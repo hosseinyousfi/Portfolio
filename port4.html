@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Codevo | طراحی و توسعه وب‌سایت و وب‌اپلیکیشن با جنگو و React</title>
+    <title>Codevo |طراحی و توسعه وب سایت</title>
 
     <!-- Meta SEO Optimized -->
     <meta name="description" content="توسعه‌دهنده فول‌استک وب (Full-Stack Developer). طراحی سایت، فروشگاه اینترنتی و وب‌اپلیکیشن‌های اختصاصی با جنگو (Django)، پایتون. مشاوره و اجرای پروژه‌های نرم‌افزاری." />
@@ -16,15 +16,15 @@
     <meta property="og:title" content="Codevo | توسعه‌دهنده وب‌سایت‌های مدرن" />
     <meta property="og:description" content="طراحی و توسعه وب‌سایت‌ها و وب‌اپلیکیشن‌های مدرن با جنگو و پایتون. ایده‌های شما را به واقعیت تبدیل می‌کنیم." />    
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://codevo.dev/" />
-    <meta property="og:image" content="https://codevo.dev/static/img/preview.png" />
+    <meta property="og:url" content="https://codeevo.ir/" />
+    <meta property="og:image" content="./codeevo.png">
     <meta property="og:locale" content="fa_IR" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Codevo | خدمات برنامه نویسی وب" />
     <meta name="twitter:description" content="توسعه دهنده وب فول استک. متخصص در Django." />
-    <meta name="twitter:image" content="https://codevo.dev/static/img/preview.png" />
+    <meta name="twitter:image" content="./codeevo.png">
     
     <!-- Favicon -->
     <link rel="icon" href="./codeevo.png" type="image/x-icon" />
@@ -176,7 +176,6 @@
                 <li><a href="#workflow" class="nav-item text-lg hover:text-cyan-400">روند کاری</a></li>
                 <li><a href="#skills" class="nav-item text-lg hover:text-cyan-400">مهارت‌ها</a></li>
                 <li><a href="#projects" class="nav-item text-lg hover:text-cyan-400">پروژه‌ها</a></li>
-                <li><a href="#testimonials" class="nav-item text-lg hover:text-cyan-400">نظرات مشتریان</a></li>
             </ul>
             <button id="hamburger-btn" class="md:hidden z-[60] text-slate-300">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
@@ -190,7 +189,6 @@
             <li><a href="#workflow" class="mobile-nav-item text-3xl font-bold text-slate-300 hover:text-cyan-400">روند کاری</a></li>
             <li><a href="#skills" class="mobile-nav-item text-3xl font-bold text-slate-300 hover:text-cyan-400">مهارت‌ها</a></li>
             <li><a href="#projects" class="mobile-nav-item text-3xl font-bold text-slate-300 hover:text-cyan-400">پروژه‌ها</a></li>
-            <li><a href="#testimonials" class="mobile-nav-item text-3xl font-bold text-slate-300 hover:text-cyan-400">نظرات مشتریان</a></li>
         </ul>
     </div>
 
@@ -318,27 +316,29 @@
                             <p class="text-slate-400 flex-grow mb-4">
                                 سیستم کامل برای نمایش منو، رزرو میز و مدیریت سفارش‌ها.
                             </p>
-                            <button class="mt-auto text-center w-full px-6 py-2 bg-slate-700 text-cyan-300 hover:bg-cyan-500 hover:text-white font-bold rounded-lg transition-all">بیشتر ببینید</button>
+                            <a href="./project-restaurant.html">
+                                <button class="mt-auto text-center w-full px-6 py-2 bg-slate-700 text-cyan-300 hover:bg-cyan-500 hover:text-white font-bold rounded-lg transition-all">بیشتر ببینید</button>
+                            </a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Project Card 2 -->
-                <div class="swiper-slide">
-                    <div class="project-card bg-gray-800/50 rounded-lg border border-slate-700 card-glow flex flex-col overflow-hidden">
-                        <img src="https://placehold.co/600x400/0d1117/38bdf8?text=E-commerce+Platform" class="w-full h-48 object-cover">
-                        <div class="p-6 flex flex-col flex-grow">
-                            <h3 class="text-xl font-bold text-white mb-2">فروشگاه اینترنتی هوشمند</h3>
-                            <p class="text-slate-400 flex-grow mb-4">
-                                پیشنهاددهنده هوشمند لباس براساس سلیقه مشتریان.
-                            </p>
-                            <button class="mt-auto text-center w-full px-6 py-2 bg-slate-700 text-cyan-300 hover:bg-cyan-500 hover:text-white font-bold rounded-lg transition-all">بیشتر ببینید</button>
+                <div class="swiper-slide h-auto">
+                    <div class="bg-gray-800/40 rounded-xl border border-slate-700/50 card-glow overflow-hidden h-full flex flex-col max-w-sm mx-auto">
+                        <img src="https://placehold.co/600x400/0d1117/38bdf8?text=Clothing+Shop" class="w-full h-48 object-cover" loading="lazy">
+                        <div class="p-6 flex flex-col flex-grow text-right">
+                            <div class="flex justify-between items-center mb-2">
+                                <h3 class="text-xl font-bold text-white">فروشگاه پوشاک</h3>
+                            </div>
+                            <p class="text-slate-400 text-sm mb-4">پلتفرم خرید پوشاک با قابلیت فیلتر پیشرفته و معماری تمیز.</p>
+                            <a href="proejct-commerce.html" class="mt-auto w-full py-2.5 bg-slate-700 text-cyan-400 rounded-lg hover:bg-cyan-600 hover:text-white transition-colors font-bold text-sm text-center block">بیشتر ببینید</a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Project Card 3 -->
-                <div class="swiper-slide">
+                <!-- <div class="swiper-slide">
                     <div class="project-card bg-gray-800/50 rounded-lg border border-slate-700 card-glow flex flex-col overflow-hidden">
                         <img src="https://placehold.co/600x400/0d1117/38bdf8?text=School+Management" class="w-full h-48 object-cover">
                         <div class="p-6 flex flex-col flex-grow">
@@ -349,7 +349,7 @@
                             <button class="mt-auto w-full px-6 py-2 bg-slate-700 text-cyan-300 font-bold rounded-lg hover:bg-cyan-500 hover:text-white transition-all">بیشتر ببینید</button>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Project Card 4 -->
                 <div class="swiper-slide">
@@ -440,9 +440,7 @@
                     <ul class="flex flex-row space-x-4 space-x-reverse md:flex-col md:space-y-3 md:space-x-0">
                         <li><a href="#services" class="text-slate-400 hover:text-cyan-400 transition-colors">خدمات</a></li>
                         <li><a href="#workflow" class="text-slate-400 hover:text-cyan-400 transition-colors">روند کاری</a></li>
-                        <li><a href="#skills" class="text-slate-400 hover:text-cyan-400 transition-colors">مهارت‌ها</a></li>
-                        <li><a href="#testimonials" class="text-slate-400 hover:text-cyan-400 transition-colors">نظرات مشتریان</a></li>
-                    </ul>
+                        <li><a href="#skills" class="text-slate-400 hover:text-cyan-400 transition-colors">مهارت‌ها</a></li>                    </ul>
                 </div>
                 <div class="md:col-span-6">
                      <h4 class="font-bold text-white mb-4">بیایید ایده شما را به واقعیت تبدیل کنیم.</h4>
@@ -456,19 +454,25 @@
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" /></svg>
                             <span>تلگرام</span>
                         </a>
-                         <a href="https://instagram.com/codeevo.dev" target="_blank" class="flex items-center gap-2 bg-slate-800 hover:bg-cyan-500 text-white font-bold py-2 px-4 rounded-lg transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd" /></svg>
+                        <a href="https://instagram.com/codeevo.dev" target="_blank" class="flex items-center gap-2 bg-slate-800 hover:bg-cyan-500 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zm5.75-.75a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5z"/>
+                            </svg>
                             <span>اینستاگرام</span>
                         </a>
+                        <a href="https://github.com/codeevo-dev" target="_blank" class="flex items-center gap-2 bg-slate-800 hover:bg-cyan-500 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.529 2.341 1.087 2.91.832.091-.647.35-1.087.636-1.338-2.22-.253-4.555-1.11-4.555-4.944 0-1.091.39-1.984 1.029-2.681-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.338 1.909-1.294 2.748-1.025 2.748-1.025.546 1.377.203 2.394.1 2.647.64.697 1.028 1.59 1.028 2.681 0 3.842-2.337 4.687-4.565 4.935.359.31.679.923.679 1.861 0 1.344-.012 2.429-.012 2.758 0 .268.18.579.688.481A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" />
+                            </svg>
+                            <span>گیت‌هاب</span>
+                        </a>
+
+
                      </div>
                 </div>
             </div>
             <div class="mt-12 border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center">
                 <p class="text-slate-500 text-sm">© Codevo. تمامی حقوق محفوظ است.</p>
-                <div class="flex space-x-4 space-x-reverse mt-4 md:mt-0">
-                    <a href="https://github.com/hosseinyousfi" class="text-slate-500 hover:text-cyan-400">گیت‌هاب</a>
-                    <a href="#" class="text-slate-500 hover:text-cyan-400">لینکدین</a>
-                </div>
             </div>
         </div>
     </footer>

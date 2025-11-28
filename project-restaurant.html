@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codevo | پروژه رستوران</title>
+    <meta name="robots" content="index, follow" />
+    <link rel="icon" href="./codeevo.png" type="image/x-icon" />
+
+    <!-- Tailwind & Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Vazirmatn:wght@300;400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Shared Styles */
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Vazirmatn', sans-serif; background-color: #0d1117; color: #cbd5e1; overflow-x: hidden; cursor: none; }
+        :lang(en) { font-family: "Cairo", sans-serif; }
+        #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        .ltr-text { direction: ltr; display: inline-block; }
+        
+        /* Cursor */
+        .cursor-dot, .cursor-outline { pointer-events: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; opacity: 0; transition: opacity 0.3s; }
+        .cursor-dot { width: 8px; height: 8px; background-color: #06b6d4; }
+        .cursor-outline { width: 40px; height: 40px; border: 2px solid #06b6d4; }
+        @media (hover: hover) { body:hover .cursor-dot, body:hover .cursor-outline { opacity: 1; } }
+
+        /* Project Specific Styles */
+        .tech-badge { background: rgba(6, 182, 212, 0.1); border: 1px solid rgba(6, 182, 212, 0.3); color: #22d3ee; padding: 5px 15px; border-radius: 20px; font-size: 0.85rem; display: flex; align-items: center; gap: 8px; transition: all 0.3s; }
+        .tech-badge:hover { background: rgba(6, 182, 212, 0.2); transform: translateY(-2px); }
+        .gallery-img { transition: transform 0.3s ease; border-radius: 12px; border: 1px solid rgba(51, 65, 85, 0.5); }
+        .gallery-img:hover { transform: scale(1.02); border-color: #06b6d4; }
+        
+        .animate-up { opacity: 0; transform: translateY(30px); }
+    </style>
+</head>
+<body class="antialiased">
+
+    <canvas id="bg-canvas"></canvas>
+    <div class="cursor-outline"></div>
+    <div class="cursor-dot"></div>
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-gray-900/80 backdrop-blur-md border-b border-gray-800">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="port4.html" class="text-2xl font-black text-cyan-400">CODEVO</a>
+            <a href="port4.html" class="flex items-center gap-2 text-slate-300 hover:text-white transition-colors">
+                <span>بازگشت به خانه</span>
+                <svg class="w-5 h-5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </a>
+        </nav>
+    </header>
+
+    <main class="pt-32 pb-20 px-6">
+        <div class="container mx-auto max-w-5xl">
+            
+            <!-- Project Header -->
+            <div class="mb-12 animate-up">
+                <div class="flex flex-wrap gap-4 mb-4">
+                    <span class="bg-cyan-900/50 text-cyan-300 px-3 py-1 rounded text-sm font-bold">طراحی وبسایت تخصصی</span>
+                    <span class="bg-blue-900/50 text-blue-300 px-3 py-1 rounded text-sm font-bold">رستوران</span>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-black text-white mb-6 leading-tight">سامانه مدیریت رستوران</h1>
+                <p class="text-xl text-slate-400 max-w-3xl leading-relaxed">
+                    یک پلتفرم جامع برای نمایش منو و مدیریت سفارشات آنلاین، رزرو میز و حسابداری رستوران.
+                </p>
+            </div>
+
+            <!-- Main Image -->
+            <div class="rounded-2xl overflow-hidden border border-slate-700 shadow-2xl mb-16 animate-up">
+                <img src="https://placehold.co/1200x600/1e293b/06b6d4?text=Project+Hero+Image" class="w-full h-auto object-cover" loading="lazy" alt="Project Cover">
+            </div>
+
+            <!-- Content Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-20">
+                
+                <!-- Left Column: Details -->
+                <div class="md:col-span-2 space-y-10 animate-up">
+                    <div>
+                        <h2 class="text-2xl font-bold text-white mb-4 border-b border-slate-700 pb-2 inline-block">چالش پروژه</h2>
+                        <p class="text-slate-400 leading-8">
+                            کارفرما با مشکل مدیریت همزمان سفارشات تلفنی، حضوری و آنلاین روبرو بود. همچنین عدم وجود سیستم گزارش‌گیری دقیق باعث می‌شد محاسبه سود و زیان روزانه با خطا مواجه شود. نیاز اصلی طراحی سیستمی بود که تمام این ورودی‌ها را در یک داشبورد متمرکز کند.
+                        </p>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-white mb-4 border-b border-slate-700 pb-2 inline-block">راه حل ما</h2>
+                        <p class="text-slate-400 leading-8">
+                            ما با استفاده از جنگو (Django)، یک پنل مدیریت یکپارچه طراحی کردیم. برای بخش مشتریان، یک وب‌اپلیکیشن (PWA) پیاده‌سازی شد که امکان سفارش‌دهی بدون نصب برنامه را فراهم می‌کند.
+                        </p>
+                        <ul class="list-disc list-inside mt-4 text-slate-400 space-y-2 marker:text-cyan-400">
+                            <li>طراحی رابط کاربری اختصاصی موبایل</li>
+                            <li>اتصال به درگاه پرداخت بانکی و چاپگر فیش</li>
+                            <li>سیستم باشگاه مشتریان و کد تخفیف</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Right Column: Info & Tech -->
+                <div class="space-y-8 animate-up">
+                    <div class="bg-gray-800/40 p-6 rounded-xl border border-slate-700">
+                        <h3 class="text-white font-bold mb-4">اطلاعات پروژه</h3>
+                        <div class="space-y-3 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-slate-500">کارفرما:</span>
+                                <span class="text-slate-300">رستوران بام سبز</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-500">نقش من:</span>
+                                <span class="text-slate-300">Full-Stack Developer</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-500">مدت زمان:</span>
+                                <span class="text-slate-300">۱ ماه</span>
+                            </div>
+                            <div class="mt-6 pt-6 border-t border-slate-700">
+                                <a href="#" target="_blank" class="block w-full py-3 bg-cyan-600 hover:bg-cyan-500 text-white text-center rounded-lg transition font-bold">مشاهده آنلاین سایت</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-white font-bold mb-4">تکنولوژی‌ها</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tech-badge ltr-text">Python / Django</span>
+                            <span class="tech-badge ltr-text">PostgreSQL</span>
+                            <span class="tech-badge ltr-text">Redis</span>
+                            <span class="tech-badge ltr-text">Docker</span>
+                            <span class="tech-badge ltr-text">Tailwind CSS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gallery -->
+            <div class="animate-up">
+                <h2 class="text-2xl font-bold text-white mb-8 text-center">تصاویر محیط کاربری</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <img src="https://placehold.co/800x600/1e293b/06b6d4?text=Dashboard+UI" class="gallery-img w-full h-auto object-cover" loading="lazy">
+                    <img src="https://placehold.co/800x600/1e293b/06b6d4?text=Mobile+View" class="gallery-img w-full h-auto object-cover" loading="lazy">
+                    <img src="https://placehold.co/800x600/1e293b/06b6d4?text=Order+Page" class="gallery-img w-full h-auto object-cover" loading="lazy">
+                    <img src="https://placehold.co/800x600/1e293b/06b6d4?text=Admin+Panel" class="gallery-img w-full h-auto object-cover" loading="lazy">
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="mt-20 pt-10 border-t border-slate-800 flex justify-between items-center animate-up">
+                <a href="port4.html#projects" class="px-6 py-2 border border-slate-600 rounded-full hover:border-cyan-400 hover:text-cyan-400 text-slate-400 transition">بازگشت به لیست پروژه‌ها</a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-gray-900/80 border-t border-slate-800 py-8 text-center">
+        <p class="text-slate-500">© 2024 Codevo</p>
+    </footer>
+
+    <!-- Scripts (Same Three.js Logic) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+             // Custom Cursor
+             const cursorDot = document.querySelector('.cursor-dot');
+             const cursorOutline = document.querySelector('.cursor-outline');
+             window.addEventListener('mousemove', (e) => { cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`; cursorOutline.style.left = `${e.clientX}px`; cursorOutline.style.top = `${e.clientY}px`; });
+
+             // Init Animations
+             window.onload = function() {
+                setTimeout(() => {
+                    if (typeof THREE !== 'undefined' && typeof anime !== 'undefined') {
+                        // Page specific animation
+                        anime({ targets: '.animate-up', translateY: [30,0], opacity: [0,1], duration: 800, delay: anime.stagger(150), easing: 'easeOutCubic' });
+
+                        // Three.js Background (Same as index for consistency)
+                        const canvas = document.getElementById('bg-canvas');
+                        const scene = new THREE.Scene();
+                        const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 2, 2000);
+                        camera.position.z = 1000;
+                        const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+                        renderer.setSize(window.innerWidth, window.innerHeight);
+                        
+                        const geometry = new THREE.BufferGeometry();
+                        const vertices = [];
+                        for (let i = 0; i < 2000; i++) vertices.push((Math.random()-0.5)*2000, (Math.random()-0.5)*2000, (Math.random()-0.5)*2000);
+                        geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+                        const particles = new THREE.Points(geometry, new THREE.PointsMaterial({ color: 0x06b6d4, size: 2, transparent: true, opacity: 0.7 }));
+                        scene.add(particles);
+                        
+                        let mouseX = 0, mouseY = 0;
+                        document.addEventListener('mousemove', (e) => { mouseX = e.clientX - window.innerWidth/2; mouseY = e.clientY - window.innerHeight/2; });
+                        
+                        function animate() {
+                            requestAnimationFrame(animate);
+                            particles.rotation.y += 0.0005;
+                            camera.position.x += (mouseX - camera.position.x) * 0.05;
+                            camera.position.y += (-mouseY - camera.position.y) * 0.05;
+                            camera.lookAt(scene.position);
+                            renderer.render(scene, camera);
+                        }
+                        animate();
+                    }
+                }, 100);
+             };
+        });
+    </script>
+</body>
+</html>
