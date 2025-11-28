@@ -27,15 +27,22 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Prepare deployment folder
+      - name: Prepare deployment content
         run: |
+          # 1. Create the deployment folder
           mkdir public
-          cp port4.html public/index.html
+          
+          # 2. Copy ALL files to public (excluding .git and public itself)
+          # This ensures codeevo.png, js files, and other html pages are included
+          rsync -av --progress . public --exclude .git --exclude public
+          
+          # 3. Rename port4.html to index.html so it becomes the homepage
+          mv public/port4.html public/index.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'public'   # Upload only this folder
+          path: 'public'
 
       - name: Deploy to GitHub Pages
         id: deployment
