@@ -159,6 +159,15 @@
         scrollbar-color: #06b6d4 #0d1117;
     }
 
+    @media (max-width: 768px) {
+        #bg-canvas {
+            opacity: 0.8; /* Dim the stars on mobile */
+        }
+        .mobile-hide {
+            display: none;
+        }
+    }
+
     </style>
 </head>
 <body class="bg-gray-900 text-slate-300 antialiased overflow-x-hidden">
@@ -169,7 +178,7 @@
     <div id="preloader"><div class="loader-text">CODEVO</div></div>
 
     <header class="fixed top-0 left-0 right-0 z-[60] bg-gray-900/70 backdrop-blur-lg opacity-0">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <nav class="container mx-auto px-4 py-3 md:py-4 flex justify-between items-center">
             <a href="#" class="nav-logo text-3xl font-black text-cyan-400 text-glow">CODEVO</a>
             <ul class="hidden md:flex space-x-8 space-x-reverse">
                 <li><a href="#services" class="nav-item text-lg hover:text-cyan-400">خدمات</a></li>
@@ -193,17 +202,66 @@
     </div>
 
     <main class="opacity-0">
-    <section id="hero" class="min-h-screen flex flex-col justify-center items-center text-center px-6 relative">
-        <h1 class="hero-line text-5xl md:text-8xl font-black text-white leading-tight">
-            <span><span>خلق راهکارهای دیجیتال</span></span>
+<section id="hero" class="relative w-full min-h-[90svh] flex flex-col justify-center items-center text-center px-4 pt-16 overflow-hidden">
+    
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(13,17,23,0.8)_100%)] pointer-events-none z-0"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-gray-900/80 z-0 pointer-events-none"></div>
+
+    <div class="relative z-10 flex flex-col items-center max-w-lg w-full bg-gray-800/20 backdrop-blur-md border border-white/5 rounded-3xl p-6 sm:p-8 shadow-2xl ring-1 ring-white/10">
+
+        <div class="mb-6 inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/30 bg-gray-900/60 backdrop-blur-md">
+            <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+            </span>
+            <span class="text-xs text-cyan-300 font-medium">آماده همکاری</span>
+        </div>
+
+        <div class="relative mb-6 group">
+            <div class="absolute -inset-1 bg-gradient-to-r from-cyan-400 to-blue-600 rounded-full blur opacity-40 group-hover:opacity-75 transition duration-500"></div>
+            
+            <div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 border-slate-700 bg-gray-900 overflow-hidden flex items-center justify-center shadow-inner">
+                
+                <img src="./codeevo.png" alt="Codevo Profile" class="w-full h-full object-contain p-1 transform group-hover:scale-110 transition-transform duration-500">
+                
+                </div>
+        </div>
+
+        <h1 class="text-3xl sm:text-5xl font-black text-white leading-tight mb-2 tracking-tight">
+            خلق راهکارهای
+            <br />
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 animate-gradient-x">دیجیتال و مدرن</span>
         </h1>
-        <h1 style="padding-top: 1%;" class="hero-line text-3xl md:text-5xl font-black bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-600 pb-4 leading-tight">
-            <span>از ایده تا محصول، با دقت و خلاقیت</span>
-        </h1>
-        <p class="hero-subtitle text-lg md:text-xl text-slate-400 mt-6 max-w-3xl">
-            من توسعه‌دهنده فول‌استک هستم و با ترکیب خلاقیت و مهارت فنی، ایده‌های شما را به محصولات دیجیتال مقیاس‌پذیر و حرفه‌ای تبدیل می‌کنم که تجربه کاربری بی‌نظیری ایجاد می‌کنند.
+
+        <p class="text-sm sm:text-base text-slate-400 mb-6 leading-7 max-w-sm">
+            توسعه‌دهنده <span class="text-cyan-300 font-bold">Python / Django</span>
+            <br>
+            تبدیل ایده‌های شما به واقعیت.
         </p>
-    </section>
+
+        <div class="flex gap-4 mb-8 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="w-8 h-8" alt="Python">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" class="w-8 h-8 invert" alt="Django">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="w-8 h-8" alt="JS">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" class="w-8 h-8" alt="React">
+        </div>
+
+        <div class="flex flex-col w-full gap-3">
+            <a href="#projects" class="w-full py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-xl shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 transition-all active:scale-95 text-center">
+                مشاهده نمونه‌کارها
+            </a>
+            <a href="#call" class="w-full py-3 bg-white/5 border border-white/10 text-slate-200 font-bold rounded-xl hover:bg-white/10 transition-all active:scale-95 text-center flex justify-center items-center gap-2 backdrop-blur-sm">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                تماس با من
+            </a>
+        </div>
+    </div>
+
+    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce opacity-50">
+        <svg class="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+    </div>
+
+</section>
 
         <section id="services" class="py-20 md:py-32">
              <div class="container mx-auto px-6 text-center">
@@ -304,7 +362,7 @@
             </div>
         </section>
 
-        <div class="swiper mySwiper">
+        <div class="swiper mySwiper" id="projects">
             <div class="swiper-wrapper">
 
                 <!-- Project Card 1 -->
@@ -387,45 +445,6 @@
             <div class="swiper-pagination"></div>
         </div>
 
-
-        <section id="testimonials" class="py-20 md:py-32 hidden">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="animate-on-scroll text-3xl md:text-4xl font-bold text-white mb-12">نظرات مشتریان</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Testimonial Card 1 -->
-                    <div class="animate-on-scroll bg-gray-800/50 p-8 rounded-lg border border-slate-700 card-glow text-right">
-                        <p class="text-slate-400 italic mb-6">"وب‌سایت باغ رستوران ما با ظاهری مدرن و کاربری ساده طراحی شد. مشتریان به‌راحتی می‌توانند منو و خدمات را مشاهده کنند و همین باعث افزایش بازدید حضوری ما شده است."</p>
-                        <div class="flex items-center">
-                            <div>
-                                <p class="font-bold text-white">مدیریت باغ رستوران</p>
-                                <p class="text-sm text-cyan-400">کارفرما</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Testimonial Card 2 -->
-                    <div class="animate-on-scroll bg-gray-800/50 p-8 rounded-lg border border-slate-700 card-glow text-right">
-                        <p class="text-slate-400 italic mb-6">"پلتفرم فروشگاهی طراحی‌شده توسط Codevo بسیار سریع، امن و مجهز به دستیار هوشمند بود. این قابلیت باعث شد مشتریان تجربه خرید راحت‌تر و جذاب‌تری داشته باشند."</p>
-                        <div class="flex items-center">
-                            <div>
-                                <p class="font-bold text-white">خانم احمدی</p>
-                                <p class="text-sm text-cyan-400">مدیر فروشگاه لباس</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Testimonial Card 3 -->
-                    <div class="animate-on-scroll bg-gray-800/50 p-8 rounded-lg border border-slate-700 card-glow text-right">
-                        <p class="text-slate-400 italic mb-6">"سامانه آموزشی ساخته‌شده توسط Codevo دقیقاً همان چیزی بود که نیاز داشتیم. مدیریت دوره‌ها، دانش‌آموزان و ارتباطات آموزشی به‌شکل حرفه‌ای پیاده‌سازی شد."</p>
-                        <div class="flex items-center">
-                            <div>
-                                <p class="font-bold text-white">آقای رضایی</p>
-                                <p class="text-sm text-cyan-400">مدیر مؤسسه آموزشی</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
     </main>
 
     <footer class="bg-gray-900/70 border-t border-slate-800 pt-16 pb-8">
@@ -442,7 +461,7 @@
                         <li><a href="#workflow" class="text-slate-400 hover:text-cyan-400 transition-colors">روند کاری</a></li>
                         <li><a href="#skills" class="text-slate-400 hover:text-cyan-400 transition-colors">مهارت‌ها</a></li>                    </ul>
                 </div>
-                <div class="md:col-span-6">
+                <div class="md:col-span-6" id="call">
                      <h4 class="font-bold text-white mb-4">بیایید ایده شما را به واقعیت تبدیل کنیم.</h4>
                      <p class="text-slate-400 mb-4">آماده شروع یک پروژه جدید هستید؟ از راه‌های زیر با من در ارتباط باشید.</p>
                      <div class="flex flex-wrap gap-4">
