@@ -5,23 +5,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>برند لباس زنانه | Cloth</title>
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/home/hossein/codes/IranSansX(Pro)/Webfonts/font.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <!-- Google Fonts: Vazirmatn for Persian -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;300;400;500;700&display=swap" rel="stylesheet">
  
     <style>
         /* Custom styles for the website */
+        :root {
+            --bg-dark: #262626;
+            --text-light: #e5e5e5;
+        }
+
         body {
-            font-family: 'Vazirmatn';
-            background-color: #262626; /* Neutral Dark Gray */
-            color: #e5e5e5; /* Neutral Light Gray Text */
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        /* PRELOADER STYLES */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #171717;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        }
+        
+        .loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* BUTTON LOADING SPINNER */
+        .btn-spinner {
+            display: none;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(0, 0, 0, 0.3);
+            border-radius: 50%;
+            border-top-color: #000;
+            animation: spin 1s linear infinite;
+            margin-right: 8px; /* For RTL support, check alignment */
+        }
+        button.loading .btn-text { display: none; }
+        button.loading .btn-spinner { display: inline-block; border-top-color: currentColor; }
+
+        /* TYPING INDICATOR */
+        .typing-indicator span {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background-color: #ccc;
+            border-radius: 50%;
+            animation: typing 1.4s infinite ease-in-out both;
+            margin: 0 1px;
+        }
+        .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
         }
 
         /* Styling for the hero video background */
@@ -50,13 +118,12 @@
 
         /* Glassmorphism effect for the header */
         .header-glass {
-            background: rgba(38, 38, 38, 0.8); /* Neutral Dark Gray Transparent */
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            background: rgba(38, 38, 38, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid #404040;
         }
         
-        /* Custom button hover effect */
         .btn-primary {
             transition: all 0.3s ease;
         }
@@ -65,26 +132,14 @@
             color: #000000;
         }
         
-        /* Styling for horizontal scroll section */
         .horizontal-scroll {
-            -ms-overflow-style: none; /* IE and Edge */
-            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
         .horizontal-scroll::-webkit-scrollbar {
-            display: none; /* Chrome, Safari, and Opera */
+            display: none;
         }
 
-        /* Modal Transitions */
-        .modal {
-            transition: opacity 0.3s ease-in-out;
-        }
-
-        /* Active state for size/color selectors */
-        .size-selector.active, .color-selector.active {
-            border-color: #ffffff;
-        }
-
-        /* Enhanced product card hover effect */
         .product-card {
             transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
@@ -94,25 +149,19 @@
         }
         
         /* Chatbot Styles */
-        #chat-widget {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
         #chat-window {
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 10px 40px rgba(0,0,0,0.4);
         }
-        .chat-message {
-            animation: fadeIn 0.5s ease-in-out;
-        }
+        .chat-message { animation: fadeIn 0.3s ease-in-out; }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(5px); }
             to { opacity: 1; transform: translateY(0); }
         }
         #chat-messages::-webkit-scrollbar { width: 4px; }
         #chat-messages::-webkit-scrollbar-track { background: #404040; }
         #chat-messages::-webkit-scrollbar-thumb { background: #737373; border-radius: 2px; }
         
-        /* Chat Tooltip Styles */
         #chat-tooltip {
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
@@ -122,53 +171,78 @@
             pointer-events: auto;
         }
 
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-        width: 10px;
-    }
+        /* Toast Notifications */
+        #toast-container {
+            position: fixed;
+            top: 100px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .toast {
+            background: rgba(255, 255, 255, 0.95);
+            color: #1a1a1a;
+            padding: 12px 24px;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            font-size: 0.9rem;
+            border-right: 4px solid #1a1a1a;
+        }
+        .toast.show { transform: translateX(0); }
 
-    ::-webkit-scrollbar-track {
-        background: #0d1117;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background: white;
-        border-radius: 10px;
-        border: 2px solid #0d1117;
-        transition: background 0.3s ease;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-        background: gainsboro;
-    }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #171717; }
+        ::-webkit-scrollbar-thumb { background: #525252; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #737373; }
+        
+        /* Active states for options */
+        .size-selector.active, .color-selector.active {
+            border-color: white;
+            box-shadow: 0 0 0 2px #262626, 0 0 0 4px white;
+        }
 
     </style>
 </head>
 <body class="overflow-x-hidden">
 
-    <!-- Header Navigation -->
+    <div id="preloader">
+        <div class="loader-spinner mb-4"></div>
+        <h2 class="text-xl font-light tracking-widest text-white animate-pulse">CLOTH</h2>
+    </div>
+
+    <div id="toast-container"></div>
+
     <header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 text-neutral-200">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <!-- Logo -->
-            <h1 class="text-3xl font-bold tracking-widest text-white">Cloth</h1>
+            <a href="#" class="text-3xl font-bold tracking-widest text-white hover:text-neutral-300 transition">Cloth</a>
             
-            <!-- Desktop Menu -->
             <ul class="hidden md:flex items-center space-x-8 space-x-reverse text-sm font-light">
-                <li><a href="#" class="hover:text-white transition-colors">کالکشن جدید</a></li>
-                <li><a href="#" class="hover:text-white transition-colors">عبا</a></li>
-                <li><a href="#" class="hover:text-white transition-colors">لباس مدرن</a></li>
-                <li><a href="#" class="hover:text-white transition-colors">داستان ما</a></li>
-                <li><a href="#" class="hover:text-white transition-colors">تماس</a></li>
+                <li><a href="#new-collection" class="hover:text-white transition-colors">کالکشن جدید</a></li>
+                <li><a href="#collections" class="hover:text-white transition-colors">دسته‌بندی‌ها</a></li>
+                <li><a href="#story" class="hover:text-white transition-colors">داستان ما</a></li>
+                <li><a href="#footer" class="hover:text-white transition-colors">تماس</a></li>
             </ul>
             
-            <!-- Icons -->
             <div class="flex items-center space-x-4 space-x-reverse">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 cursor-pointer hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-                <svg id="login-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 cursor-pointer hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 cursor-pointer hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                <div class="relative cursor-pointer group">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hover:text-white transition" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                </div>
+                
+                <div id="login-icon" class="cursor-pointer hover:text-white transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                </div>
+                
+                <div class="relative cursor-pointer hover:text-white transition" id="cart-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                    <span id="cart-badge" class="absolute -top-2 -right-2 bg-white text-black text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center opacity-0 transition-opacity duration-300">0</span>
+                </div>
             </div>
 
-            <!-- Mobile Menu Button -->
             <div class="md:hidden">
                 <button id="mobile-menu-button">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
@@ -177,54 +251,52 @@
         </nav>
     </header>
 
-    <!-- Mobile Menu (Hidden by default) -->
     <div id="mobile-menu" class="fixed inset-0 bg-neutral-900 z-40 transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden text-neutral-200">
+        <button id="close-mobile-menu" class="absolute top-6 left-6 text-white"><svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
         <div class="flex flex-col items-center justify-center h-full space-y-8 text-xl">
-            <a href="#" class="hover:text-white">کالکشن جدید</a>
-            <a href="#" class="hover:text-white">عبا</a>
-            <a href="#" class="hover:text-white">لباس مدرن</a>
-            <a href="#" class="hover:text-white">داستان ما</a>
-            <a href="#" class="hover:text-white">تماس</a>
+            <a href="#new-collection" class="mobile-link hover:text-white">کالکشن جدید</a>
+            <a href="#collections" class="mobile-link hover:text-white">عبا</a>
+            <a href="#collections" class="mobile-link hover:text-white">لباس مدرن</a>
+            <a href="#story" class="mobile-link hover:text-white">داستان ما</a>
+            <a href="#footer" class="mobile-link hover:text-white">تماس</a>
         </div>
     </div>
 
-
     <main>
-        <!-- Hero Section with Video Background -->
         <section class="h-screen flex items-center justify-center text-center relative overflow-hidden text-white">
-            <video autoplay loop muted playsinline class="hero-video-bg">
+            <video autoplay loop muted playsinline poster="https://placehold.co/1920x1080/1a1a1a/333333?text=Video+Loading..." class="hero-video-bg">
                 <source src="./isel.mp4" type="video/mp4">
-                مرورگر شما از تگ ویدیو پشتیبانی نمی‌کند.
             </video>
             <div class="absolute inset-0 bg-black opacity-50"></div>
             <div class="relative z-10 px-4 scroll-reveal">
                 <h2 class="text-5xl md:text-7xl lg:text-8xl font-thin tracking-widest">Cloth</h2>
-                <p class="mt-4 text-lg md:text-xl font-light">تلاقی ظرافت و جسارت</p>
-                <a href="#collections" class="btn-primary mt-8 inline-block border border-white px-10 py-3 text-sm tracking-wider uppercase">
+                <p class="mt-4 text-lg md:text-xl font-light text-neutral-300">تلاقی ظرافت و جسارت</p>
+                <a href="#collections" class="btn-primary mt-8 inline-block border border-white px-10 py-3 text-sm tracking-wider uppercase backdrop-blur-sm">
                     کاوش در مجموعه
                 </a>
             </div>
         </section>
 
-        <!-- Collections Section -->
         <section id="collections" class="py-20 md:py-32 bg-neutral-800">
             <div class="container mx-auto px-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
-                    <div class="relative group overflow-hidden scroll-reveal">
-                        <img src="collection1.webp" alt="لباس مدرن" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null;this.src='https://placehold.co/800x1000/1a1a1a/ffffff?text=Image+Error';">
-                        <div class="absolute inset-0 bg-black bg-opacity-30 flex items-end p-8 md:p-12 text-white">
+                    <div class="relative group overflow-hidden scroll-reveal h-[500px]">
+                        <img src="collection1.webp" alt="لباس مدرن" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" onerror="this.onerror=null;this.src='https://placehold.co/800x1000/1a1a1a/ffffff?text=Urban+Collection';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 flex items-end p-8 md:p-12 text-white">
                             <div>
-                                <h3 class="text-3xl md:text-4xl font-light">شهری و بی‌پروا</h3>
-                                <a href="#" class="btn-primary mt-4 inline-block border border-white px-8 py-2 text-xs tracking-wider uppercase">خرید لباس‌های مدرن</a>
+                                <h3 class="text-3xl md:text-4xl font-light mb-2">شهری و بی‌پروا</h3>
+                                <p class="text-sm text-gray-300 mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform translate-y-2 group-hover:translate-y-0">طراحی شده برای خیابان‌های شلوغ و نگاه‌های خیره.</p>
+                                <a href="#" class="inline-block border-b border-white pb-1 text-xs tracking-wider uppercase hover:text-gray-300 transition">مشاهده محصولات</a>
                             </div>
                         </div>
                     </div>
-                    <div class="relative group overflow-hidden scroll-reveal" style="transition-delay: 200ms;">
-                        <img src="aba.webp" alt="عبای شیک" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null;this.src='https://placehold.co/800x1000/f0f0f0/000000?text=Image+Error';">
-                        <div class="absolute inset-0 bg-black bg-opacity-30 flex items-end p-8 md:p-12 text-white">
+                    <div class="relative group overflow-hidden scroll-reveal h-[500px]" style="transition-delay: 150ms;">
+                        <img src="aba.webp" alt="عبای شیک" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" onerror="this.onerror=null;this.src='https://placehold.co/800x1000/2a2a2a/ffffff?text=Noble+Collection';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 flex items-end p-8 md:p-12 text-white">
                              <div>
-                                <h3 class="text-3xl md:text-4xl font-light">اصیل و باشکوه</h3>
-                                <a href="#" class="btn-primary mt-4 inline-block border border-white px-8 py-2 text-xs tracking-wider uppercase">خرید عباها</a>
+                                <h3 class="text-3xl md:text-4xl font-light mb-2">اصیل و باشکوه</h3>
+                                <p class="text-sm text-gray-300 mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform translate-y-2 group-hover:translate-y-0">تلفیقی از هنر سنتی و برش‌های مدرن.</p>
+                                <a href="#" class="inline-block border-b border-white pb-1 text-xs tracking-wider uppercase hover:text-gray-300 transition">مشاهده محصولات</a>
                             </div>
                         </div>
                     </div>
@@ -232,245 +304,275 @@
             </div>
         </section>
 
-        <!-- New Arrivals Section -->
-        <section class="py-20 md:py-32 bg-neutral-800 overflow-hidden">
+        <section id="new-collection" class="py-20 md:py-32 bg-neutral-900 overflow-hidden border-t border-neutral-800">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12 scroll-reveal">
                     <h2 class="text-3xl md:text-4xl font-light text-white">تازه‌های فصل</h2>
-                    <p class="text-neutral-400 mt-2">منتخبی از آخرین طراحی‌های ما</p>
+                    <p class="text-neutral-500 mt-2 font-light">منتخبی از آخرین طراحی‌های ما</p>
                 </div>
                 <div class="flex overflow-x-auto space-x-8 space-x-reverse pb-8 horizontal-scroll scroll-reveal">
                     
-                    <!-- Product Card 1 -->
-                    <div class="product-card flex-shrink-0 w-72 md:w-80 text-center group">
-                        <div class="overflow-hidden relative">
-                           <img src="harir.webp" alt="محصول ۱" class="product-image w-full object-cover transform transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null;this.src='https://placehold.co/600x800/111111/ffffff?text=Image+Error';">
-                           <div class="absolute inset-0 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center space-y-4 p-4">
-                               <a href="#" class="btn-primary border border-white text-white px-6 py-2 text-xs uppercase w-full transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 delay-100">اطلاعات بیشتر</a>
-                               <button class="quick-view-btn bg-white text-black px-6 py-2 text-xs uppercase w-full hover:bg-neutral-200 transition-colors transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 delay-200">خرید سریع</button>
+                    <div class="product-card flex-shrink-0 w-72 md:w-80 text-center group cursor-pointer">
+                        <div class="overflow-hidden relative aspect-[3/4]">
+                           <img src="harir.webp" class="product-image w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null;this.src='https://placehold.co/600x800/111111/444444?text=Blazer';">
+                           <div class="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex flex-col gap-2 bg-gradient-to-t from-black to-transparent pt-12">
+                               <button class="quick-view-btn w-full bg-white text-black py-3 text-xs uppercase tracking-widest hover:bg-neutral-200 transition">مشاهده سریع</button>
                            </div>
                         </div>
-                        <h4 class="product-name mt-4 text-base font-normal text-neutral-100">کت بلیزر شانه‌دار</h4>
-                        <p class="product-price mt-1 text-sm text-neutral-400">۴,۵۰۰,۰۰۰ تومان</p>
+                        <div class="pt-4">
+                            <h4 class="product-name text-lg font-light text-neutral-200">کت بلیزر شانه‌دار</h4>
+                            <p class="product-price mt-1 text-sm text-neutral-500">۴,۵۰۰,۰۰۰ تومان</p>
+                        </div>
                     </div>
 
-                    <!-- Product Card 2 -->
-                    <div class="product-card flex-shrink-0 w-72 md:w-80 text-center group">
-                        <div class="overflow-hidden relative">
-                            <img src="blazer.webp" alt="محصول ۲" class="product-image w-full object-cover transform transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null;this.src='https://placehold.co/600x800/eeeeee/000000?text=Image+Error';">
-                           <div class="absolute inset-0 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center space-y-4 p-4">
-                               <a href="#" class="btn-primary border border-white text-white px-6 py-2 text-xs uppercase w-full transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 delay-100">اطلاعات بیشتر</a>
-                               <button class="quick-view-btn bg-white text-black px-6 py-2 text-xs uppercase w-full hover:bg-neutral-200 transition-colors transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 delay-200">خرید سریع</button>
+                    <div class="product-card flex-shrink-0 w-72 md:w-80 text-center group cursor-pointer">
+                        <div class="overflow-hidden relative aspect-[3/4]">
+                            <img src="blazer.webp" class="product-image w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null;this.src='https://placehold.co/600x800/151515/444444?text=Black+Silk';">
+                            <div class="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex flex-col gap-2 bg-gradient-to-t from-black to-transparent pt-12">
+                               <button class="quick-view-btn w-full bg-white text-black py-3 text-xs uppercase tracking-widest hover:bg-neutral-200 transition">مشاهده سریع</button>
                            </div>
                         </div>
-                        <h4 class="product-name mt-4 text-base font-normal text-neutral-100">عبای حریر مشکی</h4>
-                        <p class="product-price mt-1 text-sm text-neutral-400">۵,۲۰۰,۰۰۰ تومان</p>
+                        <div class="pt-4">
+                            <h4 class="product-name text-lg font-light text-neutral-200">عبای حریر مشکی</h4>
+                            <p class="product-price mt-1 text-sm text-neutral-500">۵,۲۰۰,۰۰۰ تومان</p>
+                        </div>
                     </div>
 
-                    <!-- Product Card 3 -->
-                    <div class="product-card flex-shrink-0 w-72 md:w-80 text-center group">
-                        <div class="overflow-hidden relative">
-                           <img src="shomiz.webp" alt="محصول ۳" class="product-image w-full object-cover transform transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null;this.src='https://placehold.co/600x800/222222/ffffff?text=Image+Error';">
-                           <div class="absolute inset-0 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center space-y-4 p-4">
-                               <a href="#" class="btn-primary border border-white text-white px-6 py-2 text-xs uppercase w-full transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 delay-100">اطلاعات بیشتر</a>
-                               <button class="quick-view-btn bg-white text-black px-6 py-2 text-xs uppercase w-full hover:bg-neutral-200 transition-colors transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 delay-200">خرید سریع</button>
+                    <div class="product-card flex-shrink-0 w-72 md:w-80 text-center group cursor-pointer">
+                        <div class="overflow-hidden relative aspect-[3/4]">
+                           <img src="shomiz.webp" class="product-image w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null;this.src='https://placehold.co/600x800/1a1a1a/444444?text=White+Silk';">
+                           <div class="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex flex-col gap-2 bg-gradient-to-t from-black to-transparent pt-12">
+                               <button class="quick-view-btn w-full bg-white text-black py-3 text-xs uppercase tracking-widest hover:bg-neutral-200 transition">مشاهده سریع</button>
                            </div>
                         </div>
-                        <h4 class="product-name mt-4 text-base font-normal text-neutral-100">شومیز ابریشمی سفید</h4>
-                        <p class="product-price mt-1 text-sm text-neutral-400">۲,۸۰۰,۰۰۰ تومان</p>
+                        <div class="pt-4">
+                            <h4 class="product-name text-lg font-light text-neutral-200">شومیز ابریشمی سفید</h4>
+                            <p class="product-price mt-1 text-sm text-neutral-500">۲,۸۰۰,۰۰۰ تومان</p>
+                        </div>
                     </div>
 
-                    <!-- Product Card 4 -->
-                    <div class="product-card flex-shrink-0 w-72 md:w-80 text-center group">
-                        <div class="overflow-hidden relative">
-                           <img src="aba.webp" alt="محصول ۴" class="product-image w-full object-cover transform transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null;this.src='https://placehold.co/600x800/dddddd/000000?text=Image+Error';">
-                           <div class="absolute inset-0 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center space-y-4 p-4">
-                               <a href="#" class="btn-primary border border-white text-white px-6 py-2 text-xs uppercase w-full transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 delay-100">اطلاعات بیشتر</a>
-                               <button class="quick-view-btn bg-white text-black px-6 py-2 text-xs uppercase w-full hover:bg-neutral-200 transition-colors transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 delay-200">خرید سریع</button>
+                    <div class="product-card flex-shrink-0 w-72 md:w-80 text-center group cursor-pointer">
+                        <div class="overflow-hidden relative aspect-[3/4]">
+                           <img src="aba.webp" class="product-image w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null;this.src='https://placehold.co/600x800/222222/555555?text=Luxury+Aba';">
+                           <div class="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex flex-col gap-2 bg-gradient-to-t from-black to-transparent pt-12">
+                               <button class="quick-view-btn w-full bg-white text-black py-3 text-xs uppercase tracking-widest hover:bg-neutral-200 transition">مشاهده سریع</button>
                            </div>
                         </div>
-                        <h4 class="product-name mt-4 text-base font-normal text-neutral-100">عبای مجلسی کار شده</h4>
-                        <p class="product-price mt-1 text-sm text-neutral-400">۷,۱۰۰,۰۰۰ تومان</p>
+                        <div class="pt-4">
+                            <h4 class="product-name text-lg font-light text-neutral-200">عبای مجلسی کار شده</h4>
+                            <p class="product-price mt-1 text-sm text-neutral-500">۷,۱۰۰,۰۰۰ تومان</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Brand Story Section -->
-        <section class="py-20 md:py-32 bg-neutral-900">
-            <div class="container mx-auto px-6 text-center max-w-3xl scroll-reveal">
-                <h2 class="text-3xl md:text-4xl font-light mb-6 text-white">داستان ما</h2>
-                <p class="text-base md:text-lg leading-relaxed text-neutral-300">
-                    ما در ما، به قدرت تضادها ایمان داریم. به زیبایی زنانی که در قلب شهری مدرن، اصالت خود را زندگی می‌کنند. ما فقط لباس نیست، بیانیه‌ای از استقلال و ظرافت است. هر نخ، روایتی از کیفیت. هر برش، دعوتی به اعتماد به نفس.
+        <section id="story" class="py-20 md:py-32 bg-neutral-800 relative">
+            <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+            <div class="container mx-auto px-6 text-center max-w-3xl scroll-reveal relative z-10">
+                <h2 class="text-3xl md:text-4xl font-light mb-8 text-white">داستان ما</h2>
+                <p class="text-base md:text-lg leading-8 text-neutral-300 font-light">
+                    ما در <strong class="text-white font-normal">Cloth</strong>، به قدرت تضادها ایمان داریم. به زیبایی زنانی که در قلب شهری مدرن، اصالت خود را زندگی می‌کنند. ما فقط لباس نیست، بیانیه‌ای از استقلال و ظرافت است. هر نخ، روایتی از کیفیت. هر برش، دعوتی به اعتماد به نفس.
                 </p>
-                <a href="#" class="btn-primary mt-8 inline-block border border-white px-10 py-3 text-sm tracking-wider uppercase">
-                    بیشتر بدانید
-                </a>
+                <div class="mt-12 flex justify-center">
+                    <img src="https://placehold.co/100x50/333333/666666?text=SIGNATURE" alt="Signature" class="opacity-50">
+                </div>
             </div>
         </section>
-
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-neutral-900 py-16">
+    <footer id="footer" class="bg-neutral-900 py-16 border-t border-neutral-800">
         <div class="container mx-auto px-6 text-center text-neutral-400">
             <div class="mb-8">
-                <h3 class="text-2xl font-light tracking-widest text-white mb-4">Cloth</h3>
-                <div class="flex justify-center space-x-6 space-x-reverse">
-                    <a href="#" class="hover:text-white">اینستاگرام</a>
-                    <a href="#" class="hover:text-white">تلگرام</a>
-                    <a href="#" class="hover:text-white">واتس‌اپ</a>
+                <h3 class="text-2xl font-light tracking-widest text-white mb-6">Cloth</h3>
+                <div class="flex justify-center space-x-8 space-x-reverse text-sm">
+                    <a href="#" class="hover:text-white transition">اینستاگرام</a>
+                    <a href="#" class="hover:text-white transition">تلگرام</a>
+                    <a href="#" class="hover:text-white transition">واتس‌اپ</a>
+                    <a href="#" class="hover:text-white transition">ایمیل</a>
                 </div>
             </div>
-            <div class="border-t border-neutral-700 pt-8">
-                <p class="text-xs">&copy; 2025 Codeevo. تمامی حقوق محفوظ است.</p>
+            <div class="border-t border-neutral-800 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-neutral-600">
+                <p>&copy; 2025 Cloth Fashion. All rights reserved.</p>
+                <div class="mt-4 md:mt-0 space-x-4 space-x-reverse">
+                    <a href="#" class="hover:text-neutral-400">حریم خصوصی</a>
+                    <a href="#" class="hover:text-neutral-400">قوانین و مقررات</a>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- Login Modal -->
-    <div id="login-modal" class="modal fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 hidden opacity-0">
-        <div class="bg-neutral-800 border border-neutral-700 rounded-lg shadow-xl p-8 w-full max-w-sm m-4 relative text-white">
+    <div id="login-modal" class="modal fixed inset-0 z-[60] flex items-center justify-center bg-black bg-opacity-80 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-neutral-800 border border-neutral-700 rounded-none shadow-2xl p-8 w-full max-w-sm m-4 relative text-white transform scale-95 transition-transform duration-300">
             <button id="close-login-modal-btn" class="absolute top-4 left-4 text-neutral-500 hover:text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
-            <h2 class="text-2xl font-light text-center mb-6">ورود به حساب کاربری</h2>
-            <form>
+            <h2 class="text-2xl font-light text-center mb-8 tracking-wide">ورود به حساب</h2>
+            <form id="login-form">
                 <div class="mb-4">
-                    <label for="email" class="block text-sm font-light text-neutral-300 mb-2">ایمیل</label>
-                    <input type="email" id="email" class="w-full bg-neutral-700 border border-neutral-600 rounded-md py-2 px-3 focus:outline-none focus:border-white" placeholder="email@example.com">
+                    <label for="email" class="block text-xs font-light text-neutral-400 mb-2 uppercase tracking-wide">ایمیل</label>
+                    <input type="email" id="email" required class="w-full bg-neutral-900 border border-neutral-700 text-white py-3 px-4 focus:outline-none focus:border-white transition-colors text-sm" placeholder="example@domain.com">
                 </div>
-                <div class="mb-6">
-                    <label for="password" class="block text-sm font-light text-neutral-300 mb-2">رمز عبور</label>
-                    <input type="password" id="password" class="w-full bg-neutral-700 border border-neutral-600 rounded-md py-2 px-3 focus:outline-none focus:border-white" placeholder="••••••••">
+                <div class="mb-8">
+                    <label for="password" class="block text-xs font-light text-neutral-400 mb-2 uppercase tracking-wide">رمز عبور</label>
+                    <input type="password" id="password" required class="w-full bg-neutral-900 border border-neutral-700 text-white py-3 px-4 focus:outline-none focus:border-white transition-colors text-sm" placeholder="••••••••">
                 </div>
-                <button type="submit" class="w-full bg-white text-black py-2 rounded-md hover:bg-neutral-200 transition-colors">ورود</button>
+                <button type="submit" class="w-full bg-white text-black py-3 text-sm uppercase tracking-widest hover:bg-neutral-200 transition-colors flex justify-center items-center">
+                    <span class="btn-spinner"></span>
+                    <span class="btn-text">ورود</span>
+                </button>
             </form>
+            <p class="mt-4 text-center text-xs text-neutral-500 hover:text-neutral-300 cursor-pointer">رمز عبور را فراموش کرده‌اید؟</p>
         </div>
     </div>
 
-    <!-- Quick View Modal -->
-    <div id="quick-view-modal" class="modal fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 hidden opacity-0">
-        <div class="bg-neutral-800 border border-neutral-700 rounded-lg shadow-xl w-full max-w-4xl m-4 relative text-white flex flex-col md:flex-row">
-            <button id="close-quick-view-btn" class="absolute top-4 left-4 z-10 text-neutral-500 hover:text-white">
+    <div id="quick-view-modal" class="modal fixed inset-0 z-[60] flex items-center justify-center bg-black bg-opacity-80 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-neutral-800 border border-neutral-700 shadow-2xl w-full max-w-4xl m-4 relative text-white flex flex-col md:flex-row max-h-[90vh] overflow-y-auto md:overflow-hidden">
+            <button id="close-quick-view-btn" class="absolute top-4 left-4 z-10 text-neutral-500 hover:text-black md:hover:text-white bg-white md:bg-transparent rounded-full p-1 md:p-0">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
-            <!-- Product Image -->
-            <div class="w-full md:w-1/2">
-                <img id="quick-view-image" src="" alt="تصویر محصول" class="w-full h-full object-cover rounded-r-lg md:rounded-r-none md:rounded-l-lg">
+            <div class="w-full md:w-1/2 h-64 md:h-auto">
+                <img id="quick-view-image" src="" alt="تصویر محصول" class="w-full h-full object-cover">
             </div>
-            <!-- Product Details -->
-            <div class="w-full md:w-1/2 p-8 flex flex-col justify-center">
+            <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
                 <h2 id="quick-view-name" class="text-3xl font-light mb-2">نام محصول</h2>
-                <p id="quick-view-price" class="text-xl text-neutral-400 mb-6">قیمت</p>
+                <p id="quick-view-price" class="text-xl text-neutral-400 mb-8 font-light">قیمت</p>
                 
-                <!-- Color Selector -->
                 <div class="mb-6">
-                    <h3 class="text-sm font-light text-neutral-300 mb-3">رنگ</h3>
+                    <h3 class="text-xs font-light text-neutral-400 mb-3 uppercase tracking-wide">رنگ</h3>
                     <div id="color-options" class="flex space-x-3 space-x-reverse">
-                        <button class="color-selector h-8 w-8 rounded-full bg-black border-2 border-neutral-500 focus:outline-none active" data-color="black"></button>
-                        <button class="color-selector h-8 w-8 rounded-full bg-white border-2 border-neutral-500 focus:outline-none" data-color="white"></button>
-                        <button class="color-selector h-8 w-8 rounded-full bg-gray-500 border-2 border-neutral-500 focus:outline-none" data-color="gray"></button>
+                        <button class="color-selector h-8 w-8 rounded-full bg-black border border-neutral-600 focus:outline-none active transition-transform hover:scale-110" data-color="black"></button>
+                        <button class="color-selector h-8 w-8 rounded-full bg-neutral-200 border border-neutral-600 focus:outline-none transition-transform hover:scale-110" data-color="white"></button>
+                        <button class="color-selector h-8 w-8 rounded-full bg-neutral-600 border border-neutral-600 focus:outline-none transition-transform hover:scale-110" data-color="gray"></button>
                     </div>
                 </div>
 
-                <!-- Size Selector -->
                 <div class="mb-8">
-                    <h3 class="text-sm font-light text-neutral-300 mb-3">سایز</h3>
+                    <h3 class="text-xs font-light text-neutral-400 mb-3 uppercase tracking-wide">سایز</h3>
                     <div id="size-options" class="flex space-x-3 space-x-reverse">
-                        <button class="size-selector border-2 border-neutral-500 w-12 h-12 flex items-center justify-center focus:outline-none active">S</button>
-                        <button class="size-selector border-2 border-neutral-500 w-12 h-12 flex items-center justify-center focus:outline-none">M</button>
-                        <button class="size-selector border-2 border-neutral-500 w-12 h-12 flex items-center justify-center focus:outline-none">L</button>
-                        <button class="size-selector border-2 border-neutral-500 w-12 h-12 flex items-center justify-center focus:outline-none">XL</button>
+                        <button class="size-selector border border-neutral-600 w-10 h-10 flex items-center justify-center focus:outline-none text-sm hover:border-white transition-colors">S</button>
+                        <button class="size-selector border border-neutral-600 w-10 h-10 flex items-center justify-center focus:outline-none text-sm hover:border-white transition-colors active">M</button>
+                        <button class="size-selector border border-neutral-600 w-10 h-10 flex items-center justify-center focus:outline-none text-sm hover:border-white transition-colors">L</button>
                     </div>
                 </div>
 
-                <button class="w-full bg-white text-black py-3 rounded-md hover:bg-neutral-200 transition-colors text-base">افزودن به سبد خرید</button>
+                <button id="add-to-cart-btn" class="w-full bg-white text-black py-4 text-sm uppercase tracking-widest hover:bg-neutral-200 transition-colors flex justify-center items-center">
+                    <span class="btn-spinner"></span>
+                    <span class="btn-text">افزودن به سبد خرید</span>
+                </button>
+                
+                <p class="mt-4 text-xs text-neutral-500 text-center">ارسال رایگان برای خریدهای بالای ۵ میلیون تومان</p>
             </div>
         </div>
     </div>
 
-    <!-- Chatbot Widget -->
-    <div id="chat-widget" class="fixed bottom-6 left-6 z-40">
-        <!-- Chat Bubble -->
-        <button id="chat-bubble" class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg transform hover:scale-110 transition-transform">
-            <svg class="w-8 h-8 text-neutral-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+    <div id="chat-widget" class="fixed bottom-6 left-6 z-50">
+        <button id="chat-bubble" class="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-2xl transform hover:scale-105 transition-all duration-300 group">
+            <svg class="w-6 h-6 text-neutral-900 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
         </button>
 
-        <!-- Chat Window -->
-        <div id="chat-window" class="absolute bottom-20 left-0 w-80 h-96 bg-neutral-800 rounded-lg border border-neutral-700 flex flex-col transform scale-0 origin-bottom-left">
-            <!-- Header -->
-            <div class="flex justify-between items-center p-3 border-b border-neutral-700">
-                <h3 class="font-semibold text-white">پشتیبانی Cloth</h3>
+        <div id="chat-window" class="absolute bottom-20 left-0 w-80 sm:w-96 h-[450px] bg-neutral-800 rounded-xl border border-neutral-700 flex flex-col transform scale-0 origin-bottom-left overflow-hidden shadow-2xl">
+            <div class="flex justify-between items-center p-4 bg-neutral-900 border-b border-neutral-700">
+                <div class="flex items-center space-x-3 space-x-reverse">
+                    <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                    <h3 class="font-light text-white text-sm">پشتیبانی آنلاین</h3>
+                </div>
                 <button id="close-chat-btn">
-                    <svg class="w-6 h-6 text-neutral-400 hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    <svg class="w-5 h-5 text-neutral-400 hover:text-white transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </div>
-            <!-- Messages -->
-            <div id="chat-messages" class="flex-1 p-4 space-y-4 overflow-y-auto">
-                <!-- Bot Message -->
-                <div class="chat-message flex">
-                    <div class="bg-neutral-700 p-3 rounded-lg max-w-xs">
-                        <p class="text-sm">سلام! من دستیار هوشمند Cloth هستم. چطور میتونم کمکتون کنم؟</p>
+            <div id="chat-messages" class="flex-1 p-4 space-y-4 overflow-y-auto bg-neutral-800">
+                <div class="chat-message flex w-full">
+                    <div class="bg-neutral-700 p-3 rounded-2xl rounded-tr-none max-w-[85%]">
+                        <p class="text-sm text-neutral-200 leading-relaxed">سلام! به Cloth خوش آمدید. چطور می‌توانم در انتخاب لباس به شما کمک کنم؟</p>
                     </div>
                 </div>
             </div>
-            <!-- Input -->
-            <div class="p-3 border-t border-neutral-700">
-                <form id="chat-form" class="flex items-center space-x-2 space-x-reverse">
-                    <input autocomplete="off" id="chat-input" type="text" placeholder="پیام خود را بنویسید..." class="flex-1 bg-neutral-700 border border-neutral-600 rounded-full py-2 px-4 focus:outline-none focus:border-white text-sm">
-                    <button type="submit" class="w-10 h-10 bg-white rounded-full flex items-center justify-center flex-shrink-0">
-                        <svg class="w-5 h-5 text-neutral-800 transform -rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+            <div id="chat-loading" class="hidden px-4 pb-2">
+                <div class="bg-neutral-700 p-3 rounded-2xl rounded-tr-none w-16 h-10 flex items-center justify-center">
+                    <div class="typing-indicator"><span></span><span></span><span></span></div>
+                </div>
+            </div>
+            
+            <div class="p-3 bg-neutral-900 border-t border-neutral-700">
+                <form id="chat-form" class="flex items-center space-x-2 space-x-reverse relative">
+                    <input autocomplete="off" id="chat-input" type="text" placeholder="پیام..." class="flex-1 bg-neutral-800 border border-neutral-700 rounded-full py-3 px-4 focus:outline-none focus:border-white text-sm text-white placeholder-neutral-500 transition-colors">
+                    <button type="submit" class="w-10 h-10 bg-white rounded-full flex items-center justify-center flex-shrink-0 hover:bg-neutral-200 transition">
+                        <svg class="w-5 h-5 text-neutral-900 transform -rotate-90 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
                     </button>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- Chatbot Guide Tooltip -->
-    <div id="chat-tooltip" class="absolute bottom-24 left-6 z-40 w-64 bg-neutral-700 text-white p-4 rounded-lg shadow-xl opacity-0 transform translate-y-2 pointer-events-none">
-        <button id="close-tooltip-btn" class="absolute top-2 left-2 text-neutral-400 hover:text-white text-xl font-bold">&times;</button>
-        <p class="text-sm font-semibold">سوالی دارید؟</p>
-        <p class="text-xs text-neutral-300 mt-1">از دستیار هوشمند ما برای پیدا کردن محصولات یا راهنمایی در مورد سایز استفاده کنید.</p>
+    <div id="chat-tooltip" class="absolute bottom-24 left-6 z-40 w-64 bg-white text-neutral-900 p-4 rounded-lg shadow-xl opacity-0 transform translate-y-2 pointer-events-none border border-neutral-200">
+        <div class="absolute -bottom-2 left-6 w-4 h-4 bg-white transform rotate-45 border-b border-r border-neutral-200"></div>
+        <button id="close-tooltip-btn" class="absolute top-2 left-2 text-neutral-400 hover:text-black text-xl leading-none">&times;</button>
+        <p class="text-sm font-bold mb-1">کمک لازم دارید؟</p>
+        <p class="text-xs text-neutral-600">برای راهنمایی سایز یا استایل، از دستیار هوشمند ما بپرسید.</p>
     </div>
 
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // --- General Elements ---
+            // STATE MANAGEMENT ---
+            let cartCount = 0;
+
+            // DOM ELEMENTS ---
+            const preloader = document.getElementById('preloader');
             const header = document.getElementById('main-header');
             const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const closeMobileMenu = document.getElementById('close-mobile-menu');
             const mobileMenu = document.getElementById('mobile-menu');
-
-            // --- Login Modal Elements ---
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+            
+            // Login
             const loginIcon = document.getElementById('login-icon');
             const loginModal = document.getElementById('login-modal');
             const closeLoginModalBtn = document.getElementById('close-login-modal-btn');
+            const loginForm = document.getElementById('login-form');
 
-            // --- Quick View Modal Elements ---
+            // Quick View / Cart
             const quickViewModal = document.getElementById('quick-view-modal');
             const closeQuickViewBtn = document.getElementById('close-quick-view-btn');
             const quickViewBtns = document.querySelectorAll('.quick-view-btn');
+            const addToCartBtn = document.getElementById('add-to-cart-btn');
+            const cartBadge = document.getElementById('cart-badge');
             
-            // --- Chatbot Elements ---
+            // Chat
             const chatBubble = document.getElementById('chat-bubble');
             const chatWindow = document.getElementById('chat-window');
             const closeChatBtn = document.getElementById('close-chat-btn');
             const chatForm = document.getElementById('chat-form');
             const chatInput = document.getElementById('chat-input');
             const chatMessages = document.getElementById('chat-messages');
+            const chatLoading = document.getElementById('chat-loading');
             const chatTooltip = document.getElementById('chat-tooltip');
             const closeTooltipBtn = document.getElementById('close-tooltip-btn');
 
-            // --- Header & Mobile Menu Logic ---
+            // PRELOADER LOGIC 
+            // Simulate minimum load time of 1 second so users see the brand
+            setTimeout(() => {
+                preloader.classList.add('fade-out');
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 500);
+            }, 1000);
+
+            // HEADER & NAVIGATION 
             window.addEventListener('scroll', () => {
                 header.classList.toggle('header-glass', window.scrollY > 50);
             });
-            mobileMenuButton.addEventListener('click', () => {
+            
+            const toggleMobileMenu = () => {
                 mobileMenu.classList.toggle('-translate-x-full');
-            });
+            };
 
-            // --- Scroll Reveal Animation ---
+            mobileMenuButton.addEventListener('click', toggleMobileMenu);
+            closeMobileMenu.addEventListener('click', toggleMobileMenu);
+            mobileLinks.forEach(link => link.addEventListener('click', toggleMobileMenu));
+
+            // SCROLL REVEAL ANIMATION
             const revealElements = document.querySelectorAll('.scroll-reveal');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -479,29 +581,73 @@
                         observer.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.1 });
+            }, { threshold: 0.15 });
             revealElements.forEach(el => observer.observe(el));
 
-            // --- Generic Modal Logic ---
+            // TOAST NOTIFICATION SYSTEM
+            function showToast(message) {
+                const container = document.getElementById('toast-container');
+                const toast = document.createElement('div');
+                toast.className = 'toast';
+                toast.textContent = message;
+                container.appendChild(toast);
+                
+                // Trigger reflow
+                void toast.offsetWidth; 
+                
+                requestAnimationFrame(() => toast.classList.add('show'));
+                
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                    setTimeout(() => toast.remove(), 300);
+                }, 3000);
+            }
+
+            // MODAL SYSTEM
             function openModal(modal) {
                 modal.classList.remove('hidden');
-                setTimeout(() => modal.classList.remove('opacity-0'), 10);
+                // Trigger reflow
+                void modal.offsetWidth;
+                modal.classList.remove('opacity-0');
+                modal.querySelector('div').classList.remove('scale-95');
+                modal.querySelector('div').classList.add('scale-100');
             }
+            
             function closeModal(modal) {
                 modal.classList.add('opacity-0');
+                modal.querySelector('div').classList.remove('scale-100');
+                modal.querySelector('div').classList.add('scale-95');
                 setTimeout(() => modal.classList.add('hidden'), 300);
             }
 
-            // --- Login Modal Events ---
+            // Login Modal Events
             loginIcon.addEventListener('click', () => openModal(loginModal));
             closeLoginModalBtn.addEventListener('click', () => closeModal(loginModal));
             loginModal.addEventListener('click', (e) => {
                 if (e.target === loginModal) closeModal(loginModal);
             });
 
-            // --- Quick View Modal Events ---
+            // Login Form Submission (Mock)
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const btn = loginForm.querySelector('button');
+                btn.classList.add('loading');
+                btn.disabled = true;
+
+                // Simulate API Call
+                setTimeout(() => {
+                    btn.classList.remove('loading');
+                    btn.disabled = false;
+                    closeModal(loginModal);
+                    showToast('با موفقیت وارد شدید!');
+                    loginForm.reset();
+                }, 1500);
+            });
+
+            // Quick View Logic
             quickViewBtns.forEach(btn => {
                 btn.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Prevent parent click
                     const card = e.target.closest('.product-card');
                     const name = card.querySelector('.product-name').textContent;
                     const price = card.querySelector('.product-price').textContent;
@@ -520,24 +666,59 @@
                 if (e.target === quickViewModal) closeModal(quickViewModal);
             });
 
-            // --- Option Selector Logic (Color & Size) ---
+            // Add to Cart Logic (Mock)
+            addToCartBtn.addEventListener('click', function() {
+                const btn = this;
+                if(btn.disabled) return;
+                
+                btn.classList.add('loading');
+                btn.disabled = true;
+
+                setTimeout(() => {
+                    btn.classList.remove('loading');
+                    btn.disabled = false;
+                    closeModal(quickViewModal);
+                    
+                    // Update Badge
+                    cartCount++;
+                    cartBadge.textContent = cartCount;
+                    cartBadge.classList.remove('opacity-0');
+                    
+                    // Animation for badge
+                    cartBadge.classList.add('scale-125');
+                    setTimeout(() => cartBadge.classList.remove('scale-125'), 200);
+
+                    showToast('محصول به سبد خرید اضافه شد');
+                }, 800);
+            });
+
+            // Option Selectors
             function handleOptionSelection(selectorClass) {
                 const options = document.querySelectorAll(`.${selectorClass}`);
                 options.forEach(option => {
-                    option.addEventListener('click', () => {
-                        options.forEach(opt => opt.classList.remove('active'));
-                        option.classList.add('active');
+                    option.addEventListener('click', function() {
+                        // Find siblings and remove active class
+                        const parent = this.parentNode;
+                        parent.querySelectorAll(`.${selectorClass}`).forEach(sib => sib.classList.remove('active'));
+                        this.classList.add('active');
                     });
                 });
             }
             handleOptionSelection('color-selector');
             handleOptionSelection('size-selector');
 
-            // --- Chatbot Logic ---
+            // CHATBOT LOGIC
             chatBubble.addEventListener('click', () => {
-                chatWindow.classList.toggle('scale-0');
-                dismissTooltip(); // Also dismiss tooltip when chat is opened
+                const isOpen = !chatWindow.classList.contains('scale-0');
+                if (isOpen) {
+                    chatWindow.classList.add('scale-0');
+                } else {
+                    chatWindow.classList.remove('scale-0');
+                    dismissTooltip();
+                    setTimeout(() => chatInput.focus(), 300);
+                }
             });
+            
             closeChatBtn.addEventListener('click', () => {
                 chatWindow.classList.add('scale-0');
             });
@@ -547,72 +728,64 @@
                 const userMessage = chatInput.value.trim();
                 if (!userMessage) return;
 
-                // Display user message
-                const userMessageEl = document.createElement('div');
-                userMessageEl.className = 'chat-message flex justify-end';
-                userMessageEl.innerHTML = `
-                    <div class="bg-white text-neutral-800 p-3 rounded-lg max-w-xs">
-                        <p class="text-sm">${userMessage}</p>
-                    </div>
-                `;
-                chatMessages.appendChild(userMessageEl);
+                // Add User Message
+                addMessage(userMessage, 'user');
                 chatInput.value = '';
-                chatMessages.scrollTop = chatMessages.scrollHeight;
 
-                // --- Send to API ---
-                fetch("http://localhost:8000/api/chatbot/", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-CSRFToken": "{{ csrf_token }}", // Django CSRF
-                    },
-                    body: JSON.stringify({ question: userMessage }),
-                })
-                .then((res) => res.json())
-                .then((data) => {
-                    const botMessage = data.answer || "متاسفم، مشکلی پیش آمد.";
-                    const botMessageEl = document.createElement('div');
-                    botMessageEl.className = 'chat-message flex';
-                    botMessageEl.innerHTML = `
-                        <div class="bg-neutral-700 text-white p-3 rounded-lg max-w-xs">
-                            <p class="text-sm">${botMessage}</p>
-                        </div>
-                    `;
-                    chatMessages.appendChild(botMessageEl);
-                    chatMessages.scrollTop = chatMessages.scrollHeight;
-                })
-                .catch(() => {
-                    const botMessageEl = document.createElement('div');
-                    botMessageEl.className = 'chat-message flex';
-                    botMessageEl.innerHTML = `
-                        <div class="bg-red-500 text-white p-3 rounded-lg max-w-xs">
-                            <p class="text-sm">خطا در ارتباط با سرور.</p>
-                        </div>
-                    `;
-                    chatMessages.appendChild(botMessageEl);
-                    chatMessages.scrollTop = chatMessages.scrollHeight;
-                });
+                // Show Loading
+                chatLoading.classList.remove('hidden');
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+               
+                // For MVP Demo, we use setTimeout
+                setTimeout(() => {
+                    chatLoading.classList.add('hidden');
+                    
+                    // Simple Mock Responses
+                    let reply = "متشکرم. همکاران ما به زودی پاسخ خواهند داد.";
+                    if(userMessage.includes("سایز") || userMessage.includes("اندازه")) {
+                        reply = "برای راهنمایی سایز، لطفا قد و وزن خود را وارد کنید.";
+                    } else if (userMessage.includes("قیمت")) {
+                        reply = "قیمت‌ها در زیر هر محصول درج شده است.";
+                    }
+
+                    addMessage(reply, 'bot');
+                }, 1500); // 1.5s artificial delay
             });
 
-            
-            // --- Chatbot Guide Tooltip Logic ---
+            function addMessage(text, sender) {
+                const div = document.createElement('div');
+                div.className = `chat-message flex w-full ${sender === 'user' ? 'justify-end' : ''}`;
+                
+                const bubble = document.createElement('div');
+                bubble.className = sender === 'user' 
+                    ? 'bg-white text-neutral-900 p-3 rounded-2xl rounded-tl-none max-w-[85%]'
+                    : 'bg-neutral-700 text-neutral-200 p-3 rounded-2xl rounded-tr-none max-w-[85%]';
+                
+                const p = document.createElement('p');
+                p.className = 'text-sm leading-relaxed';
+                p.textContent = text;
+                
+                bubble.appendChild(p);
+                div.appendChild(bubble);
+                chatMessages.appendChild(div);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            // Chat Tooltip
             if (!sessionStorage.getItem('chatTooltipDismissed')) {
                 setTimeout(() => {
-                    chatTooltip.classList.add('visible');
-                }, 3000); // Show after 3 seconds
+                    if (chatWindow.classList.contains('scale-0')) {
+                        chatTooltip.classList.add('visible');
+                    }
+                }, 4000);
             }
 
             function dismissTooltip() {
-                if (chatTooltip.classList.contains('visible')) {
-                    chatTooltip.classList.remove('visible');
-                    sessionStorage.setItem('chatTooltipDismissed', 'true');
-                }
+                chatTooltip.classList.remove('visible');
+                sessionStorage.setItem('chatTooltipDismissed', 'true');
             }
-
             closeTooltipBtn.addEventListener('click', dismissTooltip);
-
         });
     </script>
-
 </body>
 </html>
