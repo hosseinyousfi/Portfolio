@@ -33,6 +33,26 @@
         .gallery-img:hover { transform: scale(1.02); border-color: #06b6d4; }
         
         .animate-up { opacity: 0; transform: translateY(30px); }
+    
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #0d1117;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, #06b6d4, #3b82f6);
+        border-radius: 10px;
+        border: 2px solid #0d1117;
+        transition: background 0.3s ease;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(180deg, #22d3ee, #60a5fa);
+    }
     </style>
 </head>
 <body class="antialiased">
@@ -52,116 +72,159 @@
         </nav>
     </header>
 
-    <main class="pt-32 pb-20 px-6">
-        <div class="container mx-auto max-w-5xl">
-            
-            <!-- Project Header -->
-            <div class="mb-12 animate-up">
-                <div class="flex flex-wrap gap-4 mb-4">
-                    <span class="bg-purple-900/50 text-purple-300 px-3 py-1 rounded text-sm font-bold">MVP</span>
-                    <span class="bg-blue-900/50 text-blue-300 px-3 py-1 rounded text-sm font-bold">E-commerce</span>
-                    <span class="bg-blue-900/50 text-green-300 px-3 py-1 rounded text-sm font-bold">فروشگاه اینترنتی</span>
-                </div>
-                <h1 class="text-4xl md:text-6xl font-black text-white mb-6 leading-tight">فروشگاه اینترنتی مد و پوشاک</h1>
-                <p class="text-xl text-slate-400 max-w-3xl leading-relaxed">
-                    یک MVP کامل برای شبیه‌سازی فرآیند خرید آنلاین پوشاک، با تمرکز بر معماری مقیاس‌پذیر، مدیریت سبد خرید سمت کلاینت و APIهای قدرتمند.
-                </p>
+<main class="pt-32 pb-20 px-6">
+    <div class="container mx-auto max-w-5xl">
+        
+        <!-- Project Header -->
+        <div class="mb-12 animate-up">
+            <div class="flex flex-wrap gap-4 mb-4">
+                <span class="bg-purple-900/50 text-purple-300 px-3 py-1 rounded text-sm font-bold">MVP</span>
+                <span class="bg-blue-900/50 text-blue-300 px-3 py-1 rounded text-sm font-bold">E-commerce</span>
+                <span class="bg-blue-900/50 text-green-300 px-3 py-1 rounded text-sm font-bold">دموی استاتیک</span>
             </div>
-
-            <!-- Main Image -->
-            <div class="rounded-2xl overflow-hidden border border-slate-700 shadow-2xl mb-16 animate-up">
-                <img src="https://placehold.co/1200x600/1e293b/06b6d4?text=Clothing+Shop+Dashboard" class="w-full h-auto object-cover" loading="lazy" alt="Clothing Shop Overview">
-            </div>
-
-            <!-- Content Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-20">
-                
-                <!-- Left Column: Details -->
-                <div class="md:col-span-2 space-y-10 animate-up">
-                    <div>
-                        <h2 class="text-2xl font-bold text-white mb-4 border-b border-slate-700 pb-2 inline-block">هدف پروژه</h2>
-                        <p class="text-slate-400 leading-8">
-                            هدف این پروژه، پیاده‌سازی معماری تمیز (Clean Architecture) برای یک سیستم فروشگاهی بود. چالش اصلی، مدیریت سبد خرید در سمت کاربر و همگام‌سازی آن با موجودی انبار در سمت سرور به‌صورت لحظه‌ای (Real-time) بود، بدون ایجاد فشار اضافی بر پایگاه داده.
-                        </p>
-                    </div>
-                    <div>
-                        <h2 class="text-2xl font-bold text-white mb-4 border-b border-slate-700 pb-2 inline-block">ویژگی‌های کلیدی</h2>
-                        <ul class="list-disc list-inside mt-4 text-slate-400 space-y-3 marker:text-cyan-400 leading-7">
-                            <li><strong>فیلترینگ پیشرفته:</strong> امکان فیلتر محصولات بر اساس سایز، رنگ، برند و قیمت با استفاده از Django Filter.</li>
-                            <li><strong>سیستم احراز هویت:</strong> پیاده‌سازی JWT Authentication برای امنیت بالا در ورود و ثبت‌نام.</li>
-                            <li><strong>داشبورد مدیریت:</strong> پنل ادمین اختصاصی برای تعریف محصولات متغیر (Variant) مثل رنگ و سایز.</li>
-                            <li><strong>دستیار هوشمند (Chatbot):</strong> چت‌بات مبتنی بر هوش مصنوعی برای پاسخ‌گویی خودکار به سوالات کاربران و راهنمایی در فرآیند خرید.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Right Column: Info & Tech -->
-                <div class="space-y-8 animate-up">
-                    <div class="bg-gray-800/40 p-6 rounded-xl border border-slate-700">
-                        <h3 class="text-white font-bold mb-4">اطلاعات فنی</h3>
-                        <div class="space-y-3 text-sm">
-                            <div class="flex justify-between">
-                                <span class="text-slate-500">نوع پروژه:</span>
-                                <span class="text-slate-300">Minimum Viable Product</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-slate-500">نقش من:</span>
-                                <span class="text-slate-300">توسعه‌دهنده فول‌استک</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-slate-500">وضعیت:</span>
-                                <span class="text-cyan-400 font-bold">تکمیل شده (نمونه کار)</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <h3 class="text-white font-bold mb-4">تکنولوژی‌ها</h3>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="tech-badge ltr-text">Django</span>
-                            <span class="tech-badge ltr-text">Django REST Framework</span>
-                            <span class="tech-badge ltr-text">Tailwind CSS</span>
-                            <span class="tech-badge ltr-text">PostgreSQL</span>
-                            <span class="tech-badge ltr-text">JWT Auth</span>
-                            <span class="tech-badge ltr-text">Docker</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Gallery -->
-            <div class="animate-up">
-                <h2 class="text-2xl font-bold text-white mb-8 text-center">تصاویر محیط کاربری</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="space-y-2">
-                        <img src="https://placehold.co/800x600/1e293b/06b6d4?text=Product+List+&+Filters" class="gallery-img w-full h-auto object-cover" loading="lazy">
-                        <p class="text-center text-slate-500 text-sm">صفحه محصولات با فیلترهای داینامیک</p>
-                    </div>
-                    <div class="space-y-2">
-                        <img src="https://placehold.co/800x600/1e293b/06b6d4?text=Single+Product+Page" class="gallery-img w-full h-auto object-cover" loading="lazy">
-                        <p class="text-center text-slate-500 text-sm">صفحه جزئیات محصول و انتخاب ویژگی‌ها</p>
-                    </div>
-                    <div class="space-y-2">
-                        <img src="https://placehold.co/800x600/1e293b/06b6d4?text=Shopping+Cart" class="gallery-img w-full h-auto object-cover" loading="lazy">
-                        <p class="text-center text-slate-500 text-sm">سبد خرید و محاسبه قیمت نهایی</p>
-                    </div>
-                    <div class="space-y-2">
-                        <img src="https://placehold.co/800x600/1e293b/06b6d4?text=User+Profile" class="gallery-img w-full h-auto object-cover" loading="lazy">
-                        <p class="text-center text-slate-500 text-sm">پروفایل کاربری و تاریخچه سفارشات</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Navigation -->
-            <div class="mt-20 pt-10 border-t border-slate-800 flex justify-between items-center animate-up">
-                <a href="https://codeevo.ir/#projects" class="px-6 py-2 border border-slate-600 rounded-full hover:border-cyan-400 hover:text-cyan-400 text-slate-400 transition">بازگشت به لیست پروژه‌ها</a>
-            </div>
-
+            <h1 class="text-4xl md:text-6xl font-black text-white mb-6 leading-tight">فروشگاه اینترنتی مد و پوشاک</h1>
+            <p class="text-xl text-slate-400 max-w-3xl leading-relaxed">
+                نسخهٔ نمایشی (استاتیک) یک MVP برای نمایش جریان خرید آنلاین و قابلیت‌های کلیدی: فیلتر محصولات، نمایش متغیرها (سایز/رنگ)، سبد خرید سمت کلاینت، و دستیار هوشمند نمایشی. این صفحه برای ارائهٔ قابلیت‌ها به مشتری طراحی شده و با توسعهٔ آتی قابل تبدیل به محصول کامل و متصل به سرور خواهد بود.
+            </p>
         </div>
-    </main>
 
-    <footer class="bg-gray-900/80 border-t border-slate-800 py-8 text-center">
-        <p class="text-slate-500">© 2024 Codevo</p>
+        <!-- Content Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-20">
+            
+            <!-- Left Column: Details -->
+            <div class="md:col-span-2 space-y-10 animate-up">
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-4 border-b border-slate-700 pb-2 inline-block">هدف پروژه</h2>
+                    <p class="text-slate-400 leading-8">
+                        هدف ارائهٔ یک دموی MVP استاتیک بود تا مشتریان و ذی‌نفعان بتوانند جریان سفارش، رابط کاربری و قابلیت‌های پیشنهادی مبتنی بر هوش مصنوعی را مشاهده کنند. در این نسخه، منطق خرید و سبد در سمت کاربر شبیه‌سازی شده تا تجربهٔ نهایی و نیازمندی‌های فنی برای پیاده‌سازی تولیدی مشخص و قابل تصمیم‌گیری باشد.
+                    </p>
+                    <p class="text-slate-400 leading-8 mt-4">
+                        نکتهٔ مهم: این دموی فعلی **استاتیک/نمایشی** است — هیچ احراز هویتی (مثل JWT) یا پایگاه دادهٔ زنده در این صفحه فعال نیست. تمام سناریوها برای نمایش قابلیت‌ها شبیه‌سازی شده‌اند و در صورت نیاز، قابلیت تبدیل به سرویس‌های واقعی وجود دارد.
+                    </p>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-4 border-b border-slate-700 pb-2 inline-block">ویژگی‌های کلیدی (در دمو)</h2>
+                    <ul class="list-disc list-inside mt-4 text-slate-400 space-y-3 marker:text-cyan-400 leading-7">
+                        <li><strong>فیلترینگ پیشرفته (نمایشی):</strong> نشان دادن جستجو و فیلتر بر اساس سایز، رنگ، برند و قیمت برای ارزیابی UX.</li>
+                        <li><strong>نمایش محصولات متغیر:</strong> مدل‌سازی Variantها (رنگ/سایز) و نحوهٔ نمایش در صفحات محصول.</li>
+                        <li><strong>سبد خرید سمت کلاینت:</strong> مدیریت سبد در مرورگر برای بررسی تجربهٔ کاربر و جریان سفارش بدون نیاز به سرور.</li>
+                        <li><strong>دستیار هوشمند نمایشی (Chatbot):</strong> سناریوهای تعامل و پیشنهاد محصول برای نشان دادن نقش AI در کاهش رهاسازی سبد خرید.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Right Column: Info & Tech -->
+            <div class="space-y-8 animate-up">
+                <div class="bg-gray-800/40 p-6 rounded-xl border border-slate-700">
+                    <h3 class="text-white font-bold mb-4">اطلاعات سریع</h3>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">نوع پروژه:</span>
+                            <span class="text-slate-300">MVP</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">نقش من:</span>
+                            <span class="text-slate-300">توسعه‌دهنده فول‌استک</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">وضعیت:</span>
+                            <span class="text-cyan-400 font-bold">دموی استاتیک — آماده معرفی به مشتری</span>
+                        </div>
+                        <div class="mt-6 pt-6 border-t border-slate-700 space-y-3">
+                            <a href="cloth.html" target="_blank" class="block w-full py-3 bg-cyan-600 hover:bg-cyan-500 text-white text-center rounded-lg transition font-bold shadow-lg shadow-cyan-500/20">مشاهده دموی آنلاین</a>
+                            <p class="text-xs text-center text-slate-500">این نسخه برای نمایش است؛ توسعهٔ تولیدی با اتصال به سرویس‌ها جداگانه انجام می‌شود.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold mb-4">تکنولوژی‌ها (نمایشی & آماده توسعه)</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tech-badge ltr-text">Django</span>
+                        <span class="tech-badge ltr-text">Django REST Framework</span>
+                        <span class="tech-badge ltr-text">Tailwind CSS</span>
+                        <span class="tech-badge ltr-text">PostgreSQL</span>
+                        <span class="tech-badge ltr-text">Docker</span>
+                        <span class="tech-badge ltr-text">AI / Recommendation (قابل اتصال)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional: What I can implement -->
+        <div class="animate-up bg-gray-800/30 p-6 rounded-xl border border-slate-700 mb-8">
+            <h2 class="text-2xl font-bold text-white mb-4">قابلیت‌هایی که می‌توانم برای شما پیاده‌سازی کنم</h2>
+            <ul class="list-inside space-y-3 text-slate-400">
+                <li>پیاده‌سازی احراز هویت امن (JWT / OAuth) و مدیریت نشست کاربران.</li>
+                <li>پرداخت آنلاین و یکپارچه‌سازی با درگاه‌های بانکی و مدیریت سفارشات.</li>
+                <li>همگام‌سازی موجودی به‌صورت Real-time با کاهش فشار روی دیتابیس (cache / optimistic locking).</li>
+                <li>پیشنهادگر مبتنی بر هوش مصنوعی (سفارشی‌سازی تجربهٔ خرید و کراس‌فروش).</li>
+                <li>چت‌بات واقعی با امکان اتصال به CRM و ثبت تعاملات مشتری.</li>
+                <li>پنل مدیریت حرفه‌ای برای مدیریت محصولات متغیر، تخفیف‌ها و گزارش‌های فروش.</li>
+                <li>استقرار، کانتینریزه‌سازی و بهینه‌سازی عملکرد (Docker, CI/CD, load balancing).</li>
+            </ul>
+            <p class="text-slate-400 mt-4">
+                اگر تمایل دارید، من می‌توانم بر اساس این دموی استاتیک یک مسیر توسعه مرحله‌ای پیشنهاد دهم (حداقل پیاده‌سازی قابل ارائه، زمان‌بندی و هزینهٔ تقریبی). همچنین گزینهٔ سفارشی‌سازی UI/UX برای برند شما و افزودن ماژول‌های مورد نیاز کسب‌وکار قابل ارائه است.
+            </p>
+        </div>
+
+        <!-- Navigation -->
+        <div class="mt-20 pt-10 border-t border-slate-800 flex flex-col md:flex-row justify-between items-start md:items-center animate-up gap-4">
+            <a href="https://codeevo.ir/#projects" class="px-6 py-2 border border-slate-600 rounded-full hover:border-cyan-400 hover:text-cyan-400 text-slate-400 transition">بازگشت به لیست پروژه‌ها</a>
+        </div>
+
+    </div>
+</main>
+
+
+    <footer class="bg-gray-900/70 border-t border-slate-800 pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                <div class="md:col-span-4">
+                    <h3 class="text-3xl justify-center font-black text-cyan-400 text-glow">CODEVO</h3>
+                    <p class="text-slate-400 mt-4 max-w-xs">تبدیل ایده‌های نوآورانه به راهکارهای دیجیتال قدرتمند.</p>
+                </div>
+                <div class="md:col-span-2">
+                    <h4 class="font-bold text-white mb-4">ناوبری</h4>
+                    <ul class="flex flex-row space-x-4 space-x-reverse md:flex-col md:space-y-3 md:space-x-0">
+                        <li><a href="#services" class="text-slate-400 hover:text-cyan-400 transition-colors">خدمات</a></li>
+                        <li><a href="#workflow" class="text-slate-400 hover:text-cyan-400 transition-colors">روند کاری</a></li>
+                        <li><a href="#skills" class="text-slate-400 hover:text-cyan-400 transition-colors">مهارت‌ها</a></li>                    </ul>
+                </div>
+                <div class="md:col-span-6" id="call">
+                     <h4 class="font-bold text-white mb-4">بیایید ایده شما را به واقعیت تبدیل کنیم.</h4>
+                     <p class="text-slate-400 mb-4">آماده شروع یک پروژه جدید هستید؟ از راه‌های زیر با من در ارتباط باشید.</p>
+                     <div class="flex flex-wrap gap-4">
+                        <a href="tel:+989106481103" class="flex items-center gap-2 bg-slate-800 hover:bg-cyan-500 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" /></svg>
+                            <span>تماس بگیرید</span>
+                        </a>
+                        <a href="https://t.me/codeevo" target="_blank" class="flex items-center gap-2 bg-slate-800 hover:bg-cyan-500 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" /></svg>
+                            <span>تلگرام</span>
+                        </a>
+                        <a href="https://instagram.com/codeevo.dev" target="_blank" class="flex items-center gap-2 bg-slate-800 hover:bg-cyan-500 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zm5.75-.75a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5z"/>
+                            </svg>
+                            <span>اینستاگرام</span>
+                        </a>
+                        <a href="https://github.com/codeevo-dev" target="_blank" class="flex items-center gap-2 bg-slate-800 hover:bg-cyan-500 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.529 2.341 1.087 2.91.832.091-.647.35-1.087.636-1.338-2.22-.253-4.555-1.11-4.555-4.944 0-1.091.39-1.984 1.029-2.681-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.338 1.909-1.294 2.748-1.025 2.748-1.025.546 1.377.203 2.394.1 2.647.64.697 1.028 1.59 1.028 2.681 0 3.842-2.337 4.687-4.565 4.935.359.31.679.923.679 1.861 0 1.344-.012 2.429-.012 2.758 0 .268.18.579.688.481A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" />
+                            </svg>
+                            <span>گیت‌هاب</span>
+                        </a>
+
+
+                     </div>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-slate-500 text-sm">© Codevo. تمامی حقوق محفوظ است.</p>
+            </div>
+        </div>
     </footer>
 
     <!-- Scripts -->

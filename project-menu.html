@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Codevo | پروژه رستوران</title>
+    <title>Codevo | منوی دیجیتال هوشمند</title>
+    <meta name="description" content="جزئیات پروژه منوی دیجیتال با قابلیت اسکن QR Code و پنل مدیریت اختصاصی." />
     <meta name="robots" content="index, follow" />
     <link rel="icon" href="./codeevo.png" type="image/x-icon" />
 
-    <!-- Tailwind & Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Vazirmatn:wght@300;400;700;900&display=swap" rel="stylesheet">
     
@@ -32,6 +32,26 @@
         .gallery-img:hover { transform: scale(1.02); border-color: #06b6d4; }
         
         .animate-up { opacity: 0; transform: translateY(30px); }
+    
+        /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #0d1117;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, #06b6d4, #3b82f6);
+        border-radius: 10px;
+        border: 2px solid #0d1117;
+        transition: background 0.3s ease;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(180deg, #22d3ee, #60a5fa);
+    }
     </style>
 </head>
 <body class="antialiased">
@@ -40,7 +60,6 @@
     <div class="cursor-outline"></div>
     <div class="cursor-dot"></div>
 
-    <!-- Header -->
     <header class="fixed top-0 left-0 right-0 z-50 bg-gray-900/80 backdrop-blur-md border-b border-gray-800">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="https://codeevo.ir" class="text-2xl font-black text-cyan-400">CODEVO</a>
@@ -51,104 +70,127 @@
         </nav>
     </header>
 
-    <main class="pt-32 pb-20 px-6">
-        <div class="container mx-auto max-w-5xl">
-            
-            <!-- Project Header -->
-            <div class="mb-12 animate-up">
-                <div class="flex flex-wrap gap-4 mb-4">
-                    <span class="bg-cyan-900/50 text-cyan-300 px-3 py-1 rounded text-sm font-bold">طراحی وبسایت تخصصی</span>
-                    <span class="bg-blue-900/50 text-blue-300 px-3 py-1 rounded text-sm font-bold">رستوران</span>
-                </div>
-                <h1 class="text-4xl md:text-6xl font-black text-white mb-6 leading-tight">سامانه مدیریت رستوران</h1>
-                <p class="text-xl text-slate-400 max-w-3xl leading-relaxed">
-                    یک پلتفرم جامع برای نمایش منو و مدیریت سفارشات آنلاین، رزرو میز و حسابداری رستوران.
-                </p>
+<main class="pt-32 pb-20 px-6">
+    <div class="container mx-auto max-w-5xl">
+        
+        <!-- Header -->
+        <div class="mb-12 animate-up">
+            <div class="flex flex-wrap gap-4 mb-4">
+                <span class="bg-cyan-900/50 text-cyan-300 px-3 py-1 rounded text-sm font-bold">Digital Menu</span>
+                <span class="bg-purple-900/50 text-purple-300 px-3 py-1 rounded text-sm font-bold">Smart QR</span>
             </div>
-
-            <!-- Main Image -->
-            <div class="rounded-2xl overflow-hidden border border-slate-700 shadow-2xl mb-16 animate-up">
-                <img src="https://placehold.co/1200x600/1e293b/06b6d4?text=Project+Hero+Image" class="w-full h-auto object-cover" loading="lazy" alt="Project Cover">
-            </div>
-
-            <!-- Content Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-20">
-                
-                <!-- Left Column: Details -->
-                <div class="md:col-span-2 space-y-10 animate-up">
-                    <div>
-                        <h2 class="text-2xl font-bold text-white mb-4 border-b border-slate-700 pb-2 inline-block">چالش پروژه</h2>
-                        <p class="text-slate-400 leading-8">
-                            کارفرما با مشکل مدیریت همزمان سفارشات تلفنی، حضوری و آنلاین روبرو بود. همچنین عدم وجود سیستم گزارش‌گیری دقیق باعث می‌شد محاسبه سود و زیان روزانه با خطا مواجه شود. نیاز اصلی طراحی سیستمی بود که تمام این ورودی‌ها را در یک داشبورد متمرکز کند.
-                        </p>
-                    </div>
-                    <div>
-                        <h2 class="text-2xl font-bold text-white mb-4 border-b border-slate-700 pb-2 inline-block">راه حل ما</h2>
-                        <p class="text-slate-400 leading-8">
-                            ما با استفاده از جنگو (Django)، یک پنل مدیریت یکپارچه طراحی کردیم. برای بخش مشتریان، یک وب‌اپلیکیشن (PWA) پیاده‌سازی شد که امکان سفارش‌دهی بدون نصب برنامه را فراهم می‌کند.
-                        </p>
-                        <ul class="list-disc list-inside mt-4 text-slate-400 space-y-2 marker:text-cyan-400">
-                            <li>طراحی رابط کاربری اختصاصی موبایل</li>
-                            <li>اتصال به درگاه پرداخت بانکی و چاپگر فیش</li>
-                            <li>سیستم باشگاه مشتریان و کد تخفیف</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Right Column: Info & Tech -->
-                <div class="space-y-8 animate-up">
-                    <div class="bg-gray-800/40 p-6 rounded-xl border border-slate-700">
-                        <h3 class="text-white font-bold mb-4">اطلاعات پروژه</h3>
-                        <div class="space-y-3 text-sm">
-                            <div class="flex justify-between">
-                                <span class="text-slate-500">کارفرما:</span>
-                                <span class="text-slate-300">رستوران بام سبز</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-slate-500">نقش من:</span>
-                                <span class="text-slate-300">Full-Stack Developer</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-slate-500">مدت زمان:</span>
-                                <span class="text-slate-300">۱ ماه</span>
-                            </div>
-                            <div class="mt-6 pt-6 border-t border-slate-700">
-                                <a href="#" target="_blank" class="block w-full py-3 bg-cyan-600 hover:bg-cyan-500 text-white text-center rounded-lg transition font-bold">مشاهده آنلاین سایت</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <h3 class="text-white font-bold mb-4">تکنولوژی‌ها</h3>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="tech-badge ltr-text">Python / Django</span>
-                            <span class="tech-badge ltr-text">PostgreSQL</span>
-                            <span class="tech-badge ltr-text">Redis</span>
-                            <span class="tech-badge ltr-text">Docker</span>
-                            <span class="tech-badge ltr-text">Tailwind CSS</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Gallery -->
-            <div class="animate-up">
-                <h2 class="text-2xl font-bold text-white mb-8 text-center">تصاویر محیط کاربری</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <img src="https://placehold.co/800x600/1e293b/06b6d4?text=Dashboard+UI" class="gallery-img w-full h-auto object-cover" loading="lazy">
-                    <img src="https://placehold.co/800x600/1e293b/06b6d4?text=Mobile+View" class="gallery-img w-full h-auto object-cover" loading="lazy">
-                    <img src="https://placehold.co/800x600/1e293b/06b6d4?text=Order+Page" class="gallery-img w-full h-auto object-cover" loading="lazy">
-                    <img src="https://placehold.co/800x600/1e293b/06b6d4?text=Admin+Panel" class="gallery-img w-full h-auto object-cover" loading="lazy">
-                </div>
-            </div>
-
-            <!-- Navigation -->
-            <div class="mt-20 pt-10 border-t border-slate-800 flex justify-between items-center animate-up">
-                <a href="https://codeevo.ir/#projects" class="px-6 py-2 border border-slate-600 rounded-full hover:border-cyan-400 hover:text-cyan-400 text-slate-400 transition">بازگشت به لیست پروژه‌ها</a>
-            </div>
-
+            <h1 class="text-4xl md:text-6xl font-black text-white mb-6 leading-tight">
+                سامانه منوی دیجیتال هوشمند برای رستوران‌ها
+            </h1>
+            <p class="text-xl text-slate-400 max-w-3xl leading-relaxed">
+                یک راهکار مدرن، سریع و انعطاف‌پذیر برای نمایش منو، مدیریت دسته‌بندی‌ها و تغییر قیمت‌ها بدون چاپ مجدد. مشتری فقط QR را اسکن می‌کند و مستقیماً وارد منوی شما می‌شود.
+            </p>
         </div>
-    </main>
+
+        <!-- Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-20">
+            
+            <!-- Left Content -->
+            <div class="md:col-span-2 space-y-10 animate-up">
+
+                <!-- Challenge -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-4 border-b border-slate-700 pb-2 inline-block">
+                        چالش و هدف
+                    </h2>
+                    <p class="text-slate-400 leading-8">
+                        منوهای چاپی محدودیت دارند: هزینهٔ چاپ، سختی بروزرسانی قیمت‌ها، و ناهماهنگی میان شعب. هدف این پروژه ارائهٔ یک سامانهٔ کاملاً دیجیتال و قابل مدیریت بود که بدون نیاز به اپلیکیشن نصب‌شده، منو را در لحظه در اختیار مشتری قرار دهد.
+                    </p>
+                </div>
+
+                <!-- Key Features -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-4 border-b border-slate-700 pb-2 inline-block">
+                        امکانات کلیدی
+                    </h2>
+                    <ul class="list-disc list-inside mt-4 text-slate-400 space-y-3 marker:text-cyan-400 leading-7">
+
+                        <li>
+                            <strong>QR اختصاصی برای هر میز/شعبه:</strong>
+                            اسکن سریع و ورود مستقیم به منوی دیجیتال با طراحی تمیز و سبک.
+                        </li>
+
+                        <li>
+                            <strong>پنل مدیریت لحظه‌ای:</strong>
+                            افزودن و ویرایش دسته‌بندی، آیتم‌ها، قیمت‌ها، عکس‌ها و وضعیت موجودی بدون نیاز به پشتیبان.
+                        </li>
+
+                        <li>
+                            <strong>رابط کاربری موبایل‌محور:</strong>
+                            طراحی واکنش‌گرا و بهینه برای تجربه سریع مشتری روی گوشی هوشمند.
+                        </li>
+
+                        <li>
+                            <strong>جستجو و فیلتر هوشمند:</strong>
+                            پیدا کردن سریع غذاها، نوشیدنی‌ها و پیشنهادهای ویژه.
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Right Content -->
+            <div class="space-y-8 animate-up">
+
+                <!-- Project Info -->
+                <div class="bg-gray-800/40 p-6 rounded-xl border border-slate-700">
+                    <h3 class="text-white font-bold mb-4">اطلاعات پروژه</h3>
+                    <div class="space-y-3 text-sm">
+
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">نوع پروژه:</span>
+                            <span class="text-slate-300">Minimum Viable Product</span>
+                        </div>
+
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">نقش من:</span>
+                            <span class="text-slate-300">توسعه‌دهنده فول‌استک</span>
+                        </div>
+
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">وضعیت:</span>
+                            <span class="text-cyan-400 font-bold">آماده ارائه و دمو</span>
+                        </div>
+
+                        <div class="mt-6 pt-6 border-t border-slate-700 space-y-3">
+                            <a href="digital-menu.html" target="_blank"
+                               class="block w-full py-3 bg-cyan-600 hover:bg-cyan-500 text-white text-center rounded-lg transition font-bold shadow-lg shadow-cyan-500/20">
+                                مشاهده دموی آنلاین
+                            </a>
+                            <p class="text-xs text-center text-slate-500">نسخه نمایشی — داده‌ها استاتیک هستند</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tech -->
+                <div>
+                    <h3 class="text-white font-bold mb-4">تکنولوژی‌ها</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tech-badge ltr-text">Python / Django</span>
+                        <span class="tech-badge ltr-text">JavaScript</span>
+                        <span class="tech-badge ltr-text">Tailwind CSS</span>
+                        <span class="tech-badge ltr-text">QR Code Generator</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="mt-20 pt-10 border-t border-slate-800 flex justify-between items-center animate-up">
+            <a href="https://codeevo.ir#projects"
+               class="px-6 py-2 border border-slate-600 rounded-full hover:border-cyan-400 hover:text-cyan-400 text-slate-400 transition">
+                بازگشت به لیست پروژه‌ها
+            </a>
+        </div>
+
+    </div>
+</main>
+
 
     <footer class="bg-gray-900/70 border-t border-slate-800 pt-16 pb-8">
         <div class="container mx-auto px-6">
@@ -199,7 +241,6 @@
         </div>
     </footer>
 
-    <!-- Scripts (Same Three.js Logic) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
     <script>
@@ -213,10 +254,9 @@
              window.onload = function() {
                 setTimeout(() => {
                     if (typeof THREE !== 'undefined' && typeof anime !== 'undefined') {
-                        // Page specific animation
                         anime({ targets: '.animate-up', translateY: [30,0], opacity: [0,1], duration: 800, delay: anime.stagger(150), easing: 'easeOutCubic' });
 
-                        // Three.js Background (Same as index for consistency)
+                        // Three.js Background
                         const canvas = document.getElementById('bg-canvas');
                         const scene = new THREE.Scene();
                         const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 2, 2000);

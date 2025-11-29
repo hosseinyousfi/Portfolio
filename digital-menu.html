@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>کافه | منوی دیجیتال</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+    
+    <style>
+        :root {
+            --dark-green: #1a2c24;
+            --card-bg: rgba(45, 74, 62, 0.5);
+            --accent-orange: #e07a5f;
+            --accent-gold: #f2cc8f;
+            --text-light: #f4f1de;
+            --text-muted: rgba(244, 241, 222, 0.6);
+            
+            --nav-bg: rgba(26, 44, 36, 0.95);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--dark-green);
+            color: var(--text-light);
+            font-family: 'Vazirmatn', sans-serif;
+            overflow-x: hidden;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+            padding-bottom: 100px;
+        }
+
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: var(--dark-green);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: opacity 0.6s ease;
+        }
+
+        .loader-logo {
+            width: 80px;
+            height: 80px;
+            border: 3px solid var(--accent-orange);
+            border-bottom: none;
+            border-radius: 50% 50% 0 0; /* شکل طاق */
+            animation: bounceArch 1.5s infinite ease-in-out;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .loader-logo::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 2px;
+            background: var(--accent-gold);
+        }
+
+        .loader-text {
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            color: var(--accent-gold);
+            font-weight: 900;
+            opacity: 0;
+            animation: fadeIn 1s forwards 0.5s;
+        }
+
+        header {
+            height: 320px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .header-bg-circle {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--accent-orange) 0%, transparent 70%);
+            opacity: 0.15;
+            top: -100px;
+            right: -50px;
+            filter: blur(40px);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .header-arch-outline {
+            position: absolute;
+            bottom: -2px;
+            width: 85%;
+            height: 200px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-bottom: none;
+            border-radius: 200px 200px 0 0;
+            z-index: 1;
+        }
+
+        .logo-box {
+            z-index: 10;
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(8px);
+            padding: 25px 40px;
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideUp 0.8s forwards 0.8s;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: var(--accent-gold);
+            margin: 0;
+            line-height: 1;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: var(--accent-orange);
+            letter-spacing: 2px;
+            margin-top: 5px;
+            text-transform: uppercase;
+        }
+
+        /* --- menu --- */
+        .container {
+            padding: 0 16px;
+            position: relative;
+            z-index: 5;
+            margin-top: -30px;
+        }
+
+        .category-section {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 32px 32px 16px 16px;
+            padding: 30px 16px 16px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-header {
+            text-align: center;
+            margin-bottom: 25px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .category-title {
+            background: var(--dark-green);
+            color: var(--accent-gold);
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: 800;
+            position: relative;
+            z-index: 2;
+            border: 1px solid rgba(242, 204, 143, 0.3);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .category-line {
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-orange), transparent);
+            opacity: 0.6;
+            z-index: 1;
+        }
+
+        .items-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .item-card {
+            background: rgba(0,0,0,0.2);
+            border-radius: 20px;
+            padding: 12px;
+            display: flex;
+            gap: 15px;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 1px solid transparent;
+        }
+
+        .item-card:active {
+            transform: scale(0.98);
+            background: rgba(0,0,0,0.3);
+        }
+
+        .item-img-container {
+            width: 80px;
+            height: 80px;
+            border-radius: 16px;
+            overflow: hidden;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .item-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .item-card:hover .item-img {
+            transform: scale(1.1);
+        }
+
+        .item-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .item-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .item-name {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .item-desc {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .item-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 8px;
+        }
+
+        .item-price {
+            color: var(--accent-gold);
+            font-weight: 800;
+            font-size: 1.05rem;
+        }
+        
+        .unit {
+            font-size: 0.7rem;
+            font-weight: normal;
+            opacity: 0.8;
+        }
+
+        .add-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(224, 122, 95, 0.15);
+            border: 1px solid var(--accent-orange);
+            color: var(--accent-orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .add-btn:active {
+            background: var(--accent-orange);
+            color: #fff;
+        }
+        /* ---  dock navigation --- */
+        .dock-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 400px;
+            background: var(--nav-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 12px 10px;
+            z-index: 1000;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            
+            display: flex;
+            overflow-x: auto;
+            gap: 5px;
+            scrollbar-width: none;
+        }
+        
+        .dock-nav::-webkit-scrollbar { display: none; }
+
+        .nav-btn {
+            flex: 0 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 16px;
+            border-radius: 16px;
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            transition: all 0.3s;
+            min-width: 70px;
+        }
+
+        .nav-btn i {
+            font-size: 1.3rem;
+            margin-bottom: 4px;
+            transition: transform 0.3s;
+        }
+
+        .nav-btn span {
+            font-size: 0.65rem;
+            font-weight: bold;
+        }
+
+        .nav-btn.active {
+            background: rgba(224, 122, 95, 0.15);
+            color: var(--accent-orange);
+        }
+
+        .nav-btn.active i {
+            transform: translateY(-2px);
+        }
+
+        /* --- انیمیشن‌ها --- */
+        @keyframes bounceArch {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(10px, -10px); }
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.5, 0, 0, 1);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /*  responsive style  */
+        @media (min-width: 768px) {
+            .items-grid { grid-template-columns: 1fr 1fr; }
+            .container { max-width: 800px; margin: -40px auto 0; }
+        }
+
+                .search-container {
+            position: relative;
+            margin-bottom: 25px;
+            z-index: 20;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 16px 50px 16px 20px;
+            border-radius: 50px;
+            background: rgba(26, 44, 36, 0.85);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(224, 122, 95, 0.3);
+            color: var(--text-light);
+            font-family: inherit;
+            font-size: 1rem;
+            outline: none;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-orange);
+            background: rgba(26, 44, 36, 0.95);
+            box-shadow: 0 8px 25px rgba(224, 122, 95, 0.15);
+        }
+
+        .search-input::placeholder {
+            color: rgba(244, 241, 222, 0.5);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent-orange);
+            font-size: 1.1rem;
+            pointer-events: none;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-muted);
+            font-style: italic;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- loading -->
+    <div id="loader">
+        <div class="loader-logo"></div>
+        <div class="loader-text">CAFE MENU</div>
+    </div>
+
+    <!-- header -->
+    <header>
+        <div class="header-bg-circle"></div>
+        <div class="header-arch-outline"></div>
+        
+        <div class="logo-box">
+            <h1>CAFE</h1>
+            <p class="subtitle">ART OF COFFEE</p>
+        </div>
+    </header>
+
+    <!-- menu -->
+    <main class="container">
+        <!-- Search -->
+        <div class="search-container reveal">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="searchInput" class="search-input" placeholder="جستجوی قهوه، کیک و...">
+        </div>
+        <div id="noResults" class="no-results">موردی یافت نشد :(</div>
+
+        <!-- hot coffe -->
+        <section id="hot-coffee" class="category-section reveal">
+            <div class="category-header">
+                <div class="category-line"></div>
+                <h2 class="category-title">قهوه گرم</h2>
+            </div>
+            <div class="items-grid">
+                <div class="item-card">
+                    <div class="item-img-container">
+                        <img data-src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=200&h=200&fit=crop" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="item-img lazy" alt="اسپرسو">
+                    </div>
+                    <div class="item-details">
+                        <div class="item-name">اسپرسو (سینگل/دبل)</div>
+                        <div class="item-desc">عصاره خالص عربیکا با کرمای غلیظ</div>
+                        <div class="item-bottom">
+                            <div class="item-price">۴۵/۵۵ <span class="unit">ت</span></div>
+                            <div class="add-btn"><i class="fas fa-plus"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card">
+                    <div class="item-img-container">
+                        <img data-src="https://plus.unsplash.com/premium_photo-1723559972702-2659e41dbb5b?q=80&w=736&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="item-img lazy" alt="امریکانو">
+                    </div>
+                    <div class="item-details">
+                        <div class="item-name">امریکانو</div>
+                        <div class="item-desc">اسپرسو رقیق شده با آب داغ</div>
+                        <div class="item-bottom">
+                            <div class="item-price">۵۰ <span class="unit">هزار</span></div>
+                            <div class="add-btn"><i class="fas fa-plus"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card">
+                    <div class="item-img-container">
+                        <img data-src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=200&h=200&fit=crop" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="item-img lazy" alt="لاته">
+                    </div>
+                    <div class="item-details">
+                        <div class="item-name">کافه لاته</div>
+                        <div class="item-desc">اسپرسو با شیر فوم گرفته شده</div>
+                        <div class="item-bottom">
+                            <div class="item-price">۶۵ <span class="unit">هزار</span></div>
+                            <div class="add-btn"><i class="fas fa-plus"></i></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="item-card">
+                    <div class="item-img-container">
+                        <img data-src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=200&h=200&fit=crop" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="item-img lazy" alt="موکا">
+                    </div>
+                    <div class="item-details">
+                        <div class="item-name">موکا</div>
+                        <div class="item-desc">ترکیب اسپرسو، شیر و شکلات</div>
+                        <div class="item-bottom">
+                            <div class="item-price">۷۰ <span class="unit">هزار</span></div>
+                            <div class="add-btn"><i class="fas fa-plus"></i></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="item-card">
+                    <div class="item-img-container">
+                        <img data-src="https://images.unsplash.com/photo-1604298458655-ae6e04213678?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="item-img lazy" alt="ماکیاتو">
+                    </div>
+                    <div class="item-details">
+                        <div class="item-name">کارامل ماکیاتو</div>
+                        <div class="item-desc">اسپرسو، شیر، فوم و سیروپ کارامل</div>
+                        <div class="item-bottom">
+                            <div class="item-price">۷۵ <span class="unit">هزار</span></div>
+                            <div class="add-btn"><i class="fas fa-plus"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- hot bar -->
+        <section id="warm-drinks" class="category-section reveal">
+            <div class="category-header">
+                <div class="category-line"></div>
+                <h2 class="category-title">بار گرم & دمنوش</h2>
+            </div>
+            <div class="items-grid">
+                <div class="item-card">
+                    <div class="item-img-container">
+                        <img data-src="https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=200&h=200&fit=crop" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="item-img lazy" alt="هات چاکلت">
+                    </div>
+                    <div class="item-details">
+                        <div class="item-name">هات چاکلت</div>
+                        <div class="item-desc">شکلات داغ غلیظ</div>
+                        <div class="item-bottom">
+                            <div class="item-price">۶۰ <span class="unit">هزار</span></div>
+                            <div class="add-btn"><i class="fas fa-plus"></i></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="item-card">
+                    <div class="item-img-container">
+                        <img data-src="https://images.unsplash.com/photo-1597318181409-cf64d0b5d8a2?w=200&h=200&fit=crop" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="item-img lazy" alt="دمنوش">
+                    </div>
+                    <div class="item-details">
+                        <div class="item-name">چای ماسالا</div>
+                        <div class="item-desc">شیر چای با ادویه‌های هندی</div>
+                        <div class="item-bottom">
+                            <div class="item-price">۶۵ <span class="unit">هزار</span></div>
+                            <div class="add-btn"><i class="fas fa-plus"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card">
+                    <div class="item-img-container">
+                        <img data-src="https://images.unsplash.com/photo-1499638673689-79a0b5115d87?w=200&h=200&fit=crop" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="item-img lazy" alt="دمنوش">
+                    </div>
+                    <div class="item-details">
+                        <div class="item-name">دمنوش آرامش</div>
+                        <div class="item-desc">به‌لیمو، گل‌گاوزبان و سنبل‌الطیب</div>
+                        <div class="item-bottom">
+                            <div class="item-price">۵۰ <span class="unit">هزار</span></div>
+                            <div class="add-btn"><i class="fas fa-plus"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- cold coffee -->
+        <section id="cold-coffee" class="category-section reveal">
+            <div class="category-header">
+                <div class="category-line"></div>
+                <h2 class="category-title">سرد بر پایه قهوه</h2>
+            </div>
+            <div class="items-grid">
+                <div class="item-card">
+                    <div class="item-img-container">
+                        <img data-src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=200&h=200&fit=crop" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="item-img lazy" alt="آیس امریکانو">
+                    </div>
+                    <div class="item-details">
+                        <div class="item-name">آیس امریکانو</div>
+                        <div class="item-desc">اسپرسو دبل روی یخ</div>
+                        <div class="item-bottom">
+                            <div class="item-price">۵۵ <span class="unit">هزار</span></div>
+                            <div class="add-btn"><i class="fas fa-plus"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card">
+                    <div class="item-img-container">
+                        <img data-src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="item-img lazy" alt="آیس لاته">
+                    </div>
+                    <div class="item-details">
+                        <div class="item-name">آیس لاته</div>
+                        <div class="item-bottom">
+                            <div class="item-price">۷۰ <span class="unit">هزار</span></div>
+                            <div class="add-btn"><i class="fas fa-plus"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card">
+                    <div class="item-img-container">
+                        <img data-src="https://images.unsplash.com/photo-1579954115545-a95591f28bfc?w=200&h=200&fit=crop" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="item-img lazy" alt="آفوگاتو">
+                    </div>
+                    <div class="item-details">
+                        <div class="item-name">آفوگاتو</div>
+                        <div class="item-desc">اسپرسو داغ روی بستنی وانیلی</div>
+                        <div class="item-bottom">
+                            <div class="item-price">۶۵ <span class="unit">هزار</span></div>
+                            <div class="add-btn"><i class="fas fa-plus"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- shake -->
+        <section id="cold-bar" class="category-section reveal">
+            <div class="category-header">
+                <div class="category-line"></div>
+                <h2 class="category-title">شیک & ماکتل</h2>
+            </div>
+            <div class="items-grid">
+                <div class="item-card">
+                    <div class="item-img-container">
+                        <img data-src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=200&h=200&fit=crop" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="item-img lazy" alt="شیک">
+                    </div>
+                    <div class="item-details">
+                        <div class="item-name">شیک شکلات / نوتلا</div>
+                        <div class="item-bottom">
+                            <div class="item-price">۹۰ <span class="unit">هزار</span></div>
+                            <div class="add-btn"><i class="fas fa-plus"></i></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="item-card">
+                    <div class="item-img-container">
+                        <img data-src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=200&h=200&fit=crop" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="item-img lazy" alt="ماکتل">
+                    </div>
+                    <div class="item-details">
+                        <div class="item-name">بلو اسکای</div>
+                        <div class="item-desc">سیروپ بلوکاراسائو، سودا و لیمو</div>
+                        <div class="item-bottom">
+                            <div class="item-price">۸۵ <span class="unit">هزار</span></div>
+                            <div class="add-btn"><i class="fas fa-plus"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card">
+                    <div class="item-img-container">
+                        <img data-src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=200&h=200&fit=crop&hue=120" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="item-img lazy" alt="موکتل">
+                    </div>
+                    <div class="item-details">
+                        <div class="item-name">موکتل موهیتو</div>
+                        <div class="item-desc">نعنا تازه، لیمو، سودا</div>
+                        <div class="item-bottom">
+                            <div class="item-price">۸۰ <span class="unit">هزار</span></div>
+                            <div class="add-btn"><i class="fas fa-plus"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--cake -->
+        <section id="cakes" class="category-section reveal">
+            <div class="category-header">
+                <div class="category-line"></div>
+                <h2 class="category-title">کیک & دسر</h2>
+            </div>
+            <div class="items-grid">
+                <div class="item-card">
+                    <div class="item-img-container">
+                        <img data-src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=200&h=200&fit=crop" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="item-img lazy" alt="چیز کیک">
+                    </div>
+                    <div class="item-details">
+                        <div class="item-name">چیز کیک نیویورکی</div>
+                        <div class="item-desc">با تاپینگ انتخابی (توت فرنگی/کارامل)</div>
+                        <div class="item-bottom">
+                            <div class="item-price">۱۲۰ <span class="unit">هزار</span></div>
+                            <div class="add-btn"><i class="fas fa-plus"></i></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="item-card">
+                    <div class="item-img-container">
+                        <img data-src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=200&h=200&fit=crop" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="item-img lazy" alt="کیک شکلاتی">
+                    </div>
+                    <div class="item-details">
+                        <div class="item-name">کیک شکلاتی خیس</div>
+                        <div class="item-bottom">
+                            <div class="item-price">۱۱۰ <span class="unit">هزار</span></div>
+                            <div class="add-btn"><i class="fas fa-plus"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-card">
+                    <div class="item-img-container">
+                        <img data-src="https://images.unsplash.com/photo-1703876087817-010eef3e0d59?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="item-img lazy" alt="براونی">
+                    </div>
+                    <div class="item-details">
+                        <div class="item-name">براونی با بستنی</div>
+                        <div class="item-bottom">
+                            <div class="item-price">۱۱۰ <span class="unit">هزار</span></div>
+                            <div class="add-btn"><i class="fas fa-plus"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!--  Navigation -->
+    <nav class="dock-nav">
+        <a href="#hot-coffee" class="nav-btn active" onclick="highlightNav(this)">
+            <i class="fas fa-mug-hot"></i>
+            <span>قهوه گرم</span>
+        </a>
+        <a href="#warm-drinks" class="nav-btn" onclick="highlightNav(this)">
+            <i class="fas fa-leaf"></i>
+            <span>دمنوش</span>
+        </a>
+        <a href="#cold-coffee" class="nav-btn" onclick="highlightNav(this)">
+            <i class="fas fa-coffee"></i>
+            <span>آیس کافی</span>
+        </a>
+        <a href="#cold-bar" class="nav-btn" onclick="highlightNav(this)">
+            <i class="fas fa-cocktail"></i>
+            <span>بار سرد</span>
+        </a>
+        <a href="#cakes" class="nav-btn" onclick="highlightNav(this)">
+            <i class="fas fa-birthday-cake"></i>
+            <span>کیک</span>
+        </a>
+    </nav>
+
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loader').style.display = 'none';
+                }, 600);
+            }, 1200);
+            
+            lazyLoadImages();
+        });
+
+        // lazy load
+        function lazyLoadImages() {
+            const imageObserver = new IntersectionObserver((entries, imgObserver) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const lazyImage = entry.target;
+                        lazyImage.src = lazyImage.dataset.src;
+                        lazyImage.classList.remove("lazy");
+                        imgObserver.unobserve(lazyImage);
+                    }
+                });
+            });
+
+            const arr = document.querySelectorAll('img.lazy');
+            arr.forEach((v) => {
+                imageObserver.observe(v);
+            });
+        }
+
+        // scroll animation
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // activate nav button  
+        function highlightNav(el) {
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            el.classList.add('active');
+            
+            // scroll
+            el.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+
+        // active nav by scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navBtns = document.querySelectorAll('.nav-btn');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navBtns.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('href').includes(current)) {
+                    btn.classList.add('active');
+                    // اسکرول افقی داک در صورت نیاز
+                    if(window.innerWidth < 500) {
+                         btn.parentElement.scrollLeft = btn.offsetLeft - (window.innerWidth / 2) + (btn.offsetWidth / 2);
+                    }
+                }
+            });
+        });
+
+        // effect on add btn
+        document.querySelectorAll('.add-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                this.innerHTML = '<i class="fas fa-check"></i>';
+                this.style.background = '#e07a5f';
+                this.style.color = '#fff';
+                setTimeout(() => {
+                    this.innerHTML = '<i class="fas fa-plus"></i>';
+                    this.style.background = 'rgba(224, 122, 95, 0.15)';
+                    this.style.color = '#e07a5f';
+                }, 1000);
+            });
+        });
+
+                const searchInput = document.getElementById('searchInput');
+        const noResults = document.getElementById('noResults');
+
+        searchInput.addEventListener('input', function(e) {
+            const term = e.target.value.toLowerCase().trim();
+            const sections = document.querySelectorAll('.category-section');
+            let hasGlobalResults = false;
+
+            sections.forEach(section => {
+                const items = section.querySelectorAll('.item-card');
+                let hasVisibleItems = false;
+
+                items.forEach(item => {
+                    const title = item.querySelector('.item-name').innerText.toLowerCase();
+                    const descEl = item.querySelector('.item-desc');
+                    const desc = descEl ? descEl.innerText.toLowerCase() : '';
+                    
+                    if (title.includes(term) || desc.includes(term)) {
+                        item.style.display = 'flex';
+                        hasVisibleItems = true;
+                        hasGlobalResults = true;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+
+                if (hasVisibleItems) {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+
+            // show not found
+            if (!hasGlobalResults && term !== '') {
+                noResults.style.display = 'block';
+            } else {
+                noResults.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html
