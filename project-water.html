@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codevo | سامانه پایش کیفیت آب</title>
+    <meta name="description" content="سامانه GIS پایش و تحلیل کیفیت آب با قابلیت اعتبارسنجی داده‌ها و نقشه‌های تعاملی، توسعه یافته با Django و PostGIS." />
+    <meta name="robots" content="index, follow" />
+    <link rel="icon" href="./codeevo.png" type="image/x-icon" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Vazirmatn:wght@300;400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Shared Styles */
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Vazirmatn', sans-serif; background-color: #0d1117; color: #cbd5e1; overflow-x: hidden; cursor: none; }
+        :lang(en) { font-family: "Cairo", sans-serif; }
+        #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        .ltr-text { direction: ltr; display: inline-block; }
+        
+        /* Cursor */
+        .cursor-dot, .cursor-outline { pointer-events: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; opacity: 0; transition: opacity 0.3s; }
+        .cursor-dot { width: 8px; height: 8px; background-color: #06b6d4; }
+        .cursor-outline { width: 40px; height: 40px; border: 2px solid #06b6d4; }
+        @media (hover: hover) { body:hover .cursor-dot, body:hover .cursor-outline { opacity: 1; } }
+
+        /* Project Specific Styles */
+        .tech-badge { background: rgba(6, 182, 212, 0.1); border: 1px solid rgba(6, 182, 212, 0.3); color: #22d3ee; padding: 5px 15px; border-radius: 20px; font-size: 0.85rem; display: flex; align-items: center; gap: 8px; transition: all 0.3s; }
+        .tech-badge:hover { background: rgba(6, 182, 212, 0.2); transform: translateY(-2px); }
+        .gallery-img { transition: transform 0.3s ease; border-radius: 12px; border: 1px solid rgba(51, 65, 85, 0.5); }
+        .gallery-img:hover { transform: scale(1.02); border-color: #06b6d4; }
+        
+        .animate-up { opacity: 0; transform: translateY(30px); }
+    </style>
+</head>
+<body class="antialiased">
+
+    <canvas id="bg-canvas"></canvas>
+    <div class="cursor-outline"></div>
+    <div class="cursor-dot"></div>
+
+    <header class="fixed top-0 left-0 right-0 z-50 bg-gray-900/80 backdrop-blur-md border-b border-gray-800">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="https://codeevo.ir" class="text-2xl font-black text-cyan-400">CODEVO</a>
+            <a href="https://codeevo.ir" class="flex items-center gap-2 text-slate-300 hover:text-white transition-colors">
+                <span>بازگشت به خانه</span>
+                <svg class="w-5 h-5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </a>
+        </nav>
+    </header>
+
+    <main class="pt-32 pb-20 px-6">
+        <div class="container mx-auto max-w-5xl">
+
+            <!-- Tags + Title -->
+            <div class="mb-12 animate-up">
+                <div class="flex flex-wrap gap-4 mb-4">
+                    <span class="bg-blue-900/50 text-blue-300 px-3 py-1 rounded text-sm font-bold">GIS System</span>
+                    <span class="bg-teal-900/50 text-teal-300 px-3 py-1 rounded text-sm font-bold">Data Science</span>
+                    <span class="bg-cyan-900/50 text-cyan-300 px-3 py-1 rounded text-sm font-bold">Machine Learning</span>
+                </div>
+
+                <h1 class="text-4xl md:text-6xl font-black text-white mb-6 leading-tight">
+                    سامانه هوشمند پایش و پیش‌بینی کیفیت آب
+                </h1>
+
+                <p class="text-xl text-slate-400 max-w-3xl leading-relaxed">
+                    یک پلتفرم تحت وب مبتنی‌بر GIS برای پایش، اعتبارسنجی و پیش‌بینی کیفیت آب رودخانه کارون،
+                    با استفاده از PostGIS، پردازش داده‌ها و یک ماژول هوش مصنوعی برای پیش‌بینی رفتار آینده پارامترهای کیفی.
+                </p>
+            </div>
+
+            <!-- Hero Image -->
+            <div class="rounded-2xl overflow-hidden border border-slate-700 shadow-2xl mb-16 animate-up">
+                <img src="./water-map.png"
+                    class="w-full h-auto object-cover" loading="lazy" alt="Water Quality Monitoring System">
+            </div>
+
+            <!-- Intro / challenge / solution -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-20">
+
+                <div class="md:col-span-2 space-y-10 animate-up">
+                    <!-- Challenge -->
+                    <div>
+                        <h2 class="text-2xl font-bold text-white mb-4 border-b border-slate-700 pb-2 inline-block">
+                            چالش و مسئله
+                        </h2>
+                        <p class="text-slate-400 leading-8">
+                            داده‌های کیفیت آب توسط ایستگاه‌های متعدد در بالادست و پایین‌دست رودخانه کارون ثبت می‌شوند.
+                            این داده‌ها اغلب شامل خطاهای سنسوری، مقادیر پرت و تناقض مکانی هستند.
+                            تحلیل بدون درنظرگرفتن ساختار هیدرولوژیکی رودخانه و ارتباط ایستگاه‌ها،
+                            منجر به تفسیر اشتباه روند کیفیت آب می‌شود.
+                        </p>
+                    </div>
+
+                    <!-- Technical Features -->
+                    <div>
+                        <h2 class="text-2xl font-bold text-white mb-4 border-b border-slate-700 pb-2 inline-block">
+                            راهکار فنی و امکانات سیستم
+                        </h2>
+
+                        <p class="text-slate-400 leading-8 mb-4">
+                            سامانه مبتنی بر معماری سه‌لایه طراحی شده و از PostGIS برای تحلیل‌های مکانی و Leaflet برای ارائه یک نقشه تعاملی و دقیق استفاده می‌کند.
+                        </p>
+
+                        <ul class="list-disc list-inside mt-4 text-slate-400 space-y-3 marker:text-cyan-400 leading-7">
+                            <li><strong>اعتبارسنجی هوشمند:</strong>
+                                بررسی سازگاری داده‌ها برای ایستگاه‌های پشت‌سر‌هم (upstream/downstream)
+                                و شناسایی جهش‌های غیرمنطقی در پارامترهایی مانند EC و DO.
+                            </li>
+                            <li><strong>GIS تعاملی:</strong>
+                                نمایش وضعیت لحظه‌ای ایستگاه‌ها، رنگ‌بندی کیفیت، زوم هوشمند،
+                                و نمایش گراف هیدرولوژیکی رودخانه.
+                            </li>
+                            <li><strong>تحلیل آماری:</strong>
+                                محاسبه Exceedance Probability، تشخیص داده‌های پرت، میانگین‌گیری وزنی،
+                                و تحلیل دوره‌ای (روزانه، ماهانه، فصلی).
+                            </li>
+                            <li><strong>پنل ماژولار:</strong>
+                                DRF برای API مستقل و توسعه آسان اپلیکیشن موبایل یا نسخه سازمانی.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- ML Module Section -->
+                    <div>
+                        <h2 class="text-2xl font-bold text-white mb-4 border-b border-slate-700 pb-2 inline-block">
+                            ماژول هوش مصنوعی و پیش‌بینی
+                        </h2>
+
+                        <p class="text-slate-400 leading-8 mb-4">
+                            این بخش از سامانه برای پیش‌بینی مقدار آینده پارامترهای کیفیت آب (مانند EC، TDS، DO) طراحی شده است.
+                            در این پروژه تمرکز بر <strong>پیاده‌سازی و یکپارچه‌سازی</strong> مدل‌های از پیش آموزش‌دیده بوده
+                            و منطق تبدیل داده‌ها، استانداردسازی، تخمین، و اتصال خروجی‌ها به داشبورد توسط سیستم توسعه یافته است.
+                        </p>
+
+                        <ul class="list-disc list-inside mt-4 text-slate-400 space-y-3 marker:text-cyan-400 leading-7">
+                            <li><strong>Pipeline استانداردسازی ورودی:</strong>
+                                پاک‌سازی داده، جایگزینی مقادیر گمشده و نرمال‌سازی ورودی مدل.
+                            </li>
+                            <li><strong>یکپارچه‌سازی Model Serving:</strong>
+                                اجرای مدل از طریق endpoint اختصاصی در DRF
+                                و دریافت پیش‌بینی با latency پایین.
+                            </li>
+                            <li><strong>پیش‌بینی کوتاه‌مدت:</strong>
+                                نمایش روند ۷، ۱۴ و ۳۰ روز آینده برای پارامترهای حساس.
+                            </li>
+                            <li><strong>اتصال مستقیم به نقشه:</strong>
+                                نمایش پیش‌بینی هر ایستگاه روی نقشه،
+                                همراه با رنگ‌بندی و نمودار trendline.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Project Info Sidebar -->
+                <div class="space-y-8 animate-up">
+                    <!-- Project Info -->
+                    <div class="bg-gray-800/40 p-6 rounded-xl border border-slate-700">
+                        <h3 class="text-white font-bold mb-4">اطلاعات پروژه</h3>
+                        <div class="space-y-3 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-slate-500">نوع سیستم:</span>
+                                <span class="text-slate-300">Web GIS + ML Platform</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-500">پایگاه داده:</span>
+                                <span class="text-slate-300">PostgreSQL + PostGIS</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-500">معماری:</span>
+                                <span class="text-slate-300">Django Templates + DRF API + Docker Compose</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-500">ماژول ML:</span>
+                                <span class="text-slate-300">Integrated Pre-trained Models</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Technologies -->
+                    <div>
+                        <h3 class="text-white font-bold mb-4">تکنولوژی‌ها</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tech-badge ltr-text">Python / Django</span>
+                            <span class="tech-badge ltr-text">PostGIS</span>
+                            <span class="tech-badge ltr-text">Django REST Framework</span>
+                            <span class="tech-badge ltr-text">Leaflet.js</span>
+                            <span class="tech-badge ltr-text">Chart.js</span>
+                            <span class="tech-badge ltr-text">Machine Learning Pipeline</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System parts (Images) -->
+            <div class="animate-up">
+                <h2 class="text-2xl font-bold text-white mb-8 text-center">بخش‌های سامانه</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <img src="water-map2.png"
+                            class="gallery-img w-full h-auto object-cover" loading="lazy">
+                        <p class="text-center text-slate-500 text-sm">نقشه تعاملی و پراکندگی ایستگاه‌ها</p>
+                    </div>
+
+                    <div class="space-y-2">
+                        <img src="water-dash.png"
+                            class="gallery-img w-full h-auto object-cover" loading="lazy">
+                        <p class="text-center text-slate-500 text-sm">داشبورد تحلیل آماری و نمودارها</p>
+                    </div>
+
+                    <div class="space-y-2">
+                        <img src="water-validation.png"
+                            class="gallery-img w-full h-auto object-cover" loading="lazy">
+                        <p class="text-center text-slate-500 text-sm">پنل اعتبارسنجی و اصلاح داده‌ها</p>
+                    </div>
+
+                    <div class="space-y-2">
+                        <img src="water-entry.png"
+                            class="gallery-img w-full h-auto object-cover" loading="lazy">
+                        <p class="text-center text-slate-500 text-sm"> ورودی داده‌ها </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="mt-20 pt-10 border-t border-slate-800 flex justify-between items-center animate-up">
+                <a href="https://codeevo.ir#projects"
+                    class="px-6 py-2 border border-slate-600 rounded-full hover:border-cyan-400 hover:text-cyan-400 text-slate-400 transition">
+                    بازگشت به لیست پروژه‌ها
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+
+
+    <footer class="bg-gray-900/70 border-t border-slate-800 pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                <div class="md:col-span-4">
+                    <h3 class="text-3xl justify-center font-black text-cyan-400 text-glow">CODEVO</h3>
+                    <p class="text-slate-400 mt-4 max-w-xs">تبدیل ایده‌های نوآورانه به راهکارهای دیجیتال قدرتمند.</p>
+                </div>
+                <div class="md:col-span-2">
+                    <h4 class="font-bold text-white mb-4">ناوبری</h4>
+                    <ul class="flex flex-row space-x-4 space-x-reverse md:flex-col md:space-y-3 md:space-x-0">
+                        <li><a href="#services" class="text-slate-400 hover:text-cyan-400 transition-colors">خدمات</a></li>
+                        <li><a href="#workflow" class="text-slate-400 hover:text-cyan-400 transition-colors">روند کاری</a></li>
+                        <li><a href="#skills" class="text-slate-400 hover:text-cyan-400 transition-colors">مهارت‌ها</a></li>                    </ul>
+                </div>
+                <div class="md:col-span-6" id="call">
+                     <h4 class="font-bold text-white mb-4">بیایید ایده شما را به واقعیت تبدیل کنیم.</h4>
+                     <p class="text-slate-400 mb-4">آماده شروع یک پروژه جدید هستید؟ از راه‌های زیر با من در ارتباط باشید.</p>
+                     <div class="flex flex-wrap gap-4">
+                        <a href="tel:+989106481103" class="flex items-center gap-2 bg-slate-800 hover:bg-cyan-500 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" /></svg>
+                            <span>تماس بگیرید</span>
+                        </a>
+                        <a href="https://t.me/codeevo" target="_blank" class="flex items-center gap-2 bg-slate-800 hover:bg-cyan-500 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" /></svg>
+                            <span>تلگرام</span>
+                        </a>
+                        <a href="https://instagram.com/codeevo.dev" target="_blank" class="flex items-center gap-2 bg-slate-800 hover:bg-cyan-500 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zm5.75-.75a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5z"/>
+                            </svg>
+                            <span>اینستاگرام</span>
+                        </a>
+                        <a href="https://github.com/codeevo-dev" target="_blank" class="flex items-center gap-2 bg-slate-800 hover:bg-cyan-500 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.529 2.341 1.087 2.91.832.091-.647.35-1.087.636-1.338-2.22-.253-4.555-1.11-4.555-4.944 0-1.091.39-1.984 1.029-2.681-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.338 1.909-1.294 2.748-1.025 2.748-1.025.546 1.377.203 2.394.1 2.647.64.697 1.028 1.59 1.028 2.681 0 3.842-2.337 4.687-4.565 4.935.359.31.679.923.679 1.861 0 1.344-.012 2.429-.012 2.758 0 .268.18.579.688.481A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" />
+                            </svg>
+                            <span>گیت‌هاب</span>
+                        </a>
+
+
+                     </div>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-slate-500 text-sm">© Codevo. تمامی حقوق محفوظ است.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+             // Custom Cursor & Animations
+             const cursorDot = document.querySelector('.cursor-dot');
+             const cursorOutline = document.querySelector('.cursor-outline');
+             window.addEventListener('mousemove', (e) => { cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`; cursorOutline.style.left = `${e.clientX}px`; cursorOutline.style.top = `${e.clientY}px`; });
+
+             window.onload = function() {
+                setTimeout(() => {
+                    if (typeof THREE !== 'undefined' && typeof anime !== 'undefined') {
+                        anime({ targets: '.animate-up', translateY: [30,0], opacity: [0,1], duration: 800, delay: anime.stagger(150), easing: 'easeOutCubic' });
+
+                        // Three.js Background
+                        const canvas = document.getElementById('bg-canvas');
+                        const scene = new THREE.Scene();
+                        const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 2, 2000);
+                        camera.position.z = 1000;
+                        const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+                        renderer.setSize(window.innerWidth, window.innerHeight);
+                        
+                        const geometry = new THREE.BufferGeometry();
+                        const vertices = [];
+                        for (let i = 0; i < 2000; i++) vertices.push((Math.random()-0.5)*2000, (Math.random()-0.5)*2000, (Math.random()-0.5)*2000);
+                        geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+                        const particles = new THREE.Points(geometry, new THREE.PointsMaterial({ color: 0x06b6d4, size: 2, transparent: true, opacity: 0.7 }));
+                        scene.add(particles);
+                        
+                        let mouseX = 0, mouseY = 0;
+                        document.addEventListener('mousemove', (e) => { mouseX = e.clientX - window.innerWidth/2; mouseY = e.clientY - window.innerHeight/2; });
+                        
+                        function animate() {
+                            requestAnimationFrame(animate);
+                            particles.rotation.y += 0.0005;
+                            camera.position.x += (mouseX - camera.position.x) * 0.05;
+                            camera.position.y += (-mouseY - camera.position.y) * 0.05;
+                            camera.lookAt(scene.position);
+                            renderer.render(scene, camera);
+                        }
+                        animate();
+                    }
+                }, 100);
+             };
+        });
+    </script>
+</body>
+</html>
