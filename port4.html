@@ -1,833 +1,810 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Codevo |طراحی و توسعه وب سایت</title>
+    <title>Codevo | توسعه‌دهنده فول‌استک وب با جنگو و پایتون</title>
 
     <!-- Meta SEO Optimized -->
-    <meta name="description" content="توسعه‌دهنده فول‌استک وب (Full-Stack Developer). طراحی سایت، فروشگاه اینترنتی و وب‌اپلیکیشن‌های اختصاصی با جنگو (Django)، پایتون. مشاوره و اجرای پروژه‌های نرم‌افزاری." />
+    <meta name="description" content="کدوو (Codevo) — توسعه‌دهنده فول‌استک وب. طراحی سایت، فروشگاه اینترنتی و وب‌اپلیکیشن‌های اختصاصی با جنگو (Django) و پایتون. مشاوره و اجرای پروژه‌های نرم‌افزاری." />
     <meta name="keywords" content="طراحی سایت, برنامه نویسی وب, جنگو, Django, پایتون, Python, طراحی فروشگاه اینترنتی, سئو سایت, Codevo" />
     <meta name="author" content="Codevo" />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://codeevo.ir/" />
 
     <!-- Open Graph -->
     <meta property="og:title" content="Codevo | توسعه‌دهنده وب‌سایت‌های مدرن" />
-    <meta property="og:description" content="طراحی و توسعه وب‌سایت‌ها و وب‌اپلیکیشن‌های مدرن با جنگو و پایتون. ایده‌های شما را به واقعیت تبدیل می‌کنیم." />    
+    <meta property="og:description" content="طراحی و توسعه وب‌سایت‌ها و وب‌اپلیکیشن‌های مدرن با جنگو و پایتون." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://codeevo.ir/" />
-    <meta property="og:image" content="media/codeevo.png">
+    <meta property="og:image" content="portfolio/images/logo.png" />
     <meta property="og:locale" content="fa_IR" />
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Codevo | خدمات برنامه نویسی وب" />
-    <meta name="twitter:description" content="توسعه دهنده وب فول استک. متخصص در Django." />
-    <meta name="twitter:image" content="media/codeevo.png">
-    
     <!-- Favicon -->
-    <link rel="icon" href="media/codeevo.png" type="image/x-icon" />
-
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="portfolio/images/logo.png" type="image/png" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Vazirmatn:wght@300;400;700;900&display=swap" rel="stylesheet">
-    
-    <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Dev icons (tech logos) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+
+    <!-- Tailwind CSS (Play CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        base: '#05080f',
+                        'base-50': '#080c16',
+                        'base-100': '#0b101c',
+                        mist: '#dbe6f5',
+                        brand: {
+                            DEFAULT: '#06b6d4',
+                            bright: '#22d3ee',
+                            deep: '#3b82f6',
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['Vazirmatn', 'sans-serif'],
+                        display: ['Vazirmatn', 'sans-serif'],
+                    },
+                },
+            },
+        };
+    </script>
 
     <style>
-    html { scroll-behavior: smooth; }
-    body {
-        font-family: 'Vazirmatn', sans-serif;
-        background-color: #0d1117;
-        cursor: none;
-    }
-    :lang(en) {
-        font-family: "Cairo", sans-serif;
-    }
-    #bg-canvas {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-    }
-    .text-glow { text-shadow: 0 0 5px rgba(59, 130, 246, 0.5), 0 0 10px rgba(59, 130, 246, 0.4); }
-    .card-glow { transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out; }
-    .card-glow:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 0 20px 5px rgba(34, 211, 238, 0.2);
-    }
-    .animate-on-scroll {
-        opacity: 0;
-        transform: translateY(50px) scale(0.95);
-    }
-    .cursor-dot, .cursor-outline {
-        pointer-events: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        border-radius: 50%;
-        z-index: 9999;
-        opacity: 0;
-        transition: opacity 0.3s, transform 0.3s;
-    }
-    .cursor-dot { width: 8px; height: 8px; background-color: #06b6d4; }
-    .cursor-outline { width: 40px; height: 40px; border: 2px solid #06b6d4; }
-    body:hover .cursor-dot, body:hover .cursor-outline { opacity: 1; }
-    #preloader {
-        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background-color: #0d1117; z-index: 10000;
-        display: flex; justify-content: center; align-items: center;
-        transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
-    }
-    #preloader .loader-text { font-size: 3rem; font-weight: 900; color: #06b6d4; text-shadow: 0 0 10px rgba(6, 182, 212, 0.7); }
-    
-    /* Chatbot Styles */
-    #chat-window {
-        transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
-    }
-    #chat-messages::-webkit-scrollbar { width: 4px; }
-    #chat-messages::-webkit-scrollbar-thumb { background-color: #06b6d4; border-radius: 20px; }
-
-    /* Mobile Menu Style */
-    #mobile-menu {
-        transform: translateX(100%);
-    }
-
-    .mySwiper {
-        padding: 40px 10px;
-    }
-
-    .swiper-slide {
-        display: flex;
-        justify-content: center;
-    }
-
-    .project-card {
-        width: 95%;
-        max-width: 380px;
-    }
-
-    @media (min-width: 768px) {
-        .mySwiper {
-            padding: 50px 20px;
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #05080f;
+            overflow-x: hidden;
         }
-    }
+        .ltr { direction: ltr; unicode-bidi: isolate; }
 
-    @media (min-width: 1024px) {
-        .mySwiper {
-            padding: 60px 40px;
+        ::selection { background-color: rgba(6,182,212,0.3); color:#fff; }
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #05080f; }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #22d3ee, #3b82f6);
+            border-radius: 999px; border: 2px solid #05080f;
         }
-    }
+        * { scrollbar-width: thin; scrollbar-color: #06b6d4 #05080f; }
 
-    .swiper-button-next,
-    .swiper-button-prev {
-        color: #06b6d4 !important; 
-    }
-
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-        width: 10px;
-    }
-
-    ::-webkit-scrollbar-track {
-        background: #0d1117;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background: linear-gradient(180deg, #06b6d4, #3b82f6);
-        border-radius: 10px;
-        border: 2px solid #0d1117;
-        transition: background 0.3s ease;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-        background: linear-gradient(180deg, #22d3ee, #60a5fa);
-    }
-
-    /* Firefox */
-    * {
-        scrollbar-width: thin;
-        scrollbar-color: #06b6d4 #0d1117;
-    }
-
-    @media (max-width: 768px) {
         #bg-canvas {
-            opacity: 0.8; /* Dim the stars on mobile */
+            position: fixed; inset: 0; width: 100%; height: 100%; z-index: -1; opacity: .8;
         }
-        .mobile-hide {
-            display: none;
-        }
-    }
 
+        .text-glow { text-shadow: 0 0 10px rgba(34,211,238,.5), 0 0 20px rgba(34,211,238,.25); }
+
+        .glass {
+            background: linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+            backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255,255,255,.09);
+        }
+        .glass-strong {
+            background: linear-gradient(145deg, rgba(255,255,255,.1), rgba(255,255,255,.03));
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,.12);
+        }
+
+        .card-glow { transition: box-shadow .3s ease, transform .3s ease; }
+        .card-glow:hover { transform: translateY(-8px); box-shadow: 0 0 24px 4px rgba(34,211,238,.18); }
+
+        .text-gradient {
+            background: linear-gradient(120deg, #fff 0%, #a5f3fc 38%, #22d3ee 62%, #60a5fa 100%);
+            background-size: 220% auto;
+            -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;
+            animation: shimmer 6s linear infinite;
+        }
+        @keyframes shimmer { to { background-position: 200% center; } }
+
+        .grid-backdrop {
+            background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+            background-size: 64px 64px;
+            mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, #000 50%, transparent 100%);
+        }
+
+        @keyframes blob {
+            0%,100% { transform: translate(0,0) scale(1); }
+            33% { transform: translate(-30px,-34px) scale(1.1); }
+            66% { transform: translate(24px,22px) scale(.92); }
+        }
+        .animate-blob { animation: blob 18s ease-in-out infinite; }
+        .animate-blob-delay { animation: blob 18s ease-in-out infinite; animation-delay: -8s; }
+
+        .glow-pulse { animation: glowpulse 4s ease-in-out infinite; }
+        @keyframes glowpulse {
+            0%,100% { box-shadow: 0 0 0px rgba(34,211,238,.0); }
+            50% { box-shadow: 0 0 40px rgba(34,211,238,.35); }
+        }
+        @keyframes float {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-14px); }
+        }
+
+        .shimmer-bar {
+            background: linear-gradient(90deg, rgba(255,255,255,.04) 25%, rgba(6,182,212,.25) 50%, rgba(255,255,255,.04) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 4.5s linear infinite;
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1);
+            transition-delay: var(--reveal-delay, 0s);
+        }
+        .reveal.reveal-visible { opacity: 1; transform: translateY(0); }
+        .reveal-scale { transform: scale(.94); }
+        .reveal-scale.reveal-visible { transform: scale(1); }
+        .reveal-right { transform: translateX(32px); }
+        .reveal-right.reveal-visible { transform: translateX(0); }
+        .reveal-left { transform: translateX(-32px); }
+        .reveal-left.reveal-visible { transform: translateX(0); }
+
+        /* Custom cursor (desktop only, added via JS) */
+        .cursor-dot, .cursor-outline {
+            pointer-events: none; position: fixed; top: 0; left: 0;
+            border-radius: 50%; z-index: 9999; will-change: transform;
+        }
+        .cursor-dot { width: 7px; height: 7px; background: #22d3ee; }
+        .cursor-outline {
+            width: 38px; height: 38px; border: 1.5px solid rgba(34,211,238,.7);
+            transition: transform .2s ease, border-color .2s ease;
+        }
+        .cursor-outline.hovering { transform: translate(-50%,-50%) scale(1.5) !important; border-color: #fff; }
+
+        #preloader {
+            position: fixed; inset: 0; z-index: 100; background: #05080f;
+            display: flex; justify-content: center; align-items: center;
+            transition: opacity .6s ease, visibility .6s ease;
+        }
+
+        #mobile-menu { transform: translateX(100%); transition: transform .35s cubic-bezier(.22,1,.36,1); }
+        #mobile-menu.open { transform: translateX(0); }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .nav-link.active { color: #fff; background: rgba(255,255,255,.08); }
+
+        #timeline-fill { transform: scaleY(0); transform-origin: top; transition: transform .1s linear; }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: .001ms !important; animation-iteration-count: 1 !important;
+                transition-duration: .001ms !important; scroll-behavior: auto !important;
+            }
+        }
+        @media (max-width: 768px) {
+            #bg-canvas { opacity: .5; }
+            .cursor-dot, .cursor-outline { display: none; }
+        }
     </style>
 </head>
-<body class="bg-gray-900 text-slate-300 antialiased overflow-x-hidden">
+<body class="bg-base text-mist antialiased">
 
-    <canvas id="bg-canvas"></canvas>
-    <div class="cursor-outline"></div>
-    <div class="cursor-dot"></div>
-    <div id="preloader"><div class="loader-text">CODEVO</div></div>
+<canvas id="bg-canvas"></canvas>
+<div class="cursor-outline"></div>
+<div class="cursor-dot"></div>
 
-    <header class="fixed top-0 left-0 right-0 z-[60] bg-gray-900/70 backdrop-blur-lg opacity-0">
-        <nav class="container mx-auto px-4 py-3 md:py-4 flex justify-between items-center">
-            <a href="#" class="nav-logo text-3xl font-black text-cyan-400 text-glow">CODEVO</a>
-            <ul class="hidden md:flex space-x-8 space-x-reverse">
-                <li><a href="#services" class="nav-item text-lg hover:text-cyan-400">خدمات</a></li>
-                <li><a href="#workflow" class="nav-item text-lg hover:text-cyan-400">روند کاری</a></li>
-                <li><a href="#skills" class="nav-item text-lg hover:text-cyan-400">مهارت‌ها</a></li>
-                <li><a href="#projects" class="nav-item text-lg hover:text-cyan-400">پروژه‌ها</a></li>
-            </ul>
-            <button id="hamburger-btn" class="md:hidden z-[60] text-slate-300">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-            </button>
-        </nav>
-    </header>
-
-    <div id="mobile-menu" class="fixed top-0 right-0 h-full w-full bg-gray-900 transition-transform duration-300 ease-in-out z-50 flex flex-col items-center justify-center">
-        <ul class="flex flex-col items-center space-y-8">
-            <li><a href="#services" class="mobile-nav-item text-3xl font-bold text-slate-300 hover:text-cyan-400">خدمات</a></li>
-            <li><a href="#workflow" class="mobile-nav-item text-3xl font-bold text-slate-300 hover:text-cyan-400">روند کاری</a></li>
-            <li><a href="#skills" class="mobile-nav-item text-3xl font-bold text-slate-300 hover:text-cyan-400">مهارت‌ها</a></li>
-            <li><a href="#projects" class="mobile-nav-item text-3xl font-bold text-slate-300 hover:text-cyan-400">پروژه‌ها</a></li>
-        </ul>
+<div id="preloader">
+    <div class="flex flex-col items-center gap-5">
+        <img src="portfolio/images/logo.png" alt="Codevo" class="h-16 w-16 rounded-2xl object-cover glow-pulse">
+        <span class="ltr font-extrabold text-xl tracking-tight text-white">CODEVO</span>
+        <span class="shimmer-bar h-0.5 w-32 rounded-full"></span>
     </div>
+</div>
 
-    <main class="opacity-0">
-<section id="hero" class="relative w-full min-h-[90svh] flex flex-col justify-center items-center text-center px-4 pt-16 overflow-hidden">
-    
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(13,17,23,0.8)_100%)] pointer-events-none z-0"></div>
-    <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-gray-900/80 z-0 pointer-events-none"></div>
-
-    <div class="relative z-10 flex flex-col items-center max-w-lg w-full bg-gray-800/20 backdrop-blur-md border border-white/5 rounded-3xl p-6 sm:p-8 shadow-2xl ring-1 ring-white/10">
-
-        <div class="mb-6 inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/30 bg-gray-900/60 backdrop-blur-md">
-            <span class="relative flex h-2 w-2">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
-            </span>
-            <span class="text-xs text-cyan-300 font-medium">آماده همکاری</span>
-        </div>
-
-        <div class="relative mb-6 group">
-            <div class="absolute -inset-1 bg-gradient-to-r from-cyan-400 to-blue-600 rounded-full blur opacity-40 group-hover:opacity-75 transition duration-500"></div>
-            
-            <div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full border-2 border-slate-700 bg-gray-900 overflow-hidden flex items-center justify-center shadow-inner">
-                
-                <img src="media/codeevo.png" alt="Codevo Profile" class="w-full h-full object-contain p-1 transform group-hover:scale-110 transition-transform duration-500">
-                
-                </div>
-        </div>
-
-        <h1 class="text-3xl sm:text-5xl font-black text-white leading-tight mb-2 tracking-tight">
-            خلق راهکارهای
-            <br />
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 animate-gradient-x">دیجیتال و مدرن</span>
-        </h1>
-
-        <p class="text-sm sm:text-base text-slate-400 mb-6 leading-7 max-w-sm">
-            توسعه‌دهنده <span class="text-cyan-300 font-bold">Python / Django</span>
-            <br>
-            تبدیل ایده‌های شما به واقعیت.
-        </p>
-
-        <div class="flex gap-4 mb-8 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="w-8 h-8" alt="Python">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" class="w-8 h-8 invert" alt="Django">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="w-8 h-8" alt="JS">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" class="w-8 h-8" alt="React">
-        </div>
-
-        <div class="flex flex-col w-full gap-3">
-            <a href="#projects" class="w-full py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-xl shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 transition-all active:scale-95 text-center">
-                مشاهده نمونه‌کارها
-            </a>
-            <a href="#call" class="w-full py-3 bg-white/5 border border-white/10 text-slate-200 font-bold rounded-xl hover:bg-white/10 transition-all active:scale-95 text-center flex justify-center items-center gap-2 backdrop-blur-sm">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-                تماس با من
-            </a>
-        </div>
-    </div>
-
-    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce opacity-50">
-        <a href="#services" class="flex flex-col items-center text-slate-400 hover:text-cyan-400 transition-colors">
-            <svg class="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+<!-- ================= HEADER ================= -->
+<header id="site-header" class="fixed inset-x-0 top-0 z-50">
+    <div id="header-inner" class="mx-auto max-w-7xl flex items-center justify-between px-5 py-3 transition-all duration-500">
+        <a href="#top" class="flex items-center gap-2.5 group">
+            <img src="portfolio/images/logo.png" alt="Codevo" class="h-9 w-9 rounded-xl object-cover transition-transform duration-300 group-hover:scale-105">
+            <span class="ltr text-lg font-extrabold tracking-tight text-white">Codevo</span>
         </a>
+
+        <nav class="hidden lg:flex items-center gap-1">
+            <a href="#services" class="nav-link rounded-full px-3.5 py-2 text-sm font-medium text-mist/60 hover:text-white transition-colors">خدمات</a>
+            <a href="#workflow" class="nav-link rounded-full px-3.5 py-2 text-sm font-medium text-mist/60 hover:text-white transition-colors">روند کاری</a>
+            <a href="#skills" class="nav-link rounded-full px-3.5 py-2 text-sm font-medium text-mist/60 hover:text-white transition-colors">مهارت‌ها</a>
+            <a href="#projects" class="nav-link rounded-full px-3.5 py-2 text-sm font-medium text-mist/60 hover:text-white transition-colors">نمونه‌کارها</a>
+            <a href="#contact" class="nav-link rounded-full px-3.5 py-2 text-sm font-medium text-mist/60 hover:text-white transition-colors">تماس</a>
+        </nav>
+
+        <a href="#contact" class="hidden lg:inline-flex items-center rounded-full bg-gradient-to-b from-brand-bright to-brand px-5 py-2.5 text-sm font-bold text-base shadow-[0_10px_30px_-8px_rgba(6,182,212,0.6)] hover:-translate-y-0.5 transition-transform">
+            شروع همکاری
+        </a>
+
+        <button id="hamburger-btn" class="lg:hidden text-white" aria-label="باز و بسته کردن منو">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
+        </button>
+    </div>
+</header>
+
+<div id="mobile-menu" class="fixed top-0 left-0 h-full w-full bg-base z-40 flex flex-col items-center justify-center gap-8 lg:hidden">
+    <a href="#services" class="mobile-nav-item text-2xl font-bold text-mist hover:text-brand-bright">خدمات</a>
+    <a href="#workflow" class="mobile-nav-item text-2xl font-bold text-mist hover:text-brand-bright">روند کاری</a>
+    <a href="#skills" class="mobile-nav-item text-2xl font-bold text-mist hover:text-brand-bright">مهارت‌ها</a>
+    <a href="#projects" class="mobile-nav-item text-2xl font-bold text-mist hover:text-brand-bright">نمونه‌کارها</a>
+    <a href="#contact" class="mobile-nav-item text-2xl font-bold text-mist hover:text-brand-bright">تماس</a>
+</div>
+
+<!-- Scroll progress -->
+<div id="scroll-progress" class="fixed inset-x-0 top-0 z-40 h-0.5 origin-right bg-gradient-to-l from-brand-bright via-brand to-blue-400" style="transform: scaleX(0)"></div>
+
+<main>
+
+<!-- ================= HERO ================= -->
+<section id="top" class="relative overflow-hidden pt-36 sm:pt-44 lg:pt-48 pb-20 lg:pb-28">
+    <div class="absolute inset-0 -z-10">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_70%_55%_at_50%_-5%,rgba(6,182,212,0.22),transparent_60%)]"></div>
+        <div class="absolute right-[-10%] top-[8%] h-[34rem] w-[34rem] rounded-full bg-brand/20 blur-[130px] animate-blob"></div>
+        <div class="absolute left-[-8%] top-[18%] h-[28rem] w-[28rem] rounded-full bg-blue-500/15 blur-[130px] animate-blob-delay"></div>
+        <div class="absolute inset-0 grid-backdrop"></div>
     </div>
 
+    <div class="mx-auto max-w-7xl px-5 grid items-center gap-14 lg:grid-cols-2 lg:gap-10">
+        <div class="text-center lg:text-right">
+            <div class="reveal inline-flex items-center gap-2 rounded-full border border-brand/25 bg-brand/10 px-3.5 py-1.5 text-xs font-semibold text-brand-bright">
+                <span class="relative flex h-1.5 w-1.5">
+                    <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand opacity-60"></span>
+                    <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-brand"></span>
+                </span>
+                آماده همکاری
+            </div>
+
+            <h1 class="reveal mt-6 text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.25] tracking-tight text-white" style="--reveal-delay:.1s">
+                خلق راهکارهای<br>
+                <span class="text-gradient">دیجیتال و مدرن</span>
+            </h1>
+
+            <p class="reveal mx-auto lg:mx-0 mt-6 max-w-xl text-lg leading-relaxed text-mist/65" style="--reveal-delay:.2s">
+                من <span class="font-bold text-white">Codevo</span> هستم، توسعه‌دهنده فول‌استک با تخصص در
+                <span class="ltr text-brand-bright">Python</span> و <span class="ltr text-brand-bright">Django</span>.
+                ایده‌های شما را به وب‌اپلیکیشن‌ها و فروشگاه‌های اینترنتی حرفه‌ای تبدیل می‌کنم.
+            </p>
+
+            <div class="reveal mt-9 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3" style="--reveal-delay:.3s">
+                <a href="#projects" class="group inline-flex items-center gap-2 rounded-full bg-gradient-to-b from-brand-bright to-brand px-7 py-3.5 text-base font-bold text-base shadow-[0_10px_30px_-8px_rgba(6,182,212,0.6)] hover:-translate-y-0.5 hover:shadow-[0_16px_44px_-8px_rgba(6,182,212,0.75)] transition-all">
+                    مشاهده نمونه‌کارها
+                    <svg class="w-4 h-4 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m7-7l-7 7 7 7"/></svg>
+                </a>
+                <a href="#contact" class="inline-flex items-center gap-2 rounded-full glass-strong px-7 py-3.5 text-base font-bold text-white hover:-translate-y-0.5 hover:border-white/25 transition-all">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                    تماس با من
+                </a>
+            </div>
+
+            <div class="reveal mt-8 flex items-center justify-center lg:justify-start gap-4 opacity-80" style="--reveal-delay:.4s">
+                <i class="devicon-python-plain colored text-3xl"></i>
+                <i class="devicon-django-plain text-3xl text-mist/70"></i>
+                <i class="devicon-javascript-plain colored text-3xl"></i>
+                <i class="devicon-tailwindcss-plain colored text-3xl"></i>
+            </div>
+        </div>
+
+        <div class="reveal reveal-scale relative mx-auto w-full max-w-lg" style="--reveal-delay:.25s">
+            <div class="glass-strong glow-pulse relative overflow-hidden rounded-[22px] p-6 sm:p-8 shadow-2xl">
+                <div class="flex flex-col items-center text-center">
+                    <div class="relative">
+                        <div class="absolute -inset-2 rounded-full bg-gradient-to-br from-brand-bright to-brand opacity-40 blur-lg"></div>
+                        <img src="portfolio/images/avatar.jpg" alt="Codevo" class="relative h-28 w-28 sm:h-32 sm:w-32 rounded-full border-2 border-white/15 object-cover shadow-lg">
+                        <span class="absolute bottom-1 left-1 flex h-5 w-5 items-center justify-center rounded-full border-2 border-base bg-emerald-400"></span>
+                    </div>
+                    <h3 class="mt-4 text-xl font-bold text-white">Codevo</h3>
+                    <p class="text-sm text-mist/55">توسعه‌دهنده فول‌استک Django</p>
+                </div>
+
+                <div class="mt-6 overflow-hidden rounded-2xl border border-white/10 bg-base-50/60">
+                    <div class="flex items-center gap-2 border-b border-white/10 px-4 py-2.5">
+                        <span class="h-2.5 w-2.5 rounded-full bg-[#ff5f57]"></span>
+                        <span class="h-2.5 w-2.5 rounded-full bg-[#febc2e]"></span>
+                        <span class="h-2.5 w-2.5 rounded-full bg-[#28c840]"></span>
+                        <span class="ltr mr-auto text-xs text-mist/45">models.py</span>
+                    </div>
+                    <pre class="ltr overflow-x-auto p-4 text-left font-mono text-[12px] leading-[1.8]"><code><span class="text-mist/55">from django.db import models</span>
+
+<span class="text-brand-bright">class Order(models.Model):</span>
+<span class="text-mist/80">    customer = models.ForeignKey(
+        User, on_delete=models.CASCADE
+    )
+    total = models.DecimalField(
+        max_digits=10, decimal_places=0
+    )</span>
+
+<span class="text-sky-300">    def __str__(self):</span>
+<span class="text-mist/80">        return f'سفارش #{self.id}'</span></code></pre>
+                </div>
+            </div>
+
+            <div class="hidden sm:flex absolute -bottom-5 -right-4 items-center gap-3 rounded-2xl glass-strong px-4 py-3 shadow-xl animate-[float_6s_ease-in-out_infinite]">
+                <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-bright to-brand text-base">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                </span>
+                <div class="leading-tight">
+                    <p class="text-xs text-mist/55">تحویل پروژه</p>
+                    <p class="text-sm font-semibold text-white">سریع و باکیفیت</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
-        <section id="services" class="py-20 md:py-32">
-             <div class="container mx-auto px-6 text-center">
-                <h2 class="animate-on-scroll text-3xl md:text-4xl font-bold text-white mb-12">تخصص و خدمات من</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="bg-gray-800/50 p-8 rounded-lg border border-slate-700 card-glow reveal-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-4 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7" /></svg>
-                        <h3 class="text-2xl font-bold text-white mb-3">توسعه بک‌اند با جنگو</h3>
-                        <p class="text-slate-400">ساخت APIهای قدرتمند و امن با Django REST Framework</p>
-                    </div>
-                    <div class="bg-gray-800/50 p-8 rounded-lg border border-slate-700 card-glow reveal-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-4 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l-4 4-4-4M6 16l-4-4 4-4" /></svg>
-                        <h3 class="text-2xl font-bold text-white mb-3">طراحی فرانت‌اند مدرن</h3>
-                        <p class="text-slate-400">پیاده‌سازی رابط‌های کاربری واکنش‌گرا با JavaScript و Tailwind CSS</p>
-                    </div>
-                    <div class="bg-gray-800/50 p-8 rounded-lg border border-slate-700 card-glow reveal-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-4 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7a8 8 0 0116 0" /></svg>
-                        <h3 class="text-2xl font-bold text-white mb-3">مدیریت پایگاه داده</h3>
-                        <p class="text-slate-400">طراحی و بهینه‌سازی دیتابیس‌های PostgreSQL و MySQL</p>
-                    </div>
-                    <div class="bg-gray-800/50 p-8 rounded-lg border border-slate-700 card-glow reveal-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-4 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" /></svg>
-                        <h3 class="text-2xl font-bold text-white mb-3">استقرار و DevOps</h3>
-                        <p class="text-slate-400">راه‌اندازی سرور و خودکارسازی فرآیندها با Docker و CI/CD</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section id="workflow" class="py-20 md:py-32 bg-gray-900/70">
-            <div class="container mx-auto px-6">
-                <h2 class="animate-on-scroll text-3xl md:text-4xl font-bold text-center text-white mb-20">روند کاری من</h2>
-                <div class="animate-on-scroll relative max-w-4xl mx-auto">
-                    <!-- The vertical line -->
-                    <div class="absolute w-0.5 h-full bg-slate-700 left-5 md:left-1/2 md:-translate-x-1/2"></div>
-                    
-                    <div class="space-y-12 md:space-y-0">
-                        <!-- Item 1 -->
-                        <div class="md:flex md:justify-end md:items-center relative">
-                             <div class="md:w-1/2 md:pr-8">
-                                <div class="bg-gray-800/50 p-6 rounded-lg border border-slate-700 card-glow ml-10 md:ml-0">
-                                    <h3 class="text-xl font-bold text-white md:text-right">۱. کشف و تحلیل</h3>
-                                    <p class="text-slate-400 mt-2 md:text-right">درک عمیق اهداف پروژه و نیازهای شما برای تدوین یک نقشه راه دقیق.</p>
-                                </div>
-                             </div>
-                             <div class="absolute w-5 h-5 bg-cyan-400 rounded-full z-10 left-5 md:left-1/2 transform -translate-x-1/2 flex items-center justify-center"></div>
-                        </div>
-            
-                        <!-- Item 2 -->
-                        <div class="md:flex md:justify-start md:items-center relative mt-12">
-                             <div class="md:w-1/2 md:pl-8">
-                                <div class="bg-gray-800/50 p-6 rounded-lg border border-slate-700 card-glow ml-10 md:ml-0">
-                                    <h3 class="text-xl font-bold text-white">۲. طراحی و معماری</h3>
-                                    <p class="text-slate-400 mt-2">طراحی رابط کاربری (UI/UX) و معماری فنی سیستم برای عملکرد بهینه.</p>
-                                </div>
-                             </div>
-                             <div class="absolute w-5 h-5 bg-cyan-400 rounded-full z-10 left-5 md:left-1/2 transform -translate-x-1/2 flex items-center justify-center"></div>
-                        </div>
-
-                         <!-- Item 3 -->
-                        <div class="md:flex md:justify-end md:items-center relative mt-12">
-                             <div class="md:w-1/2 md:pr-8">
-                                <div class="bg-gray-800/50 p-6 rounded-lg border border-slate-700 card-glow ml-10 md:ml-0">
-                                    <h3 class="text-xl font-bold text-white md:text-right">۳. توسعه و پیاده‌سازی</h3>
-                                    <p class="text-slate-400 mt-2 md:text-right">کدنویسی تمیز و مقیاس‌پذیر بک‌اند و فرانت‌اند با استفاده از بهترین شیوه‌ها.</p>
-                                </div>
-                             </div>
-                             <div class="absolute w-5 h-5 bg-cyan-400 rounded-full z-10 left-5 md:left-1/2 transform -translate-x-1/2 flex items-center justify-center"></div>
-                        </div>
-
-                         <!-- Item 4 -->
-                        <div class="md:flex md:justify-start md:items-center relative mt-12">
-                             <div class="md:w-1/2 md:pl-8">
-                                <div class="bg-gray-800/50 p-6 rounded-lg border border-slate-700 card-glow ml-10 md:ml-0">
-                                    <h3 class="text-xl font-bold text-white">۴. تست و استقرار</h3>
-                                    <p class="text-slate-400 mt-2">آزمایش کامل پروژه برای تضمین کیفیت و استقرار نهایی روی سرور.</p>
-                                </div>
-                             </div>
-                             <div class="absolute w-5 h-5 bg-cyan-400 rounded-full z-10 left-5 md:left-1/2 transform -translate-x-1/2 flex items-center justify-center"></div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section id="skills" class="py-20 md:py-32">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="animate-on-scroll text-3xl md:text-4xl font-bold text-white mb-16">جعبه ابزار من</h2>
-                <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 md:gap-12">
-                    <div class="skill-icon animate-on-scroll flex flex-col items-center gap-3"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="h-16 w-16" /><span class="text-slate-300"><p lang="en">Python</p></span></div>
-                    <div class="skill-icon animate-on-scroll flex flex-col items-center gap-3"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" class="h-16 w-16" /><span class="text-slate-300"><p lang="en">Django</p></span></div>
-                    <div class="skill-icon animate-on-scroll flex flex-col items-center gap-3"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="h-16 w-16" /><span class="text-slate-300"><p lang="en">JavaScript</p></span></div>
-                    <div class="skill-icon animate-on-scroll flex flex-col items-center gap-3"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" class="h-16 w-16" /><span class="text-slate-300"><p lang="en">Tailwind CSS</p></span></div>
-                    <div class="skill-icon animate-on-scroll flex flex-col items-center gap-3"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" class="h-16 w-16" /><span class="text-slate-300"><p lang="en">PostgreSQL</p></span></div>
-                    <div class="skill-icon animate-on-scroll flex flex-col items-center gap-3"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" class="h-16 w-16" /><span class="text-slate-300"><p lang="en">Docker</p></span></div>
-                </div>
-            </div>
-        </section>
-
-        <div class="swiper mySwiper" id="projects">
-            <div class="swiper-wrapper">
-
-        <!-- Project Card -->
-        <div class="swiper-slide h-auto">
-            <div class="bg-gray-800/40 rounded-xl border border-slate-700/50 card-glow overflow-hidden h-full flex flex-col max-w-sm mx-auto">
-                <img src="media/cloth.webp" class="w-full h-48 object-cover" loading="lazy">
-                <div class="p-6 flex flex-col flex-grow text-right">
-                    <h3 class="text-xl font-bold text-white mb-2">فروشگاه آنلاین پوشاک</h3>
-                    <p class="text-slate-400 text-sm mb-4 leading-6 flex-grow">
-                        سامانه فروش پوشاک با مدیریت آسان، فیلترهای هوشمند، دسته‌بندی پویا و تجربه خرید روان. مناسب بوتیک‌ها و برندهای پوشاک.
-                    </p>
-                    <a href="project-commerce.html" class="mt-auto block w-full py-2.5 bg-slate-700 text-cyan-400 rounded-lg hover:bg-cyan-600 hover:text-white transition-colors font-bold text-sm text-center">
-                        مشاهده جزئیات پروژه
-                    </a>
-                </div>
-            </div>
+<!-- ================= SERVICES ================= -->
+<section id="services" class="relative py-24 lg:py-32 scroll-mt-24">
+    <div class="mx-auto max-w-7xl px-5">
+        <div class="flex flex-col items-center text-center gap-5">
+            <span class="reveal inline-flex items-center gap-2 rounded-full border border-brand/25 bg-brand/10 px-3.5 py-1.5 text-xs font-semibold text-brand-bright">خدمات</span>
+            <h2 class="reveal max-w-3xl text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white" style="--reveal-delay:.05s">تخصص و خدمات من</h2>
+            <p class="reveal max-w-2xl text-base sm:text-lg text-mist/60" style="--reveal-delay:.1s">از ایده تا اجرا؛ خدماتی که برای ساخت یک محصول دیجیتال حرفه‌ای به آن نیاز دارید.</p>
         </div>
 
-        <!-- Project Card -->
-        <div class="swiper-slide h-auto">
-            <div class="bg-gray-800/40 rounded-xl border border-slate-700/50 card-glow overflow-hidden h-full flex flex-col max-w-sm mx-auto">
-                <img src="media/menu.webp" class="w-full h-48 object-cover" loading="lazy">
-                <div class="p-6 flex flex-col flex-grow text-right">
-                    <h3 class="text-xl font-bold text-white mb-2">منوی دیجیتال کافه‌رستوران</h3>
-                    <p class="text-slate-400 text-sm mb-4 leading-6 flex-grow">
-                        منوی QR با قابلیت سفارش‌گیری آنلاین، مدیریت لحظه‌ای قیمت‌ها و آیتم‌ها، و پنل مدیریتی قدرتمند برای کافه‌ها و رستوران‌ها.
-                    </p>
-                    <a href="project-menu.html" class="mt-auto block w-full py-2.5 bg-slate-700 text-cyan-400 rounded-lg hover:bg-cyan-600 hover:text-white transition-colors font-bold text-sm text-center">
-                        مشاهده جزئیات پروژه
-                    </a>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- Project Card -->
-        <div class="swiper-slide h-auto">
-            <div class="bg-gray-800/40 rounded-xl border border-slate-700/50 card-glow overflow-hidden h-full flex flex-col max-w-sm mx-auto">
-                <img src="media/water.webp" class="w-full h-48 object-cover" loading="lazy">
-                <div class="p-6 flex flex-col flex-grow text-right">
-                    <h3 class="text-xl font-bold text-white mb-2">سامانه تحلیل کیفیت آب</h3>
-                    <p class="text-slate-400 text-sm mb-4 leading-6 flex-grow">
-                        پلتفرم تحلیلی مبتنی بر GIS با داده‌کاوی، مدل‌های یادگیری ماشین و داشبوردهای تعاملی برای پیش‌بینی کیفیت آب کارون.
-                    </p>
-                    <a href="project-water.html" class="mt-auto block w-full py-2.5 bg-slate-700 text-cyan-400 rounded-lg hover:bg-cyan-600 hover:text-white transition-colors font-bold text-sm text-center">
-                        مشاهده جزئیات پروژه
-                    </a>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- Project Card -->
-        <div class="swiper-slide h-auto">
-            <div class="bg-gray-800/40 rounded-xl border border-slate-700/50 card-glow overflow-hidden h-full flex flex-col max-w-sm mx-auto">
-                <img src="media/chapkhone.webp" class="w-full h-48 object-cover" loading="lazy">
-                <div class="p-6 flex flex-col flex-grow text-right">
-                    <h3 class="text-xl font-bold text-white mb-2">سامانه مدیریت چاپخانه</h3>
-                    <p class="text-slate-400 text-sm mb-4 leading-6 flex-grow">
-                        سیستم ثبت سفارش، مدیریت فایل‌های چاپ، پیگیری وضعیت تولید، و مدیریت مشتری برای چاپخانه‌ها و مراکز طراحی.
-                    </p>
-                    <a href="project-print.html" class="mt-auto block w-full py-2.5 bg-slate-700 text-cyan-400 rounded-lg hover:bg-cyan-600 hover:text-white transition-colors font-bold text-sm text-center">
-                        مشاهده جزئیات پروژه
-                    </a>
-                </div>
-            </div>
-        </div>
-
-
+        <div class="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div class="reveal card-glow glass rounded-3xl p-7">
+                <span class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-bright/20 to-brand/10 text-brand-bright ring-1 ring-brand/25">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </span>
+                <h3 class="mt-5 text-xl font-bold text-white">توسعه بک‌اند با جنگو</h3>
+                <p class="mt-2.5 text-sm leading-relaxed text-mist/60">ساخت APIهای قدرتمند، امن و مقیاس‌پذیر با Django و Django REST Framework.</p>
+                <ul class="mt-5 space-y-2 text-sm text-mist/70">
+                    <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-brand"></span>معماری تمیز و اصولی</li>
+                    <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-brand"></span>احراز هویت و مجوزها</li>
+                    <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-brand"></span>مستندسازی کامل API</li>
+                </ul>
             </div>
 
-            <!-- Navigation + Pagination -->
-            <div class="swiper-button-next text-cyan-400"></div>
-            <div class="swiper-button-prev text-cyan-400"></div>
-            <div class="swiper-pagination"></div>
-        </div>
-
-    </main>
-
-    <footer class="bg-gray-900/70 border-t border-slate-800 pt-16 pb-8">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
-                <div class="md:col-span-4">
-                    <h3 class="text-3xl justify-center font-black text-cyan-400 text-glow">CODEVO</h3>
-                    <p class="text-slate-400 mt-4 max-w-xs">تبدیل ایده‌های نوآورانه به راهکارهای دیجیتال قدرتمند.</p>
-                </div>
-                <div class="md:col-span-2">
-                    <h4 class="font-bold text-white mb-4">ناوبری</h4>
-                    <ul class="flex flex-row space-x-4 space-x-reverse md:flex-col md:space-y-3 md:space-x-0">
-                        <li><a href="#services" class="text-slate-400 hover:text-cyan-400 transition-colors">خدمات</a></li>
-                        <li><a href="#workflow" class="text-slate-400 hover:text-cyan-400 transition-colors">روند کاری</a></li>
-                        <li><a href="#skills" class="text-slate-400 hover:text-cyan-400 transition-colors">مهارت‌ها</a></li>                    </ul>
-                </div>
-                <div class="md:col-span-6" id="call">
-                     <h4 class="font-bold text-white mb-4">بیایید ایده شما را به واقعیت تبدیل کنیم.</h4>
-                     <p class="text-slate-400 mb-4">آماده شروع یک پروژه جدید هستید؟ از راه‌های زیر با من در ارتباط باشید.</p>
-                     <div class="flex flex-wrap gap-4">
-                        <a href="tel:+989106481103" class="flex items-center gap-2 bg-slate-800 hover:bg-cyan-500 text-white font-bold py-2 px-4 rounded-lg transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" /></svg>
-                            <span>تماس بگیرید</span>
-                        </a>
-                        <a href="https://t.me/codeevo" target="_blank" class="flex items-center gap-2 bg-slate-800 hover:bg-cyan-500 text-white font-bold py-2 px-4 rounded-lg transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" /></svg>
-                            <span>تلگرام</span>
-                        </a>
-                        <a href="https://instagram.com/codeevo.dev" target="_blank" class="flex items-center gap-2 bg-slate-800 hover:bg-cyan-500 text-white font-bold py-2 px-4 rounded-lg transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zm5.75-.75a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5z"/>
-                            </svg>
-                            <span>اینستاگرام</span>
-                        </a>
-                        <a href="https://github.com/hosseinyousfi" target="_blank" class="flex items-center gap-2 bg-slate-800 hover:bg-cyan-500 text-white font-bold py-2 px-4 rounded-lg transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
-                                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.529 2.341 1.087 2.91.832.091-.647.35-1.087.636-1.338-2.22-.253-4.555-1.11-4.555-4.944 0-1.091.39-1.984 1.029-2.681-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.338 1.909-1.294 2.748-1.025 2.748-1.025.546 1.377.203 2.394.1 2.647.64.697 1.028 1.59 1.028 2.681 0 3.842-2.337 4.687-4.565 4.935.359.31.679.923.679 1.861 0 1.344-.012 2.429-.012 2.758 0 .268.18.579.688.481A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" />
-                            </svg>
-                            <span>گیت‌هاب</span>
-                        </a>
-
-
-                     </div>
-                </div>
+            <div class="reveal card-glow glass rounded-3xl p-7" style="--reveal-delay:.08s">
+                <span class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-bright/20 to-brand/10 text-brand-bright ring-1 ring-brand/25">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l-4 4-4-4M6 16l-4-4 4-4"/></svg>
+                </span>
+                <h3 class="mt-5 text-xl font-bold text-white">طراحی فرانت‌اند مدرن</h3>
+                <p class="mt-2.5 text-sm leading-relaxed text-mist/60">پیاده‌سازی رابط‌های کاربری واکنش‌گرا و زیبا با جاوااسکریپت و Tailwind CSS.</p>
+                <ul class="mt-5 space-y-2 text-sm text-mist/70">
+                    <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-brand"></span>ریسپانسیو در همه دستگاه‌ها</li>
+                    <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-brand"></span>انیمیشن‌های ظریف و روان</li>
+                    <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-brand"></span>تجربه کاربری اصولی</li>
+                </ul>
             </div>
-            <div class="mt-12 border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-slate-500 text-sm">© Codevo. تمامی حقوق محفوظ است.</p>
-            </div>
-        </div>
-    </footer>
 
-    <!-- Chatbot Elements -->
-    <div class="fixed bottom-8 left-8 z-50 hidden">
-        <div id="chat-toggle" class="relative w-16 h-16 bg-cyan-500 rounded-full flex items-center justify-center shadow-lg cursor-pointer transform hover:scale-110 transition-transform">
-        <div id="chat-tooltip" class="absolute bottom-full mb-3 w-max left-0 bg-slate-700 text-white text-sm rounded-lg px-3 py-1.5 shadow-lg opacity-0 transition-opacity duration-300 pointer-events-none">
-            <span>سوالی دارید؟ با من صحبت کنید!</span>
-            <div class="absolute left-8 bottom-[-4px] w-2 h-2 bg-slate-700 transform rotate-45"></div>
-        </div>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-            </svg>
+            <div class="reveal card-glow glass rounded-3xl p-7" style="--reveal-delay:.16s">
+                <span class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-bright/20 to-brand/10 text-brand-bright ring-1 ring-brand/25">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7a8 8 0 0116 0"/></svg>
+                </span>
+                <h3 class="mt-5 text-xl font-bold text-white">مدیریت پایگاه داده</h3>
+                <p class="mt-2.5 text-sm leading-relaxed text-mist/60">طراحی و بهینه‌سازی دیتابیس‌های PostgreSQL و MySQL برای عملکرد پایدار.</p>
+                <ul class="mt-5 space-y-2 text-sm text-mist/70">
+                    <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-brand"></span>ایندکس‌گذاری هوشمند</li>
+                    <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-brand"></span>بکاپ‌گیری خودکار</li>
+                    <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-brand"></span>کوئری‌های بهینه</li>
+                </ul>
+            </div>
+
+            <div class="reveal card-glow glass rounded-3xl p-7" style="--reveal-delay:.24s">
+                <span class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-bright/20 to-brand/10 text-brand-bright ring-1 ring-brand/25">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+                </span>
+                <h3 class="mt-5 text-xl font-bold text-white">استقرار و DevOps</h3>
+                <p class="mt-2.5 text-sm leading-relaxed text-mist/60">راه‌اندازی سرور و خودکارسازی فرآیندها با Docker و CI/CD.</p>
+                <ul class="mt-5 space-y-2 text-sm text-mist/70">
+                    <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-brand"></span>دیپلوی بدون قطعی</li>
+                    <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-brand"></span>مانیتورینگ لحظه‌ای</li>
+                    <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-brand"></span>امنیت زیرساخت</li>
+                </ul>
+            </div>
         </div>
     </div>
+</section>
 
-    <div id="chat-window" class="fixed bottom-28 left-8 w-80 h-96 bg-gray-800/80 backdrop-blur-md rounded-lg shadow-2xl flex flex-col transform translate-y-10 opacity-0 hidden z-50">
-        <div class="p-4 bg-gray-900/50 rounded-t-lg flex justify-between items-center">
-            <h3 class="text-white font-bold">دستیار Codevo</h3>
-            <button id="chat-close" class="text-slate-400 hover:text-white text-2xl leading-none">&times;</button>
+<!-- ================= WORKFLOW ================= -->
+<section id="workflow" class="relative py-24 lg:py-32 scroll-mt-24">
+    <div class="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_60%_50%_at_50%_20%,rgba(6,182,212,0.08),transparent_70%)]"></div>
+    <div class="mx-auto max-w-5xl px-5">
+        <div class="flex flex-col items-center text-center gap-5">
+            <span class="reveal inline-flex items-center gap-2 rounded-full border border-brand/25 bg-brand/10 px-3.5 py-1.5 text-xs font-semibold text-brand-bright">روند کاری</span>
+            <h2 class="reveal max-w-3xl text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white" style="--reveal-delay:.05s">از ایده تا اجرا در ۴ گام شفاف</h2>
+            <p class="reveal max-w-2xl text-base sm:text-lg text-mist/60" style="--reveal-delay:.1s">هر پروژه با یک مسیر مشخص و قابل پیش‌بینی جلو می‌رود، بدون ابهام و غافلگیری.</p>
         </div>
-        <div id="chat-messages" class="flex-1 p-4 overflow-y-auto">
-            <!-- Messages will be appended here -->
+
+        <div id="timeline" class="relative mt-20">
+            <div class="absolute right-5 md:right-1/2 top-0 h-full w-0.5 bg-white/8"></div>
+            <div id="timeline-fill" class="absolute right-5 md:right-1/2 top-0 h-full w-0.5 bg-gradient-to-b from-brand-bright to-brand"></div>
+
+            <div class="flex flex-col gap-12">
+                <div class="relative flex items-start md:items-center gap-6">
+                    <span class="absolute right-5 md:right-1/2 top-1.5 -translate-x-1/2 z-10 flex h-4 w-4 items-center justify-center rounded-full bg-brand-bright shadow-[0_0_16px_rgba(34,211,238,0.8)]"></span>
+                    <div class="w-full md:w-1/2 pr-14 md:pr-0 md:pl-12">
+                        <div class="reveal reveal-right glass rounded-2xl p-6">
+                            <span class="ltr text-3xl font-extrabold text-brand-bright/40">01</span>
+                            <h3 class="mt-2 text-xl font-bold text-white">کشف و تحلیل</h3>
+                            <p class="mt-2 text-sm leading-relaxed text-mist/60">درک عمیق اهداف پروژه و نیازهای شما برای تدوین یک نقشه راه دقیق و شفاف.</p>
+                        </div>
+                    </div>
+                    <div class="hidden md:block md:w-1/2"></div>
+                </div>
+
+                <div class="relative flex items-start md:items-center gap-6 md:flex-row-reverse">
+                    <span class="absolute right-5 md:right-1/2 top-1.5 -translate-x-1/2 z-10 flex h-4 w-4 items-center justify-center rounded-full bg-brand-bright shadow-[0_0_16px_rgba(34,211,238,0.8)]"></span>
+                    <div class="w-full md:w-1/2 pr-14 md:pr-0 md:pr-12">
+                        <div class="reveal reveal-left glass rounded-2xl p-6">
+                            <span class="ltr text-3xl font-extrabold text-brand-bright/40">02</span>
+                            <h3 class="mt-2 text-xl font-bold text-white">طراحی و معماری</h3>
+                            <p class="mt-2 text-sm leading-relaxed text-mist/60">طراحی رابط کاربری (UI/UX) و معماری فنی سیستم برای عملکرد بهینه.</p>
+                        </div>
+                    </div>
+                    <div class="hidden md:block md:w-1/2"></div>
+                </div>
+
+                <div class="relative flex items-start md:items-center gap-6">
+                    <span class="absolute right-5 md:right-1/2 top-1.5 -translate-x-1/2 z-10 flex h-4 w-4 items-center justify-center rounded-full bg-brand-bright shadow-[0_0_16px_rgba(34,211,238,0.8)]"></span>
+                    <div class="w-full md:w-1/2 pr-14 md:pr-0 md:pl-12">
+                        <div class="reveal reveal-right glass rounded-2xl p-6">
+                            <span class="ltr text-3xl font-extrabold text-brand-bright/40">03</span>
+                            <h3 class="mt-2 text-xl font-bold text-white">توسعه و پیاده‌سازی</h3>
+                            <p class="mt-2 text-sm leading-relaxed text-mist/60">کدنویسی تمیز، قابل نگهداری و مقیاس‌پذیر برای بک‌اند و فرانت‌اند.</p>
+                        </div>
+                    </div>
+                    <div class="hidden md:block md:w-1/2"></div>
+                </div>
+
+                <div class="relative flex items-start md:items-center gap-6 md:flex-row-reverse">
+                    <span class="absolute right-5 md:right-1/2 top-1.5 -translate-x-1/2 z-10 flex h-4 w-4 items-center justify-center rounded-full bg-brand-bright shadow-[0_0_16px_rgba(34,211,238,0.8)]"></span>
+                    <div class="w-full md:w-1/2 pr-14 md:pr-0 md:pr-12">
+                        <div class="reveal reveal-left glass rounded-2xl p-6">
+                            <span class="ltr text-3xl font-extrabold text-brand-bright/40">04</span>
+                            <h3 class="mt-2 text-xl font-bold text-white">تست و استقرار</h3>
+                            <p class="mt-2 text-sm leading-relaxed text-mist/60">آزمایش کامل پروژه برای تضمین کیفیت و استقرار نهایی روی سرور تولید.</p>
+                        </div>
+                    </div>
+                    <div class="hidden md:block md:w-1/2"></div>
+                </div>
+            </div>
         </div>
-        <form id="chat-form" class="p-4 border-t border-slate-700">
-            <div class="flex gap-2">
-                <input type="text" id="chat-input" placeholder="پیام خود را بنویسید..." class="flex-1 bg-gray-700 border border-slate-600 rounded-lg p-2 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500">
-                <button type="submit" class="w-10 h-10 bg-cyan-500 rounded-lg flex items-center justify-center transform hover:scale-105 transition-transform">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" /></svg>
+    </div>
+</section>
+
+<!-- ================= SKILLS ================= -->
+<section id="skills" class="relative py-24 lg:py-32 scroll-mt-24">
+    <div class="mx-auto max-w-6xl px-5 text-center">
+        <div class="flex flex-col items-center gap-5">
+            <span class="reveal inline-flex items-center gap-2 rounded-full border border-brand/25 bg-brand/10 px-3.5 py-1.5 text-xs font-semibold text-brand-bright">مهارت‌ها</span>
+            <h2 class="reveal max-w-3xl text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white" style="--reveal-delay:.05s">جعبه ابزار من</h2>
+            <p class="reveal max-w-2xl text-base sm:text-lg text-mist/60" style="--reveal-delay:.1s">فناوری‌هایی که هر روز با آن‌ها محصولات واقعی می‌سازم.</p>
+        </div>
+
+        <div class="mt-14 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-5">
+            <div class="reveal skill-icon glass flex flex-col items-center gap-3 rounded-2xl px-3 py-6 transition-transform duration-300 hover:-translate-y-2 hover:scale-105">
+                <i class="devicon-python-plain colored text-4xl sm:text-5xl"></i>
+                <span class="ltr text-xs sm:text-sm font-medium text-mist/55">Python</span>
+            </div>
+            <div class="reveal skill-icon glass flex flex-col items-center gap-3 rounded-2xl px-3 py-6 transition-transform duration-300 hover:-translate-y-2 hover:scale-105">
+                <i class="devicon-django-plain text-4xl sm:text-5xl text-mist/80"></i>
+                <span class="ltr text-xs sm:text-sm font-medium text-mist/55">Django</span>
+            </div>
+            <div class="reveal skill-icon glass flex flex-col items-center gap-3 rounded-2xl px-3 py-6 transition-transform duration-300 hover:-translate-y-2 hover:scale-105">
+                <i class="devicon-javascript-plain colored text-4xl sm:text-5xl"></i>
+                <span class="ltr text-xs sm:text-sm font-medium text-mist/55">JavaScript</span>
+            </div>
+            <div class="reveal skill-icon glass flex flex-col items-center gap-3 rounded-2xl px-3 py-6 transition-transform duration-300 hover:-translate-y-2 hover:scale-105">
+                <i class="devicon-tailwindcss-plain colored text-4xl sm:text-5xl"></i>
+                <span class="ltr text-xs sm:text-sm font-medium text-mist/55">Tailwind</span>
+            </div>
+            <div class="reveal skill-icon glass flex flex-col items-center gap-3 rounded-2xl px-3 py-6 transition-transform duration-300 hover:-translate-y-2 hover:scale-105">
+                <i class="devicon-postgresql-plain colored text-4xl sm:text-5xl"></i>
+                <span class="ltr text-xs sm:text-sm font-medium text-mist/55">PostgreSQL</span>
+            </div>
+            <div class="reveal skill-icon glass flex flex-col items-center gap-3 rounded-2xl px-3 py-6 transition-transform duration-300 hover:-translate-y-2 hover:scale-105">
+                <i class="devicon-docker-plain colored text-4xl sm:text-5xl"></i>
+                <span class="ltr text-xs sm:text-sm font-medium text-mist/55">Docker</span>
+            </div>
+            <div class="reveal skill-icon glass flex flex-col items-center gap-3 rounded-2xl px-3 py-6 transition-transform duration-300 hover:-translate-y-2 hover:scale-105">
+                <i class="devicon-git-plain colored text-4xl sm:text-5xl"></i>
+                <span class="ltr text-xs sm:text-sm font-medium text-mist/55">Git</span>
+            </div>
+            <div class="reveal skill-icon glass flex flex-col items-center gap-3 rounded-2xl px-3 py-6 transition-transform duration-300 hover:-translate-y-2 hover:scale-105">
+                <i class="devicon-linux-plain text-4xl sm:text-5xl text-mist/80"></i>
+                <span class="ltr text-xs sm:text-sm font-medium text-mist/55">Linux</span>
+            </div>
+            <div class="reveal skill-icon glass flex flex-col items-center gap-3 rounded-2xl px-3 py-6 transition-transform duration-300 hover:-translate-y-2 hover:scale-105">
+                <i class="devicon-react-original colored text-4xl sm:text-5xl"></i>
+                <span class="ltr text-xs sm:text-sm font-medium text-mist/55">React</span>
+            </div>
+            <div class="reveal skill-icon glass flex flex-col items-center gap-3 rounded-2xl px-3 py-6 transition-transform duration-300 hover:-translate-y-2 hover:scale-105">
+                <i class="devicon-redis-plain colored text-4xl sm:text-5xl"></i>
+                <span class="ltr text-xs sm:text-sm font-medium text-mist/55">Redis</span>
+            </div>
+            <div class="reveal skill-icon glass flex flex-col items-center gap-3 rounded-2xl px-3 py-6 transition-transform duration-300 hover:-translate-y-2 hover:scale-105">
+                <i class="devicon-nginx-original colored text-4xl sm:text-5xl"></i>
+                <span class="ltr text-xs sm:text-sm font-medium text-mist/55">Nginx</span>
+            </div>
+            <div class="reveal skill-icon glass flex flex-col items-center gap-3 rounded-2xl px-3 py-6 transition-transform duration-300 hover:-translate-y-2 hover:scale-105">
+                <i class="devicon-html5-plain colored text-4xl sm:text-5xl"></i>
+                <span class="ltr text-xs sm:text-sm font-medium text-mist/55">HTML5</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= PROJECTS ================= -->
+<section id="projects" class="relative py-24 lg:py-32 scroll-mt-24">
+    <div class="mx-auto max-w-7xl px-5">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="flex flex-col items-center sm:items-start text-center sm:text-right gap-5">
+                <span class="reveal inline-flex items-center gap-2 rounded-full border border-brand/25 bg-brand/10 px-3.5 py-1.5 text-xs font-semibold text-brand-bright">نمونه‌کارها</span>
+                <h2 class="reveal max-w-xl text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white" style="--reveal-delay:.05s">پروژه‌هایی که ساخته‌ام</h2>
+                <p class="reveal max-w-xl text-base sm:text-lg text-mist/60" style="--reveal-delay:.1s">نمونه‌ای از پروژه‌های واقعی که از صفر تا استقرار روی سرور انجام داده‌ام.</p>
+            </div>
+            <div class="hidden sm:flex gap-2 shrink-0">
+                <button id="proj-next" class="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white hover:border-brand/40 hover:text-brand-bright transition-colors" aria-label="پروژه بعدی">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                </button>
+                <button id="proj-prev" class="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white hover:border-brand/40 hover:text-brand-bright transition-colors" aria-label="پروژه قبلی">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
                 </button>
             </div>
-        </form>
+        </div>
+
+        <div id="project-scroller" class="reveal mt-12 flex gap-5 overflow-x-auto no-scrollbar pb-6" style="--reveal-delay:.15s">
+
+            <article class="project-card card-glow glass flex h-full w-[280px] sm:w-[340px] shrink-0 flex-col overflow-hidden rounded-3xl"
+                data-title="فروشگاه آنلاین پوشاک"
+                data-full="یک فروشگاه اینترنتی کامل برای برند پوشاک با پنل مدیریت محصولات، سبد خرید بلادرنگ، درگاه پرداخت متصل، فیلتر و جستجوی هوشمند و داشبورد گزارش‌گیری فروش. زیرساخت با جنگو و پستگرس‌کیوال برای مقیاس‌پذیری در ترافیک بالا طراحی شده است."
+                data-image="portfolio/images/project-fashion.jpg"
+                data-stack="Django,PostgreSQL,Tailwind,Redis">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="portfolio/images/project-fashion.jpg" class="h-full w-full object-cover transition-transform duration-700 hover:scale-110" loading="lazy" alt="فروشگاه آنلاین پوشاک">
+                    <div class="absolute inset-0 bg-gradient-to-t from-base via-transparent to-transparent"></div>
+                </div>
+                <div class="flex flex-1 flex-col p-6">
+                    <h3 class="text-xl font-bold text-white">فروشگاه آنلاین پوشاک</h3>
+                    <p class="mt-2.5 flex-1 text-sm leading-relaxed text-mist/60">سامانه فروش پوشاک با مدیریت آسان، فیلترهای هوشمند، دسته‌بندی پویا و تجربه خرید روان.</p>
+                    <div class="mt-4 flex flex-wrap gap-1.5">
+                        <span class="ltr rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-[11px] text-mist/60">Django</span>
+                        <span class="ltr rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-[11px] text-mist/60">PostgreSQL</span>
+                        <span class="ltr rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-[11px] text-mist/60">Tailwind</span>
+                    </div>
+                    <button class="project-open-btn mt-5 w-full rounded-xl bg-white/5 py-2.5 text-sm font-bold text-brand-bright hover:bg-brand hover:text-base transition-colors">مشاهده جزئیات پروژه</button>
+                </div>
+            </article>
+
+            <article class="project-card card-glow glass flex h-full w-[280px] sm:w-[340px] shrink-0 flex-col overflow-hidden rounded-3xl"
+                data-title="منوی دیجیتال کافه‌رستوران"
+                data-full="پلتفرم منوی دیجیتال با اسکن کد QR، سفارش‌گیری آنلاین بدون نیاز به نصب اپلیکیشن، به‌روزرسانی آنی قیمت و موجودی آیتم‌ها، و پنل مدیریت چندشعبه‌ای برای کافه‌ها و رستوران‌ها."
+                data-image="portfolio/images/project-menu.jpg"
+                data-stack="Django,JavaScript,PWA,SQLite">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="portfolio/images/project-menu.jpg" class="h-full w-full object-cover transition-transform duration-700 hover:scale-110" loading="lazy" alt="منوی دیجیتال کافه‌رستوران">
+                    <div class="absolute inset-0 bg-gradient-to-t from-base via-transparent to-transparent"></div>
+                </div>
+                <div class="flex flex-1 flex-col p-6">
+                    <h3 class="text-xl font-bold text-white">منوی دیجیتال کافه‌رستوران</h3>
+                    <p class="mt-2.5 flex-1 text-sm leading-relaxed text-mist/60">منوی QR با قابلیت سفارش‌گیری آنلاین، مدیریت لحظه‌ای قیمت‌ها و پنل مدیریتی قدرتمند.</p>
+                    <div class="mt-4 flex flex-wrap gap-1.5">
+                        <span class="ltr rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-[11px] text-mist/60">Django</span>
+                        <span class="ltr rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-[11px] text-mist/60">JavaScript</span>
+                        <span class="ltr rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-[11px] text-mist/60">PWA</span>
+                    </div>
+                    <button class="project-open-btn mt-5 w-full rounded-xl bg-white/5 py-2.5 text-sm font-bold text-brand-bright hover:bg-brand hover:text-base transition-colors">مشاهده جزئیات پروژه</button>
+                </div>
+            </article>
+
+            <article class="project-card card-glow glass flex h-full w-[280px] sm:w-[340px] shrink-0 flex-col overflow-hidden rounded-3xl"
+                data-title="سامانه تحلیل کیفیت آب"
+                data-full="پلتفرم علمی برای پایش و پیش‌بینی کیفیت آب رودخانه کارون با استفاده از مدل‌های یادگیری ماشین، تحلیل داده‌های مکانی (GIS) و نمایش نتایج در قالب داشبوردهای تعاملی و نقشه‌های حرارتی."
+                data-image="portfolio/images/project-water.jpg"
+                data-stack="Django,Python,Pandas,Leaflet.js">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="portfolio/images/project-water.jpg" class="h-full w-full object-cover transition-transform duration-700 hover:scale-110" loading="lazy" alt="سامانه تحلیل کیفیت آب">
+                    <div class="absolute inset-0 bg-gradient-to-t from-base via-transparent to-transparent"></div>
+                </div>
+                <div class="flex flex-1 flex-col p-6">
+                    <h3 class="text-xl font-bold text-white">سامانه تحلیل کیفیت آب</h3>
+                    <p class="mt-2.5 flex-1 text-sm leading-relaxed text-mist/60">پلتفرم تحلیلی مبتنی بر GIS با داده‌کاوی، مدل‌های یادگیری ماشین و داشبوردهای تعاملی.</p>
+                    <div class="mt-4 flex flex-wrap gap-1.5">
+                        <span class="ltr rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-[11px] text-mist/60">Django</span>
+                        <span class="ltr rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-[11px] text-mist/60">Python</span>
+                        <span class="ltr rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-[11px] text-mist/60">Pandas</span>
+                    </div>
+                    <button class="project-open-btn mt-5 w-full rounded-xl bg-white/5 py-2.5 text-sm font-bold text-brand-bright hover:bg-brand hover:text-base transition-colors">مشاهده جزئیات پروژه</button>
+                </div>
+            </article>
+
+            <article class="project-card card-glow glass flex h-full w-[280px] sm:w-[340px] shrink-0 flex-col overflow-hidden rounded-3xl"
+                data-title="سامانه مدیریت چاپخانه"
+                data-full="نرم‌افزار مدیریت داخلی برای چاپخانه‌ها شامل ثبت و پیگیری سفارش‌ها، آپلود و پیش‌نمایش فایل‌های چاپی، مدیریت مراحل تولید به‌صورت کانبان، صدور فاکتور و مدیریت باشگاه مشتریان."
+                data-image="portfolio/images/project-print.jpg"
+                data-stack="Django,PostgreSQL,Docker,Celery">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="portfolio/images/project-print.jpg" class="h-full w-full object-cover transition-transform duration-700 hover:scale-110" loading="lazy" alt="سامانه مدیریت چاپخانه">
+                    <div class="absolute inset-0 bg-gradient-to-t from-base via-transparent to-transparent"></div>
+                </div>
+                <div class="flex flex-1 flex-col p-6">
+                    <h3 class="text-xl font-bold text-white">سامانه مدیریت چاپخانه</h3>
+                    <p class="mt-2.5 flex-1 text-sm leading-relaxed text-mist/60">سیستم ثبت سفارش، مدیریت فایل‌های چاپ، پیگیری وضعیت تولید و مدیریت مشتری.</p>
+                    <div class="mt-4 flex flex-wrap gap-1.5">
+                        <span class="ltr rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-[11px] text-mist/60">Django</span>
+                        <span class="ltr rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-[11px] text-mist/60">Docker</span>
+                        <span class="ltr rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-[11px] text-mist/60">Celery</span>
+                    </div>
+                    <button class="project-open-btn mt-5 w-full rounded-xl bg-white/5 py-2.5 text-sm font-bold text-brand-bright hover:bg-brand hover:text-base transition-colors">مشاهده جزئیات پروژه</button>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+<!-- Project modal -->
+<div id="project-modal" class="fixed inset-0 z-[70] hidden items-center justify-center bg-black/70 p-4 backdrop-blur-sm">
+    <div id="project-modal-panel" class="glass-strong relative max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-3xl">
+        <button id="project-modal-close" class="absolute left-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-black/40 text-white hover:bg-black/60" aria-label="بستن">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+        <img id="project-modal-image" src="" alt="" class="h-56 sm:h-72 w-full object-cover">
+        <div class="p-6 sm:p-8">
+            <h3 id="project-modal-title" class="text-2xl font-bold text-white"></h3>
+            <p id="project-modal-full" class="mt-4 text-sm sm:text-base leading-relaxed text-mist/65"></p>
+            <div id="project-modal-stack" class="mt-5 flex flex-wrap gap-2"></div>
+        </div>
+    </div>
+</div>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact" class="relative py-24 lg:py-32 scroll-mt-24">
+    <div class="mx-auto max-w-7xl px-5">
+        <div class="glass-strong relative overflow-hidden rounded-[2rem] px-6 py-16 sm:px-12 lg:py-20">
+            <div class="absolute inset-0 -z-10">
+                <div class="absolute inset-0 bg-[radial-gradient(ellipse_70%_120%_at_50%_0%,rgba(6,182,212,0.25),transparent_60%)]"></div>
+                <div class="absolute -left-20 -top-20 h-72 w-72 rounded-full bg-blue-500/20 blur-3xl animate-blob"></div>
+                <div class="absolute -bottom-24 -right-16 h-72 w-72 rounded-full bg-brand/15 blur-3xl animate-blob-delay"></div>
+                <div class="absolute inset-0 grid-backdrop opacity-40"></div>
+            </div>
+
+            <div class="mx-auto max-w-2xl text-center">
+                <span class="reveal inline-flex items-center gap-2 rounded-full border border-brand/25 bg-brand/10 px-3.5 py-1.5 text-xs font-semibold text-brand-bright">بیایید همکاری کنیم</span>
+                <h2 class="reveal mt-6 text-3xl sm:text-5xl font-extrabold leading-[1.3] tracking-tight text-white" style="--reveal-delay:.08s">
+                    بیایید ایده شما را به <span class="text-gradient">واقعیت تبدیل کنیم</span>
+                </h2>
+                <p class="reveal mx-auto mt-5 max-w-xl text-base sm:text-lg leading-relaxed text-mist/65" style="--reveal-delay:.16s">
+                    آماده شروع یک پروژه جدید هستید؟ از هر کدام از راه‌های زیر می‌توانید با من در ارتباط باشید.
+                </p>
+
+                <div class="reveal mt-9 flex flex-wrap items-center justify-center gap-3" style="--reveal-delay:.24s">
+                    <a href="tel:+989106481103" class="flex items-center gap-2 rounded-full bg-white/5 px-5 py-3 text-sm font-bold text-white hover:-translate-y-0.5 hover:bg-gradient-to-b hover:from-brand-bright hover:to-brand hover:text-base transition-all">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+                        تماس بگیرید
+                    </a>
+                    <a href="https://t.me/codeevo" target="_blank" rel="noreferrer" class="flex items-center gap-2 rounded-full bg-white/5 px-5 py-3 text-sm font-bold text-white hover:-translate-y-0.5 hover:bg-gradient-to-b hover:from-brand-bright hover:to-brand hover:text-base transition-all">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"/></svg>
+                        تلگرام
+                    </a>
+                    <a href="https://instagram.com/codeevo.dev" target="_blank" rel="noreferrer" class="flex items-center gap-2 rounded-full bg-white/5 px-5 py-3 text-sm font-bold text-white hover:-translate-y-0.5 hover:bg-gradient-to-b hover:from-brand-bright hover:to-brand hover:text-base transition-all">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5A4.25 4.25 0 0020.5 16.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7zm5.75-.75a1.25 1.25 0 110 2.5 1.25 1.25 0 010-2.5z"/></svg>
+                        اینستاگرام
+                    </a>
+                    <a href="https://github.com/hosseinyousfi" target="_blank" rel="noreferrer" class="flex items-center gap-2 rounded-full bg-white/5 px-5 py-3 text-sm font-bold text-white hover:-translate-y-0.5 hover:bg-gradient-to-b hover:from-brand-bright hover:to-brand hover:text-base transition-all">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.529 2.341 1.087 2.91.832.091-.647.35-1.087.636-1.338-2.22-.253-4.555-1.11-4.555-4.944 0-1.091.39-1.984 1.029-2.681-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.338 1.909-1.294 2.748-1.025 2.748-1.025.546 1.377.203 2.394.1 2.647.64.697 1.028 1.59 1.028 2.681 0 3.842-2.337 4.687-4.565 4.935.359.31.679.923.679 1.861 0 1.344-.012 2.429-.012 2.758 0 .268.18.579.688.481A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z"/></svg>
+                        گیت‌هاب
+                    </a>
+                </div>
+            </div>
+
+            <div class="mx-auto mt-16 grid max-w-3xl gap-4 sm:grid-cols-3">
+                <div class="reveal glass flex flex-col items-center gap-3 rounded-2xl p-6 text-center">
+                    <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-brand-bright to-brand text-base">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    </span>
+                    <p class="font-semibold text-white">مشاوره رایگان</p>
+                    <p class="text-sm text-mist/55">بدون تعهد، درباره ایده‌تان صحبت می‌کنیم.</p>
+                </div>
+                <div class="reveal glass flex flex-col items-center gap-3 rounded-2xl p-6 text-center" style="--reveal-delay:.08s">
+                    <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-brand-bright to-brand text-base">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </span>
+                    <p class="font-semibold text-white">پاسخ‌گویی سریع</p>
+                    <p class="text-sm text-mist/55">معمولاً در کمتر از ۲۴ ساعت پاسخ می‌دهم.</p>
+                </div>
+                <div class="reveal glass flex flex-col items-center gap-3 rounded-2xl p-6 text-center" style="--reveal-delay:.16s">
+                    <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-brand-bright to-brand text-base">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    </span>
+                    <p class="font-semibold text-white">کد تمیز و مستند</p>
+                    <p class="text-sm text-mist/55">مالکیت کامل کد و مستندات از روز اول با شماست.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="relative border-t border-white/8 pt-16">
+    <div class="mx-auto max-w-7xl px-5">
+        <div class="flex flex-col md:flex-row items-center md:items-start justify-between gap-10 border-b border-white/8 pb-12">
+            <div class="text-center md:text-right">
+                <a href="#top" class="inline-flex items-center gap-2.5">
+                    <img src="portfolio/images/logo.png" alt="Codevo" class="h-9 w-9 rounded-xl object-cover">
+                    <span class="ltr text-lg font-extrabold text-white">Codevo</span>
+                </a>
+                <p class="mt-4 max-w-xs text-sm leading-relaxed text-mist/55">توسعه‌دهنده فول‌استک وب، متخصص در جنگو و پایتون. تبدیل ایده‌های شما به محصولات دیجیتال قدرتمند.</p>
+            </div>
+
+            <nav class="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+                <a href="#services" class="text-sm font-medium text-mist/60 hover:text-brand-bright transition-colors">خدمات</a>
+                <a href="#workflow" class="text-sm font-medium text-mist/60 hover:text-brand-bright transition-colors">روند کاری</a>
+                <a href="#skills" class="text-sm font-medium text-mist/60 hover:text-brand-bright transition-colors">مهارت‌ها</a>
+                <a href="#projects" class="text-sm font-medium text-mist/60 hover:text-brand-bright transition-colors">نمونه‌کارها</a>
+            </nav>
+
+            <div class="flex items-center gap-2.5">
+                <a href="tel:+989106481103" aria-label="تماس" class="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-mist/60 hover:-translate-y-0.5 hover:border-brand/40 hover:text-brand-bright transition-all">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+                </a>
+                <a href="https://t.me/codeevo" target="_blank" rel="noreferrer" aria-label="تلگرام" class="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-mist/60 hover:-translate-y-0.5 hover:border-brand/40 hover:text-brand-bright transition-all">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"/></svg>
+                </a>
+                <a href="https://instagram.com/codeevo.dev" target="_blank" rel="noreferrer" aria-label="اینستاگرام" class="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-mist/60 hover:-translate-y-0.5 hover:border-brand/40 hover:text-brand-bright transition-all">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5A4.25 4.25 0 0020.5 16.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7zm5.75-.75a1.25 1.25 0 110 2.5 1.25 1.25 0 010-2.5z"/></svg>
+                </a>
+                <a href="https://github.com/hosseinyousfi" target="_blank" rel="noreferrer" aria-label="گیت‌هاب" class="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-mist/60 hover:-translate-y-0.5 hover:border-brand/40 hover:text-brand-bright transition-all">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.529 2.341 1.087 2.91.832.091-.647.35-1.087.636-1.338-2.22-.253-4.555-1.11-4.555-4.944 0-1.091.39-1.984 1.029-2.681-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.338 1.909-1.294 2.748-1.025 2.748-1.025.546 1.377.203 2.394.1 2.647.64.697 1.028 1.59 1.028 2.681 0 3.842-2.337 4.687-4.565 4.935.359.31.679.923.679 1.861 0 1.344-.012 2.429-.012 2.758 0 .268.18.579.688.481A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z"/></svg>
+                </a>
+            </div>
+        </div>
+        <div class="flex items-center justify-center py-7 text-center">
+            <p class="text-sm text-mist/45">© <span id="footer-year"></span> Codevo. تمامی حقوق محفوظ است.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- ================= CHAT WIDGET ================= -->
+<div class="fixed bottom-6 left-6 z-50">
+    <div id="chat-tooltip" class="glass-strong absolute bottom-full mb-3 w-max max-w-[220px] rounded-xl px-3.5 py-2 text-xs text-white shadow-lg opacity-0 pointer-events-none transition-opacity duration-300">
+        سوالی دارید؟ با من صحبت کنید!
+    </div>
+    <button id="chat-toggle" class="relative flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-brand-bright to-brand text-base shadow-[0_10px_30px_-6px_rgba(6,182,212,0.7)] hover:scale-105 transition-transform" aria-label="گفتگو با دستیار Codevo">
+        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-bright opacity-30"></span>
+        <svg id="chat-icon-open" class="relative w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
+        <svg id="chat-icon-close" class="relative w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+</div>
+
+<div id="chat-window" class="glass-strong fixed bottom-24 left-4 sm:left-6 z-50 hidden h-[28rem] w-[90vw] max-w-sm flex-col overflow-hidden rounded-3xl opacity-0 shadow-2xl transition-all duration-300" style="transform: translateY(24px)">
+    <div class="flex items-center justify-between border-b border-white/10 bg-white/5 px-4 py-3.5">
+        <div class="flex items-center gap-2.5">
+            <img src="portfolio/images/logo.png" class="h-8 w-8 rounded-lg object-cover" alt="">
+            <div>
+                <p class="text-sm font-bold text-white">دستیار Codevo</p>
+                <p class="flex items-center gap-1 text-[11px] text-mist/50"><span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span> آنلاین</p>
+            </div>
+        </div>
+        <button id="chat-close" class="flex h-8 w-8 items-center justify-center rounded-full text-mist/50 hover:bg-white/10 hover:text-white" aria-label="بستن گفتگو">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+    <div id="chat-messages" class="flex-1 space-y-3 overflow-y-auto p-4"></div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
+    <form id="chat-form" class="flex items-center gap-2 border-t border-white/10 p-3">
+        <input id="chat-input" type="text" autocomplete="off" placeholder="پیام خود را بنویسید..." class="flex-1 rounded-full bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-mist/40 focus:outline-none focus:ring-2 focus:ring-brand/50">
+        <button type="submit" class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-brand-bright to-brand text-base hover:scale-105 transition-transform" aria-label="ارسال">
+            <svg class="w-4 h-4 -scale-x-100" fill="currentColor" viewBox="0 0 20 20"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"/></svg>
+        </button>
+    </form>
+</div>
 
-            // --- Three.js Interactive Background ---
-            let scene, camera, renderer, sphere, stars;
-            let mouseX = 0, mouseY = 0;
-            const windowHalfX = window.innerWidth / 2;
-            const windowHalfY = window.innerHeight / 2;
+<!-- Back to top -->
+<a href="#top" id="back-to-top" class="fixed bottom-6 right-6 z-50 flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-brand-bright to-brand text-base shadow-[0_10px_30px_-8px_rgba(6,182,212,0.7)] opacity-0 pointer-events-none transition-all duration-300" aria-label="بازگشت به بالا">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+</a>
 
-            function initThreeJS() {
-                scene = new THREE.Scene();
-                camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 2, 2000);
-                camera.position.z = 1000;
-
-                renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg-canvas'), alpha: true });
-                renderer.setSize(window.innerWidth, window.innerHeight);
-
-                // Data Orb
-                const radius = 300;
-                const sphereGeometry = new THREE.SphereGeometry(radius, 64, 64);
-                const sphereMaterial = new THREE.PointsMaterial({
-                    color: 0x06b6d4, size: 2, blending: THREE.AdditiveBlending,
-                    transparent: true, opacity: 0.8
-                });
-                sphere = new THREE.Points(sphereGeometry, sphereMaterial);
-                scene.add(sphere);
-
-                // Starfield
-                const starGeometry = new THREE.BufferGeometry();
-                const starVertices = [];
-                for (let i = 0; i < 5000; i++) {
-                    starVertices.push((Math.random() - 0.5) * 2000, (Math.random() - 0.5) * 2000, (Math.random() - 0.5) * 2000);
-                }
-                starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
-                const starMaterial = new THREE.PointsMaterial({ color: 0x555555, size: 0.7 });
-                stars = new THREE.Points(starGeometry, starMaterial);
-                scene.add(stars);
-
-                animate();
-            }
-            
-            function animate() {
-                requestAnimationFrame(animate);
-
-                // Orb & Stars animation
-                if (sphere) sphere.rotation.y += 0.0005;
-                if (stars) stars.rotation.y += 0.0001;
-
-                // Mouse interaction
-                camera.position.x += (mouseX - camera.position.x) * 0.05;
-                camera.position.y += (-mouseY - camera.position.y) * 0.05;
-                camera.lookAt(scene.position);
-
-                renderer.render(scene, camera);
-            }
-
-            function onWindowResize() {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            }
-
-            function onMouseMove(event) {
-                mouseX = event.clientX - windowHalfX;
-                mouseY = event.clientY - windowHalfY;
-            }
-
-            initThreeJS();
-            window.addEventListener('resize', onWindowResize, false);
-            document.addEventListener('mousemove', onMouseMove, false);
-            
-            // --- Standard Page Animations & UI Logic ---
-            const preloader = document.getElementById('preloader');
-            const mainContent = document.querySelector('main');
-            const header = document.querySelector('header');
-
-            const startSiteAnimations = () => {
-                const textWrappers = document.querySelectorAll('.hero-line .text-wrapper > span');
-                textWrappers.forEach(span => {
-                    span.innerHTML = span.textContent.replace(/\S/g, "<span class='letter' style='display:inline-block'>$&</span>");
-                });
-                anime.timeline({loop: false})
-                    .add({ targets: 'header', translateY: [-50, 0], opacity: [0, 1], duration: 1000, easing: 'easeOutExpo' })
-                    .add({ targets: '.hero-line .letter', translateY: [100,0], opacity: [0,1], easing: "easeOutExpo", duration: 1400, delay: (el, i) => 30 * i }, '-=800')
-                    .add({ targets: '.hero-subtitle', translateY: [50, 0], opacity: [0, 1], duration: 1200, easing: "easeOutExpo" }, '-=1200');
-            };
-
-            // Optimized Preloader Logic
-            anime({
-                targets: preloader,
-                opacity: 0,
-                duration: 500,
-                easing: 'easeOutExpo',
-                delay: 500, // A very short delay to ensure assets start loading
-                complete: () => {
-                    preloader.style.display = 'none';
-                }
-            });
-            mainContent.style.opacity = '1';
-            header.style.opacity = '1';
-            startSiteAnimations();
-
-
-            const cursorDot = document.querySelector('.cursor-dot');
-            const cursorOutline = document.querySelector('.cursor-outline');
-            window.addEventListener('mousemove', function (e) {
-                const posX = e.clientX;
-                const posY = e.clientY;
-                cursorDot.style.left = `${posX}px`;
-                cursorDot.style.top = `${posY}px`;
-                anime({ targets: '.cursor-outline', left: `${posX}px`, top: `${posY}px`, duration: 500, easing: 'easeOutExpo' });
-            });
-            
-            document.querySelectorAll('a.nav-item').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    if(targetElement) {
-                        anime({ targets: document.documentElement, scrollTop: targetElement.offsetTop - 80, duration: 1000, easing: 'easeInOutCubic' });
-                    }
-                });
-            });
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const elementsToAnimate = entry.target.querySelectorAll('.animate-on-scroll');
-                        anime({ targets: elementsToAnimate, translateY: [50, 0], scale: [0.95, 1], opacity: [0, 1], duration: 1200, delay: anime.stagger(150), easing: 'easeOutCubic' });
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('#services, #workflow, #skills, #projects, #testimonials, footer').forEach(section => { observer.observe(section); });
-
-
-            const skillIcons = document.querySelectorAll('.skill-icon');
-            skillIcons.forEach(icon => {
-                icon.addEventListener('mouseenter', () => { anime({ targets: icon, translateY: -10, scale: 1.1, duration: 300, easing: 'easeOutSine' }); });
-                icon.addEventListener('mouseleave', () => { anime({ targets: icon, translateY: 0, scale: 1, duration: 300, easing: 'easeInSine' }); });
-            });
-            
-            // --- Hamburger Menu Logic ---
-            const hamburgerBtn = document.getElementById('hamburger-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
-            let isMenuOpen = false;
-
-            const toggleMobileMenu = () => {
-                isMenuOpen = !isMenuOpen;
-                if (isMenuOpen) {
-                    hamburgerBtn.innerHTML = `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`;
-                    anime({ targets: mobileMenu, translateX: ['100%', '0%'], duration: 400, easing: 'easeOutCubic' });
-                } else {
-                    hamburgerBtn.innerHTML = `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>`;
-                    anime({ targets: mobileMenu, translateX: ['0%', '100%'], duration: 400, easing: 'easeInCubic' });
-                }
-            };
-
-            hamburgerBtn.addEventListener('click', toggleMobileMenu);
-
-            mobileNavItems.forEach(item => {
-                item.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const targetId = item.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    
-                    if (isMenuOpen) {
-                        toggleMobileMenu();
-                    }
-                    
-                    setTimeout(() => {
-                         if(targetElement) {
-                            anime({ targets: document.documentElement, scrollTop: targetElement.offsetTop - 80, duration: 1000, easing: 'easeInOutCubic' });
-                        }
-                    }, 400); 
-                });
-            });
-
-            // --- AI Powered Chatbot Logic ---
-            const chatToggle = document.getElementById('chat-toggle');
-            const chatWindow = document.getElementById('chat-window');
-            const chatClose = document.getElementById('chat-close');
-            const chatForm = document.getElementById('chat-form');
-            const chatInput = document.getElementById('chat-input');
-            const chatMessages = document.getElementById('chat-messages');
-            const chatTooltip = document.getElementById('chat-tooltip');
-            let isChatOpen = false;
-            let initialMessageSent = false;
-            let chatHistory = [];
-
-            setTimeout(() => {
-                if (!isChatOpen) {
-                    chatTooltip.style.opacity = '1';
-                }
-            }, 5000);
-
-            const toggleChat = () => {
-                isChatOpen = !isChatOpen;
-                chatTooltip.style.opacity = '0';
-                if (isChatOpen) {
-                    chatWindow.classList.remove('hidden');
-                    anime({ targets: chatWindow, translateY: [40, 0], opacity: [0, 1], duration: 400, easing: 'easeOutCubic' });
-                    if (!initialMessageSent) {
-                        setTimeout(() => {
-                           addMessageToChat('bot', 'سلام! من دستیار هوشمند Codevo هستم. چطور می‌توانم در مورد پروژه‌ها و خدمات به شما کمک کنم؟');
-                           initialMessageSent = true;
-                        }, 500);
-                    }
-                } else {
-                    anime({
-                        targets: chatWindow,
-                        translateY: [0, 40],
-                        opacity: [1, 0],
-                        duration: 400,
-                        easing: 'easeInCubic',
-                        complete: () => chatWindow.classList.add('hidden')
-                    });
-                }
-            };
-
-            chatToggle.addEventListener('click', toggleChat);
-            chatClose.addEventListener('click', toggleChat);
-
-            chatForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const userInput = chatInput.value.trim();
-                if (userInput) {
-                    addMessageToChat('user', userInput);
-                    chatHistory.push({ role: "user", content: userInput });
-                    chatInput.value = '';
-                    getBotResponse();
-                }
-            });
-
-            function addMessageToChat(sender, message) {
-                const messageWrapper = document.createElement('div');
-                messageWrapper.className = `flex mb-3 ${sender === 'user' ? 'justify-end' : 'justify-start'}`;
-                const messageBubble = document.createElement('div');
-                messageBubble.className = `p-3 rounded-lg max-w-xs break-words ${sender === 'user' ? 'bg-cyan-600 text-white' : 'bg-gray-700 text-slate-300'}`;
-                messageBubble.textContent = message;
-                messageWrapper.appendChild(messageBubble);
-                chatMessages.appendChild(messageWrapper);
-                anime({ targets: messageBubble, scale: [0.8, 1], opacity: [0, 1], duration: 300, easing: 'easeOutCubic' });
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }
-
-            function showTypingIndicator() {
-                const typingIndicator = document.createElement('div');
-                typingIndicator.id = 'typing-indicator';
-                typingIndicator.className = 'flex justify-start mb-3';
-                typingIndicator.innerHTML = `<div class="bg-gray-700 p-3 rounded-lg flex items-center gap-1"><span class="w-2 h-2 bg-slate-400 rounded-full animate-pulse"></span><span class="w-2 h-2 bg-slate-400 rounded-full animate-pulse" style="animation-delay: 0.2s;"></span><span class="w-2 h-2 bg-slate-400 rounded-full animate-pulse" style="animation-delay: 0.4s;"></span></div>`;
-                chatMessages.appendChild(typingIndicator);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }
-
-            function removeTypingIndicator() {
-                const indicator = document.getElementById('typing-indicator');
-                if (indicator) indicator.remove();
-            }
-
-            async function getBotResponse() {
-                showTypingIndicator();
-
-                const systemPrompt = "You are a professional and friendly AI assistant for Codevo, a top-tier Full-Stack Django Developer. Your goal is to answer questions about Codevo's skills, services, and workflow, and to encourage potential clients to get in touch. Keep your answers concise, professional, and helpful in Persian. You are an expert in Python, Django, JavaScript, PostgreSQL, and Docker. When asked about starting a project, guide the user towards the contact options in the footer.";
-
-                const messages = [
-                    { role: "system", content: systemPrompt },
-                    ...chatHistory
-                ];
-            }
-
-        });
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script>
-var swiper = new Swiper(".mySwiper", {
-    slidesPerView: 1,
-    spaceBetween: 40,
-    loop: true,
-    grabCursor: true,
-
-    breakpoints: {
-        768: { slidesPerView: 2, spaceBetween: 45 },
-        1024: { slidesPerView: 3, spaceBetween: 50 }
-    },
-
-    navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-    },
-
-    pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-    },
-});
-
-</script>
-
+<script src="portfolio/js/main.js"></script>
 </body>
 </html>
-
