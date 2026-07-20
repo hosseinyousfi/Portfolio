@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>آتریا — خانه‌ی مد پایدار | Atria Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { vazir: ['Vazirmatn', 'sans-serif'] },
+                    colors: {
+                        atria: {
+                            bg: '#FCFAF7',
+                            ink: '#111111',
+                            muted: '#6B6B6B',
+                            line: '#EDE8E1',
+                            sand: '#F5F1EB',
+                            stone: '#D9D1C7',
+                            accent: '#121212'
+                        }
+                    },
+                    letterSpacing: { persian: '-0.02em' }
+                }
+            }
+        }
+    </script>
+    <style>
+        *{font-family:'Vazirmatn', sans-serif; box-sizing:border-box}
+        html{scroll-behavior:smooth; overflow-x:clip; max-width:100vw}
+        body{background:#FCFAF7;color:#111111; overflow-x:clip; max-width:100vw; position:relative}
+        ::-webkit-scrollbar{width:6px;height:6px}
+        ::-webkit-scrollbar-thumb{background:#D9D1C7;border-radius:100px}
+        .persian-num{font-feature-settings:"ss02"}
+        .line-clamp-2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+        .glass{backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+        .shimmer{background:linear-gradient(90deg,#F5F1EB 25%,#EDE8E1 50%,#F5F1EB 75%);background-size:200% 100%;animation:shimmer 1.5s infinite}
+        @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+        [x-cloak]{display:none!important}
+        .swiper-pagination-bullet-active{background:#111!important}
+        /* Mobile fixes */
+        img{max-width:100%}
+        .no-scrollbar::-webkit-scrollbar{display:none}
+        .no-scrollbar{ -ms-overflow-style:none; scrollbar-width:none }
+        @media (max-width:768px){
+          .swiper{overflow:hidden!important}
+          .hero-img{transform:none!important}
+        }
+    </style>
+</head>
+<body x-data="atriaApp()" x-init="initApp()" class="antialiased selection:bg-[#111] selection:text-white">
+
+    <!-- Announcement -->
+    <div class="w-full bg-atria-ink text-[#FCFAF7] text-[11px] md:text-[12px] tracking-wide py-[8px] md:py-[10px] px-3 md:px-4 flex justify-center items-center z-50 relative overflow-hidden">
+        <div class="flex items-center gap-2">
+            <span class="w-1 h-1 bg-white rounded-full animate-pulse hidden md:block"></span>
+            <p class="font-light text-center leading-5 whitespace-nowrap md:whitespace-normal">ارسال رایگان بالای ۲ میلیون — بازگشت ۱۴ روزه</p>
+        </div>
+        <button class="hidden md:flex items-center gap-1 text-[11px] opacity-60 hover:opacity-100 transition absolute left-6">
+            <span>پیگیری سفارش</span><i data-lucide="arrow-left" class="w-3 h-3"></i>
+        </button>
+    </div>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-40 bg-[#FCFAF7]/90 glass border-b border-atria-line">
+        <div class="max-w-[1600px] mx-auto px-4 md:px-10 h-[60px] md:h-[72px] flex items-center justify-between">
+            <!-- Right: Nav -->
+            <div class="flex items-center gap-8">
+                <button @click="mobileMenuOpen=true" class="lg:hidden w-9 h-9 flex items-center justify-center border border-atria-line rounded-full">
+                    <i data-lucide="menu" class="w-4 h-4"></i>
+                </button>
+                <nav class="hidden lg:flex items-center gap-8 text-[13.5px] font-[400] tracking-[-0.01em]">
+                    <a href="#shop" class="relative group py-2">فروشگاه <span class="absolute bottom-0 right-0 w-0 h-[1px] bg-black group-hover:w-full transition-all duration-500"></span></a>
+                    <a href="#new" class="relative group py-2">کالکشن جدید <span class="absolute -top-1 -left-2 w-1 h-1 bg-red-500 rounded-full"></span></a>
+                    <a href="#story" class="opacity-60 hover:opacity-100 transition">داستان ما</a>
+                    <a href="#journal" class="opacity-60 hover:opacity-100 transition">ژورنال</a>
+                </nav>
+            </div>
+            <!-- Center: Logo -->
+            <a href="#" class="absolute left-1/2 -translate-x-1/2 flex flex-col items-center leading-none">
+                <span class="text-[26px] font-[800] tracking-[0.18em]">آتـریا</span>
+                <span class="text-[9px] tracking-[0.32em] font-[400] -mt-1 opacity-60">ATRIA STUDIO — TEHRAN</span>
+            </a>
+            <!-- Left: Actions -->
+            <div class="flex items-center gap-2.5">
+                <button @click="searchOpen=true" class="w-9 h-9 rounded-full border border-atria-line flex items-center justify-center hover:bg-white transition">
+                    <i data-lucide="search" class="w-4 h-4"></i>
+                </button>
+                <button @click="wishlistOpen=true" class="w-9 h-9 rounded-full border border-atria-line flex items-center justify-center hover:bg-white transition relative">
+                    <i data-lucide="heart" class="w-4 h-4"></i>
+                    <span x-show="wishlist.length" x-text="toFa(wishlist.length)" class="absolute -top-1 -left-1 bg-black text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center"></span>
+                </button>
+                <button @click="cartOpen=true" class="h-9 px-4 rounded-full bg-[#111] text-white flex items-center gap-2.5 text-[12.5px] hover:bg-black transition group">
+                    <i data-lucide="shopping-bag" class="w-4 h-4 group-hover:rotate-6 transition"></i>
+                    <span class="hidden md:inline">سبد خرید</span>
+                    <span class="bg-white/20 rounded-full px-2 py-0.5 text-[11px]" x-text="toFa(cart.reduce((a,b)=>a+b.qty,0))">۰</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div x-cloak x-show="mobileMenuOpen" class="fixed inset-0 z-[70] flex">
+        <div @click="mobileMenuOpen=false" class="flex-1 bg-black/20 backdrop-blur-sm"></div>
+        <div x-transition:enter="transition ease-out duration-500" x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
+             x-transition:leave="transition ease-in duration-300" x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full"
+             class="w-[88%] max-w-[380px] bg-[#FCFAF7] h-full p-8 flex flex-col">
+            <div class="flex justify-between items-center mb-12">
+                <span class="text-xl font-bold tracking-widest">آتریا</span>
+                <button @click="mobileMenuOpen=false" class="w-9 h-9 rounded-full border border-atria-line flex items-center justify-center"><i data-lucide="x" class="w-4 h-4"></i></button>
+            </div>
+            <nav class="flex flex-col gap-6 text-[18px] font-[300]">
+                <a href="#shop" @click="mobileMenuOpen=false">فروشگاه</a>
+                <a href="#new" @click="mobileMenuOpen=false">کالکشن جدید</a>
+                <a href="#story" @click="mobileMenuOpen=false">داستان ما</a>
+                <a href="#">حساب کاربری</a>
+                <a href="#">تماس با ما</a>
+            </nav>
+            <div class="mt-auto pt-8 border-t border-atria-line text-[13px] leading-7 opacity-60">
+                <p>تهران، خیابان ولیعصر، بالاتر از پارک ملت<br>برج آتریا، طبقه ۴، واحد ۱۲</p>
+                <p class="mt-4 font-medium">۰۲۱-۲۶۲۰۸۰۸۰</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero -->
+    <section class="max-w-[1600px] mx-auto px-4 md:px-10 pt-4 md:pt-14 overflow-hidden">
+        <div class="grid grid-cols-12 gap-0 md:gap-10 items-end bg-white md:bg-transparent rounded-[24px] md:rounded-none border border-atria-line md:border-none overflow-hidden">
+            <!-- Image Mobile First -->
+            <div class="col-span-12 lg:col-span-7 order-1 lg:order-2 relative">
+                <div class="relative aspect-[4/3.6] md:aspect-[1.15/1] overflow-hidden bg-atria-sand md:rounded-[24px]">
+                    <img src="images/hero.jpg" class="hero-img w-full h-full object-cover object-top md:scale-[1.06]" alt="کالکشن آتریا">
+                    <!-- Mobile overlay gradient for text readability if needed -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent md:hidden"></div>
+                    <div class="absolute bottom-3 right-3 md:bottom-6 md:right-6 bg-white/95 glass rounded-full px-3 md:px-4 py-2 flex items-center gap-2 md:gap-3 text-[11px] md:text-[12px] shadow-sm">
+                        <span class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-black text-white flex items-center justify-center"><i data-lucide="play" class="w-3 h-3 md:w-3.5 md:h-3.5 mr-[-1px]"></i></span>
+                        <span class="font-medium">پشت صحنه لولاگر</span>
+                    </div>
+                    <div class="absolute top-3 left-3 md:top-4 md:left-4 bg-white rounded-full px-3 py-1.5 text-[10px] md:text-[11px] flex items-center gap-2 shadow-sm">
+                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> موجود در شوروم
+                    </div>
+                </div>
+            </div>
+            <!-- Text -->
+            <div class="col-span-12 lg:col-span-5 order-2 lg:order-1 p-6 md:p-0 pt-7 md:pt-0">
+                <div class="overflow-hidden"><span class="hero-kicker block text-[10px] md:text-[11px] tracking-[0.2em] opacity-50 mb-4 md:mb-6">AUTUMN / WINTER 1404 — TEHRAN</span></div>
+                <h1 class="hero-title text-[42px] md:text-[64px] lg:text-[72px] font-[300] leading-[0.9] tracking-[-0.04em] mb-5 md:mb-8">
+                    سکوت،<br>فرم،<br><span class="font-[700]">حضور.</span>
+                </h1>
+                <p class="hero-desc text-[13.5px] md:text-[15px] leading-[1.9] opacity-70 max-w-[36ch] mb-7 md:mb-10 font-[300]">
+                    ما برای ترند طراحی نمی‌کنیم. برای کمدی که ده سال بعد هم دوستش خواهید داشت. هر قطعه در لولاگر با پارچه‌های طبیعی دوخته می‌شود.
+                </p>
+                <div class="hero-cta flex flex-col md:flex-row gap-2.5 md:gap-3">
+                    <a href="#shop" class="h-[52px] md:h-[48px] px-8 bg-[#111] text-white rounded-full text-[14px] md:text-[13.5px] flex items-center justify-center gap-2 hover:bg-black transition w-full md:w-auto">
+                        مشاهده کالکشن <i data-lucide="arrow-up-left" class="w-4 h-4"></i>
+                    </a>
+                    <a href="#story" class="h-[52px] md:h-[48px] px-8 border border-atria-line rounded-full text-[14px] md:text-[13.5px] flex items-center justify-center hover:bg-white transition w-full md:w-auto bg-[#FCFAF7]">داستان برند</a>
+                </div>
+                <div class="mt-8 md:mt-14 grid grid-cols-3 border-t border-atria-line pt-5 md:pt-6 max-w-full md:max-w-[380px]">
+                    <div><p class="text-[20px] md:text-[22px] font-[400]">۱۴+</p><p class="text-[10px] md:text-[11px] opacity-50 mt-1 leading-4">سال تجربه<br>دوخت سفارشی</p></div>
+                    <div class="border-r border-atria-line pr-5 md:pr-6"><p class="text-[20px] md:text-[22px] font-[400]">۱۰۰٪</p><p class="text-[10px] md:text-[11px] opacity-50 mt-1 leading-4">الیاف طبیعی<br>ارگانیک</p></div>
+                    <div class="border-r border-atria-line pr-5 md:pr-6"><p class="text-[20px] md:text-[22px] font-[400]">۳۴۰۰</p><p class="text-[10px] md:text-[11px] opacity-50 mt-1 leading-4">مشتری وفادار<br>در تهران</p></div>
+                </div>
+            </div>
+        </div>
+        <!-- Trust strip mobile scroll -->
+        <div class="mt-6 md:mt-16 py-0 md:py-6 md:border-y md:border-atria-line flex md:flex-wrap gap-2 md:gap-0 md:justify-between items-center text-[11px] tracking-wide opacity-70 overflow-x-auto no-scrollbar">
+            <div class="flex gap-2 md:contents">
+                <span class="flex items-center gap-2 whitespace-nowrap bg-white md:bg-transparent border md:border-0 border-atria-line rounded-full px-3.5 py-2.5 md:p-0"><i data-lucide="truck" class="w-4 h-4"></i> ارسال امروز تهران</span>
+                <span class="flex items-center gap-2 whitespace-nowrap bg-white md:bg-transparent border md:border-0 border-atria-line rounded-full px-3.5 py-2.5 md:p-0"><i data-lucide="refresh-cw" class="w-4 h-4"></i> بازگشت ۱۴ روزه</span>
+                <span class="flex items-center gap-2 whitespace-nowrap bg-white md:bg-transparent border md:border-0 border-atria-line rounded-full px-3.5 py-2.5 md:p-0"><i data-lucide="shield-check" class="w-4 h-4"></i> پرداخت امن</span>
+                <span class="flex items-center gap-2 whitespace-nowrap bg-white md:bg-transparent border md:border-0 border-atria-line rounded-full px-3.5 py-2.5 md:p-0"><i data-lucide="scissors" class="w-4 h-4"></i> شخصی‌دوزی</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="max-w-[1600px] mx-auto px-4 md:px-10 mt-12 md:mt-32 overflow-hidden">
+        <div class="flex justify-between items-end mb-6 md:mb-10">
+            <div>
+                <p class="text-[10px] md:text-[11px] tracking-[0.2em] opacity-50 mb-2 md:mb-3">SHOP BY WORLD</p>
+                <h2 class="text-[24px] md:text-[36px] font-[300] tracking-[-0.02em] leading-[1.1]">دنیای آتریا را<br class="md:hidden"> انتخاب کنید</h2>
+            </div>
+            <a href="#shop" class="hidden md:flex items-center gap-2 text-[13px] border-b border-black pb-1">مشاهده همه <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i></a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-6">
+            <a href="#shop" @click="activeCategory='زنانه'" class="cat-card md:col-span-8 group relative aspect-[4/3] md:aspect-[1.6/1] overflow-hidden rounded-[20px] md:rounded-[20px] bg-[#E9E3DA]">
+                <img src="images/cat-women.jpg" class="w-full h-full object-cover group-hover:scale-[1.04] transition duration-[1.2s] ease-out" alt="">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent"></div>
+                <div class="absolute bottom-0 right-0 p-5 md:p-10 text-white">
+                    <p class="text-[10px] md:text-[11px] tracking-[0.2em] opacity-80 mb-1.5 md:mb-2">۱۲ محصول</p>
+                    <h3 class="text-[22px] md:text-[36px] font-[300] leading-none">زنانه — برش‌های نرم</h3>
+                </div>
+                <span class="absolute top-4 left-4 md:top-6 md:left-6 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full flex items-center justify-center -rotate-45 group-hover:rotate-0 transition duration-500"><i data-lucide="arrow-up-right" class="w-4 h-4"></i></span>
+            </a>
+            <div class="md:col-span-4 grid grid-cols-2 md:grid-cols-1 gap-3 md:gap-6">
+                <a href="#shop" @click="activeCategory='مردانه'" class="cat-card group relative aspect-[3/3.6] md:aspect-[1.2/1] overflow-hidden rounded-[20px] bg-[#D9D1C7]">
+                    <img src="images/cat-men.jpg" class="w-full h-full object-cover group-hover:scale-[1.05] transition duration-[1.2s]" alt="">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                    <div class="absolute bottom-0 right-0 p-4 md:p-6 text-white"><h3 class="text-[18px] md:text-[22px] font-[300] leading-none">مردانه</h3><p class="text-[10px] md:text-[11px] opacity-70 mt-1">ساختارمند</p></div>
+                </a>
+                <a href="#shop" @click="activeCategory='اکسسوری'" class="cat-card group relative aspect-[3/3.6] md:aspect-[1.2/1] overflow-hidden rounded-[20px] bg-[#EDE8E1]">
+                    <img src="images/cat-accessory.jpg" class="w-full h-full object-cover group-hover:scale-[1.05] transition duration-[1.2s]" alt="">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                    <div class="absolute bottom-0 right-0 p-4 md:p-6 text-white"><h3 class="text-[18px] md:text-[22px] font-[300] leading-none">اکسسوری</h3><p class="text-[10px] md:text-[11px] opacity-70 mt-1">دست‌دوز تهران</p></div>
+                </a>
+            </div>
+        </div>
+        <a href="#shop" class="md:hidden mt-4 flex items-center justify-center gap-2 h-12 border border-atria-line rounded-full text-[13px] bg-white">مشاهده همه محصولات <i data-lucide="arrow-left" class="w-4 h-4"></i></a>
+    </section>
+
+    <!-- Featured / Best sellers Swiper -->
+    <section id="new" class="max-w-[1600px] mx-auto px-0 md:px-10 mt-12 md:mt-40 overflow-hidden">
+        <div class="flex justify-between items-end mb-6 md:mb-8 px-4 md:px-0">
+            <h2 class="text-[22px] md:text-[32px] font-[300] tracking-[-0.02em] leading-[1.2]">پرفروش‌های این فصل <span class="hidden md:inline text-[13px] opacity-40 font-[400] mr-3 tracking-normal">/ انتخاب تهران</span></h2>
+            <div class="hidden md:flex gap-2">
+                <button id="best-prev" class="w-9 h-9 rounded-full border border-atria-line flex items-center justify-center hover:bg-white transition"><i data-lucide="chevron-right" class="w-4 h-4"></i></button>
+                <button id="best-next" class="w-9 h-9 rounded-full border border-atria-line flex items-center justify-center hover:bg-white transition"><i data-lucide="chevron-left" class="w-4 h-4"></i></button>
+            </div>
+            <button class="md:hidden w-8 h-8 rounded-full border border-atria-line flex items-center justify-center"><i data-lucide="arrow-left" class="w-4 h-4"></i></button>
+        </div>
+        <div class="swiper bestSwiper overflow-hidden px-4 md:px-0">
+            <div class="swiper-wrapper">
+                <template x-for="p in products.slice(0,6)" :key="'best'+p.id">
+                    <div class="swiper-slide !w-[168px] md:!w-[340px]">
+                        <div class="group cursor-pointer" @click="openQuickView(p)">
+                            <div class="relative aspect-[4/5] overflow-hidden rounded-[18px] bg-atria-sand">
+                                <img :src="p.images[0]" class="w-full h-full object-cover group-hover:scale-[1.05] transition duration-700" :alt="p.name">
+                                <img :src="p.images[1]" class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition duration-700" alt="">
+                                <div class="absolute top-3 right-3 flex gap-1.5">
+                                    <span x-show="p.badge" x-text="p.badge" class="bg-white rounded-full px-2.5 py-1 text-[11px] font-medium shadow-sm"></span>
+                                </div>
+                                <button @click.stop="toggleWishlist(p)" class="absolute top-3 left-3 w-8 h-8 bg-white/90 glass rounded-full flex items-center justify-center hover:bg-white transition">
+                                    <i :data-lucide="isWishlisted(p.id)?'heart-off':'heart'" class="w-4 h-4" :class="isWishlisted(p.id)?'fill-black':''"></i>
+                                </button>
+                                <div class="absolute bottom-3 left-3 right-3 flex gap-2 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition duration-500">
+                                    <button class="flex-1 h-[40px] bg-[#111] text-white rounded-full text-[12.5px] flex items-center justify-center gap-1.5">نمایش سریع <i data-lucide="eye" class="w-3.5 h-3.5"></i></button>
+                                </div>
+                            </div>
+                            <div class="mt-4 px-1">
+                                <div class="flex justify-between items-start gap-3">
+                                    <h3 class="text-[14px] leading-6 line-clamp-2 font-[400]" x-text="p.name"></h3>
+                                    <span class="text-[13px] font-[500] whitespace-nowrap" x-text="formatPrice(p.price)"></span>
+                                </div>
+                                <p class="text-[11.5px] opacity-50 mt-1" x-text="p.category"></p>
+                                <div class="mt-2 flex items-center gap-1">
+                                    <span class="text-[11px] opacity-60" x-text="toFa(p.rating)"></span>
+                                    <span class="flex text-[10px]">★★★★★</span>
+                                    <span class="text-[10px] opacity-40" x-text="'('+toFa(p.reviewsCount)+')'"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Story -->
+    <section id="story" class="max-w-[1600px] mx-auto px-4 md:px-10 mt-12 md:mt-40">
+        <div class="grid grid-cols-12 gap-0 md:gap-16 items-center bg-white rounded-[24px] p-0 md:p-12 border border-atria-line overflow-hidden">
+            <div class="col-span-12 md:col-span-6">
+                <div class="relative aspect-[4/3] md:rounded-[20px] overflow-hidden bg-atria-sand">
+                    <img src="images/story.jpg" class="w-full h-full object-cover" alt="">
+                    <div class="absolute bottom-4 right-4 bg-[#FCFAF7] rounded-[14px] p-4 flex gap-4 shadow-sm max-w-[280px]">
+                        <img src="images/p1.jpg" class="w-14 h-14 rounded-full object-cover" alt="">
+                        <div><p class="text-[13px] font-medium leading-6">«ما لباس را به عنوان معماری نرم می‌بینیم»</p><p class="text-[11px] opacity-60 mt-1">لیلا رضایی — بنیان‌گذار آتریا</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-span-12 md:col-span-6 p-6 md:p-0 pt-7 md:pt-0">
+                <p class="text-[10px] md:text-[11px] tracking-[0.2em] opacity-50 mb-4 md:mb-6">BRAND STORY — SINCE 1396</p>
+                <h2 class="text-[26px] md:text-[42px] leading-[1.1] font-[300] tracking-[-0.03em] mb-4 md:mb-6">ما برای سرعت<br>طراحی نمی‌کنیم.<br>برای <span class="font-[600]">ماندگاری</span> می‌دوزیم.</h2>
+                <p class="text-[13px] md:text-[14.5px] leading-[1.9] md:leading-[2] opacity-70 font-light mb-6 md:mb-8">
+                    آتریا در یک کارگاه ۴۰ متری در کوچه لولاگر متولد شد. جایی که استاد حسین هنوز با چرخ قدیمی‌اش یقه کت‌ها را با دست می‌دوزد. امروز در ولیعصر شوروم داریم، اما قلب‌مان همان‌جاست.
+                    <span class="hidden md:inline"><br><br>هر سال فقط دو کالکشن عرضه می‌کنیم. هر کالکشن ۱۸ قطعه. نه بیشتر. چون کیفیت در تکرار نیست، در حذف است.</span>
+                </p>
+                <div class="flex gap-6 md:gap-8 border-t border-atria-line pt-6 md:pt-8">
+                    <div><p class="text-[22px] md:text-[28px] font-[300]">۱۸</p><p class="text-[10px] md:text-[11px] opacity-60 mt-1 leading-4">قطعه در هر کالکشن<br>نه بیشتر</p></div>
+                    <div><p class="text-[22px] md:text-[28px] font-[300]">۴٫۹</p><p class="text-[10px] md:text-[11px] opacity-60 mt-1 leading-4">امتیاز رضایت<br>از ۳۴۰۰ خرید</p></div>
+                    <div><p class="text-[22px] md:text-[28px] font-[300]">۱۴ روز</p><p class="text-[10px] md:text-[11px] opacity-60 mt-1 leading-4">بازگشت بدون سوال<br>حتی اگر پوشیده باشید</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop / Product Grid -->
+    <section id="shop" class="max-w-[1600px] mx-auto px-4 md:px-10 mt-14 md:mt-40 overflow-hidden">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-5 md:gap-6 mb-6 md:mb-10">
+            <div>
+                <p class="text-[10px] md:text-[11px] tracking-[0.2em] opacity-50 mb-2 md:mb-3">ALL PRODUCTS — 1404</p>
+                <h2 class="text-[26px] md:text-[44px] font-[300] leading-none tracking-[-0.03em]">فروشگاه</h2>
+            </div>
+            <!-- Sort & Filter bar -->
+            <div class="flex flex-col md:flex-row md:items-center gap-3 w-full md:w-auto">
+                <div class="flex items-center gap-1.5 bg-white border border-atria-line rounded-full p-1 overflow-x-auto no-scrollbar w-full md:w-auto">
+                    <button @click="activeCategory='همه'" :class="activeCategory==='همه'?'bg-black text-white':'hover:bg-atria-sand'" class="px-4 h-8 rounded-full text-[12px] md:text-[12.5px] transition whitespace-nowrap flex-shrink-0">همه</button>
+                    <template x-for="cat in categories" :key="cat">
+                        <button @click="activeCategory=cat" :class="activeCategory===cat?'bg-black text-white':'hover:bg-atria-sand'" class="px-4 h-8 rounded-full text-[12px] md:text-[12.5px] transition whitespace-nowrap flex-shrink-0" x-text="cat"></button>
+                    </template>
+                </div>
+                <div class="flex gap-2 w-full md:w-auto">
+                    <div class="relative flex-1 md:flex-none">
+                        <select x-model="sortBy" class="appearance-none w-full md:w-auto h-[40px] bg-white border border-atria-line rounded-full px-4 pl-9 pr-4 text-[12px] md:text-[12.5px] outline-none">
+                            <option value="newest">جدیدترین</option>
+                            <option value="price-low">ارزان‌ترین</option>
+                            <option value="price-high">گران‌ترین</option>
+                            <option value="popular">محبوب‌ترین</option>
+                        </select>
+                        <i data-lucide="chevron-down" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none opacity-60"></i>
+                    </div>
+                    <button @click="showFilters=!showFilters" class="h-[40px] px-5 bg-white border border-atria-line rounded-full text-[12px] md:text-[12.5px] flex items-center gap-2 hover:bg-black hover:text-white transition whitespace-nowrap">
+                        <i data-lucide="sliders-horizontal" class="w-4 h-4"></i> فیلتر
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-12 gap-4 md:gap-8">
+            <!-- Filters sidebar -->
+            <div x-show="showFilters" x-transition class="col-span-12 md:col-span-3">
+                <div class="bg-white border border-atria-line rounded-[20px] p-6 sticky top-[88px]">
+                    <div class="flex justify-between items-center mb-6"><h3 class="font-medium text-[14px]">فیلترها</h3><button @click="clearFilters()" class="text-[11px] opacity-60 hover:opacity-100 border-b border-black">حذف همه</button></div>
+
+                    <div class="space-y-8">
+                        <div>
+                            <p class="text-[12px] font-medium mb-3">رنگ</p>
+                            <div class="flex flex-wrap gap-2.5">
+                                <template x-for="c in allColors" :key="c.name">
+                                    <button @click="toggleColor(c.name)" :style="`background:${c.hex}; border: ${selectedColors.includes(c.name)?'2px solid black':'1px solid #EDE8E1'}`" class="w-8 h-8 rounded-full relative flex items-center justify-center">
+                                        <i x-show="selectedColors.includes(c.name)" data-lucide="check" class="w-4 h-4 text-white mix-blend-difference"></i>
+                                    </button>
+                                </template>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-[12px] font-medium mb-3">سایز</p>
+                            <div class="flex flex-wrap gap-2">
+                                <template x-for="s in ['36','38','40','42','44','فری']" :key="s">
+                                    <button @click="toggleSize(s)" :class="selectedSizes.includes(s)?'bg-black text-white border-black':'bg-white border-atria-line hover:border-black'" class="w-10 h-9 rounded-full border text-[12px] transition" x-text="s"></button>
+                                </template>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-[12px] font-medium mb-3">محدوده قیمت</p>
+                            <div class="flex gap-2 text-[12px]">
+                                <input type="number" x-model.number="priceRange[0]" placeholder="از" class="w-1/2 h-9 border border-atria-line rounded-full px-3 outline-none">
+                                <input type="number" x-model.number="priceRange[1]" placeholder="تا ۱۰ میلیون" class="w-1/2 h-9 border border-atria-line rounded-full px-3 outline-none">
+                            </div>
+                            <p class="text-[11px] opacity-50 mt-2">قیمت‌ها به تومان</p>
+                        </div>
+                        <div class="pt-6 border-t border-atria-line">
+                            <p class="text-[11px] opacity-60 leading-6">تمام پارچه‌ها دارای شناسنامه الیاف هستند. برای مشاوره سایز در واتساپ ۰۹۱۲-۱۲۳۴۵۶۷ پیام دهید.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products -->
+            <div :class="showFilters?'col-span-12 md:col-span-9':'col-span-12'">
+                <!-- Loading -->
+                <div x-show="loading" class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+                    <template x-for="i in 6">
+                        <div class="space-y-3"><div class="aspect-[4/5] rounded-[18px] shimmer"></div><div class="h-4 w-3/4 rounded-full shimmer"></div><div class="h-3 w-1/2 rounded-full shimmer"></div></div>
+                    </template>
+                </div>
+
+                <!-- Grid -->
+                <div x-show="!loading" class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+                    <template x-for="p in filteredProducts" :key="p.id">
+                        <div class="group cursor-pointer shop-card" @click="openQuickView(p)">
+                            <div class="relative aspect-[4/5] overflow-hidden rounded-[18px] bg-atria-sand">
+                                <img :src="p.images[0]" class="w-full h-full object-cover group-hover:scale-[1.06] transition duration-[1.2s] ease-out" :alt="p.name">
+                                <img :src="p.images[1]" class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition duration-700" alt="">
+                                <!-- Badges -->
+                                <div class="absolute top-3 right-3 flex flex-col gap-1.5 items-start">
+                                    <span x-show="p.badge" x-text="p.badge" class="px-2.5 py-1 rounded-full text-[10.5px] font-medium bg-white/90 glass shadow-sm"></span>
+                                    <span x-show="p.originalPrice" class="px-2.5 py-1 rounded-full text-[10.5px] font-medium bg-red-500 text-white shadow-sm">٪<span x-text="toFa(Math.round((1-p.price/p.originalPrice)*100))"></span> تخفیف</span>
+                                </div>
+                                <button @click.stop="toggleWishlist(p)" class="absolute top-3 left-3 w-[32px] h-[32px] bg-white/90 glass rounded-full flex items-center justify-center hover:bg-white transition shadow-sm">
+                                    <i data-lucide="heart" class="w-4 h-4 transition" :class="isWishlisted(p.id)?'fill-black stroke-black':''"></i>
+                                </button>
+                                <div class="absolute bottom-0 left-0 right-0 p-2 md:p-3 translate-y-0 md:translate-y-full md:group-hover:translate-y-0 transition duration-500 ease-out">
+                                    <div class="flex gap-1.5 md:gap-2">
+                                        <button @click.stop="addToCart(p)" class="flex-1 h-[36px] md:h-[42px] bg-[#111] text-white rounded-full text-[11px] md:text-[12.5px] font-medium flex items-center justify-center gap-1 md:gap-2 hover:bg-black transition shadow-lg">
+                                            <span class="hidden md:inline">افزودن به سبد</span><span class="md:hidden">افزودن</span> <i data-lucide="plus" class="w-3.5 h-3.5 md:w-4 md:h-4"></i>
+                                        </button>
+                                        <button @click.stop="openQuickView(p)" class="hidden md:flex w-[42px] h-[42px] bg-white rounded-full items-center justify-center shadow-lg hover:bg-atria-sand transition">
+                                            <i data-lucide="eye" class="w-4 h-4"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-3.5 px-1">
+                                <h3 class="text-[13.5px] leading-6 font-[400] line-clamp-2" x-text="p.name"></h3>
+                                <div class="flex items-center gap-2 mt-1.5">
+                                    <span class="text-[13.5px] font-[600]" x-text="formatPrice(p.price)"></span>
+                                    <span x-show="p.originalPrice" class="text-[11.5px] opacity-40 line-through" x-text="formatPrice(p.originalPrice)"></span>
+                                </div>
+                                <div class="mt-2 flex items-center gap-2">
+                                    <div class="flex gap-1">
+                                        <template x-for="col in p.colors.slice(0,3)" :key="col.name">
+                                            <span class="w-3.5 h-3.5 rounded-full border border-white shadow-sm ring-1 ring-atria-line" :style="`background:${col.hex}`"></span>
+                                        </template>
+                                    </div>
+                                    <span class="text-[11px] opacity-40" x-text="p.colors.length + ' رنگ'"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+                <div x-show="!loading && filteredProducts.length===0" class="py-24 text-center">
+                    <p class="text-[15px] opacity-60">محصولی با این فیلترها یافت نشد.</p>
+                    <button @click="clearFilters()" class="mt-4 h-9 px-5 border border-atria-line rounded-full text-[12px]">پاک کردن فیلترها</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recently Viewed -->
+    <section x-show="recentlyViewed.length" class="max-w-[1600px] mx-auto px-4 md:px-10 mt-12 md:mt-20 overflow-hidden">
+        <h3 class="text-[16px] md:text-[18px] font-[400] mb-4 md:mb-6">اخیراً دیده‌اید</h3>
+        <div class="flex gap-3 md:gap-4 overflow-x-auto pb-2 no-scrollbar">
+            <template x-for="p in recentlyViewed" :key="'recent'+p.id">
+                <button @click="openQuickView(p)" class="flex-shrink-0 w-[90px] md:w-[110px] text-right">
+                    <img :src="p.images[0]" class="w-full aspect-[4/5] object-cover rounded-[12px] bg-atria-sand">
+                    <p class="text-[10px] md:text-[11px] leading-4 mt-2 line-clamp-2" x-text="p.name"></p>
+                </button>
+            </template>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="journal" class="max-w-[1600px] mx-auto px-4 md:px-10 mt-12 md:mt-40 overflow-hidden">
+        <div class="grid grid-cols-12 gap-6">
+            <div class="col-span-12 md:col-span-5">
+                <p class="text-[11px] tracking-[0.2em] opacity-50 mb-4">VOICES — مشتریان آتریا</p>
+                <h2 class="text-[30px] md:text-[38px] leading-[1.15] font-[300] tracking-[-0.02em]">لباس باید فراموش<br>شود، تا شما<br><span class="font-[600]">دیده شوید.</span></h2>
+            </div>
+            <div class="col-span-12 md:col-span-7 grid md:grid-cols-2 gap-4">
+                <div class="bg-white border border-atria-line rounded-[20px] p-7">
+                    <div class="flex gap-1 mb-4 text-[13px]">★★★★★</div>
+                    <p class="text-[14px] leading-8 font-[300]">«کت فوتر را ۲ سال است هر روز می‌پوشم. هنوز مثل روز اول می‌ایستد. دوخت آتریا فرق دارد، واقعاً مهندسی شده است.»</p>
+                    <div class="mt-6 flex items-center gap-3"><div class="w-9 h-9 rounded-full bg-atria-sand flex items-center justify-center text-[11px] font-bold">س.ا</div><div><p class="text-[13px] font-medium">سارا احمدی — معمار</p><p class="text-[11px] opacity-60">تهران، زعفرانیه</p></div></div>
+                </div>
+                <div class="bg-white border border-atria-line rounded-[20px] p-7">
+                    <div class="flex gap-1 mb-4 text-[13px]">★★★★★</div>
+                    <p class="text-[14px] leading-8 font-[300]">«برای اولین بار آنلاین لباس خریدم که سایزش دقیق بود. راهنمای سایز و پشتیبانی واتساپ عالی بود.»</p>
+                    <div class="mt-6 flex items-center gap-3"><div class="w-9 h-9 rounded-full bg-atria-sand flex items-center justify-center text-[11px] font-bold">ا.ک</div><div><p class="text-[13px] font-medium">امیرعلی کاظمی</p><p class="text-[11px] opacity-60">مشهد</p></div></div>
+                </div>
+                <div class="md:col-span-2 bg-[#111] text-[#FCFAF7] rounded-[20px] p-7 flex flex-col md:flex-row justify-between gap-6">
+                    <div><p class="text-[20px] leading-8 font-[300]">۴٫۹ / ۵ میانگین رضایت<br>از ۳,۴۲۱ نظر تایید شده</p><p class="text-[12px] opacity-60 mt-3">نظرها پس از تحویل و ۱۴ روز استفاده ثبت می‌شوند</p></div>
+                    <div class="flex items-end gap-2"><span class="text-[12px] opacity-60">در</span><span class="text-[14px] font-medium"> سایت فروشگاه</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="max-w-[1600px] mx-auto px-4 md:px-10 mt-12 md:mt-28">
+        <div class="rounded-[24px] md:rounded-[28px] bg-[#EDE8E1] p-6 md:p-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 md:gap-8">
+            <div><h3 class="text-[20px] md:text-[28px] font-[300] leading-tight">به ژورنال آتریا بپیوندید</h3><p class="text-[12.5px] md:text-[13.5px] opacity-60 mt-2 md:mt-3 leading-6 md:leading-7 max-w-[40ch]">هر ماه یک نامه: داستان پارچه، پشت صحنه کارگاه، و ۱۰٪ تخفیف اعضای ژورنال.</p></div>
+            <form @submit.prevent="subscribeNewsletter()" class="flex gap-2 w-full md:w-auto mt-2 md:mt-0">
+                <div class="relative flex-1 md:w-[320px]"><input x-model="newsletterEmail" type="email" placeholder="ایمیل شما" class="w-full h-[52px] md:h-[48px] bg-white border border-atria-line rounded-full px-5 text-[13.5px] outline-none focus:border-black transition placeholder:opacity-40"><span class="absolute left-2 top-1/2 -translate-y-1/2 text-[11px] opacity-40">IR</span></div>
+                <button type="submit" class="h-[52px] md:h-[48px] px-7 bg-black text-white rounded-full text-[13.5px] hover:bg-[#222] transition whitespace-nowrap">عضویت</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="max-w-[1600px] mx-auto px-4 md:px-10 mt-14 md:mt-20 border-t border-atria-line pt-10 md:pt-16 pb-28 md:pb-10 overflow-hidden">
+        <div class="grid grid-cols-2 md:grid-cols-12 gap-10">
+            <div class="col-span-2 md:col-span-5">
+                <p class="text-[28px] font-[800] tracking-[0.18em]">آتـریا</p>
+                <p class="text-[12px] opacity-60 mt-4 leading-7 max-w-[32ch]">طراحی شده در تهران، برای زندگی واقعی. ما به جای تولید انبوه، به کیفیت وسواس داریم. هر قطعه شناسنامه پارچه و دوخت دارد.</p>
+                <div class="mt-6 flex gap-2">
+                    <a href="#" class="w-9 h-9 rounded-full border border-atria-line flex items-center justify-center hover:bg-black hover:text-white transition"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                    <a href="#" class="w-9 h-9 rounded-full border border-atria-line flex items-center justify-center hover:bg-black hover:text-white transition"><i data-lucide="youtube" class="w-4 h-4"></i></a>
+                    <a href="#" class="w-9 h-9 rounded-full border border-atria-line flex items-center justify-center hover:bg-black hover:text-white transition"><i data-lucide="send" class="w-4 h-4"></i></a>
+                </div>
+            </div>
+            <div class="col-span-1 md:col-span-2"><p class="text-[12px] font-medium tracking-wide mb-5">فروشگاه</p><ul class="space-y-3 text-[13px] opacity-60 leading-6"><li><a href="#">زنانه</a></li><li><a href="#">مردانه</a></li><li><a href="#">اکسسوری</a></li><li><a href="#">کالکشن ۱۴۰۴</a></li><li><a href="#">کارت هدیه</a></li></ul></div>
+            <div class="col-span-1 md:col-span-2"><p class="text-[12px] font-medium tracking-wide mb-5">خدمات</p><ul class="space-y-3 text-[13px] opacity-60 leading-6"><li><a href="#">راهنمای سایز</a></li><li><a href="#">شرایط بازگشت</a></li><li><a href="#">شیوه نگهداری</a></li><li><a href="#">شخصی‌دوزی</a></li><li><a href="#">سوالات متداول</a></li></ul></div>
+            <div class="col-span-2 md:col-span-3"><p class="text-[12px] font-medium tracking-wide mb-5">شوروم</p><p class="text-[13px] leading-7 opacity-70">تهران، خیابان ولیعصر، بالاتر از پارک ملت،<br>نبش خیابان ناهید، برج آتریا، طبقه ۴، واحد ۱۲<br>شنبه تا چهارشنبه ۱۱ تا ۲۰ — پنجشنبه ۱۱ تا ۱۸</p><p class="mt-4 text-[13px] font-medium">۰۲۱-۲۶۲۰۸۰۸۰<br>۰۹۱۲-۳۴۵۶۷۸۹</p><p class="mt-4 text-[11px] opacity-50">ایمیل: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="deb6bbb2b2b19ebfaaacb7bff0adaaabbab7b1">[email&#160;protected]</a></p></div>
+        </div>
+        <div class="mt-16 pt-6 border-t border-atria-line flex flex-col md:flex-row justify-between gap-4 text-[11px] opacity-50">
+            <p>© 1405 آتریا استودیو — تمامی حقوق محفوظ است. طراحی و توسعه توسط کدوو .</p>
+            <div class="flex gap-6"><span>حریم خصوصی</span><span>قوانین</span><span class="flex items-center gap-1">ساخته شده با <i data-lucide="heart" class="w-3 h-3 fill-black"></i> توسط کدوو</span></div>
+        </div>
+    </footer>
+
+    <!-- Sticky Mobile Cart Bar -->
+    <div x-show="cart.length && !cartOpen" x-transition class="md:hidden fixed bottom-4 left-4 right-4 z-30 bg-[#111] text-white rounded-full h-[56px] px-2 flex items-center justify-between shadow-[0_20px_40px_rgba(0,0,0,0.25)]">
+        <div class="flex items-center gap-3 pr-4"><span class="w-9 h-9 bg-white text-black rounded-full flex items-center justify-center text-[12px] font-bold" x-text="toFa(cart.reduce((a,b)=>a+b.qty,0))"></span><div><p class="text-[12px]">سبد شما</p><p class="text-[11px] opacity-60 leading-none" x-text="formatPrice(cart.reduce((a,b)=>a+b.price*b.qty,0))"></p></div></div>
+        <button @click="cartOpen=true" class="h-[44px] px-6 bg-white text-black rounded-full text-[13px] font-medium">مشاهده سبد</button>
+    </div>
+
+    <!-- Search Overlay -->
+    <div x-cloak x-show="searchOpen" class="fixed inset-0 z-[80] flex flex-col bg-[#FCFAF7]/95 glass">
+        <div class="max-w-[900px] w-full mx-auto px-6 md:px-10 pt-10">
+            <div class="flex justify-between items-center"><p class="text-[12px] tracking-[0.2em] opacity-50">SEARCH</p><button @click="searchOpen=false" class="w-9 h-9 rounded-full border border-atria-line flex items-center justify-center"><i data-lucide="x" class="w-4 h-4"></i></button></div>
+            <div class="mt-10 relative"><i data-lucide="search" class="w-5 h-5 absolute right-5 top-1/2 -translate-y-1/2 opacity-30"></i><input x-model="searchQuery" placeholder="جستجوی کت پشمی، شلوار لنین، کیف چرم..." class="w-full h-[64px] bg-white border border-atria-line rounded-full pr-14 pl-6 text-[16px] outline-none focus:border-black placeholder:opacity-30"></div>
+            <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+                <template x-for="p in products.filter(p=>p.name.includes(searchQuery) || searchQuery==='').slice(0,4)">
+                    <button @click="openQuickView(p); searchOpen=false" class="text-right group"><img :src="p.images[0]" class="w-full aspect-[4/5] rounded-[14px] object-cover bg-atria-sand"><p class="text-[12px] mt-2 leading-5 line-clamp-2 group-hover:opacity-60" x-text="p.name"></p></button>
+                </template>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick View Modal -->
+    <div x-cloak x-show="quickViewOpen" class="fixed inset-0 z-[90] flex">
+        <div @click="quickViewOpen=false" class="absolute inset-0 bg-black/40 backdrop-blur-[2px]"></div>
+        <div x-transition:enter="transition ease-out duration-500" x-transition:enter-start="translate-y-8 opacity-0" x-transition:enter-end="translate-y-0 opacity-100"
+             class="relative w-full max-w-[1180px] mx-auto my-auto md:my-8 bg-[#FCFAF7] rounded-t-[28px] md:rounded-[28px] max-h-[92vh] md:max-h-[88vh] overflow-hidden flex flex-col md:flex-row shadow-2xl">
+            <button @click="quickViewOpen=false" class="absolute top-4 left-4 z-10 w-9 h-9 bg-white rounded-full border border-atria-line flex items-center justify-center hover:bg-black hover:text-white transition"><i data-lucide="x" class="w-4 h-4"></i></button>
+
+            <template x-if="selectedProduct">
+                <div class="flex flex-col md:flex-row w-full overflow-y-auto">
+                    <!-- Gallery -->
+                    <div class="md:w-[56%] p-3 md:p-6 bg-white">
+                        <div class="grid grid-cols-12 gap-3 h-full">
+                            <div class="col-span-2 hidden md:flex flex-col gap-3">
+                                <template x-for="(img, idx) in selectedProduct.images" :key="idx">
+                                    <button @click="activeImageIndex=idx" :class="activeImageIndex===idx?'ring-1 ring-black':''" class="aspect-[4/5] rounded-[12px] overflow-hidden bg-atria-sand">
+                                        <img :src="img" class="w-full h-full object-cover">
+                                    </button>
+                                </template>
+                            </div>
+                            <div class="col-span-12 md:col-span-10 relative aspect-[4/5] md:aspect-auto md:h-full rounded-[18px] overflow-hidden bg-atria-sand">
+                                <img :src="selectedProduct.images[activeImageIndex]" class="w-full h-full object-cover">
+                                <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 md:hidden">
+                                    <template x-for="(img, i) in selectedProduct.images"><span :class="activeImageIndex===i?'bg-black':'bg-white/60'" class="w-5 h-1 rounded-full transition"></span></template>
+                                </div>
+                                <button @click="activeImageIndex=(activeImageIndex+1)%selectedProduct.images.length" class="absolute bottom-4 left-4 w-9 h-9 bg-white rounded-full flex items-center justify-center shadow md:hidden"><i data-lucide="chevron-left" class="w-4 h-4"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Details -->
+                    <div class="md:w-[44%] p-6 md:p-10 flex flex-col overflow-y-auto">
+                        <p class="text-[11px] tracking-[0.18em] opacity-50" x-text="selectedProduct.category + ' — ' + selectedProduct.id"></p>
+                        <h2 class="text-[26px] md:text-[28px] font-[400] leading-[1.3] mt-3 tracking-[-0.02em]" x-text="selectedProduct.name"></h2>
+                        <div class="flex items-center gap-3 mt-3">
+                            <span class="text-[22px] font-[600]" x-text="formatPrice(selectedProduct.price)"></span>
+                            <span x-show="selectedProduct.originalPrice" class="text-[14px] opacity-40 line-through" x-text="formatPrice(selectedProduct.originalPrice)"></span>
+                            <span class="text-[11px] bg-black text-white rounded-full px-2.5 py-1" x-text="toFa(selectedProduct.rating)+' ★'"></span>
+                        </div>
+                        <p class="text-[13.5px] leading-[1.9] opacity-70 mt-6 font-light" x-text="selectedProduct.description"></p>
+
+                        <!-- Colors -->
+                        <div class="mt-8">
+                            <p class="text-[12px] font-medium mb-3">رنگ: <span class="opacity-60 font-normal" x-text="selectedColor?.name || 'انتخاب کنید'"></span></p>
+                            <div class="flex gap-2.5">
+                                <template x-for="c in selectedProduct.colors" :key="c.name">
+                                    <button @click="selectedColor=c" :style="`background:${c.hex}`" class="w-9 h-9 rounded-full border-2 flex items-center justify-center transition" :class="selectedColor?.name===c.name?'border-black scale-110':'border-white ring-1 ring-atria-line'">
+                                    </button>
+                                </template>
+                            </div>
+                        </div>
+                        <!-- Sizes -->
+                        <div class="mt-6">
+                            <div class="flex justify-between"><p class="text-[12px] font-medium">سایز</p><button class="text-[11px] opacity-60 underline">راهنمای سایز</button></div>
+                            <div class="flex flex-wrap gap-2 mt-3">
+                                <template x-for="s in selectedProduct.sizes" :key="s">
+                                    <button @click="selectedSize=s" :class="selectedSize===s?'bg-black text-white border-black':'bg-white border-atria-line'" class="min-w-[44px] h-9 rounded-full border text-[12.5px] px-3 transition" x-text="s"></button>
+                                </template>
+                            </div>
+                        </div>
+
+                        <!-- Qty + Add -->
+                        <div class="mt-8 flex gap-3">
+                            <div class="h-[48px] flex items-center border border-atria-line rounded-full bg-white px-1">
+                                <button @click="qty=Math.max(1,qty-1)" class="w-9 h-9 rounded-full hover:bg-atria-sand flex items-center justify-center"><i data-lucide="minus" class="w-4 h-4"></i></button>
+                                <span class="w-10 text-center text-[14px] font-medium" x-text="toFa(qty)"></span>
+                                <button @click="qty++" class="w-9 h-9 rounded-full hover:bg-atria-sand flex items-center justify-center"><i data-lucide="plus" class="w-4 h-4"></i></button>
+                            </div>
+                            <button @click="addToCart(selectedProduct, qty); quickViewOpen=false" class="flex-1 h-[48px] bg-[#111] text-white rounded-full text-[13.5px] font-medium flex items-center justify-center gap-2 hover:bg-black transition">
+                                <i data-lucide="shopping-bag" class="w-4 h-4"></i> افزودن به سبد — <span x-text="formatPrice(selectedProduct.price*qty)"></span>
+                            </button>
+                        </div>
+
+                        <!-- Features -->
+                        <div class="mt-6 grid grid-cols-2 gap-3 text-[11.5px]">
+                            <div class="flex items-center gap-2 bg-white border border-atria-line rounded-full px-3 h-9"><i data-lucide="truck" class="w-4 h-4 opacity-60"></i> ارسال امروز تهران</div>
+                            <div class="flex items-center gap-2 bg-white border border-atria-line rounded-full px-3 h-9"><i data-lucide="refresh-cw" class="w-4 h-4 opacity-60"></i> بازگشت ۱۴ روزه</div>
+                        </div>
+
+                        <!-- Reviews -->
+                        <div class="mt-10 border-t border-atria-line pt-6">
+                            <h4 class="text-[13px] font-medium mb-4">نظرات تایید شده <span class="opacity-50" x-text="'('+toFa(selectedProduct.reviewsCount)+')'"></span></h4>
+                            <div class="space-y-4">
+                                <template x-for="r in selectedProduct.reviews" :key="r.name">
+                                    <div class="bg-white border border-atria-line rounded-[14px] p-4"><div class="flex justify-between text-[11px]"><span class="font-medium" x-text="r.name"></span><span class="opacity-50" x-text="r.date"></span></div><p class="text-[12.5px] leading-7 mt-2 opacity-70" x-text="r.text"></p></div>
+                                </template>
+                            </div>
+                        </div>
+
+                        <!-- Related -->
+                        <div class="mt-8">
+                            <p class="text-[12px] font-medium mb-3">کامل کنید با</p>
+                            <div class="flex gap-3">
+                                <template x-for="rel in products.filter(p=>p.category===selectedProduct.category && p.id!==selectedProduct.id).slice(0,3)">
+                                    <button @click="openQuickView(rel)" class="w-[80px] text-right"><img :src="rel.images[0]" class="w-full aspect-square object-cover rounded-[10px]"><p class="text-[10px] mt-1 line-clamp-2 leading-4" x-text="rel.name"></p></button>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+
+    <!-- Cart Drawer -->
+    <div x-cloak x-show="cartOpen" class="fixed inset-0 z-[85] flex">
+        <div @click="cartOpen=false" class="flex-1 bg-black/20 backdrop-blur-sm"></div>
+        <div x-transition:enter="transition ease-out duration-500" x-transition:enter-start="translate-x-[-100%]" x-transition:enter-end="translate-x-0"
+             x-transition:leave="transition ease-in duration-300" x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-[-100%]"
+             class="w-[92%] max-w-[440px] bg-[#FCFAF7] h-full flex flex-col shadow-2xl">
+            <div class="p-6 border-b border-atria-line flex justify-between items-center">
+                <h3 class="text-[18px] font-medium">سبد خرید <span class="opacity-50 text-[13px]">— <span x-text="toFa(cart.reduce((a,b)=>a+b.qty,0))"></span> کالا</span></h3>
+                <button @click="cartOpen=false" class="w-9 h-9 rounded-full border border-atria-line flex items-center justify-center hover:bg-black hover:text-white transition"><i data-lucide="x" class="w-4 h-4"></i></button>
+            </div>
+            <div class="flex-1 overflow-y-auto p-4 space-y-4">
+                <template x-for="(item,i) in cart" :key="item.uid">
+                    <div class="flex gap-4 bg-white border border-atria-line rounded-[16px] p-3">
+                        <img :src="item.images[0]" class="w-[86px] aspect-[4/5] object-cover rounded-[10px] bg-atria-sand">
+                        <div class="flex-1 flex flex-col">
+                            <div class="flex justify-between gap-2"><h4 class="text-[12.5px] leading-5 line-clamp-2" x-text="item.name"></h4><button @click="removeFromCart(i)" class="w-6 h-6 rounded-full bg-atria-sand flex items-center justify-center"><i data-lucide="x" class="w-3 h-3"></i></button></div>
+                            <p class="text-[11px] opacity-50 mt-1" x-text="(item.color?.name||'') + ' / ' + (item.size||'')"></p>
+                            <div class="mt-auto flex justify-between items-center">
+                                <div class="flex items-center border border-atria-line rounded-full h-8 px-1"><button @click="item.qty=Math.max(1,item.qty-1)" class="w-6 h-6 rounded-full hover:bg-atria-sand flex items-center justify-center"><i data-lucide="minus" class="w-3 h-3"></i></button><span class="w-7 text-center text-[12px]" x-text="toFa(item.qty)"></span><button @click="item.qty++" class="w-6 h-6 rounded-full hover:bg-atria-sand flex items-center justify-center"><i data-lucide="plus" class="w-3 h-3"></i></button></div>
+                                <span class="text-[13px] font-medium" x-text="formatPrice(item.price*item.qty)"></span>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <div x-show="!cart.length" class="py-20 text-center">
+                    <div class="w-20 h-20 rounded-full bg-atria-sand mx-auto flex items-center justify-center mb-4"><i data-lucide="shopping-bag" class="w-8 h-8 opacity-30"></i></div>
+                    <p class="text-[14px] opacity-70">سبد خرید شما خالی است</p><a href="#shop" @click="cartOpen=false" class="mt-4 inline-flex h-9 px-5 border border-atria-line rounded-full text-[12px] items-center">رفتن به فروشگاه</a>
+                </div>
+            </div>
+            <div x-show="cart.length" class="p-6 border-t border-atria-line bg-white space-y-4">
+                <div class="space-y-2 text-[13px]"><div class="flex justify-between opacity-60"><span>جمع کل</span><span x-text="formatPrice(cart.reduce((a,b)=>a+b.price*b.qty,0))"></span></div><div class="flex justify-between opacity-60"><span>ارسال</span><span>رایگان</span></div><div class="flex justify-between font-medium text-[15px] pt-2 border-t border-dashed border-atria-line"><span>مبلغ قابل پرداخت</span><span x-text="formatPrice(cart.reduce((a,b)=>a+b.price*b.qty,0))"></span></div></div>
+                <button @click="checkoutOpen=true" class="w-full h-[48px] bg-black text-white rounded-full text-[13.5px] flex items-center justify-center gap-2 hover:bg-[#222] transition">ادامه و پرداخت <i data-lucide="arrow-left" class="w-4 h-4"></i></button>
+                <p class="text-[11px] opacity-50 text-center leading-5">پرداخت امن با زرین‌پال — اطلاعات شما رمزگذاری می‌شود</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wishlist Drawer -->
+    <div x-cloak x-show="wishlistOpen" class="fixed inset-0 z-[86] flex">
+        <div @click="wishlistOpen=false" class="flex-1 bg-black/20 backdrop-blur-sm"></div>
+        <div x-transition:enter="transition ease-out duration-500" x-transition:enter-start="translate-x-[-100%]" x-transition:enter-end="translate-x-0"
+             x-transition:leave="transition ease-in duration-300" x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-[-100%]"
+             class="w-[92%] max-w-[440px] bg-[#FCFAF7] h-full flex flex-col shadow-2xl">
+            <div class="p-6 border-b border-atria-line flex justify-between items-center"><h3 class="text-[18px] font-medium">لیست علاقه‌مندی‌ها</h3><button @click="wishlistOpen=false" class="w-9 h-9 rounded-full border border-atria-line flex items-center justify-center"><i data-lucide="x" class="w-4 h-4"></i></button></div>
+            <div class="flex-1 overflow-y-auto p-4 grid grid-cols-2 gap-3 content-start">
+                <template x-for="p in wishlist" :key="'wish'+p.id">
+                    <div class="bg-white border border-atria-line rounded-[14px] p-2 group">
+                        <div class="relative"><img :src="p.images[0]" class="w-full aspect-[4/5] object-cover rounded-[10px]"><button @click="toggleWishlist(p)" class="absolute top-1.5 left-1.5 w-7 h-7 bg-white rounded-full flex items-center justify-center shadow"><i data-lucide="x" class="w-3.5 h-3.5"></i></button></div>
+                        <p class="text-[11.5px] leading-5 mt-2 line-clamp-2" x-text="p.name"></p>
+                        <p class="text-[12px] font-medium mt-1" x-text="formatPrice(p.price)"></p>
+                        <button @click="addToCart(p); toggleWishlist(p)" class="mt-2 w-full h-8 bg-black text-white rounded-full text-[11px]">افزودن به سبد</button>
+                    </div>
+                </template>
+                <div x-show="!wishlist.length" class="col-span-2 py-20 text-center"><p class="opacity-60 text-[13px]">هنوز چیزی ذخیره نکرده‌اید.</p></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div x-cloak x-show="checkoutOpen" class="fixed inset-0 z-[95] flex items-center justify-center p-4">
+        <div @click="checkoutOpen=false" class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+        <div class="relative w-full max-w-[520px] bg-[#FCFAF7] rounded-[24px] p-7 md:p-8 max-h-[92vh] overflow-y-auto shadow-2xl" x-transition>
+            <div class="flex justify-between items-center mb-7"><h3 class="text-[20px] font-medium">تکمیل سفارش</h3><button @click="checkoutOpen=false" class="w-8 h-8 rounded-full border border-atria-line flex items-center justify-center"><i data-lucide="x" class="w-4 h-4"></i></button></div>
+            <form @submit.prevent="submitOrder()" class="space-y-4">
+                <div class="grid grid-cols-2 gap-3">
+                    <div><label class="text-[11px] opacity-60">نام و نام خانوادگی</label><input required placeholder="سارا احمدی" class="mt-1 w-full h-11 border border-atria-line rounded-full px-4 text-[13px] outline-none focus:border-black bg-white"></div>
+                    <div><label class="text-[11px] opacity-60">شماره موبایل</label><input required placeholder="۰۹۱۲۳۴۵۶۷۸۹" class="mt-1 w-full h-11 border border-atria-line rounded-full px-4 text-[13px] outline-none focus:border-black bg-white"></div>
+                </div>
+                <div><label class="text-[11px] opacity-60">آدرس دقیق (شهر، خیابان، پلاک، واحد)</label><textarea required rows="2" placeholder="تهران، خیابان ولیعصر، ..." class="mt-1 w-full border border-atria-line rounded-[16px] p-4 text-[13px] outline-none focus:border-black bg-white"></textarea></div>
+                <div><label class="text-[11px] opacity-60">کد پستی (اختیاری)</label><input placeholder="۱۹۶۶۸۴۳۴۱۳" class="mt-1 w-full h-11 border border-atria-line rounded-full px-4 text-[13px] outline-none focus:border-black bg-white"></div>
+                <div class="bg-white border border-atria-line rounded-[16px] p-4 text-[12.5px] leading-7"><p class="font-medium mb-2">خلاصه سفارش</p><div class="flex justify-between opacity-70"><span x-text="toFa(cart.reduce((a,b)=>a+b.qty,0)) + ' کالا'"></span><span x-text="formatPrice(cart.reduce((a,b)=>a+b.price*b.qty,0))"></span></div><p class="text-[11px] opacity-50 mt-3">ارسال رایگان — تحویل ۱ تا ۳ روز کاری — پرداخت درگاه امن</p></div>
+                <button type="submit" class="w-full h-[48px] bg-black text-white rounded-full text-[13.5px] mt-2">پرداخت و ثبت سفارش</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div x-show="toast.show" x-transition class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] bg-[#111] text-white rounded-full px-5 py-3 text-[13px] flex items-center gap-2 shadow-xl">
+        <i data-lucide="check-circle" class="w-4 h-4"></i><span x-text="toast.msg"></span>
+    </div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script>
+function atriaApp(){
+ return {
+  loading:true, mobileMenuOpen:false, cartOpen:false, wishlistOpen:false, searchOpen:false, quickViewOpen:false, checkoutOpen:false, showFilters:true,
+  activeImageIndex:0, selectedColor:null, selectedSize:null, qty:1, selectedProduct:null, activeCategory:'همه', sortBy:'newest', searchQuery:'', newsletterEmail:'',
+  priceRange:[0,10000000], selectedColors:[], selectedSizes:[], toast:{show:false,msg:''},
+  allColors:[
+    {name:'مشکی',hex:'#111111'},{name:'سفید',hex:'#FFFFFF'},{name:'بژ',hex:'#D9C5A5'},{name:'شتری',hex:'#C49A6C'},{name:'زیتونی',hex:'#6B7350'},{name:'سرمه‌ای',hex:'#1E293B'},{name:'طوسی',hex:'#9AA0A6'},{name:'عسلی',hex:'#B7794C'}
+  ],
+  categories:['زنانه','مردانه','اکسسوری'],
+  cart:[], wishlist:[], recentlyViewed:[],
+  products:[
+   {id:'ATR-01',name:'کت فوتر پشمی شتری — برش اورسایز',category:'زنانه',price:4850000,originalPrice:5800000,badge:'جدید',rating:4.9,reviewsCount:87,colors:[{name:'شتری',hex:'#C49A6C'},{name:'مشکی',hex:'#111'},{name:'طوسی',hex:'#9AA0A6'}],sizes:['36','38','40','42'],images:['images/p1.jpg','images/p1.jpg'],description:'کت فوتر ۱۰۰٪ پشم طبیعی ایتالیایی، آستر ویسکوز، برش اورسایز با سرشانه افتاده. دوخت کاملاً دست‌دوز در کارگاه لولاگر.',reviews:[{name:'نگار کیانی',date:'۱۲ آذر ۱۴۰۴',text:'گرم، سبک، و فوق‌العاده خوش‌دوخت. ارزشش را داشت.'},{name:'مهسا ر.',date:'۲ آذر ۱۴۰۴',text:'رنگ شتری‌اش دقیقاً مثل عکس است، عاشقش شدم.'}]},
+   {id:'ATR-02',name:'شلوار واید لنین مشکی — فاق بلند',category:'زنانه',price:1850000,rating:4.8,reviewsCount:43,colors:[{name:'مشکی',hex:'#111'},{name:'بژ',hex:'#D9C5A5'}],sizes:['36','38','40','42','44'],images:['images/p2.jpg','images/p2.jpg'],description:'شلوار لنین ارگانیک، تنفس‌پذیر و خنک. کمر کش با بند داخلی، مناسب تابستان تهران.',reviews:[{name:'سحر',date:'۱۰ آذر',text:'خنک‌ترین شلواری که داشتم.'}]},
+   {id:'ATR-03',name:'پیراهن آکسفورد اورسایز — سفید یخچالی',category:'مردانه',price:1650000,badge:'پرفروش',rating:4.9,reviewsCount:124,colors:[{name:'سفید',hex:'#fff'},{name:'طوسی',hex:'#9AA0A6'}],sizes:['40','42','44','فری'],images:['images/p3.jpg','images/p3.jpg'],description:'پارچه آکسفورد ۱۰۰٪ پنبه، بافت سنگین ۱۸۰ گرم، یقه کلاسیک.',reviews:[{name:'پویا',date:'۱ آذر',text:'دقیقاً همونی که دنبالش بودم.'}]},
+   {id:'ATR-04',name:'کیف رودوشی چرم طبیعی — عسلی',category:'اکسسوری',price:3250000,rating:5.0,reviewsCount:56,colors:[{name:'عسلی',hex:'#B7794C'},{name:'مشکی',hex:'#111'}],sizes:['فری'],images:['images/p4.jpg','images/p4.jpg'],description:'چرم گاوی طبیعی دباغی گیاهی، دوخته شده با دست، یراق برنجی.',reviews:[{name:'آوا',date:'۵ آذر',text:'بوی چرمش محشره.'}]},
+   {id:'ATR-05',name:'بافت یقه اسکی کشمیر — طوسی روشن',category:'زنانه',price:2950000,originalPrice:3400000,badge:'محدود',rating:4.7,reviewsCount:32,colors:[{name:'طوسی',hex:'#9AA0A6'},{name:'مشکی',hex:'#111'}],sizes:['36','38','40','فری'],images:['images/p5.jpg','images/p5.jpg'],description:'۳۰٪ کشمیر، ۷۰٪ پشم مرینو، بافت راشل، بسیار لطیف.',reviews:[{name:'لیلا',date:'۸ آذر',text:'گرم و سبک.'}]},
+   {id:'ATR-06',name:'دامن میدی پلیسه — کرم',category:'زنانه',price:1950000,rating:4.8,reviewsCount:21,colors:[{name:'بژ',hex:'#D9C5A5'},{name:'مشکی',hex:'#111'}],sizes:['36','38','40','42'],images:['images/p6.jpg','images/p6.jpg'],description:'پارچه کرپ پلیسه، قد میدی، کمر کش.',reviews:[]},
+   {id:'ATR-07',name:'کفش لوفر چرمی — قهوه‌ای تیره',category:'مردانه',price:3850000,rating:4.9,reviewsCount:67,colors:[{name:'عسلی',hex:'#6B4226'},{name:'مشکی',hex:'#111'}],sizes:['40','41','42','43','44'],images:['images/p7.jpg','images/p7.jpg'],description:'چرم طبیعی دست‌دوز تبریز.',reviews:[]},
+   {id:'ATR-08',name:'شومیز ساتن شامپاینی — یقه آرشال',category:'زنانه',price:2250000,badge:'جدید',rating:4.9,reviewsCount:19,colors:[{name:'بژ',hex:'#E8DCC6'},{name:'مشکی',hex:'#111'}],sizes:['36','38','40','42'],images:['images/p8.jpg','images/p8.jpg'],description:'ساتن ابریشم ۱۹ موم، براق لطیف.',reviews:[]},
+   {id:'ATR-09',name:'ترنچ کت کلاسیک — بژ بارانی',category:'زنانه',price:5450000,rating:5.0,reviewsCount:91,colors:[{name:'بژ',hex:'#D9C5A5'},{name:'سرمه‌ای',hex:'#1E293B'}],sizes:['36','38','40','42','44'],images:['images/p9.jpg','images/p9.jpg'],description:'پارچه ضد آب تنفس‌پذیر، آستر چهارخانه.',reviews:[]},
+   {id:'ATR-10',name:'شلوار کارگو کتان — زیتونی',category:'مردانه',price:2150000,rating:4.6,reviewsCount:28,colors:[{name:'زیتونی',hex:'#6B7350'},{name:'مشکی',hex:'#111'}],sizes:['40','42','44','فری'],images:['images/p10.jpg','images/p10.jpg'],description:'کتان سنگین ۳۲۰ گرم، جیب‌های کاربردی.',reviews:[]},
+   {id:'ATR-11',name:'روسری ابریشم دست‌باف — سرمه‌ای',category:'اکسسوری',price:1450000,badge:'هنری',rating:4.9,reviewsCount:34,colors:[{name:'سرمه‌ای',hex:'#1E293B'},{name:'عسلی',hex:'#B7794C'}],sizes:['فری'],images:['images/p11.jpg','images/p11.jpg'],description:'ابریشم ۱۰۰٪، چاپ دستی اصفهان.',reviews:[]},
+   {id:'ATR-12',name:'نیم‌بوت چلسی چرم — مشکی مات',category:'مردانه',price:4250000,originalPrice:4900000,rating:4.8,reviewsCount:73,colors:[{name:'مشکی',hex:'#111'}],sizes:['40','41','42','43','44'],images:['images/p12.jpg','images/p12.jpg'],description:'زیره کم‌صدا، چرم واکس.',reviews:[]},
+  ],
+  get filteredProducts(){
+    let list=[...this.products];
+    if(this.activeCategory!=='همه') list=list.filter(p=>p.category===this.activeCategory);
+    if(this.searchQuery) list=list.filter(p=>p.name.includes(this.searchQuery));
+    if(this.selectedColors.length) list=list.filter(p=>p.colors.some(c=>this.selectedColors.includes(c.name)));
+    if(this.selectedSizes.length) list=list.filter(p=>p.sizes.some(s=>this.selectedSizes.includes(s)));
+    if(this.priceRange[0]) list=list.filter(p=>p.price>=this.priceRange[0]);
+    if(this.priceRange[1] && this.priceRange[1]<10000000) list=list.filter(p=>p.price<=this.priceRange[1]);
+    if(this.sortBy==='price-low') list.sort((a,b)=>a.price-b.price);
+    if(this.sortBy==='price-high') list.sort((a,b)=>b.price-a.price);
+    if(this.sortBy==='popular') list.sort((a,b)=>b.reviewsCount-a.reviewsCount);
+    return list;
+  },
+  initApp(){
+    setTimeout(()=>{this.loading=false; this.$nextTick(()=>{lucide.createIcons(); this.initGsap(); this.initSwiper();});},1100);
+    const savedCart=localStorage.getItem('atria_cart'); if(savedCart) this.cart=JSON.parse(savedCart);
+    const savedWish=localStorage.getItem('atria_wish'); if(savedWish) this.wishlist=JSON.parse(savedWish);
+  },
+  initGsap(){
+    if(typeof gsap==='undefined') return;
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.from('.hero-kicker',{y:20,opacity:0,duration:0.8,ease:'power3.out'});
+    gsap.from('.hero-title',{y:60,opacity:0,duration:1.1,delay:0.1,ease:'power4.out'});
+    gsap.from('.hero-desc',{y:30,opacity:0,duration:0.9,delay:0.25,ease:'power3.out'});
+    gsap.from('.hero-cta',{y:20,opacity:0,duration:0.8,delay:0.4,ease:'power3.out'});
+    gsap.from('.hero-img',{scale:1.14,duration:1.6,ease:'power4.out',delay:0.2});
+    gsap.utils.toArray('.cat-card').forEach((el,i)=>{
+      gsap.from(el,{y:40,opacity:0,duration:0.8,delay:i*0.08,scrollTrigger:{trigger:el,start:'top 88%'}});
+    });
+    gsap.utils.toArray('.shop-card').forEach((el)=>{
+      gsap.from(el,{y:24,opacity:0,duration:0.6,scrollTrigger:{trigger:el,start:'top 92%'}});
+    });
+  },
+  initSwiper(){
+    new Swiper('.bestSwiper',{slidesPerView:'auto',spaceBetween:20,freeMode:true,navigation:{nextEl:'#best-next',prevEl:'#best-prev'}});
+    this.$nextTick(()=>lucide.createIcons());
+  },
+  openQuickView(p){
+    this.selectedProduct=p; this.activeImageIndex=0; this.selectedColor=p.colors[0]; this.selectedSize=p.sizes[0]; this.qty=1; this.quickViewOpen=true;
+    if(!this.recentlyViewed.find(x=>x.id===p.id)){this.recentlyViewed.unshift(p); if(this.recentlyViewed.length>6) this.recentlyViewed.pop();}
+    this.$nextTick(()=>lucide.createIcons());
+  },
+  addToCart(product, quantity=1){
+    const uid=product.id+'-'+(this.selectedColor?.name||product.colors[0].name)+'-'+(this.selectedSize||product.sizes[0]);
+    const existing=this.cart.find(c=>c.uid===uid);
+    if(existing){existing.qty+=quantity;} else {
+      this.cart.push({...product, uid, qty:quantity, color:this.selectedColor||product.colors[0], size:this.selectedSize||product.sizes[0]});
+    }
+    localStorage.setItem('atria_cart',JSON.stringify(this.cart));
+    this.showToast('به سبد اضافه شد — '+product.name.slice(0,20)+'...');
+    this.$nextTick(()=>lucide.createIcons());
+  },
+  removeFromCart(i){this.cart.splice(i,1); localStorage.setItem('atria_cart',JSON.stringify(this.cart));},
+  toggleWishlist(p){
+    const idx=this.wishlist.findIndex(w=>w.id===p.id);
+    if(idx>=0){this.wishlist.splice(idx,1);} else {this.wishlist.push(p);}
+    localStorage.setItem('atria_wish',JSON.stringify(this.wishlist));
+    this.showToast(idx>=0?'از علاقه‌مندی‌ها حذف شد':'به علاقه‌مندی‌ها اضافه شد');
+    this.$nextTick(()=>lucide.createIcons());
+  },
+  isWishlisted(id){return this.wishlist.some(w=>w.id===id);},
+  toggleColor(name){this.selectedColors.includes(name)?this.selectedColors=this.selectedColors.filter(n=>n!==name):this.selectedColors.push(name);},
+  toggleSize(s){this.selectedSizes.includes(s)?this.selectedSizes=this.selectedSizes.filter(n=>n!==s):this.selectedSizes.push(s);},
+  clearFilters(){this.selectedColors=[]; this.selectedSizes=[]; this.priceRange=[0,10000000]; this.activeCategory='همه'; this.searchQuery='';},
+  formatPrice(n){return new Intl.NumberFormat('fa-IR').format(n)+' تومان';},
+  toFa(n){return new Intl.NumberFormat('fa-IR').format(n);},
+  showToast(msg){this.toast={show:true,msg}; setTimeout(()=>this.toast.show=false,2800); this.$nextTick(()=>lucide.createIcons());},
+  subscribeNewsletter(){if(!this.newsletterEmail){this.showToast('لطفاً ایمیل را وارد کنید'); return;} this.showToast('عضویت شما ثبت شد — کد ۱۰٪ تخفیف ارسال شد'); this.newsletterEmail='';},
+  submitOrder(){this.showToast('سفارش شما ثبت شد — به زودی با شما تماس می‌گیریم'); this.cart=[]; localStorage.removeItem('atria_cart'); this.checkoutOpen=false; this.cartOpen=false;}
+ }
+}
+</script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a1dd77e1486e2d68',t:'MTc4NDUwMzM0Nw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

@@ -1,0 +1,2243 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>کلینیک تخصصی و فوق‌تخصصی آریا | تجربه آرامش و سلامتی</title>
+  
+  <!-- Fonts: Vazirmatn -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+  
+  <!-- Swiper.js CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- GSAP -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  
+  <!-- Swiper.js -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  
+  <!-- Alpine.js (defer) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Tailwind Configuration -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Vazirmatn', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              200: '#bae6fd',
+              300: '#7dd3fc',
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7', // Primary medical sky-blue
+              700: '#0369a1',
+              800: '#075985',
+              900: '#0c4a6e',
+              accent: '#0d9488', // Premium clinical teal
+              dark: '#0f172a',   // Deep slate for premium text
+              body: '#475569',   // Neutral body text
+              light: '#f8fafc',  // Crisp bright slate-50
+            }
+          },
+          animation: {
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'float': 'float 6s ease-in-out infinite',
+            'shimmer': 'shimmer 2.5s infinite linear',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            shimmer: {
+              '0%': { backgroundPosition: '-200% 0' },
+              '100%': { backgroundPosition: '200% 0' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Styles -->
+  <style type="text/css">
+    body {
+      font-family: 'Vazirmatn', sans-serif;
+      background-color: #f8fafc;
+      color: #334155;
+      overflow-x: hidden;
+    }
+    
+    [x-cloak] { display: none !important; }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #0284c7;
+    }
+
+    /* Elegant Custom Selection */
+    ::selection {
+      background-color: #e0f2fe;
+      color: #0369a1;
+    }
+
+    /* Shimmer effect for premium cards */
+    .premium-shimmer {
+      background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+      background-size: 200% 100%;
+    }
+
+    /* Custom Swiper styles */
+    .swiper-pagination-bullet-active {
+      background: #0284c7 !important;
+      width: 24px !important;
+      border-radius: 4px !important;
+      transition: all 0.3s ease;
+    }
+    .swiper-button-disabled {
+      opacity: 0.3 !important;
+      cursor: not-allowed !important;
+    }
+  </style>
+</head>
+<body x-data="{ mobileMenuOpen: false, activeModal: null, isScrolled: false }" @scroll.window="isScrolled = (window.pageYOffset > 20)" class="antialiased selection:bg-brand-100 selection:text-brand-800">
+
+  <!-- EMERGENCY BANNER (بخش اورژانس ۲۴ ساعته) -->
+  <div id="emergency-banner" class="bg-gradient-to-r from-red-600 via-rose-600 to-red-700 text-white relative z-50">
+    <div class="max-w-7xl mx-auto px-4 py-2.5 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-right">
+      <div class="flex items-center gap-2.5">
+        <span class="flex h-2.5 w-2.5 relative">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-white"></span>
+        </span>
+        <p class="text-xs sm:text-sm font-semibold tracking-wide flex items-center gap-1.5 leading-relaxed">
+          <i data-lucide="alert-circle" class="w-4 h-4 shrink-0"></i>
+          بخش اورژانس شبانه‌روزی کلینیک آریا فعال است. پذیرش فوری و تخصصی بدون اتلاف وقت.
+        </p>
+      </div>
+      <div class="flex items-center gap-4">
+        <span class="text-xs font-bold bg-white/10 px-2 py-0.5 rounded-full border border-white/20">۲۴ ساعته - بدون تعطیلی</span>
+        <a href="tel:1590" class="flex items-center gap-1.5 text-xs sm:text-sm font-black bg-white text-red-700 hover:bg-red-50 px-3.5 py-1 rounded-lg transition-transform hover:scale-105 shadow-sm">
+          <i data-lucide="phone-call" class="w-3.5 h-3.5"></i>
+          تماس اضطراری: ۱۵۹۰
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- STICKY NAVBAR (منوی چسبنده و ناوبری) -->
+  <header class="sticky top-0 z-40 transition-all duration-300"
+          :class="isScrolled ? 'bg-white/90 backdrop-blur-md shadow-md border-b border-slate-100 py-3' : 'bg-white/70 backdrop-blur-md py-5 border-b border-slate-100/50'">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between">
+        
+        <!-- RIGHT: Logo & Brand -->
+        <a href="#" class="flex items-center gap-3 group focus:outline-none">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-500 to-brand-600 flex items-center justify-center text-white shadow-lg shadow-brand-500/20 group-hover:scale-105 transition-all duration-300">
+            <!-- Modern Medical SVG Cross Logo -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+          </div>
+          <div class="flex flex-col">
+            <span class="text-lg font-black tracking-tight text-brand-dark group-hover:text-brand-600 transition-colors">کلینیک فوق‌تخصصی آریا</span>
+            <span class="text-[10px] text-brand-body/70 font-medium tracking-wider -mt-1">ARYA PREMIUM CLINIC</span>
+          </div>
+        </a>
+
+        <!-- CENTER: Desktop Navigation -->
+        <nav class="hidden lg:flex items-center gap-8">
+          <a href="#" class="text-sm font-semibold text-brand-600 transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-brand-600 after:rounded-full">صفحه اصلی</a>
+          <a href="#departments" class="text-sm font-medium text-brand-dark hover:text-brand-600 transition-colors py-1 relative group">
+            دپارتمان‌ها
+            <span class="absolute bottom-0 left-1/2 right-1/2 h-0.5 bg-brand-600 rounded-full transition-all duration-300 group-hover:left-0 group-hover:right-0"></span>
+          </a>
+          <a href="#services" class="text-sm font-medium text-brand-dark hover:text-brand-600 transition-colors py-1 relative group">
+            خدمات ما
+            <span class="absolute bottom-0 left-1/2 right-1/2 h-0.5 bg-brand-600 rounded-full transition-all duration-300 group-hover:left-0 group-hover:right-0"></span>
+          </a>
+          <a href="#doctors" class="text-sm font-medium text-brand-dark hover:text-brand-600 transition-colors py-1 relative group">
+            پزشکان متخصص
+            <span class="absolute bottom-0 left-1/2 right-1/2 h-0.5 bg-brand-600 rounded-full transition-all duration-300 group-hover:left-0 group-hover:right-0"></span>
+          </a>
+          <a href="#booking" class="text-sm font-medium text-brand-dark hover:text-brand-600 transition-colors py-1 relative group">
+            نوبت‌دهی آنلاین
+            <span class="absolute bottom-0 left-1/2 right-1/2 h-0.5 bg-brand-600 rounded-full transition-all duration-300 group-hover:left-0 group-hover:right-0"></span>
+          </a>
+          <a href="#articles" class="text-sm font-medium text-brand-dark hover:text-brand-600 transition-colors py-1 relative group">
+            مجله سلامت
+            <span class="absolute bottom-0 left-1/2 right-1/2 h-0.5 bg-brand-600 rounded-full transition-all duration-300 group-hover:left-0 group-hover:right-0"></span>
+          </a>
+          <a href="#contact" class="text-sm font-medium text-brand-dark hover:text-brand-600 transition-colors py-1 relative group">
+            تماس با ما
+            <span class="absolute bottom-0 left-1/2 right-1/2 h-0.5 bg-brand-600 rounded-full transition-all duration-300 group-hover:left-0 group-hover:right-0"></span>
+          </a>
+        </nav>
+
+        <!-- LEFT: CTAs & Mobile Menu Button -->
+        <div class="flex items-center gap-3">
+          <a href="#booking" class="hidden sm:flex items-center gap-2 text-sm font-bold bg-gradient-to-l from-brand-600 to-brand-700 hover:from-brand-700 hover:to-brand-800 text-white px-5 py-2.5 rounded-xl shadow-lg shadow-brand-600/15 hover:shadow-brand-600/25 hover:scale-[1.02] active:scale-[0.98] transition-all">
+            <i data-lucide="calendar" class="w-4 h-4"></i>
+            دریافت نوبت آنلاین
+          </a>
+          
+          <button @click="mobileMenuOpen = !mobileMenuOpen" class="lg:hidden p-2.5 rounded-xl bg-slate-100/80 hover:bg-slate-100 text-brand-dark focus:outline-none" aria-label="منوی اصلی">
+            <i data-lucide="menu" class="w-6 h-6" x-show="!mobileMenuOpen"></i>
+            <i data-lucide="x" class="w-6 h-6" x-show="mobileMenuOpen" x-cloak></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- MOBILE NAVIGATION PANEL -->
+    <div x-show="mobileMenuOpen" 
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0 -translate-y-4"
+         x-transition:enter-end="opacity-100 translate-y-0"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100 translate-y-0"
+         x-transition:leave-end="opacity-0 -translate-y-4"
+         class="lg:hidden absolute top-full left-0 right-0 bg-white border-b border-slate-100 shadow-xl py-6 px-4 z-40" x-cloak>
+      <div class="flex flex-col gap-4">
+        <a href="#" @click="mobileMenuOpen = false" class="text-sm font-semibold text-brand-600 bg-brand-50/50 px-4 py-3 rounded-xl">صفحه اصلی</a>
+        <a href="#departments" @click="mobileMenuOpen = false" class="text-sm font-medium text-brand-dark hover:text-brand-600 hover:bg-slate-50 px-4 py-3 rounded-xl transition-all">دپارتمان‌ها</a>
+        <a href="#services" @click="mobileMenuOpen = false" class="text-sm font-medium text-brand-dark hover:text-brand-600 hover:bg-slate-50 px-4 py-3 rounded-xl transition-all">خدمات ما</a>
+        <a href="#doctors" @click="mobileMenuOpen = false" class="text-sm font-medium text-brand-dark hover:text-brand-600 hover:bg-slate-50 px-4 py-3 rounded-xl transition-all">پزشکان متخصص</a>
+        <a href="#booking" @click="mobileMenuOpen = false" class="text-sm font-medium text-brand-dark hover:text-brand-600 hover:bg-slate-50 px-4 py-3 rounded-xl transition-all">نوبت‌دهی آنلاین</a>
+        <a href="#articles" @click="mobileMenuOpen = false" class="text-sm font-medium text-brand-dark hover:text-brand-600 hover:bg-slate-50 px-4 py-3 rounded-xl transition-all">مجله سلامت</a>
+        <a href="#contact" @click="mobileMenuOpen = false" class="text-sm font-medium text-brand-dark hover:text-brand-600 hover:bg-slate-50 px-4 py-3 rounded-xl transition-all">تماس با ما</a>
+        <a href="#booking" @click="mobileMenuOpen = false" class="flex items-center justify-center gap-2 text-sm font-bold bg-brand-600 text-white px-5 py-3.5 rounded-xl shadow-lg shadow-brand-600/10">
+          <i data-lucide="calendar" class="w-4 h-4"></i>
+          دریافت نوبت آنلاین
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION (بخش اصلی وب‌سایت) -->
+  <section class="relative pt-12 pb-24 lg:pt-20 lg:pb-32 overflow-hidden bg-gradient-to-b from-brand-50/50 via-white to-slate-50/20">
+    <!-- Abstract Design Patterns for Premium Look -->
+    <div class="absolute inset-0 z-0 opacity-40">
+      <div class="absolute -top-48 -right-48 w-96 h-96 rounded-full bg-brand-100 blur-3xl"></div>
+      <div class="absolute top-1/2 -left-48 w-80 h-80 rounded-full bg-teal-50 blur-3xl"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        
+        <!-- RIGHT: Copywriting & Actions -->
+        <div class="lg:col-span-7 text-right">
+          
+          <!-- Premium Micro-badge -->
+          <div class="hero-animate-text inline-flex items-center gap-2 bg-brand-100/60 text-brand-800 border border-brand-200/50 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold mb-6 hover:scale-105 transition-transform duration-300">
+            <span class="flex h-2 w-2 rounded-full bg-brand-600 animate-pulse"></span>
+            مدرن‌ترین مرکز درمانی شمال تهران (میدان ونک)
+          </div>
+
+          <!-- Title -->
+          <h1 class="hero-animate-text text-3xl sm:text-4xl lg:text-[2.75rem] font-black text-brand-dark leading-tight sm:leading-snug lg:leading-normal mb-6">
+            سلامتی شایسته شماست؛<br class="hidden sm:inline" />
+            در کنار <span class="text-transparent bg-clip-text bg-gradient-to-l from-brand-600 to-brand-800 underline decoration-brand-200 decoration-8 underline-offset-4">برترین پزشکان</span> کشور
+          </h1>
+
+          <!-- Description -->
+          <p class="hero-animate-text text-base sm:text-lg text-brand-body leading-relaxed mb-8 max-w-2xl">
+            کلینیک تخصصی و فوق‌تخصصی آریا با تکیه بر دانش روز دنیا، کادر پزشکی مجرب و برترین تجهیزات پزشکی روز جهان، محیطی ایمن و آرامش‌بخش را برای مراقبت از سلامت شما و عزیزانتان فراهم نموده است.
+          </p>
+
+          <!-- CTAs -->
+          <div class="hero-animate-text flex flex-col sm:flex-row items-center gap-4 mb-10">
+            <a href="#booking" class="w-full sm:w-auto flex items-center justify-center gap-2.5 text-base font-bold bg-brand-600 hover:bg-brand-700 text-white px-8 py-4 rounded-2xl shadow-xl shadow-brand-600/20 hover:shadow-brand-600/30 hover:scale-[1.03] active:scale-[0.97] transition-all">
+              <i data-lucide="calendar" class="w-5 h-5"></i>
+              نوبت‌دهی آنلاین هوشمند
+            </a>
+            <a href="tel:02188888888" class="w-full sm:w-auto flex items-center justify-center gap-2.5 text-base font-bold bg-white text-brand-dark hover:text-brand-600 border border-slate-200 hover:border-brand-500 px-8 py-4 rounded-2xl shadow-sm hover:scale-[1.03] active:scale-[0.97] transition-all group">
+              <i data-lucide="phone" class="w-5 h-5 text-brand-600 group-hover:animate-bounce"></i>
+              مشاوره تلفنی رایگان
+            </a>
+          </div>
+
+          <!-- Trust Badges & Floating Avatars -->
+          <div class="hero-animate-text flex flex-wrap items-center gap-6 border-t border-slate-100 pt-8">
+            <div class="flex items-center -space-x-4 space-x-reverse">
+              <div class="w-10 h-10 rounded-full border-2 border-white overflow-hidden bg-slate-200">
+                <img src="images/doctor-1.jpg" alt="کاربر" class="w-full h-full object-cover">
+              </div>
+              <div class="w-10 h-10 rounded-full border-2 border-white overflow-hidden bg-slate-200">
+                <img src="images/doctor-3.jpg" alt="کاربر" class="w-full h-full object-cover">
+              </div>
+              <div class="w-10 h-10 rounded-full border-2 border-white overflow-hidden bg-brand-600 flex items-center justify-center text-white text-[10px] font-bold">
+                ۹۸٪+
+              </div>
+            </div>
+            <div class="flex flex-col">
+              <div class="flex items-center gap-1">
+                <span class="text-sm font-black text-brand-dark">۴.۹ از ۵</span>
+                <div class="flex text-amber-500">
+                  <i data-lucide="star" class="w-4 h-4 fill-amber-500 stroke-none"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-amber-500 stroke-none"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-amber-500 stroke-none"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-amber-500 stroke-none"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-amber-500 stroke-none"></i>
+                </div>
+              </div>
+              <span class="text-xs text-brand-body">بر اساس رضایت ۱۲,۰۰۰+ پرونده ثبت شده در کلینیک</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- LEFT: Media Composition & Floating Cards -->
+        <div class="lg:col-span-5 relative flex justify-center hero-animate-image">
+          <div class="relative w-full max-w-md sm:max-w-lg lg:max-w-none">
+            
+            <!-- Frame Background Glow -->
+            <div class="absolute -inset-4 bg-gradient-to-tr from-brand-300 to-teal-200 rounded-[2.5rem] blur-2xl opacity-30 animate-pulse-slow"></div>
+
+            <!-- Main Hero Image Frame -->
+            <div class="relative rounded-[2rem] overflow-hidden border-8 border-white shadow-2xl bg-slate-100 aspect-[4/5] sm:aspect-square lg:aspect-[4/5] select-none">
+              <img src="images/clinic-hero.jpg" alt="کلینیک فوق تخصصی آریا" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700">
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-900/40 via-transparent to-transparent"></div>
+            </div>
+
+            <!-- Floating Card 1: 24/7 Service -->
+            <div class="absolute -bottom-6 -right-6 bg-white/95 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-brand-50 flex items-center gap-4 animate-float select-none">
+              <div class="w-12 h-12 rounded-xl bg-brand-50 flex items-center justify-center text-brand-600 shrink-0">
+                <i data-lucide="clock-3" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <span class="block text-[10px] text-brand-body font-semibold">پشتیبانی و پذیرش</span>
+                <span class="block text-sm font-black text-brand-dark">۲۴ ساعت شبانه‌روز</span>
+              </div>
+            </div>
+
+            <!-- Floating Card 2: Specialized Care -->
+            <div class="absolute top-1/4 -left-6 bg-white/95 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-brand-50 flex items-center gap-4 animate-float select-none" style="animation-delay: -3s;">
+              <div class="w-12 h-12 rounded-xl bg-teal-50 flex items-center justify-center text-brand-accent shrink-0">
+                <i data-lucide="shield-check" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <span class="block text-[10px] text-brand-body font-semibold">تضمین کادر درمانی</span>
+                <span class="block text-sm font-black text-brand-dark">رتبه‌های برتر بورد تخصصی</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- HOSPITAL STATISTICS SECTION (آمار و ارقام کلینیک) -->
+  <section class="relative z-10 -mt-12 bg-white max-w-6xl mx-auto rounded-3xl shadow-xl shadow-brand-900/5 border border-slate-100 px-6 py-8 sm:px-12 md:py-10 gsap-animate">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 divide-y divide-y-reverse lg:divide-y-0 lg:divide-x lg:divide-x-reverse divide-slate-100">
+      
+      <!-- Stat Card 1 -->
+      <div class="text-center pt-6 lg:pt-0 gsap-stagger-item">
+        <div class="text-3xl sm:text-4xl font-black text-brand-600 mb-2">۴۵+</div>
+        <div class="text-sm font-bold text-brand-dark mb-1">پزشک فوق‌تخصص و باسابقه</div>
+        <div class="text-xs text-brand-body/70 font-medium">عضو هیئت علمی دانشگاه‌های برتر</div>
+      </div>
+
+      <!-- Stat Card 2 -->
+      <div class="text-center pt-6 lg:pt-0 border-t-0 lg:border-t-0 gsap-stagger-item">
+        <div class="text-3xl sm:text-4xl font-black text-brand-600 mb-2">۹۸٪</div>
+        <div class="text-sm font-bold text-brand-dark mb-1">رضایتمندی مراجعین</div>
+        <div class="text-xs text-brand-body/70 font-medium">طبق نظرسنجی سالانه بیماران</div>
+      </div>
+
+      <!-- Stat Card 3 -->
+      <div class="text-center pt-6 lg:pt-0 gsap-stagger-item">
+        <div class="text-3xl sm:text-4xl font-black text-brand-600 mb-2">۱۵+</div>
+        <div class="text-sm font-bold text-brand-dark mb-1">دپارتمان تخصصی فعال</div>
+        <div class="text-xs text-brand-body/70 font-medium">پوشش کامل تخصص‌های کلیدی</div>
+      </div>
+
+      <!-- Stat Card 4 -->
+      <div class="text-center pt-6 lg:pt-0 gsap-stagger-item">
+        <div class="text-3xl sm:text-4xl font-black text-brand-600 mb-2">۱۲۰,۰۰۰+</div>
+        <div class="text-sm font-bold text-brand-dark mb-1">پرونده سلامت موفق</div>
+        <div class="text-xs text-brand-body/70 font-medium">مراقبت مستمر در تمام طول درمان</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DEPARTMENTS SECTION (دپارتمان‌های تخصصی) -->
+  <section id="departments" class="py-24 bg-slate-50 relative overflow-hidden gsap-animate">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-sm font-bold text-brand-600 bg-brand-50 px-3.5 py-1.5 rounded-full uppercase tracking-wider">جامعیت خدمات پزشکی</span>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-brand-dark mt-4 mb-5 leading-normal">دپارتمان‌های تخصصی و کلینیک‌های ویژه آریا</h2>
+        <div class="w-16 h-1 bg-brand-600 mx-auto rounded-full mb-6"></div>
+        <p class="text-base text-brand-body leading-relaxed">
+          دپارتمان‌های کلینیک آریا هرکدام با مجهزترین دستگاه‌های تشخیصی دنیا و مدیریت برترین پزشکان کشور اداره می‌شوند تا دقیق‌ترین خدمات را در اختیار شما بگذارند.
+        </p>
+      </div>
+
+      <!-- Grid of Departments -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- Dept Card 1: Cardiology -->
+        <div class="bg-white rounded-3xl p-8 border border-slate-100 hover:border-brand-300 shadow-sm hover:shadow-xl hover:shadow-brand-500/5 hover:-translate-y-1.5 transition-all duration-300 group gsap-stagger-item">
+          <div class="w-14 h-14 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-rose-100 transition-all duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-8 h-8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-black text-brand-dark mb-3">قلب و عروق</h3>
+          <p class="text-sm text-brand-body leading-relaxed mb-6">
+            تشخیص و درمان تخصصی بیماری‌های قلبی، نوار قلب دیجیتال، اکوکاردیوگرافی پیشرفته و هولتر فشار خون تحت نظر رتبه‌های برتر بورد کشوری.
+          </p>
+          <a href="#booking" class="inline-flex items-center gap-1.5 text-xs font-bold text-brand-600 hover:text-brand-800 transition-colors">
+            مشاوره و رزرو نوبت دپارتمان
+            <i data-lucide="arrow-left" class="w-4 h-4 shrink-0 transform group-hover:-translate-x-1 transition-transform"></i>
+          </a>
+        </div>
+
+        <!-- Dept Card 2: Neurology -->
+        <div class="bg-white rounded-3xl p-8 border border-slate-100 hover:border-brand-300 shadow-sm hover:shadow-xl hover:shadow-brand-500/5 hover:-translate-y-1.5 transition-all duration-300 group gsap-stagger-item">
+          <div class="w-14 h-14 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-brand-100 transition-all duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-8 h-8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75c0-1.242.518-2.37 1.353-3.174a6.002 6.002 0 019.231 6.348 3.75 3.75 0 00-6.702 1.317 3.75 3.75 0 00-3.882-4.491z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-black text-brand-dark mb-3">مغز و اعصاب (نورولوژی)</h3>
+          <p class="text-sm text-brand-body leading-relaxed mb-6">
+            درمان تخصصی سردردهای مزمن، میگرن، صرع، ام‌اس، اختلالات خواب، لرزش دست و پیشگیری از سکته مغزی با نقشه‌برداری دقیق مغزی.
+          </p>
+          <a href="#booking" class="inline-flex items-center gap-1.5 text-xs font-bold text-brand-600 hover:text-brand-800 transition-colors">
+            مشاوره و رزرو نوبت دپارتمان
+            <i data-lucide="arrow-left" class="w-4 h-4 shrink-0 transform group-hover:-translate-x-1 transition-transform"></i>
+          </a>
+        </div>
+
+        <!-- Dept Card 3: Pediatrics -->
+        <div class="bg-white rounded-3xl p-8 border border-slate-100 hover:border-brand-300 shadow-sm hover:shadow-xl hover:shadow-brand-500/5 hover:-translate-y-1.5 transition-all duration-300 group gsap-stagger-item">
+          <div class="w-14 h-14 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-amber-100 transition-all duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-8 h-8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-black text-brand-dark mb-3">کودکان و نوزادان</h3>
+          <p class="text-sm text-brand-body leading-relaxed mb-6">
+            پایش رشد و تکامل نوزاد، واکسیناسیون تخصصی، درمان آلرژی‌های فصلی و مشکلات گوارشی نوزادان در محیطی شاد و عاری از استرس.
+          </p>
+          <a href="#booking" class="inline-flex items-center gap-1.5 text-xs font-bold text-brand-600 hover:text-brand-800 transition-colors">
+            مشاوره و رزرو نوبت دپارتمان
+            <i data-lucide="arrow-left" class="w-4 h-4 shrink-0 transform group-hover:-translate-x-1 transition-transform"></i>
+          </a>
+        </div>
+
+        <!-- Dept Card 4: Ophthalmology -->
+        <div class="bg-white rounded-3xl p-8 border border-slate-100 hover:border-brand-300 shadow-sm hover:shadow-xl hover:shadow-brand-500/5 hover:-translate-y-1.5 transition-all duration-300 group gsap-stagger-item">
+          <div class="w-14 h-14 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-teal-100 transition-all duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-8 h-8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-black text-brand-dark mb-3">چشم‌پزشکی تخصصی</h3>
+          <p class="text-sm text-brand-body leading-relaxed mb-6">
+            سنجش دقیق بینایی با کامپیوتر، جراحی لیزیک و فمتولیزیک، درمان تنبلی چشم کودکان و رفع بیماری‌های تخصصی شبکیه و آب سیاه.
+          </p>
+          <a href="#booking" class="inline-flex items-center gap-1.5 text-xs font-bold text-brand-600 hover:text-brand-800 transition-colors">
+            مشاوره و رزرو نوبت دپارتمان
+            <i data-lucide="arrow-left" class="w-4 h-4 shrink-0 transform group-hover:-translate-x-1 transition-transform"></i>
+          </a>
+        </div>
+
+        <!-- Dept Card 5: Dentistry -->
+        <div class="bg-white rounded-3xl p-8 border border-slate-100 hover:border-brand-300 shadow-sm hover:shadow-xl hover:shadow-brand-500/5 hover:-translate-y-1.5 transition-all duration-300 group gsap-stagger-item">
+          <div class="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-indigo-100 transition-all duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-8 h-8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v12m0-12c1.458 0 2.5-1.042 2.5-2.5S13.458 4 12 4s-2.5 1.042-2.5 2.5S10.542 9 12 9zm0 0c-1.458 0-2.5 1.042-2.5 2.5s1.042 2.5 2.5 2.5m0-5c1.458 0 2.5 1.042 2.5 2.5S13.458 14 12 14" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-black text-brand-dark mb-3">دندانپزشکی دیجیتال</h3>
+          <p class="text-sm text-brand-body leading-relaxed mb-6">
+            اصلاح پیشرفته طرح لبخند، ایمپلنت بدون درد دیجیتال، ارتودنسی، لمینت، کامپوزیت فوق‌طبیعی و دندانپزشکی تخصصی کودکان.
+          </p>
+          <a href="#booking" class="inline-flex items-center gap-1.5 text-xs font-bold text-brand-600 hover:text-brand-800 transition-colors">
+            مشاوره و رزرو نوبت دپارتمان
+            <i data-lucide="arrow-left" class="w-4 h-4 shrink-0 transform group-hover:-translate-x-1 transition-transform"></i>
+          </a>
+        </div>
+
+        <!-- Dept Card 6: Dermatology -->
+        <div class="bg-white rounded-3xl p-8 border border-slate-100 hover:border-brand-300 shadow-sm hover:shadow-xl hover:shadow-brand-500/5 hover:-translate-y-1.5 transition-all duration-300 group gsap-stagger-item">
+          <div class="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-emerald-100 transition-all duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-8 h-8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 21m0 0l-.813-5.096L9 21zm0 0h4.906M9.362 5.076a9 9 0 00-6.107 10.99A9 9 0 0015.5 18M18 10a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-black text-brand-dark mb-3">پوست، مو و زیبایی</h3>
+          <p class="text-sm text-brand-body leading-relaxed mb-6">
+            جوانسازی پوست با هایفو و اندولیفت، تزریق تخصصی ژل و بوتاکس، درمان بیماری‌های پوستی و لیزر موهای زائد با دستگاه‌های ۲۰۲۶ امریکایی.
+          </p>
+          <a href="#booking" class="inline-flex items-center gap-1.5 text-xs font-bold text-brand-600 hover:text-brand-800 transition-colors">
+            مشاوره و رزرو نوبت دپارتمان
+            <i data-lucide="arrow-left" class="w-4 h-4 shrink-0 transform group-hover:-translate-x-1 transition-transform"></i>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES TABBED SECTION (بخش خدمات متمایز) -->
+  <section id="services" class="py-24 bg-white relative overflow-hidden gsap-animate" x-data="{ currentTab: 'lab' }">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-sm font-bold text-brand-600 bg-brand-50 px-3.5 py-1.5 rounded-full uppercase tracking-wider">سرویس‌های تشخیصی پیشرفته</span>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-brand-dark mt-4 mb-5 leading-normal">خدمات متمایز و کلینیک‌های تشخیصی آریا</h2>
+        <div class="w-16 h-1 bg-brand-600 mx-auto rounded-full mb-6"></div>
+        <p class="text-base text-brand-body leading-relaxed">
+          تشخیص دقیق، نیمی از روند درمان است. در کلینیک آریا خدمات تصویربرداری، آزمایشگاه و پاتولوژی در سریع‌ترین زمان و با بالاترین استاندارد کیفی انجام می‌شود.
+        </p>
+      </div>
+
+      <!-- Alpine Tab Navigation -->
+      <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-12 p-1.5 bg-slate-100 rounded-2xl max-w-4xl mx-auto">
+        <button @click="currentTab = 'lab'" 
+                :class="currentTab === 'lab' ? 'bg-white text-brand-600 shadow-md' : 'text-brand-body hover:text-brand-dark hover:bg-white/40'"
+                class="flex-1 min-w-[140px] px-5 py-3.5 text-sm font-black rounded-xl transition-all duration-300 flex items-center justify-center gap-2">
+          <i data-lucide="test-tube" class="w-4 h-4"></i>
+          آزمایشگاه تخصصی
+        </button>
+        <button @click="currentTab = 'imaging'" 
+                :class="currentTab === 'imaging' ? 'bg-white text-brand-600 shadow-md' : 'text-brand-body hover:text-brand-dark hover:bg-white/40'"
+                class="flex-1 min-w-[140px] px-5 py-3.5 text-sm font-black rounded-xl transition-all duration-300 flex items-center justify-center gap-2">
+          <i data-lucide="scan" class="w-4 h-4"></i>
+          تصویربرداری دیجیتال
+        </button>
+        <button @click="currentTab = 'physio'" 
+                :class="currentTab === 'physio' ? 'bg-white text-brand-600 shadow-md' : 'text-brand-body hover:text-brand-dark hover:bg-white/40'"
+                class="flex-1 min-w-[140px] px-5 py-3.5 text-sm font-black rounded-xl transition-all duration-300 flex items-center justify-center gap-2">
+          <i data-lucide="activity" class="w-4 h-4"></i>
+          فیزیوتراپی و بازتوانی
+        </button>
+        <button @click="currentTab = 'checkup'" 
+                :class="currentTab === 'checkup' ? 'bg-white text-brand-600 shadow-md' : 'text-brand-body hover:text-brand-dark hover:bg-white/40'"
+                class="flex-1 min-w-[140px] px-5 py-3.5 text-sm font-black rounded-xl transition-all duration-300 flex items-center justify-center gap-2">
+          <i data-lucide="heart-pulse" class="w-4 h-4"></i>
+          چک‌آپ جامع سلامت
+        </button>
+      </div>
+
+      <!-- Tab Content Area -->
+      <div class="bg-gradient-to-tr from-brand-50/30 to-slate-50 border border-slate-100/80 rounded-[2.5rem] p-6 sm:p-12 shadow-inner">
+        
+        <!-- Tab 1: Laboratory -->
+        <div x-show="currentTab === 'lab'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center" x-cloak>
+          <div class="lg:col-span-7">
+            <span class="text-xs font-extrabold bg-brand-100 text-brand-700 px-3 py-1 rounded-full uppercase tracking-wider mb-4 inline-block">بخش پاتولوژی و پلاسما</span>
+            <h3 class="text-2xl sm:text-3xl font-black text-brand-dark mb-4">آزمایشگاه فوق‌تخصصی و پاتولوژی آریا</h3>
+            <p class="text-sm sm:text-base text-brand-body leading-relaxed mb-6">
+              مجهز به دستگاه‌های خودکار نسل پنجم کشور و با حضور پزشکان پاتولوژیست برتر. انجام کلیه آزمایش‌های بیوشیمی، هورمونی، هماتولوژی، ژنتیک و غربالگری بارداری با دقت مثال‌زدنی.
+            </p>
+            <ul class="grid sm:grid-cols-2 gap-4 mb-8">
+              <li class="flex items-center gap-2.5 text-sm text-brand-body font-semibold">
+                <i data-lucide="check-circle-2" class="w-4.5 h-4.5 text-brand-accent"></i>
+                امکان نمونه‌گیری در منزل و محل کار
+              </li>
+              <li class="flex items-center gap-2.5 text-sm text-brand-body font-semibold">
+                <i data-lucide="check-circle-2" class="w-4.5 h-4.5 text-brand-accent"></i>
+                جواب‌دهی آنلاین در کمتر از ۲۴ ساعت
+              </li>
+              <li class="flex items-center gap-2.5 text-sm text-brand-body font-semibold">
+                <i data-lucide="check-circle-2" class="w-4.5 h-4.5 text-brand-accent"></i>
+                قرارداد مستقیم با تمام بیمه‌ها
+              </li>
+              <li class="flex items-center gap-2.5 text-sm text-brand-body font-semibold">
+                <i data-lucide="check-circle-2" class="w-4.5 h-4.5 text-brand-accent"></i>
+                بخش اورژانس آزمایشگاهی شبانه‌روزی
+              </li>
+            </ul>
+            <div class="flex flex-wrap items-center gap-6">
+              <span class="text-xs font-semibold text-slate-500">شروع هزینه تست‌های پایه: <strong class="text-lg font-black text-brand-dark">از ۱۵۰,۰۰۰ تومان</strong></span>
+              <a href="#booking" class="text-sm font-bold bg-brand-600 hover:bg-brand-700 text-white px-6 py-3.5 rounded-xl shadow-lg shadow-brand-600/10 transition-transform hover:scale-[1.02] active:scale-[0.98]">
+                رزرو نوبت آزمایشگاه
+              </a>
+            </div>
+          </div>
+          <div class="lg:col-span-5">
+            <div class="rounded-3xl overflow-hidden border-4 border-white shadow-xl aspect-video sm:aspect-square lg:aspect-[4/3]">
+              <img src="images/clinic-hero.jpg" alt="آزمایشگاه آریا" class="w-full h-full object-cover">
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: Imaging -->
+        <div x-show="currentTab === 'imaging'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center" x-cloak>
+          <div class="lg:col-span-7">
+            <span class="text-xs font-extrabold bg-brand-100 text-brand-700 px-3 py-1 rounded-full uppercase tracking-wider mb-4 inline-block">رادیولوژی دیجیتال و سونوگرافی</span>
+            <h3 class="text-2xl sm:text-3xl font-black text-brand-dark mb-4">مرکز تصویربرداری دیجیتال و سونوگرافی تخصصی</h3>
+            <p class="text-sm sm:text-base text-brand-body leading-relaxed mb-6">
+              ارائه دقیق‌ترین تصاویر رادیوگرافی، ماموگرافی، سنجش تراکم استخوان، سونوگرافی‌های تخصصی داپلر و آنومالی بارداری با کمترین دوز ممکن تابش اشعه و برترین دستگاه‌های ساخت ۲۰۲۵ آلمان.
+            </p>
+            <ul class="grid sm:grid-cols-2 gap-4 mb-8">
+              <li class="flex items-center gap-2.5 text-sm text-brand-body font-semibold">
+                <i data-lucide="check-circle-2" class="w-4.5 h-4.5 text-brand-accent"></i>
+                سونوگرافی‌های تخصصی و چهاربعدی بارداری
+              </li>
+              <li class="flex items-center gap-2.5 text-sm text-brand-body font-semibold">
+                <i data-lucide="check-circle-2" class="w-4.5 h-4.5 text-brand-accent"></i>
+                ماموگرافی دیجیتال با سیستم ارگونومیک بی‌درد
+              </li>
+              <li class="flex items-center gap-2.5 text-sm text-brand-body font-semibold">
+                <i data-lucide="check-circle-2" class="w-4.5 h-4.5 text-brand-accent"></i>
+                آرشیو دیجیتال عکس برای همکاران پزشک
+              </li>
+              <li class="flex items-center gap-2.5 text-sm text-brand-body font-semibold">
+                <i data-lucide="check-circle-2" class="w-4.5 h-4.5 text-brand-accent"></i>
+                تحویل گزارش کتبی و دیسک تصاویر در نیم ساعت
+              </li>
+            </ul>
+            <div class="flex flex-wrap items-center gap-6">
+              <span class="text-xs font-semibold text-slate-500">شروع هزینه سونوگرافی پایه: <strong class="text-lg font-black text-brand-dark">از ۴۰۰,۰۰۰ تومان</strong></span>
+              <a href="#booking" class="text-sm font-bold bg-brand-600 hover:bg-brand-700 text-white px-6 py-3.5 rounded-xl shadow-lg shadow-brand-600/10 transition-transform hover:scale-[1.02] active:scale-[0.98]">
+                رزرو نوبت تصویربرداری
+              </a>
+            </div>
+          </div>
+          <div class="lg:col-span-5">
+            <div class="rounded-3xl overflow-hidden border-4 border-white shadow-xl aspect-video sm:aspect-square lg:aspect-[4/3]">
+              <img src="images/clinic-hero.jpg" alt="رادیولوژی آریا" class="w-full h-full object-cover">
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Physiotherapy -->
+        <div x-show="currentTab === 'physio'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center" x-cloak>
+          <div class="lg:col-span-7">
+            <span class="text-xs font-extrabold bg-brand-100 text-brand-700 px-3 py-1 rounded-full uppercase tracking-wider mb-4 inline-block">الکتروتراپی و توانبخشی حرکتی</span>
+            <h3 class="text-2xl sm:text-3xl font-black text-brand-dark mb-4">کلینیک فیزیوتراپی و بازتوانی فیزیکی آریا</h3>
+            <p class="text-sm sm:text-base text-brand-body leading-relaxed mb-6">
+              درمان بیماری‌های اسکلتی-عضلانی، آسیب‌های ورزشی، توانبخشی بعد از جراحی‌های ستون فقرات، و درمان دردهای کهنه مفاصل با بهره‌گیری از تکنیک‌های درمانی دستی (منوال‌تراپی)، سوزن خشک و لیزر پرتوان.
+            </p>
+            <ul class="grid sm:grid-cols-2 gap-4 mb-8">
+              <li class="flex items-center gap-2.5 text-sm text-brand-body font-semibold">
+                <i data-lucide="check-circle-2" class="w-4.5 h-4.5 text-brand-accent"></i>
+                کادر مجرب فیزیوتراپیست‌های خانم و آقا
+              </li>
+              <li class="flex items-center gap-2.5 text-sm text-brand-body font-semibold">
+                <i data-lucide="check-circle-2" class="w-4.5 h-4.5 text-brand-accent"></i>
+                لیزر پرتوان رباتیک و درمان پیشرفته درد
+              </li>
+              <li class="flex items-center gap-2.5 text-sm text-brand-body font-semibold">
+                <i data-lucide="check-circle-2" class="w-4.5 h-4.5 text-brand-accent"></i>
+                برنامه‌ریزی تمرینی تخصصی هر بیمار
+              </li>
+              <li class="flex items-center gap-2.5 text-sm text-brand-body font-semibold">
+                <i data-lucide="check-circle-2" class="w-4.5 h-4.5 text-brand-accent"></i>
+                مجهز به فضای تمرین‌درمانی و سوئدی مدرن
+              </li>
+            </ul>
+            <div class="flex flex-wrap items-center gap-6">
+              <span class="text-xs font-semibold text-slate-500">هزینه هر جلسه درمانی: <strong class="text-lg font-black text-brand-dark">از ۳۰۰,۰۰۰ تومان</strong></span>
+              <a href="#booking" class="text-sm font-bold bg-brand-600 hover:bg-brand-700 text-white px-6 py-3.5 rounded-xl shadow-lg shadow-brand-600/10 transition-transform hover:scale-[1.02] active:scale-[0.98]">
+                رزرو نوبت فیزیوتراپی
+              </a>
+            </div>
+          </div>
+          <div class="lg:col-span-5">
+            <div class="rounded-3xl overflow-hidden border-4 border-white shadow-xl aspect-video sm:aspect-square lg:aspect-[4/3]">
+              <img src="images/clinic-hero.jpg" alt="فیزیوتراپی آریا" class="w-full h-full object-cover">
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 4: Checkup -->
+        <div x-show="currentTab === 'checkup'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center" x-cloak>
+          <div class="lg:col-span-7">
+            <span class="text-xs font-extrabold bg-brand-100 text-brand-700 px-3 py-1 rounded-full uppercase tracking-wider mb-4 inline-block">پیشگیری و پایش مداوم</span>
+            <h3 class="text-2xl sm:text-3xl font-black text-brand-dark mb-4">بسته‌های چک‌آپ جامع و سلامت خانواده</h3>
+            <p class="text-sm sm:text-base text-brand-body leading-relaxed mb-6">
+              سالم‌زیستن نیازمند آگاهی است. پکیج‌های پیشرفته و اقتصادی چک‌آپ سالانه کلینیک آریا به شما این امکان را می‌دهد تا به صورت مستمر وضعیت ارگان‌های داخلی، سلامت قلب، غدد، ویتامین‌ها و چربی بدن خود را پایش کنید.
+            </p>
+            <ul class="grid sm:grid-cols-2 gap-4 mb-8">
+              <li class="flex items-center gap-2.5 text-sm text-brand-body font-semibold">
+                <i data-lucide="check-circle-2" class="w-4.5 h-4.5 text-brand-accent"></i>
+                پکیج‌های اختصاصی آقایان، بانوان و اطفال
+              </li>
+              <li class="flex items-center gap-2.5 text-sm text-brand-body font-semibold">
+                <i data-lucide="check-circle-2" class="w-4.5 h-4.5 text-brand-accent"></i>
+                ویزیت جامع و تفسیر نتایج توسط پزشکان ارشد
+              </li>
+              <li class="flex items-center gap-2.5 text-sm text-brand-body font-semibold">
+                <i data-lucide="check-circle-2" class="w-4.5 h-4.5 text-brand-accent"></i>
+                ارزیابی کامل ریسک قلبی و غددی بدن
+              </li>
+              <li class="flex items-center gap-2.5 text-sm text-brand-body font-semibold">
+                <i data-lucide="check-circle-2" class="w-4.5 h-4.5 text-brand-accent"></i>
+                صدور شناسنامه سلامت دیجیتال برای بیماران
+              </li>
+            </ul>
+            <div class="flex flex-wrap items-center gap-6">
+              <span class="text-xs font-semibold text-slate-500">پکیج چک‌آپ کامل دوره‌ای: <strong class="text-lg font-black text-brand-dark">از ۱,۲۰۰,۰۰۰ تومان</strong></span>
+              <a href="#booking" class="text-sm font-bold bg-brand-600 hover:bg-brand-700 text-white px-6 py-3.5 rounded-xl shadow-lg shadow-brand-600/10 transition-transform hover:scale-[1.02] active:scale-[0.98]">
+                مشاهده پکیج‌ها و رزرو
+              </a>
+            </div>
+          </div>
+          <div class="lg:col-span-5">
+            <div class="rounded-3xl overflow-hidden border-4 border-white shadow-xl aspect-video sm:aspect-square lg:aspect-[4/3]">
+              <img src="images/clinic-hero.jpg" alt="چکاپ سلامت آریا" class="w-full h-full object-cover">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DOCTORS SECTION (پزشکان متخصص و اعضای بورد) -->
+  <section id="doctors" class="py-24 bg-slate-50 relative overflow-hidden gsap-animate">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row items-end justify-between mb-16 gap-6">
+        <div class="text-right max-w-2xl">
+          <span class="text-sm font-bold text-brand-600 bg-brand-50 px-3.5 py-1.5 rounded-full uppercase tracking-wider">نخبگان علم پزشکی</span>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-brand-dark mt-4 mb-4 leading-normal">پزشکان متخصص و کادر علمی برجسته آریا</h2>
+          <div class="w-16 h-1 bg-brand-600 rounded-full mb-4"></div>
+          <p class="text-sm sm:text-base text-brand-body">
+            پزشکان ما متعهد به ترکیب علم نوین با مراقبت دلسوزانه هستند. کادر علمی کلینیک آریا همگی از فارغ‌التحصیلان برگزیده و رتبه‌های اول بورد تخصصی دانشگاه‌های تراز اول کشور می‌باشند.
+          </p>
+        </div>
+        
+        <!-- Slider Navigation Controls (RTL-aware arrows) -->
+        <div class="flex items-center gap-3">
+          <button class="swiper-doc-prev p-3.5 rounded-xl bg-white border border-slate-200/80 text-brand-dark hover:text-brand-600 hover:border-brand-500 hover:scale-105 transition-all shadow-sm flex items-center justify-center focus:outline-none" aria-label="پزشک قبلی">
+            <i data-lucide="arrow-right" class="w-5 h-5"></i>
+          </button>
+          <button class="swiper-doc-next p-3.5 rounded-xl bg-white border border-slate-200/80 text-brand-dark hover:text-brand-600 hover:border-brand-500 hover:scale-105 transition-all shadow-sm flex items-center justify-center focus:outline-none" aria-label="پزشک بعدی">
+            <i data-lucide="arrow-left" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Swiper Slider Container -->
+      <div class="swiper doctors-swiper overflow-visible px-1 select-none">
+        <div class="swiper-wrapper">
+          
+          <!-- Doctor 1 -->
+          <div class="swiper-slide h-auto">
+            <div class="bg-white rounded-[2rem] border border-slate-100 p-5 shadow-sm hover:shadow-xl hover:shadow-brand-500/5 hover:-translate-y-1.5 transition-all duration-300 flex flex-col h-full">
+              <!-- Photo Frame -->
+              <div class="relative rounded-2xl overflow-hidden aspect-[4/5] bg-slate-100 mb-6 group">
+                <img src="images/doctor-1.jpg" alt="دکتر الهام رضایی" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <span class="absolute top-4 right-4 bg-brand-600 text-white text-[11px] font-bold px-3 py-1 rounded-full shadow-md shadow-brand-600/10">هیئت علمی دانشگاه</span>
+              </div>
+              <!-- Credentials -->
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold text-slate-400">نظام پزشکی: ۱۲۳۴۵</span>
+                <div class="flex items-center gap-1 text-amber-500 text-xs font-black">
+                  <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500 stroke-none"></i>
+                  ۴.۹ <span class="text-slate-400 font-normal">(۲۵۰ نظر)</span>
+                </div>
+              </div>
+              <h3 class="text-lg font-black text-brand-dark mb-1">دکتر الهام رضایی</h3>
+              <p class="text-xs font-bold text-brand-600 mb-4">متخصص و جراح قلب و عروق</p>
+              <p class="text-xs text-brand-body leading-relaxed mb-6 flex-grow">
+                فلوشیپ فوق‌تخصصی اینترونشنال کاردیولوژی با بیش از ۱۲ سال سابقه جراحی‌های موفق قلب باز و آنژیوپلاستی عروقی.
+              </p>
+              <!-- Info grid & button -->
+              <div class="border-t border-slate-100 pt-4 mt-auto">
+                <div class="flex items-center justify-between text-xs mb-4">
+                  <span class="text-slate-400">روزهای حضور:</span>
+                  <span class="font-extrabold text-brand-dark">شنبه، دوشنبه (عصر)</span>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                  <button @click="activeModal = 'doc1'" class="text-xs font-bold bg-slate-100 text-brand-dark hover:bg-slate-200 py-3 rounded-xl transition-all">مشاهده بیوگرافی</button>
+                  <a href="#booking" class="text-xs font-bold bg-brand-600 text-white hover:bg-brand-700 py-3 rounded-xl text-center transition-all">دریافت نوبت</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Doctor 2 -->
+          <div class="swiper-slide h-auto">
+            <div class="bg-white rounded-[2rem] border border-slate-100 p-5 shadow-sm hover:shadow-xl hover:shadow-brand-500/5 hover:-translate-y-1.5 transition-all duration-300 flex flex-col h-full">
+              <!-- Photo Frame -->
+              <div class="relative rounded-2xl overflow-hidden aspect-[4/5] bg-slate-100 mb-6 group">
+                <img src="images/doctor-2.jpg" alt="دکتر علیرضا عباسی" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <span class="absolute top-4 right-4 bg-teal-600 text-white text-[11px] font-bold px-3 py-1 rounded-full shadow-md shadow-brand-600/10">رتبه ۱ بورد کشور</span>
+              </div>
+              <!-- Credentials -->
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold text-slate-400">نظام پزشکی: ۲۳۴۵۶</span>
+                <div class="flex items-center gap-1 text-amber-500 text-xs font-black">
+                  <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500 stroke-none"></i>
+                  ۴.۸ <span class="text-slate-400 font-normal">(۱۹۰ نظر)</span>
+                </div>
+              </div>
+              <h3 class="text-lg font-black text-brand-dark mb-1">دکتر علیرضا عباسی</h3>
+              <p class="text-xs font-bold text-brand-600 mb-4">متخصص مغز و اعصاب (نورولوژی)</p>
+              <p class="text-xs text-brand-body leading-relaxed mb-6 flex-grow">
+                دارای فلوشیپ اختلالات عصبی و ام‌اس از فرانسه، متخصص درمان دردهای ستون فقرات، میگرن و بیماری‌های عصب‌شناختی.
+              </p>
+              <!-- Info grid & button -->
+              <div class="border-t border-slate-100 pt-4 mt-auto">
+                <div class="flex items-center justify-between text-xs mb-4">
+                  <span class="text-slate-400">روزهای حضور:</span>
+                  <span class="font-extrabold text-brand-dark">یکشنبه، سه‌شنبه (عصر)</span>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                  <button @click="activeModal = 'doc2'" class="text-xs font-bold bg-slate-100 text-brand-dark hover:bg-slate-200 py-3 rounded-xl transition-all">مشاهده بیوگرافی</button>
+                  <a href="#booking" class="text-xs font-bold bg-brand-600 text-white hover:bg-brand-700 py-3 rounded-xl text-center transition-all">دریافت نوبت</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Doctor 3 -->
+          <div class="swiper-slide h-auto">
+            <div class="bg-white rounded-[2rem] border border-slate-100 p-5 shadow-sm hover:shadow-xl hover:shadow-brand-500/5 hover:-translate-y-1.5 transition-all duration-300 flex flex-col h-full">
+              <!-- Photo Frame -->
+              <div class="relative rounded-2xl overflow-hidden aspect-[4/5] bg-slate-100 mb-6 group">
+                <img src="images/doctor-3.jpg" alt="دکتر مریم سجادی" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <span class="absolute top-4 right-4 bg-brand-600 text-white text-[11px] font-bold px-3 py-1 rounded-full shadow-md shadow-brand-600/10">رتبه برتر بورد تخصصی</span>
+              </div>
+              <!-- Credentials -->
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold text-slate-400">نظام پزشکی: ۳۴۵۶۷</span>
+                <div class="flex items-center gap-1 text-amber-500 text-xs font-black">
+                  <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500 stroke-none"></i>
+                  ۴.۹ <span class="text-slate-400 font-normal">(۳۱۰ نظر)</span>
+                </div>
+              </div>
+              <h3 class="text-lg font-black text-brand-dark mb-1">دکتر مریم سجادی</h3>
+              <p class="text-xs font-bold text-brand-600 mb-4">متخصص کودکان و نوزادان</p>
+              <p class="text-xs text-brand-body leading-relaxed mb-6 flex-grow">
+                فلوشیپ ایمونولوژی و آلرژی کودکان، متخصص پایش رشد، درمان آسم، آلرژی‌ها و مشکلات تغذیه‌ای نوزادان در محیط ویژه اطفال کلینیک.
+              </p>
+              <!-- Info grid & button -->
+              <div class="border-t border-slate-100 pt-4 mt-auto">
+                <div class="flex items-center justify-between text-xs mb-4">
+                  <span class="text-slate-400">روزهای حضور:</span>
+                  <span class="font-extrabold text-brand-dark">شنبه، چهارشنبه (صبح)</span>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                  <button @click="activeModal = 'doc3'" class="text-xs font-bold bg-slate-100 text-brand-dark hover:bg-slate-200 py-3 rounded-xl transition-all">مشاهده بیوگرافی</button>
+                  <a href="#booking" class="text-xs font-bold bg-brand-600 text-white hover:bg-brand-700 py-3 rounded-xl text-center transition-all">دریافت نوبت</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- MODALS FOR DOCTOR DETAILS (پاپ‌آپ‌های بیوگرافی پزشکان) -->
+    <!-- Doc 1 Modal -->
+    <div x-show="activeModal === 'doc1'" class="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4 bg-brand-dark/50 backdrop-blur-sm" x-cloak>
+      <div @click.away="activeModal = null" class="bg-white rounded-[2rem] border border-slate-100 max-w-lg w-full p-8 shadow-2xl relative">
+        <button @click="activeModal = null" class="absolute top-6 left-6 p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-brand-dark"><i data-lucide="x" class="w-4 h-4"></i></button>
+        <div class="flex items-center gap-5 mb-6">
+          <div class="w-16 h-16 rounded-full overflow-hidden bg-slate-100">
+            <img src="images/doctor-1.jpg" alt="دکتر الهام رضایی" class="w-full h-full object-cover">
+          </div>
+          <div>
+            <h3 class="text-lg font-black text-brand-dark">دکتر الهام رضایی</h3>
+            <span class="text-xs font-bold text-brand-600">متخصص قلب و عروق - فلوشیپ اینترونشنال کاردیولوژی</span>
+          </div>
+        </div>
+        <div class="space-y-4 mb-6 text-sm text-brand-body leading-relaxed">
+          <p><strong>سوابق علمی:</strong> فارغ‌التحصیل ممتاز دانشگاه علوم پزشکی تهران، رتبه ۳ بورد تخصصی قلب کشور، عضو رسمی انجمن کاردیولوژی ایران و اروپا.</p>
+          <p><strong>بیماری‌های تخصصی:</strong> جراحی‌های آنژیوپلاستی و آنژیوگرافی، تعویض دریچه‌های قلب، درمان فشار خون بالا و نارسایی قلبی حاد.</p>
+          <p><strong>ساعات حضور در مطب:</strong> شنبه و دوشنبه از ساعت ۱۶:۰۰ الی ۲۰:۰۰ (با هماهنگی قبلی).</p>
+        </div>
+        <a href="#booking" @click="activeModal = null" class="block text-center font-bold bg-brand-600 text-white hover:bg-brand-700 py-3.5 rounded-xl">دریافت نوبت از این پزشک</a>
+      </div>
+    </div>
+
+    <!-- Doc 2 Modal -->
+    <div x-show="activeModal === 'doc2'" class="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4 bg-brand-dark/50 backdrop-blur-sm" x-cloak>
+      <div @click.away="activeModal = null" class="bg-white rounded-[2rem] border border-slate-100 max-w-lg w-full p-8 shadow-2xl relative">
+        <button @click="activeModal = null" class="absolute top-6 left-6 p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-brand-dark"><i data-lucide="x" class="w-4 h-4"></i></button>
+        <div class="flex items-center gap-5 mb-6">
+          <div class="w-16 h-16 rounded-full overflow-hidden bg-slate-100">
+            <img src="images/doctor-2.jpg" alt="دکتر علیرضا عباسی" class="w-full h-full object-cover">
+          </div>
+          <div>
+            <h3 class="text-lg font-black text-brand-dark">دکتر علیرضا عباسی</h3>
+            <span class="text-xs font-bold text-brand-600">متخصص مغز و اعصاب (نورولوژی)</span>
+          </div>
+        </div>
+        <div class="space-y-4 mb-6 text-sm text-brand-body leading-relaxed">
+          <p><strong>سوابق علمی:</strong> رتبه برتر بورد فوق‌تخصصی، فلوشیپ ام‌اس از فرانسه، تالیف بیش از ۱۵ مقاله علمی در ژورنال‌های معتبر بین‌المللی ISI.</p>
+          <p><strong>بیماری‌های تخصصی:</strong> درمان سردردهای میگرنی حاد، تشخیص و کنترل ام‌اس، صرع، آلزایمر، اختلال تعادل و گزگز اندام‌ها.</p>
+          <p><strong>ساعات حضور در مطب:</strong> یکشنبه و سه‌شنبه از ساعت ۱۶:۳۰ الی ۲۰:۳۰ (با هماهنگی قبلی).</p>
+        </div>
+        <a href="#booking" @click="activeModal = null" class="block text-center font-bold bg-brand-600 text-white hover:bg-brand-700 py-3.5 rounded-xl">دریافت نوبت از این پزشک</a>
+      </div>
+    </div>
+
+    <!-- Doc 3 Modal -->
+    <div x-show="activeModal === 'doc3'" class="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4 bg-brand-dark/50 backdrop-blur-sm" x-cloak>
+      <div @click.away="activeModal = null" class="bg-white rounded-[2rem] border border-slate-100 max-w-lg w-full p-8 shadow-2xl relative">
+        <button @click="activeModal = null" class="absolute top-6 left-6 p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-brand-dark"><i data-lucide="x" class="w-4 h-4"></i></button>
+        <div class="flex items-center gap-5 mb-6">
+          <div class="w-16 h-16 rounded-full overflow-hidden bg-slate-100">
+            <img src="images/doctor-3.jpg" alt="دکتر مریم سجادی" class="w-full h-full object-cover">
+          </div>
+          <div>
+            <h3 class="text-lg font-black text-brand-dark">دکتر مریم سجادی</h3>
+            <span class="text-xs font-bold text-brand-600">متخصص کودکان و نوزادان - فلوشیپ آلرژی اطفال</span>
+          </div>
+        </div>
+        <div class="space-y-4 mb-6 text-sm text-brand-body leading-relaxed">
+          <p><strong>سوابق علمی:</strong> فارغ‌التحصیل از دانشگاه علوم پزشکی شهید بهشتی، عضو رسمی انجمن علمی آلرژی و اطفال ایران، پزشک ارشد بخش نوزادان بیمارستان دی.</p>
+          <p><strong>بیماری‌های تخصصی:</strong> پایش تکامل کودکان، درمان و کنترل آلرژی غذایی و تنفسی اطفال، درمان بیماری‌های عفونی و تب کودکان.</p>
+          <p><strong>ساعات حضور در مطب:</strong> شنبه و چهارشنبه از ساعت ۰۹:۰۰ الی ۱۳:۰۰.</p>
+        </div>
+        <a href="#booking" @click="activeModal = null" class="block text-center font-bold bg-brand-600 text-white hover:bg-brand-700 py-3.5 rounded-xl">دریافت نوبت از این پزشک</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPOINTMENT BOOKING FORM (سیستم نوبت‌دهی هوشمند) -->
+  <section id="booking" class="py-24 bg-white relative overflow-hidden gsap-animate" x-data="bookingSystem">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-sm font-bold text-brand-600 bg-brand-50 px-3.5 py-1.5 rounded-full uppercase tracking-wider">سیستم پذیرش دیجیتال</span>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-brand-dark mt-4 mb-5 leading-normal">دریافت آنلاین نوبت کلینیک آریا</h2>
+        <div class="w-16 h-1 bg-brand-600 mx-auto rounded-full mb-6"></div>
+        <p class="text-base text-brand-body leading-relaxed">
+          با سیستم هوشمند رزرواسیون، بدون نیاز به مراجعه حضوری و اتلاف وقت، تخصص و پزشک خود را انتخاب کرده و رسید معتبر نوبت دریافت نمایید.
+        </p>
+      </div>
+
+      <!-- MAIN BOOKING SYSTEM GRID -->
+      <div class="grid lg:grid-cols-12 gap-10 items-start">
+        
+        <!-- RIGHT: INTERACTIVE FORM STEPS -->
+        <div class="lg:col-span-8 bg-gradient-to-br from-brand-50/20 to-slate-50 border border-slate-100/80 p-6 sm:p-10 rounded-3xl shadow-inner">
+          
+          <!-- STEP CONTROLLER BAR -->
+          <div class="flex items-center justify-between mb-10 overflow-x-auto pb-4 select-none">
+            <div class="flex items-center gap-2">
+              <span :class="step >= 1 ? 'bg-brand-600 text-white' : 'bg-slate-200 text-slate-500'" class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-black transition-all">۱</span>
+              <span class="text-xs sm:text-sm font-bold text-brand-dark shrink-0">انتخاب دپارتمان</span>
+            </div>
+            <div class="h-[1px] bg-slate-200 flex-grow mx-3 min-w-[20px]"></div>
+            <div class="flex items-center gap-2">
+              <span :class="step >= 2 ? 'bg-brand-600 text-white' : 'bg-slate-200 text-slate-500'" class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-black transition-all">۲</span>
+              <span class="text-xs sm:text-sm font-bold text-brand-dark shrink-0">انتخاب پزشک</span>
+            </div>
+            <div class="h-[1px] bg-slate-200 flex-grow mx-3 min-w-[20px]"></div>
+            <div class="flex items-center gap-2">
+              <span :class="step >= 3 ? 'bg-brand-600 text-white' : 'bg-slate-200 text-slate-500'" class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-black transition-all">۳</span>
+              <span class="text-xs sm:text-sm font-bold text-brand-dark shrink-0">انتخاب روز و ساعت</span>
+            </div>
+            <div class="h-[1px] bg-slate-200 flex-grow mx-3 min-w-[20px]"></div>
+            <div class="flex items-center gap-2">
+              <span :class="step >= 4 ? 'bg-brand-600 text-white' : 'bg-slate-200 text-slate-500'" class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-black transition-all">۴</span>
+              <span class="text-xs sm:text-sm font-bold text-brand-dark shrink-0">مشخصات نهایی</span>
+            </div>
+          </div>
+
+          <!-- STEP 1: SELECT DEPARTMENT -->
+          <div x-show="step === 1" x-transition:enter="transition duration-200" class="space-y-6">
+            <h3 class="text-base sm:text-lg font-black text-brand-dark mb-4">لطفاً دپارتمان مورد نظر خود را انتخاب کنید:</h3>
+            <div class="grid sm:grid-cols-2 gap-4">
+              
+              <button @click="selectDepartment('cardiology')" class="flex items-center justify-between p-4 rounded-2xl bg-white border border-slate-100 hover:border-brand-500 shadow-sm transition-all text-right group">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center shrink-0">
+                    <i data-lucide="heart" class="w-5 h-5"></i>
+                  </div>
+                  <span class="text-sm font-bold text-brand-dark">دپارتمان قلب و عروق</span>
+                </div>
+                <i data-lucide="chevron-left" class="w-4.5 h-4.5 text-slate-400 group-hover:text-brand-600 shrink-0"></i>
+              </button>
+
+              <button @click="selectDepartment('neurology')" class="flex items-center justify-between p-4 rounded-2xl bg-white border border-slate-100 hover:border-brand-500 shadow-sm transition-all text-right group">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center shrink-0">
+                    <i data-lucide="brain" class="w-5 h-5"></i>
+                  </div>
+                  <span class="text-sm font-bold text-brand-dark">دپارتمان مغز و اعصاب</span>
+                </div>
+                <i data-lucide="chevron-left" class="w-4.5 h-4.5 text-slate-400 group-hover:text-brand-600 shrink-0"></i>
+              </button>
+
+              <button @click="selectDepartment('pediatrics')" class="flex items-center justify-between p-4 rounded-2xl bg-white border border-slate-100 hover:border-brand-500 shadow-sm transition-all text-right group">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
+                    <i data-lucide="smile" class="w-5 h-5"></i>
+                  </div>
+                  <span class="text-sm font-bold text-brand-dark">دپارتمان کودکان و نوزادان</span>
+                </div>
+                <i data-lucide="chevron-left" class="w-4.5 h-4.5 text-slate-400 group-hover:text-brand-600 shrink-0"></i>
+              </button>
+
+              <button @click="selectDepartment('ophthalmology')" class="flex items-center justify-between p-4 rounded-2xl bg-white border border-slate-100 hover:border-brand-500 shadow-sm transition-all text-right group">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center shrink-0">
+                    <i data-lucide="eye" class="w-5 h-5"></i>
+                  </div>
+                  <span class="text-sm font-bold text-brand-dark">دپارتمان چشم‌پزشکی</span>
+                </div>
+                <i data-lucide="chevron-left" class="w-4.5 h-4.5 text-slate-400 group-hover:text-brand-600 shrink-0"></i>
+              </button>
+
+              <button @click="selectDepartment('dentistry')" class="flex items-center justify-between p-4 rounded-2xl bg-white border border-slate-100 hover:border-brand-500 shadow-sm transition-all text-right group">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
+                    <i data-lucide="sparkles" class="w-5 h-5"></i>
+                  </div>
+                  <span class="text-sm font-bold text-brand-dark">دندانپزشکی دیجیتال</span>
+                </div>
+                <i data-lucide="chevron-left" class="w-4.5 h-4.5 text-slate-400 group-hover:text-brand-600 shrink-0"></i>
+              </button>
+
+              <button @click="selectDepartment('dermatology')" class="flex items-center justify-between p-4 rounded-2xl bg-white border border-slate-100 hover:border-brand-500 shadow-sm transition-all text-right group">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                    <i data-lucide="shield" class="w-5 h-5"></i>
+                  </div>
+                  <span class="text-sm font-bold text-brand-dark">پوست و زیبایی</span>
+                </div>
+                <i data-lucide="chevron-left" class="w-4.5 h-4.5 text-slate-400 group-hover:text-brand-600 shrink-0"></i>
+              </button>
+
+            </div>
+          </div>
+
+          <!-- STEP 2: SELECT DOCTOR -->
+          <div x-show="step === 2" x-transition:enter="transition duration-200" class="space-y-6" x-cloak>
+            <div class="flex items-center justify-between">
+              <h3 class="text-base sm:text-lg font-black text-brand-dark">پزشک معالج خود را انتخاب کنید:</h3>
+              <button @click="step = 1" class="text-xs font-bold text-brand-600 hover:text-brand-800 flex items-center gap-1">
+                تغییر دپارتمان
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+            
+            <div class="grid sm:grid-cols-2 gap-4">
+              <template x-for="doc in filteredDoctors" :key="doc.id">
+                <button @click="selectDoctor(doc.id)" class="flex items-center gap-4 p-4 rounded-2xl bg-white border border-slate-100 hover:border-brand-500 shadow-sm text-right transition-all group">
+                  <div class="w-14 h-14 rounded-xl overflow-hidden bg-slate-100 shrink-0">
+                    <img :src="doc.image" :alt="doc.name" class="w-full h-full object-cover">
+                  </div>
+                  <div class="flex-grow">
+                    <span class="block text-sm font-black text-brand-dark" x-text="doc.name"></span>
+                    <span class="block text-xs text-brand-body/70 mt-0.5" x-text="doc.specialty"></span>
+                    <span class="block text-[10px] text-slate-400 mt-1" x-text="doc.code"></span>
+                  </div>
+                  <i data-lucide="chevron-left" class="w-4.5 h-4.5 text-slate-400 group-hover:text-brand-600 shrink-0"></i>
+                </button>
+              </template>
+            </div>
+
+            <!-- If no doctors are available in this mock yet -->
+            <div x-show="filteredDoctors.length === 0" class="text-center py-8">
+              <p class="text-sm text-brand-body">در حال حاضر نوبت‌دهی آنلاین برای این دپارتمان موقتاً غیرفعال است.</p>
+              <button @click="step = 1" class="mt-4 text-xs font-bold bg-slate-100 px-4 py-2 rounded-lg text-brand-dark">بازگشت</button>
+            </div>
+          </div>
+
+          <!-- STEP 3: SELECT DATE & TIME -->
+          <div x-show="step === 3" x-transition:enter="transition duration-200" class="space-y-6" x-cloak>
+            <div class="flex items-center justify-between">
+              <h3 class="text-base sm:text-lg font-black text-brand-dark">انتخاب روز و ساعت حضور:</h3>
+              <button @click="step = 2" class="text-xs font-bold text-brand-600 hover:text-brand-800 flex items-center gap-1">
+                تغییر پزشک
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+
+            <!-- JALALI CALENDAR DAYS ROW -->
+            <div>
+              <span class="block text-xs font-bold text-slate-400 mb-3">۱. انتخاب تاریخ:</span>
+              <div class="grid grid-cols-3 sm:grid-cols-6 gap-2">
+                <template x-for="dayObj in datesList" :key="dayObj.id">
+                  <button @click="selectDate(dayObj.id)" 
+                          :class="date === dayObj.id ? 'bg-brand-600 text-white border-brand-600 shadow-md shadow-brand-600/10 scale-105' : 'bg-white text-brand-dark border-slate-100 hover:border-brand-200'"
+                          class="flex flex-col items-center justify-center p-3 rounded-2xl border transition-all text-center select-none">
+                    <span class="text-[10px] font-medium" :class="date === dayObj.id ? 'text-brand-100' : 'text-slate-400'" x-text="dayObj.day"></span>
+                    <span class="text-base font-black mt-1" x-text="dayObj.dateStr"></span>
+                    <span class="text-[9px]" :class="date === dayObj.id ? 'text-brand-200' : 'text-slate-400'" x-text="dayObj.year"></span>
+                  </button>
+                </template>
+              </div>
+            </div>
+
+            <!-- VISUAL TIME SLOTS ROW -->
+            <div x-show="date" x-transition:enter="transition duration-150">
+              <span class="block text-xs font-bold text-slate-400 mb-3">۲. انتخاب زمان حضور:</span>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <template x-for="slot in timeSlots" :key="slot.id">
+                  <button @click="selectTimeSlot(slot)" 
+                          :disabled="slot.status === 'booked'"
+                          :class="[
+                            timeSlot === slot.time ? 'bg-brand-accent text-white border-brand-accent scale-105 shadow-md shadow-teal-600/10' : '',
+                            slot.status === 'booked' ? 'bg-slate-100 text-slate-400 border-slate-100 cursor-not-allowed line-through' : 'bg-white text-brand-dark border-slate-100 hover:border-brand-200'
+                          ]"
+                          class="flex items-center justify-center gap-1.5 p-3.5 rounded-2xl border text-center font-bold text-xs sm:text-sm transition-all select-none">
+                    <i data-lucide="clock" class="w-3.5 h-3.5 shrink-0" :class="slot.status === 'booked' ? 'text-slate-300' : 'text-brand-600'"></i>
+                    <span x-text="slot.time"></span>
+                    <span class="text-[9px] font-normal" x-text="slot.status === 'booked' ? '(پر شده)' : '(آزاد)'"></span>
+                  </button>
+                </template>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 4: PATIENT INFO & CONFIRMATION -->
+          <div x-show="step === 4" x-transition:enter="transition duration-200" class="space-y-6" x-cloak>
+            <div class="flex items-center justify-between">
+              <h3 class="text-base sm:text-lg font-black text-brand-dark">مشخصات متقاضی نوبت:</h3>
+              <button @click="step = 3" class="text-xs font-bold text-brand-600 hover:text-brand-800 flex items-center gap-1">
+                تغییر روز و ساعت
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-5">
+              
+              <!-- Patient Full Name -->
+              <div>
+                <label for="pName" class="block text-xs font-bold text-slate-500 mb-2">نام و نام خانوادگی بیمار *</label>
+                <div class="relative">
+                  <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400"><i data-lucide="user" class="w-4 h-4"></i></span>
+                  <input type="text" id="pName" x-model="patientName" placeholder="نمونه: سهراب سپهری" class="w-full pr-11 pl-4 py-3.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 bg-white text-sm font-semibold text-brand-dark placeholder-slate-400 outline-none transition-all">
+                </div>
+              </div>
+
+              <!-- Patient Mobile -->
+              <div>
+                <label for="pPhone" class="block text-xs font-bold text-slate-500 mb-2">شماره همراه متقاضی (پیامک نوبت) *</label>
+                <div class="relative">
+                  <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400"><i data-lucide="phone" class="w-4 h-4"></i></span>
+                  <input type="tel" id="pPhone" x-model="patientPhone" placeholder="۰۹۱۲۳۴۵۶۷۸۹" class="w-full pr-11 pl-4 py-3.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 bg-white text-sm font-semibold text-brand-dark placeholder-slate-400 outline-none transition-all text-left dir-ltr">
+                </div>
+              </div>
+
+              <!-- Patient National ID -->
+              <div class="sm:col-span-2">
+                <label for="pNatId" class="block text-xs font-bold text-slate-500 mb-2">کد ملی ۱۰ رقمی بیمار *</label>
+                <div class="relative">
+                  <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400"><i data-lucide="credit-card" class="w-4 h-4"></i></span>
+                  <input type="text" id="pNatId" x-model="patientNationalId" placeholder="۰۰۱۲۳۴۵۶۷۸" maxlength="10" class="w-full pr-11 pl-4 py-3.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 bg-white text-sm font-semibold text-brand-dark placeholder-slate-400 outline-none transition-all text-left dir-ltr">
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Important Information Note -->
+            <div class="p-4 bg-amber-50 rounded-2xl border border-amber-100 flex items-start gap-3">
+              <i data-lucide="info" class="w-5 h-5 text-amber-600 shrink-0 mt-0.5"></i>
+              <p class="text-[11px] sm:text-xs text-amber-800 leading-relaxed">
+                حضور بیمار ۱۵ دقیقه قبل از زمان رزرو شده در طبقه اول کلینیک آریا جهت تایید نهایی پذیرش الزامی است. لغو یا تغییر زمان نوبت تنها تا ۲۴ ساعت قبل امکان‌پذیر است.
+              </p>
+            </div>
+
+            <button @click="submitBooking()" class="w-full py-4 bg-brand-accent hover:bg-teal-700 text-white font-black text-sm sm:text-base rounded-2xl shadow-xl shadow-teal-600/10 transition-transform hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-2">
+              <i data-lucide="check" class="w-5 h-5"></i>
+              ثبت و صدور کارت نوبت دیجیتال
+            </button>
+          </div>
+
+        </div>
+
+        <!-- LEFT: TICKET RECEIPT DISPLAY -->
+        <div class="lg:col-span-4" id="booking-receipt">
+          
+          <!-- State 1: Empty State / Pre-Booking Receipt -->
+          <div x-show="!bookingSuccess" class="bg-white border-2 border-dashed border-slate-200 p-6 rounded-3xl text-center flex flex-col items-center justify-center min-h-[350px]">
+            <div class="w-16 h-16 rounded-full bg-slate-50 text-slate-400 flex items-center justify-center mb-6">
+              <i data-lucide="receipt" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-base font-black text-brand-dark mb-2">رسید خلاصه پذیرش</h3>
+            <p class="text-xs text-brand-body leading-relaxed max-w-[240px] mx-auto">
+              با انتخاب گزینه‌های سمت راست، پیش‌نمایش کارت نوبت دیجیتال شما به صورت زنده در این قسمت رندر خواهد شد.
+            </p>
+            
+            <!-- Live Preview Mini Card -->
+            <div x-show="department" class="w-full mt-8 pt-6 border-t border-slate-100 text-right space-y-3.5" x-cloak>
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-400">دپارتمان:</span>
+                <span class="font-extrabold text-brand-dark" x-text="selectedDeptName"></span>
+              </div>
+              <div class="flex items-center justify-between text-xs" x-show="doctor">
+                <span class="text-slate-400">پزشک معالج:</span>
+                <span class="font-extrabold text-brand-dark" x-text="selectedDoctorObj?.name"></span>
+              </div>
+              <div class="flex items-center justify-between text-xs" x-show="date">
+                <span class="text-slate-400">تاریخ حضور:</span>
+                <span class="font-extrabold text-brand-dark" x-text="selectedDateObj?.label"></span>
+              </div>
+              <div class="flex items-center justify-between text-xs" x-show="timeSlot">
+                <span class="text-slate-400">ساعت نوبت:</span>
+                <span class="font-extrabold text-brand-accent" x-text="timeSlot"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- State 2: Confirmed Digital Ticket Receipt -->
+          <div x-show="bookingSuccess" x-transition:enter="transition duration-300" class="bg-gradient-to-tr from-brand-900 to-brand-800 text-white rounded-[2.5rem] shadow-2xl relative overflow-hidden" x-cloak>
+            
+            <!-- Deco circles for ticket shape -->
+            <div class="absolute top-1/2 -left-4 w-8 h-8 rounded-full bg-white z-20"></div>
+            <div class="absolute top-1/2 -right-4 w-8 h-8 rounded-full bg-white z-20"></div>
+
+            <!-- Top Header -->
+            <div class="p-6 text-center border-b border-white/10">
+              <div class="w-12 h-12 rounded-xl bg-white/10 text-brand-200 flex items-center justify-center mx-auto mb-4 border border-white/20">
+                <i data-lucide="ticket" class="w-6 h-6"></i>
+              </div>
+              <span class="text-[10px] font-bold text-brand-200 uppercase tracking-widest">کارت نوبت دیجیتال معتبر</span>
+              <h4 class="text-base font-black mt-1">کلینیک فوق‌تخصصی آریا</h4>
+            </div>
+
+            <!-- Ticket details body -->
+            <div class="p-6 space-y-5 relative">
+              
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <span class="block text-[10px] text-brand-200">کد رهگیری نوبت:</span>
+                  <span class="block text-sm font-black text-brand-accent tracking-wider mt-0.5" x-text="trackingCode"></span>
+                </div>
+                <div>
+                  <span class="block text-[10px] text-brand-200">وضعیت پذیرش:</span>
+                  <span class="inline-block text-[10px] font-bold bg-teal-500 text-white px-2 py-0.5 rounded-full mt-0.5">تایید شده</span>
+                </div>
+              </div>
+
+              <div class="border-t border-white/10 my-4"></div>
+
+              <div>
+                <span class="block text-[10px] text-brand-200">نام و نام خانوادگی بیمار:</span>
+                <span class="block text-sm font-bold mt-0.5" x-text="patientName"></span>
+              </div>
+
+              <div>
+                <span class="block text-[10px] text-brand-200">دپارتمان تخصصی:</span>
+                <span class="block text-sm font-bold mt-0.5" x-text="selectedDeptName"></span>
+              </div>
+
+              <div>
+                <span class="block text-[10px] text-brand-200">پزشک معالج:</span>
+                <span class="block text-sm font-bold mt-0.5" x-text="selectedDoctorObj?.name"></span>
+              </div>
+
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <span class="block text-[10px] text-brand-200">تاریخ مراجعه:</span>
+                  <span class="block text-sm font-bold mt-0.5" x-text="selectedDateObj?.label"></span>
+                </div>
+                <div>
+                  <span class="block text-[10px] text-brand-200">ساعت حضور:</span>
+                  <span class="block text-sm font-black text-brand-accent mt-0.5" x-text="timeSlot"></span>
+                </div>
+              </div>
+
+              <div class="border-t border-white/10 my-4"></div>
+
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-brand-200">فرانشیز ویزیت آنلاین:</span>
+                <span class="font-extrabold text-white text-base">۱۶۰,۰۰۰ تومان</span>
+              </div>
+
+            </div>
+
+            <!-- Bottom QR Placeholder / Footer -->
+            <div class="p-6 bg-brand-950/40 text-center border-t border-white/10 flex flex-col items-center">
+              <!-- Custom Stylized SVG QR Code representation -->
+              <svg class="w-16 h-16 text-white mb-4 bg-white p-1 rounded-lg" viewBox="0 0 100 100">
+                <rect width="100" height="100" fill="white" />
+                <rect x="10" y="10" width="30" height="30" fill="currentColor" />
+                <rect x="15" y="15" width="20" height="20" fill="white" />
+                <rect x="18" y="18" width="14" height="14" fill="currentColor" />
+                
+                <rect x="60" y="10" width="30" height="30" fill="currentColor" />
+                <rect x="65" y="15" width="20" height="20" fill="white" />
+                <rect x="68" y="18" width="14" height="14" fill="currentColor" />
+
+                <rect x="10" y="60" width="30" height="30" fill="currentColor" />
+                <rect x="15" y="65" width="20" height="20" fill="white" />
+                <rect x="18" y="68" width="14" height="14" fill="currentColor" />
+
+                <rect x="50" y="50" width="10" height="10" fill="currentColor" />
+                <rect x="70" y="60" width="20" height="20" fill="currentColor" />
+                <rect x="80" y="80" width="10" height="10" fill="currentColor" />
+                <rect x="50" y="70" width="10" height="20" fill="currentColor" />
+              </svg>
+              <span class="text-[10px] text-brand-200 leading-relaxed mb-4">لطفاً اسکرین‌شات این کارت نوبت را به پذیرش نشان دهید.</span>
+              <div class="flex gap-2 w-full">
+                <button onclick="window.print()" class="flex-1 bg-white text-brand-dark font-bold text-xs py-2.5 rounded-lg hover:bg-slate-50 transition-colors">پرینت کارت</button>
+                <button @click="resetBooking()" class="flex-1 bg-white/10 border border-white/20 hover:bg-white/20 text-white font-bold text-xs py-2.5 rounded-lg transition-colors">نوبت جدید</button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- INSURANCE PARTNERS SECTION (بیمه‌های طرف قرارداد) -->
+  <section class="py-16 bg-slate-50 relative overflow-hidden gsap-animate">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <!-- Sub Section Header -->
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <h3 class="text-lg font-black text-brand-dark">بیمه‌های همکار و طرف قرارداد مستقیم</h3>
+        <p class="text-xs text-brand-body mt-2">کلینیک آریا جهت رفاه حال شما عزیزان با تمامی سازمان‌های بیمه‌گر پایه و تکمیلی طرف قرارداد می‌باشد.</p>
+      </div>
+
+      <!-- Grid of Insurances -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4 justify-items-center items-center opacity-60 hover:opacity-100 transition-opacity duration-300">
+        
+        <!-- Ins 1 -->
+        <div class="bg-white px-4 py-5 rounded-2xl border border-slate-100 text-center w-full shadow-sm hover:border-brand-300 transition-colors gsap-stagger-item">
+          <span class="block text-xs font-black text-brand-dark">بیمه ایران</span>
+          <span class="block text-[9px] text-slate-400 mt-0.5">تکمیلی انفرادی/گروهی</span>
+        </div>
+
+        <!-- Ins 2 -->
+        <div class="bg-white px-4 py-5 rounded-2xl border border-slate-100 text-center w-full shadow-sm hover:border-brand-300 transition-colors gsap-stagger-item">
+          <span class="block text-xs font-black text-brand-dark">تامین اجتماعی</span>
+          <span class="block text-[9px] text-slate-400 mt-0.5">بیمه پایه سراسری</span>
+        </div>
+
+        <!-- Ins 3 -->
+        <div class="bg-white px-4 py-5 rounded-2xl border border-slate-100 text-center w-full shadow-sm hover:border-brand-300 transition-colors gsap-stagger-item">
+          <span class="block text-xs font-black text-brand-dark">بیمه دانا</span>
+          <span class="block text-[9px] text-slate-400 mt-0.5">تکمیلی طلایی</span>
+        </div>
+
+        <!-- Ins 4 -->
+        <div class="bg-white px-4 py-5 rounded-2xl border border-slate-100 text-center w-full shadow-sm hover:border-brand-300 transition-colors gsap-stagger-item">
+          <span class="block text-xs font-black text-brand-dark">بیمه دی</span>
+          <span class="block text-[9px] text-slate-400 mt-0.5">ایثارگران و خانواده شهدا</span>
+        </div>
+
+        <!-- Ins 5 -->
+        <div class="bg-white px-4 py-5 rounded-2xl border border-slate-100 text-center w-full shadow-sm hover:border-brand-300 transition-colors gsap-stagger-item">
+          <span class="block text-xs font-black text-brand-dark">سلامت ایرانیان</span>
+          <span class="block text-[9px] text-slate-400 mt-0.5">خدمات درمانی دولتی</span>
+        </div>
+
+        <!-- Ins 6 -->
+        <div class="bg-white px-4 py-5 rounded-2xl border border-slate-100 text-center w-full shadow-sm hover:border-brand-300 transition-colors gsap-stagger-item">
+          <span class="block text-xs font-black text-brand-dark">بیمه البرز</span>
+          <span class="block text-[9px] text-slate-400 mt-0.5">تکمیلی تخصصی</span>
+        </div>
+
+        <!-- Ins 7 -->
+        <div class="bg-white px-4 py-5 rounded-2xl border border-slate-100 text-center w-full shadow-sm hover:border-brand-300 transition-colors gsap-stagger-item">
+          <span class="block text-xs font-black text-brand-dark">نیروهای مسلح</span>
+          <span class="block text-[9px] text-slate-400 mt-0.5">درمانی شاغلین و بازنشستگان</span>
+        </div>
+
+        <!-- Ins 8 -->
+        <div class="bg-white px-4 py-5 rounded-2xl border border-slate-100 text-center w-full shadow-sm hover:border-brand-300 transition-colors gsap-stagger-item">
+          <span class="block text-xs font-black text-brand-dark">بیمه کوثر</span>
+          <span class="block text-[9px] text-slate-400 mt-0.5">پوشش تکمیلی ممتاز</span>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PATIENT REVIEWS SECTION (نظرات مراجعین) -->
+  <section class="py-24 bg-white relative overflow-hidden gsap-animate">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row items-end justify-between mb-16 gap-6">
+        <div class="text-right max-w-2xl">
+          <span class="text-sm font-bold text-brand-600 bg-brand-50 px-3.5 py-1.5 rounded-full uppercase tracking-wider">صدای مراجعین</span>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-brand-dark mt-4 mb-4 leading-normal">رضایت بیماران از مراقبت‌های کلینیک آریا</h2>
+          <div class="w-16 h-1 bg-brand-600 rounded-full mb-4"></div>
+          <p class="text-sm sm:text-base text-brand-body">
+            پاسخگویی، صبوری و تخصص اصلی‌ترین عهد ماست. رضایت حداکثری مراجعین کلینیک آریا، انگیزه و پشتوانه راه درمانی کادر ما برای ارتقای مستمر خدمات سلامت است.
+          </p>
+        </div>
+        
+        <!-- Slider Navigation Controls -->
+        <div class="flex items-center gap-3">
+          <button class="swiper-reviews-prev p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 text-brand-dark hover:text-brand-600 hover:border-brand-500 hover:scale-105 transition-all shadow-sm flex items-center justify-center focus:outline-none" aria-label="نظر قبلی">
+            <i data-lucide="arrow-right" class="w-5 h-5"></i>
+          </button>
+          <button class="swiper-reviews-next p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 text-brand-dark hover:text-brand-600 hover:border-brand-500 hover:scale-105 transition-all shadow-sm flex items-center justify-center focus:outline-none" aria-label="نظر بعدی">
+            <i data-lucide="arrow-left" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Swiper Reviews -->
+      <div class="swiper reviews-swiper overflow-visible px-1 select-none mb-12">
+        <div class="swiper-wrapper">
+          
+          <!-- Review 1 -->
+          <div class="swiper-slide h-auto">
+            <div class="bg-gradient-to-tr from-brand-50/20 to-slate-50/60 rounded-[2.25rem] border border-slate-100 p-8 flex flex-col h-full relative">
+              <span class="absolute top-8 left-8 text-brand-200"><i data-lucide="quote" class="w-12 h-12"></i></span>
+              <div class="flex items-center gap-1 text-amber-500 mb-4">
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500 stroke-none"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500 stroke-none"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500 stroke-none"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500 stroke-none"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500 stroke-none"></i>
+              </div>
+              <p class="text-sm sm:text-base text-brand-body leading-relaxed mb-6 flex-grow">
+                "تشخیص سریع و به‌موقع دکتر سارا احمدی جان من را نجات داد. کلینیک آریا از نظر تمیزی، برخورد بسیار محترمانه پرسنل و کیفیت تجهیزات واقعاً در تراز اول کشور است. سیستم نوبت‌دهی آنلاین نیز فوق‌العاده سریع و عالی بود."
+              </p>
+              <div class="flex items-center gap-4 mt-auto border-t border-slate-200/60 pt-5">
+                <div class="w-11 h-11 rounded-full bg-brand-500 flex items-center justify-center text-white font-black text-xs">
+                  ع‌ح
+                </div>
+                <div>
+                  <span class="block text-sm font-black text-brand-dark">مهندس علی حسینی</span>
+                  <span class="block text-[11px] text-slate-400">بیمار دپارتمان قلب و عروق</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review 2 -->
+          <div class="swiper-slide h-auto">
+            <div class="bg-gradient-to-tr from-brand-50/20 to-slate-50/60 rounded-[2.25rem] border border-slate-100 p-8 flex flex-col h-full relative">
+              <span class="absolute top-8 left-8 text-brand-200"><i data-lucide="quote" class="w-12 h-12"></i></span>
+              <div class="flex items-center gap-1 text-amber-500 mb-4">
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500 stroke-none"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500 stroke-none"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500 stroke-none"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500 stroke-none"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500 stroke-none"></i>
+              </div>
+              <p class="text-sm sm:text-base text-brand-body leading-relaxed mb-6 flex-grow">
+                "سال‌ها از دردهای شدید میگرنی رنج می‌بردم و هیچ مسکنی موثر نبود. درمان تخصصی دکتر عباسی با روش‌های نوین واقعاً معجزه کرد. مدیریت زمان بسیار دقیقی در کلینیک وجود دارد و نوبت آنلاین درست سر وقت پذیرش شد."
+              </p>
+              <div class="flex items-center gap-4 mt-auto border-t border-slate-200/60 pt-5">
+                <div class="w-11 h-11 rounded-full bg-teal-500 flex items-center justify-center text-white font-black text-xs">
+                  م‌ک
+                </div>
+                <div>
+                  <span class="block text-sm font-black text-brand-dark">مریم کریمی</span>
+                  <span class="block text-[11px] text-slate-400">بیمار دپارتمان مغز و اعصاب</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review 3 -->
+          <div class="swiper-slide h-auto">
+            <div class="bg-gradient-to-tr from-brand-50/20 to-slate-50/60 rounded-[2.25rem] border border-slate-100 p-8 flex flex-col h-full relative">
+              <span class="absolute top-8 left-8 text-brand-200"><i data-lucide="quote" class="w-12 h-12"></i></span>
+              <div class="flex items-center gap-1 text-amber-500 mb-4">
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500 stroke-none"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500 stroke-none"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500 stroke-none"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500 stroke-none"></i>
+                <i data-lucide="star" class="w-4 h-4 fill-amber-500 stroke-none"></i>
+              </div>
+              <p class="text-sm sm:text-base text-brand-body leading-relaxed mb-6 flex-grow">
+                "دختر چهار ساله‌ام آلرژی بسیار شدیدی داشت که روند زندگی ما را مختل کرده بود. صبوری فوق‌العاده زیاد و دانش بی‌نظیر خانم دکتر سجادی روند درمان را برای ما آسان کرد. دکوراسیون و محیط دپارتمان اطفال کلینیک عالی است."
+              </p>
+              <div class="flex items-center gap-4 mt-auto border-t border-slate-200/60 pt-5">
+                <div class="w-11 h-11 rounded-full bg-amber-500 flex items-center justify-center text-white font-black text-xs">
+                  ز‌ر
+                </div>
+                <div>
+                  <span class="block text-sm font-black text-brand-dark">زهرا رضوی</span>
+                  <span class="block text-[11px] text-slate-400">بیمار دپارتمان کودکان و نوزادان</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Custom Pagination Bar -->
+      <div class="swiper-reviews-pagination flex justify-center gap-1.5"></div>
+
+    </div>
+  </section>
+
+  <!-- HEALTH ARTICLES & BLOG (مجله علمی سلامت آریا) -->
+  <section id="articles" class="py-24 bg-slate-50 relative overflow-hidden gsap-animate">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-sm font-bold text-brand-600 bg-brand-50 px-3.5 py-1.5 rounded-full uppercase tracking-wider">مجله علمی و پزشکی آریا</span>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-brand-dark mt-4 mb-5 leading-normal">جدیدترین مقالات علمی و دانستنی‌های سلامت</h2>
+        <div class="w-16 h-1 bg-brand-600 mx-auto rounded-full mb-6"></div>
+        <p class="text-base text-brand-body leading-relaxed">
+          افزایش دانش عمومی جامعه گام نخست پیشگیری از بیماری‌هاست. مقالات آموزشی کلینیک آریا همگی توسط پزشکان متخصص ما بررسی، تایید و به رشته تحریر درآمده‌اند.
+        </p>
+      </div>
+
+      <!-- Grid of Articles -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- Article 1 -->
+        <article class="bg-white rounded-[2rem] border border-slate-100 overflow-hidden shadow-sm hover:shadow-xl hover:shadow-brand-500/5 hover:-translate-y-1.5 transition-all duration-300 group gsap-stagger-item">
+          <!-- Thumbnail Frame -->
+          <div class="relative overflow-hidden aspect-video bg-slate-100 group-hover:scale-105 transition-transform duration-500">
+            <img src="images/clinic-hero.jpg" alt="فشار خون بالا" class="w-full h-full object-cover">
+            <span class="absolute top-4 right-4 bg-brand-600 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow">دپارتمان قلب</span>
+          </div>
+          <!-- Detail -->
+          <div class="p-6">
+            <div class="flex items-center gap-4 text-xs text-slate-400 mb-3">
+              <span class="flex items-center gap-1"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> ۲۵ تیر ۱۴۰۵</span>
+              <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> ۵ دقیقه مطالعه</span>
+            </div>
+            <h3 class="text-base sm:text-lg font-black text-brand-dark group-hover:text-brand-600 transition-colors mb-3 leading-snug">
+              ۱۰ راهکار علمی برای کنترل و پیشگیری از فشار خون بالا
+            </h3>
+            <p class="text-xs sm:text-sm text-brand-body leading-relaxed mb-6">
+              فشار خون بالا به عنوان قاتل خاموش شناخته می‌شود. در این مقاله به بررسی متدهای تغذیه‌ای و تمرینی علمی برای کاهش سریع و مهار آن می‌پردازیم...
+            </p>
+            <div class="flex items-center justify-between border-t border-slate-100 pt-4">
+              <span class="text-xs font-bold text-slate-500">نویسنده: دکتر الهام رضایی</span>
+              <a href="#booking" class="text-xs font-bold text-brand-600 hover:text-brand-800 flex items-center gap-1 group/link">
+                ادامه مقاله
+                <i data-lucide="arrow-left" class="w-4 h-4 shrink-0 transform group-hover/link:-translate-x-1 transition-transform"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Article 2 -->
+        <article class="bg-white rounded-[2rem] border border-slate-100 overflow-hidden shadow-sm hover:shadow-xl hover:shadow-brand-500/5 hover:-translate-y-1.5 transition-all duration-300 group gsap-stagger-item">
+          <!-- Thumbnail Frame -->
+          <div class="relative overflow-hidden aspect-video bg-slate-100 group-hover:scale-105 transition-transform duration-500">
+            <img src="images/clinic-hero.jpg" alt="استرس مزمن" class="w-full h-full object-cover">
+            <span class="absolute top-4 right-4 bg-brand-600 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow">دپارتمان مغز و اعصاب</span>
+          </div>
+          <!-- Detail -->
+          <div class="p-6">
+            <div class="flex items-center gap-4 text-xs text-slate-400 mb-3">
+              <span class="flex items-center gap-1"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> ۲۰ تیر ۱۴۰۵</span>
+              <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> ۷ دقیقه مطالعه</span>
+            </div>
+            <h3 class="text-base sm:text-lg font-black text-brand-dark group-hover:text-brand-600 transition-colors mb-3 leading-snug">
+              نشانه‌های پنهان استرس مزمن بر سیستم عصبی و راه‌های مقابله
+            </h3>
+            <p class="text-xs sm:text-sm text-brand-body leading-relaxed mb-6">
+              استرس مکرر روزانه ساختار سلول‌های مغزی شما را دستخوش تغییر می‌کند. این نشانه‌های پنهان را جدی بگیرید و با متدهای ریلکسیشن علمی آشنا شوید...
+            </p>
+            <div class="flex items-center justify-between border-t border-slate-100 pt-4">
+              <span class="text-xs font-bold text-slate-500">نویسنده: دکتر علیرضا عباسی</span>
+              <a href="#booking" class="text-xs font-bold text-brand-600 hover:text-brand-800 flex items-center gap-1 group/link">
+                ادامه مقاله
+                <i data-lucide="arrow-left" class="w-4 h-4 shrink-0 transform group-hover/link:-translate-x-1 transition-transform"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Article 3 -->
+        <article class="bg-white rounded-[2rem] border border-slate-100 overflow-hidden shadow-sm hover:shadow-xl hover:shadow-brand-500/5 hover:-translate-y-1.5 transition-all duration-300 group gsap-stagger-item">
+          <!-- Thumbnail Frame -->
+          <div class="relative overflow-hidden aspect-video bg-slate-100 group-hover:scale-105 transition-transform duration-500">
+            <img src="images/clinic-hero.jpg" alt="خواب کودکان" class="w-full h-full object-cover">
+            <span class="absolute top-4 right-4 bg-brand-600 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow">دپارتمان اطفال</span>
+          </div>
+          <!-- Detail -->
+          <div class="p-6">
+            <div class="flex items-center gap-4 text-xs text-slate-400 mb-3">
+              <span class="flex items-center gap-1"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> ۱۵ تیر ۱۴۰۵</span>
+              <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> ۴ دقیقه مطالعه</span>
+            </div>
+            <h3 class="text-base sm:text-lg font-black text-brand-dark group-hover:text-brand-600 transition-colors mb-3 leading-snug">
+              اهمیت خواب کافی و منظم در رشد مغزی و فیزیکی نوزادان و کودکان
+            </h3>
+            <p class="text-xs sm:text-sm text-brand-body leading-relaxed mb-6">
+              ترشح هورمون رشد کودکان عمیقاً وابسته به چرخه بهینه خواب عمیق است. راهنمای کاربردی والدین برای تنظیم ساعت خواب نوزادان و اطفال...
+            </p>
+            <div class="flex items-center justify-between border-t border-slate-100 pt-4">
+              <span class="text-xs font-bold text-slate-500">نویسنده: دکتر مریم سجادی</span>
+              <a href="#booking" class="text-xs font-bold text-brand-600 hover:text-brand-800 flex items-center gap-1 group/link">
+                ادامه مقاله
+                <i data-lucide="arrow-left" class="w-4 h-4 shrink-0 transform group-hover/link:-translate-x-1 transition-transform"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FAQ SECTION (سوالات متداول مراجعین) -->
+  <section class="py-24 bg-white relative overflow-hidden gsap-animate" x-data="{ openFaq: null }">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-sm font-bold text-brand-600 bg-brand-50 px-3.5 py-1.5 rounded-full uppercase tracking-wider">پاسخ به ابهامات شما</span>
+        <h2 class="text-2xl sm:text-3xl font-black text-brand-dark mt-4 mb-5 leading-normal">سوالات متداول و راهنمای مراجعین کلینیک آریا</h2>
+        <div class="w-16 h-1 bg-brand-600 mx-auto rounded-full mb-6"></div>
+      </div>
+
+      <!-- FAQ Accordions -->
+      <div class="space-y-4">
+        
+        <!-- Accordion 1 -->
+        <div class="bg-slate-50 border border-slate-100/80 rounded-2xl overflow-hidden transition-all duration-300">
+          <button @click="openFaq = (openFaq === 1 ? null : 1)" class="w-full flex items-center justify-between p-5 text-right font-extrabold text-sm sm:text-base text-brand-dark focus:outline-none">
+            <span>چگونه می‌توانم نوبت خود را تغییر دهم یا لغو کنم؟</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-brand-600 transition-transform duration-300 shrink-0" :class="openFaq === 1 ? 'rotate-180' : ''"></i>
+          </button>
+          <div x-show="openFaq === 1" x-transition:enter="transition ease-out duration-200" class="px-5 pb-5 pt-1 text-xs sm:text-sm text-brand-body leading-relaxed border-t border-slate-100 bg-white" x-cloak>
+            شما می‌توانید تا ۲۴ ساعت قبل از زمان نوبت رزرو شده خود، از طریق تماس تلفنی با بخش پذیرش کلینیک (شماره ۸۸۸۸۸۸۸۸-۰۲۱) یا با انتخاب مجدد بخش نوبت‌دهی و وارد کردن کد رهگیری در کارت دیجیتال خود، نوبت را لغو کرده یا زمان آن را به روز دیگری منتقل نمایید.
+          </div>
+        </div>
+
+        <!-- Accordion 2 -->
+        <div class="bg-slate-50 border border-slate-100/80 rounded-2xl overflow-hidden transition-all duration-300">
+          <button @click="openFaq = (openFaq === 2 ? null : 2)" class="w-full flex items-center justify-between p-5 text-right font-extrabold text-sm sm:text-base text-brand-dark focus:outline-none">
+            <span>آیا هزینه‌های درمانی کلینیک شامل بیمه تامین اجتماعی و بیمه‌های تکمیلی می‌شود؟</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-brand-600 transition-transform duration-300 shrink-0" :class="openFaq === 2 ? 'rotate-180' : ''"></i>
+          </button>
+          <div x-show="openFaq === 2" x-transition:enter="transition ease-out duration-200" class="px-5 pb-5 pt-1 text-xs sm:text-sm text-brand-body leading-relaxed border-t border-slate-100 bg-white" x-cloak>
+            بله، کلینیک فوق‌تخصصی آریا با سازمان‌های اصلی بیمه‌گر پایه نظیر سازمان تامین اجتماعی و بیمه سلامت همگانی ایرانیان و همچنین اکثر شرکت‌های مطرح ارائه دهنده بیمه تکمیلی (نظیر بیمه ایران، دانا، دی، البرز، آسیا، پاسارگاد و...) طرف قرارداد مستقیم بوده و معرفی‌نامه درمان آنلاین صادر می‌گردد.
+          </div>
+        </div>
+
+        <!-- Accordion 3 -->
+        <div class="bg-slate-50 border border-slate-100/80 rounded-2xl overflow-hidden transition-all duration-300">
+          <button @click="openFaq = (openFaq === 3 ? null : 3)" class="w-full flex items-center justify-between p-5 text-right font-extrabold text-sm sm:text-base text-brand-dark focus:outline-none">
+            <span>برای اولین مراجعه به کلینیک، چه مدارکی باید همراه داشته باشیم؟</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-brand-600 transition-transform duration-300 shrink-0" :class="openFaq === 3 ? 'rotate-180' : ''"></i>
+          </button>
+          <div x-show="openFaq === 3" x-transition:enter="transition ease-out duration-200" class="px-5 pb-5 pt-1 text-xs sm:text-sm text-brand-body leading-relaxed border-t border-slate-100 bg-white" x-cloak>
+            همراه داشتن کارت شناسایی معتبر (کارت ملی یا شناسنامه) الزامی است. همچنین اگر مدارک پزشکی قبلی شامل نتایج آزمایش خون، تصاویر ام‌آر‌آی، سونوگرافی، نسخه دارویی پزشک دیگر یا خلاصه پرونده بستری در بیمارستان دارید، حتماً جهت بررسی دقیق‌تر پزشک معالج، آن‌ها را به همراه داشته باشید.
+          </div>
+        </div>
+
+        <!-- Accordion 4 -->
+        <div class="bg-slate-50 border border-slate-100/80 rounded-2xl overflow-hidden transition-all duration-300">
+          <button @click="openFaq = (openFaq === 4 ? null : 4)" class="w-full flex items-center justify-between p-5 text-right font-extrabold text-sm sm:text-base text-brand-dark focus:outline-none">
+            <span>زمان پاسخ‌دهی آزمایش‌های خون و تصویربرداری‌ها چقدر طول می‌کشد؟</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-brand-600 transition-transform duration-300 shrink-0" :class="openFaq === 4 ? 'rotate-180' : ''"></i>
+          </button>
+          <div x-show="openFaq === 4" x-transition:enter="transition ease-out duration-200" class="px-5 pb-5 pt-1 text-xs sm:text-sm text-brand-body leading-relaxed border-t border-slate-100 bg-white" x-cloak>
+            آزمایش‌های روتین هماتولوژی و بیوشیمی معمولاً ظرف مدت ۲۴ ساعت آماده شده و به صورت آنلاین از سایت قابل دریافت است. جواب تصویربرداری دیجیتال و گزارش اولیه سونوگرافی بلافاصله پس از انجام تقدیم شما شده و گزارش تفصیلی مکتوب پزشک رادیولوژیست ظرف حداکثر ۴۸ ساعت تحویل خواهد شد.
+          </div>
+        </div>
+
+        <!-- Accordion 5 -->
+        <div class="bg-slate-50 border border-slate-100/80 rounded-2xl overflow-hidden transition-all duration-300">
+          <button @click="openFaq = (openFaq === 5 ? null : 5)" class="w-full flex items-center justify-between p-5 text-right font-extrabold text-sm sm:text-base text-brand-dark focus:outline-none">
+            <span>بخش اورژانس در چه ساعاتی فعال است و چه خدماتی ارائه می‌دهد؟</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-brand-600 transition-transform duration-300 shrink-0" :class="openFaq === 5 ? 'rotate-180' : ''"></i>
+          </button>
+          <div x-show="openFaq === 5" x-transition:enter="transition ease-out duration-200" class="px-5 pb-5 pt-1 text-xs sm:text-sm text-brand-body leading-relaxed border-t border-slate-100 bg-white" x-cloak>
+            بخش اورژانس، تزریقات، پانسمان و مراقبت‌های سرپایی کلینیک آریا به صورت شبانه‌روزی (۲۴ ساعته، ۷ روز هفته حتی در ایام تعطیلات رسمی) فعال است. خدماتی نظیر ویزیت پزشک عمومی مقیم، نوار قلب، احیای پایه، شستشوی گوش، تزریق سرم و سرم‌تراپی تخصصی و بخیه سرپایی ارائه می‌شود.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT & DETAILED WORKING HOURS SECTION (ارتباط با ما و ساعات کاری) -->
+  <section id="contact" class="py-24 bg-slate-50 relative overflow-hidden gsap-animate" x-data="{ contactSuccess: false }">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-sm font-bold text-brand-600 bg-brand-50 px-3.5 py-1.5 rounded-full uppercase tracking-wider">راهنمای مراجعه حضوری</span>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-brand-dark mt-4 mb-5 leading-normal">تماس با ما، نشانی و ساعات پذیرش کلینیک</h2>
+        <div class="w-16 h-1 bg-brand-600 mx-auto rounded-full mb-6"></div>
+      </div>
+
+      <!-- Grid Column: Form vs Info -->
+      <div class="grid lg:grid-cols-12 gap-10 sm:gap-12 items-start">
+        
+        <!-- LEFT COLUMN: Contact Form -->
+        <div class="lg:col-span-6 bg-white border border-slate-100 p-6 sm:p-10 rounded-3xl shadow-sm">
+          <h3 class="text-base sm:text-lg font-black text-brand-dark mb-6">ارسال پیام مستقیم به مدیریت کلینیک:</h3>
+          
+          <!-- Success State -->
+          <div x-show="contactSuccess" class="bg-teal-50 border border-teal-100 p-6 rounded-2xl text-center" x-cloak>
+            <div class="w-12 h-12 rounded-full bg-teal-500 text-white flex items-center justify-center mx-auto mb-4">
+              <i data-lucide="check" class="w-6 h-6"></i>
+            </div>
+            <h4 class="text-sm font-black text-brand-dark mb-2">پیام شما با موفقیت ارسال شد</h4>
+            <p class="text-xs text-brand-body leading-relaxed mb-4">از دیدگاه‌ها و مکاتبات شما سپاسگزاریم. روابط عمومی کلینیک آریا در سریع‌ترین زمان از طریق تماس تلفنی یا ایمیل پاسخگوی شما خواهد بود.</p>
+            <button @click="contactSuccess = false" class="text-xs font-bold bg-slate-100 px-4 py-2 rounded-lg text-brand-dark">ارسال پیام جدید</button>
+          </div>
+
+          <!-- Form Fields -->
+          <form x-show="!contactSuccess" @submit.prevent="contactSuccess = true" class="space-y-5">
+            <div>
+              <label for="cName" class="block text-xs font-bold text-slate-500 mb-2">نام و نام خانوادگی شما *</label>
+              <input type="text" id="cName" required placeholder="مثال: مهران مدیری" class="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 bg-slate-50/50 text-sm font-semibold text-brand-dark outline-none transition-all">
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label for="cPhone" class="block text-xs font-bold text-slate-500 mb-2">شماره تماس مستقیم *</label>
+                <input type="tel" id="cPhone" required placeholder="۰۹۱۲۳۴۵۶۷۸۹" class="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 bg-slate-50/50 text-sm font-semibold text-brand-dark outline-none transition-all text-left dir-ltr">
+              </div>
+              <div>
+                <label for="cSubject" class="block text-xs font-bold text-slate-500 mb-2">موضوع مکاتبه *</label>
+                <select id="cSubject" class="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 bg-slate-50/50 text-sm font-semibold text-brand-dark outline-none transition-all">
+                  <option value="feedback">انتقاد، پیشنهاد یا تقدیر</option>
+                  <option value="cooperation">همکاری پزشکان و کادر درمان</option>
+                  <option value="insurance">امور اداری و طرف قرارداد بیمه</option>
+                  <option value="technical">پشتیبانی فنی سایت و نوبت‌دهی</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label for="cMsg" class="block text-xs font-bold text-slate-500 mb-2">متن پیام شما *</label>
+              <textarea id="cMsg" required rows="4" placeholder="متن پیام یا بازخورد خود را بنویسید..." class="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 bg-slate-50/50 text-sm font-semibold text-brand-dark outline-none transition-all"></textarea>
+            </div>
+
+            <button type="submit" class="w-full py-4 bg-brand-600 hover:bg-brand-700 text-white font-black text-sm rounded-xl shadow-lg shadow-brand-600/10 transition-transform hover:scale-[1.01] active:scale-[0.99]">
+              ارسال پیام به دبیرخانه کلینیک
+            </button>
+          </form>
+
+        </div>
+
+        <!-- RIGHT COLUMN: Contact Info & Working Hours -->
+        <div class="lg:col-span-6 space-y-8 text-right">
+          
+          <!-- Location, Tel, Email grid -->
+          <div class="bg-white border border-slate-100 p-6 sm:p-8 rounded-3xl shadow-sm space-y-5">
+            <h3 class="text-base sm:text-lg font-black text-brand-dark border-b border-slate-100 pb-4 mb-4">نشانی و خطوط ارتباطی:</h3>
+            
+            <div class="flex items-start gap-3.5">
+              <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center shrink-0 mt-0.5">
+                <i data-lucide="map-pin" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <span class="block text-xs font-bold text-slate-400">آدرس کلینیک:</span>
+                <p class="text-sm font-bold text-brand-dark leading-relaxed mt-1">تهران، خیابان ولیعصر، ۱۰۰ متر پایین‌تر از میدان ونک، ساختمان پزشکان آریا، طبقات همکف، اول و دوم</p>
+              </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-4 border-t border-slate-100 pt-5">
+              
+              <div class="flex items-start gap-3.5">
+                <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center shrink-0 mt-0.5">
+                  <i data-lucide="phone" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <span class="block text-xs font-bold text-slate-400">تلفن ویژه پذیرش:</span>
+                  <a href="tel:02188888888" class="block text-sm font-black text-brand-dark leading-relaxed mt-1 dir-ltr text-right">۰۲۱-۸۸۸۸۸۸۸۸</a>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3.5">
+                <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center shrink-0 mt-0.5">
+                  <i data-lucide="mail" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <span class="block text-xs font-bold text-slate-400">پست الکترونیک:</span>
+                  <a href="/cdn-cgi/l/email-protection#4b22252d240b2a39222a28272225222865282426" class="block text-sm font-semibold text-brand-dark leading-relaxed mt-1"><span class="__cf_email__" data-cfemail="1e777078715e7f6c777f7d727770777d307d7173">[email&#160;protected]</span></a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Working Hours Table Grid & Live Status Badge -->
+          <div class="bg-gradient-to-tr from-brand-900 to-brand-800 text-white p-6 sm:p-8 rounded-3xl shadow-lg relative overflow-hidden">
+            
+            <!-- Real-time Status Badge (dynamic) -->
+            <div class="absolute top-6 left-6 flex items-center gap-1.5 bg-white/10 border border-white/20 px-3.5 py-1.5 rounded-full select-none">
+              <span class="flex h-2 w-2 relative">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+              </span>
+              <!-- Will dynamic check hours: 8:00 - 20:00 -->
+              <span class="text-[10px] font-bold text-white leading-relaxed">بخش تخصصی فعال است</span>
+            </div>
+
+            <h3 class="text-base sm:text-lg font-black border-b border-white/10 pb-4 mb-6">ساعات کاری و پذیرش دپارتمان‌ها:</h3>
+
+            <div class="space-y-3.5 text-xs sm:text-sm">
+              <div class="flex items-center justify-between border-b border-white/5 pb-2.5">
+                <span class="text-brand-200">شنبه تا چهارشنبه (پذیرش کلینیک تخصصی):</span>
+                <span class="font-bold">۰۸:۰۰ الی ۲۰:۰۰</span>
+              </div>
+              <div class="flex items-center justify-between border-b border-white/5 pb-2.5">
+                <span class="text-brand-200">پنجشنبه‌ها (پذیرش کلینیک تخصصی):</span>
+                <span class="font-bold">۰۸:۰۰ الی ۱۶:۰۰</span>
+              </div>
+              <div class="flex items-center justify-between border-b border-white/5 pb-2.5">
+                <span class="text-brand-200">جمعه‌ها و ایام تعطیلات رسمی:</span>
+                <span class="font-bold text-rose-300">بخش تخصصی تعطیل می‌باشد</span>
+              </div>
+              <div class="flex items-center justify-between pt-1 font-bold text-brand-accent">
+                <span class="flex items-center gap-1"><i data-lucide="alert-circle" class="w-4 h-4"></i> اورژانس، تزریقات و پانسمان:</span>
+                <span>۲۴ ساعته - ۷ روز هفته</span>
+              </div>
+            </div>
+
+            <!-- Stylized Map Placeholder instead of heavy iframe -->
+            <div class="mt-8 border border-white/10 rounded-2xl p-4 bg-white/5 flex items-center justify-between gap-4">
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-brand-200 shrink-0">
+                  <i data-lucide="map" class="w-4.5 h-4.5"></i>
+                </div>
+                <div>
+                  <span class="block text-[10px] text-brand-200">موقعیت کلینیک روی نقشه</span>
+                  <span class="block text-xs font-bold text-white mt-0.5">منطقه ونک تهران (پارکینگ اختصاصی مراجعین)</span>
+                </div>
+              </div>
+              <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="bg-white text-brand-dark hover:bg-slate-50 font-bold text-[10px] sm:text-xs px-4 py-2 rounded-lg shrink-0 transition-all">مسیریابی هوشمند</a>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- REGULATORY TRUST SEAL FOOTER PLACEMENT (بخش اصالت قانونی) -->
+  <section class="py-12 bg-white border-t border-slate-100 relative z-10 text-center select-none">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-center gap-10">
+      
+      <!-- Regulatory badge 1 placeholder -->
+      <div class="flex items-center gap-3.5 max-w-[200px] text-right">
+        <div class="w-12 h-12 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center shrink-0">
+          <svg class="w-7 h-7 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+        </div>
+        <div>
+          <span class="block text-xs font-black text-brand-dark">نشان ملی وزارت بهداشت</span>
+          <span class="block text-[10px] text-slate-400">تاییدیه رسمی اعتباربخشی سالانه</span>
+        </div>
+      </div>
+
+      <!-- Regulatory badge 2 placeholder -->
+      <div class="flex items-center gap-3.5 max-w-[200px] text-right">
+        <div class="w-12 h-12 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center shrink-0">
+          <svg class="w-7 h-7 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.907c.961 0 1.36 1.25.59 1.81l-3.97 2.883a1 1 0 00-.364 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.971-2.883a1 1 0 00-1.17 0l-3.97 2.883c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.364-1.118L2.98 10.1c-.77-.57-.375-1.81.59-1.81h4.907a1 1 0 00.95-.69l1.519-4.674z" />
+          </svg>
+        </div>
+        <div>
+          <span class="block text-xs font-black text-brand-dark">رتبه عالی کیفیت درمان</span>
+          <span class="block text-[10px] text-slate-400">برترین کلینیک تخصصی شمال تهران</span>
+        </div>
+      </div>
+
+      <!-- Regulatory badge 3 placeholder -->
+      <div class="flex items-center gap-3.5 max-w-[200px] text-right">
+        <div class="w-12 h-12 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center shrink-0">
+          <svg class="w-7 h-7 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+          </svg>
+        </div>
+        <div>
+          <span class="block text-xs font-black text-brand-dark">حریم خصوصی و امنیت</span>
+          <span class="block text-[10px] text-slate-400">حفاظت کامل از پرونده پزشکی</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MAIN FOOTER (فوتر وب‌سایت) -->
+  <footer class="bg-brand-dark text-slate-300 pt-16 pb-8 border-t border-slate-800 relative z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 border-b border-slate-800 pb-12 mb-10 text-right">
+        
+        <!-- Column 1: Brand & Desc -->
+        <div class="lg:col-span-5 space-y-5">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-600 flex items-center justify-center text-white shadow-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+              </svg>
+            </div>
+            <span class="text-lg font-black text-white">کلینیک فوق‌تخصصی آریا</span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed max-w-sm">
+            کلینیک تخصصی و فوق‌تخصصی آریا با تعهد به استانداردهای بین‌المللی مراقبت‌های بهداشتی، برترین خدمات درمانی سرپایی، تصویربرداری و آزمایشگاهی کشور را در فضایی یکپارچه، پیشرفته و ایمن ارائه می‌نماید.
+          </p>
+          
+          <!-- Social Media Icons (RTL aware layout) -->
+          <div class="flex items-center gap-3.5 pt-2">
+            <a href="#" class="w-9 h-9 rounded-lg bg-slate-800 hover:bg-brand-600 text-slate-300 hover:text-white flex items-center justify-center transition-colors" aria-label="اینستاگرام">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <a href="#" class="w-9 h-9 rounded-lg bg-slate-800 hover:bg-brand-600 text-slate-300 hover:text-white flex items-center justify-center transition-colors" aria-label="تلگرام">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm4.318 10.314c-.168.809-.533 2.949-.718 3.939-.078.419-.24.559-.389.573-.324.031-.569-.213-.883-.419-.492-.323-.77-.523-1.247-.837-.552-.363-.194-.563.12-.889.082-.085 1.51-1.384 1.538-1.503.003-.015.006-.071-.026-.099-.033-.028-.08-.019-.115-.011-.049.011-.837.531-2.364 1.564-.224.154-.426.23-.608.226-.2-.004-.585-.113-.871-.206-.351-.114-.63-.174-.606-.368.013-.101.152-.205.419-.313 1.644-.716 2.741-1.189 3.29-1.417 1.565-.652 1.89-.766 2.102-.77.047-.001.152.01.221.066.058.047.074.112.081.161.008.053.013.17-.003.321z"/></svg>
+            </a>
+            <a href="#" class="w-9 h-9 rounded-lg bg-slate-800 hover:bg-brand-600 text-slate-300 hover:text-white flex items-center justify-center transition-colors" aria-label="لینکدین">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Column 2: Quick Links -->
+        <div class="lg:col-span-2 space-y-4">
+          <h4 class="text-sm font-black text-white">دسترسی سریع</h4>
+          <ul class="space-y-2.5 text-xs sm:text-sm text-slate-400">
+            <li><a href="#" class="hover:text-brand-500 transition-colors">صفحه اصلی کلینیک</a></li>
+            <li><a href="#departments" class="hover:text-brand-500 transition-colors">دپارتمان‌های پزشکان</a></li>
+            <li><a href="#services" class="hover:text-brand-500 transition-colors">خدمات درمانی و پاراکلینیک</a></li>
+            <li><a href="#doctors" class="hover:text-brand-500 transition-colors">کادر پزشکی و علمی</a></li>
+            <li><a href="#booking" class="hover:text-brand-500 transition-colors">نوبت‌دهی آنلاین</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Specialized Clinics -->
+        <div class="lg:col-span-2 space-y-4">
+          <h4 class="text-sm font-black text-white">دپارتمان‌های کلیدی</h4>
+          <ul class="space-y-2.5 text-xs sm:text-sm text-slate-400">
+            <li><a href="#booking" class="hover:text-brand-500 transition-colors">کلینیک فوق‌تخصصی قلب</a></li>
+            <li><a href="#booking" class="hover:text-brand-500 transition-colors">کلینیک مغز و اعصاب</a></li>
+            <li><a href="#booking" class="hover:text-brand-500 transition-colors">بخش تخصصی اطفال و نوزادان</a></li>
+            <li><a href="#booking" class="hover:text-brand-500 transition-colors">رادیولوژی و سونوگرافی</a></li>
+            <li><a href="#booking" class="hover:text-brand-500 transition-colors">دندانپزشکی پیشرفته دیجیتال</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Newsletter Signup -->
+        <div class="lg:col-span-3 space-y-4" x-data="{ subSuccess: false }">
+          <h4 class="text-sm font-black text-white">عضویت در خبرنامه سلامت</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">با عضویت در خبرنامه کلینیک، مقالات برگزیده سلامت پزشکان آریا را در ایمیل خود دریافت نمایید.</p>
+          
+          <div x-show="subSuccess" class="p-3 bg-white/5 border border-white/10 rounded-xl text-xs text-brand-accent font-bold" x-cloak>
+            سپاس! ایمیل شما با موفقیت ثبت شد.
+          </div>
+
+          <form x-show="!subSuccess" @submit.prevent="subSuccess = true" class="space-y-2.5">
+            <input type="email" required placeholder="example@email.com" class="w-full px-4 py-3 rounded-xl bg-slate-800 text-white placeholder-slate-500 border border-slate-700/80 focus:ring-1 focus:ring-brand-500 outline-none text-left dir-ltr text-xs">
+            <button type="submit" class="w-full py-3 bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs rounded-xl transition-all">عضویت در خبرنامه</button>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="flex flex-col sm:flex-row items-center justify-between text-center sm:text-right gap-4 pt-4 border-t border-slate-800/60 text-xs text-slate-500">
+        <p>تمامی حقوق مادی و معنوی این وب‌سایت متعلق به کلینیک تخصصی و فوق‌تخصصی آریا می‌باشد. © ۱۴۰۵</p>
+        <p class="text-[10px] tracking-wide text-slate-600 select-none">DESIGNED BY SENIOR PRODUCT DESIGNER | PRODUCTION-READY</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- SCROLL TO TOP FLOATING BUTTON (دکمه بازگشت به بالا) -->
+  <button onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" 
+          x-show="isScrolled"
+          x-transition:enter="transition duration-200"
+          x-transition:leave="transition duration-150"
+          class="fixed bottom-6 left-6 z-30 p-3.5 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white shadow-xl shadow-brand-600/20 hover:scale-110 active:scale-95 transition-all flex items-center justify-center focus:outline-none" 
+          aria-label="بازگشت به بالای صفحه" x-cloak>
+    <i data-lucide="arrow-up" class="w-5 h-5"></i>
+  </button>
+
+  <!-- SCRIPTS & INITIALIZATIONS -->
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Alpine.js Stores & Components
+    document.addEventListener('alpine:init', () => {
+      Alpine.data('bookingSystem', () => ({
+        // State
+        department: '',
+        doctor: '',
+        date: '',
+        timeSlot: '',
+        patientName: '',
+        patientPhone: '',
+        patientNationalId: '',
+        step: 1,
+        bookingSuccess: false,
+        trackingCode: '',
+
+        // Doctors data by department
+        doctorsList: [
+          { id: '1', name: 'دکتر الهام رضایی', specialty: 'متخصص و جراح قلب و عروق', dept: 'cardiology', image: 'images/doctor-1.jpg', rating: '۴.۹', code: 'نظام پزشکی: ۱۲۳۴۵' },
+          { id: '2', name: 'دکتر علیرضا عباسی', specialty: 'فوق‌تخصص مغز و اعصاب', dept: 'neurology', image: 'images/doctor-2.jpg', rating: '۴.۸', code: 'نظام پزشکی: ۲۳۴۵۶' },
+          { id: '3', name: 'دکتر مریم سجادی', specialty: 'متخصص کودکان و نوزادان', dept: 'pediatrics', image: 'images/doctor-3.jpg', rating: '۴.۹', code: 'نظام پزشکی: ۳۴۵۶۷' },
+          { id: '4', name: 'دکتر کامران علوی', specialty: 'جراح و متخصص چشم', dept: 'ophthalmology', image: 'images/doctor-2.jpg', rating: '۴.۷', code: 'نظام پزشکی: ۴۵۶۷۸' },
+          { id: '5', name: 'دکتر سارا فرهادی', specialty: 'متخصص دندانپزشکی زیبایی', dept: 'dentistry', image: 'images/doctor-1.jpg', rating: '۴.۹', code: 'نظام پزشکی: ۵۶۷۸۹' },
+          { id: '6', name: 'دکتر شروین تهرانی', specialty: 'متخصص پوست و زیبایی', dept: 'dermatology', image: 'images/doctor-3.jpg', rating: '۴.۹', code: 'نظام پزشکی: ۶۷۸۹۰' },
+        ],
+
+        // Dates for July/August 2026 (Tir/Mordad 1405)
+        datesList: [
+          { id: 'd1', day: 'شنبه', dateStr: '۲۸ تیر', year: '۱۴۰۵', label: 'شنبه ۲۸ تیر ۱۴۰۵' },
+          { id: 'd2', day: 'یکشنبه', dateStr: '۲۹ تیر', year: '۱۴۰۵', label: 'یکشنبه ۲۹ تیر ۱۴۰۵' },
+          { id: 'd3', day: 'دوشنبه', dateStr: '۳۰ تیر', year: '۱۴۰۵', label: 'دوشنبه ۳۰ تیر ۱۴۰۵' },
+          { id: 'd4', day: 'سه‌شنبه', dateStr: '۳۱ تیر', year: '۱۴۰۵', label: 'سه‌شنبه ۳۱ تیر ۱۴۰۵' },
+          { id: 'd5', day: 'چهارشنبه', dateStr: '۱ مرداد', year: '۱۴۰۵', label: 'چهارشنبه ۱ مرداد ۱۴۰۵' },
+          { id: 'd6', day: 'پنجشنبه', dateStr: '۲ مرداد', year: '۱۴۰۵', label: 'پنجشنبه ۲ مرداد ۱۴۰۵' },
+        ],
+
+        // Time slots
+        timeSlots: [
+          { id: 't1', time: '۱۶:۰۰', status: 'available' },
+          { id: 't2', time: '۱۶:۳۰', status: 'available' },
+          { id: 't3', time: '۱۷:۰۰', status: 'booked' },
+          { id: 't4', time: '۱۷:۳۰', status: 'available' },
+          { id: 't5', time: '۱۸:۰۰', status: 'available' },
+          { id: 't6', time: '۱۸:۳۰', status: 'booked' },
+          { id: 't7', time: '۱۹:۰۰', status: 'available' },
+          { id: 't8', time: '۱۹:۳۰', status: 'available' },
+        ],
+
+        get filteredDoctors() {
+          if (!this.department) return [];
+          return this.doctorsList.filter(d => d.dept === this.department);
+        },
+
+        get selectedDoctorObj() {
+          return this.doctorsList.find(d => d.id === this.doctor) || null;
+        },
+
+        get selectedDateObj() {
+          return this.datesList.find(d => d.id === this.date) || null;
+        },
+
+        get selectedDeptName() {
+          const depts = {
+            cardiology: 'قلب و عروق',
+            neurology: 'مغز و اعصاب',
+            pediatrics: 'کودکان و نوزادان',
+            ophthalmology: 'چشم‌پزشکی',
+            dentistry: 'دندانپزشکی دیجیتال',
+            dermatology: 'پوست و زیبایی'
+          };
+          return depts[this.department] || '';
+        },
+
+        selectDepartment(dept) {
+          this.department = dept;
+          this.doctor = '';
+          this.date = '';
+          this.timeSlot = '';
+          this.step = 2;
+        },
+
+        selectDoctor(docId) {
+          this.doctor = docId;
+          this.date = '';
+          this.timeSlot = '';
+          this.step = 3;
+        },
+
+        selectDate(dateId) {
+          this.date = dateId;
+          this.timeSlot = '';
+        },
+
+        selectTimeSlot(slot) {
+          if (slot.status === 'booked') return;
+          this.timeSlot = slot.time;
+          this.step = 4;
+        },
+
+        submitBooking() {
+          if (!this.patientName.trim()) {
+            alert('لطفاً نام و نام خانوادگی بیمار را وارد کنید.');
+            return;
+          }
+          if (!this.patientPhone.trim() || (!/^۰۹\d{9}$/.test(this.patientPhone.trim()) && !/^09\d{9}$/.test(this.patientPhone.trim()))) {
+            alert('لطفاً شماره موبایل معتبر (مثال: ۰۹۱۲۳۴۵۶۷۸۹) وارد کنید.');
+            return;
+          }
+          if (!this.patientNationalId.trim() || !/^\d{10}$/.test(this.patientNationalId.trim())) {
+            alert('لطفاً کد ملی ۱۰ رقمی معتبر وارد کنید.');
+            return;
+          }
+
+          this.trackingCode = 'ARC-' + Math.floor(10000 + Math.random() * 90000);
+          this.bookingSuccess = true;
+          
+          setTimeout(() => {
+            const el = document.getElementById('booking-receipt');
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+          }, 100);
+        },
+
+        resetBooking() {
+          this.department = '';
+          this.doctor = '';
+          this.date = '';
+          this.timeSlot = '';
+          this.patientName = '';
+          this.patientPhone = '';
+          this.patientNationalId = '';
+          this.step = 1;
+          this.bookingSuccess = false;
+          this.trackingCode = '';
+        }
+      }));
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      // Initialize Lucide Icons
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
+
+      // GSAP Entrance Animations
+      gsap.from(".hero-animate-text", {
+        duration: 1.2,
+        y: 40,
+        opacity: 0,
+        stagger: 0.2,
+        ease: "power3.out"
+      });
+
+      gsap.from(".hero-animate-image", {
+        duration: 1.4,
+        scale: 0.95,
+        opacity: 0,
+        ease: "power3.out",
+        delay: 0.3
+      });
+
+      // Stagger Intersection Observer for Sections
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+      };
+
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const target = entry.target;
+            const staggerItems = target.querySelectorAll('.gsap-stagger-item');
+            
+            if (staggerItems.length > 0) {
+              gsap.from(staggerItems, {
+                duration: 0.8,
+                y: 30,
+                opacity: 0,
+                stagger: 0.12,
+                ease: "power2.out"
+              });
+            } else {
+              gsap.from(target, {
+                duration: 0.8,
+                y: 35,
+                opacity: 0,
+                ease: "power2.out"
+              });
+            }
+            observer.unobserve(target);
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.gsap-animate').forEach(el => {
+        observer.observe(el);
+      });
+
+      // Swiper Doctors Slide Initialization
+      const doctorsSwiper = new Swiper('.doctors-swiper', {
+        slidesPerView: 1,
+        spaceBetween: 24,
+        rtl: true, // Native RTL Support for Farsi layout order!
+        navigation: {
+          nextEl: '.swiper-doc-next',
+          prevEl: '.swiper-doc-prev',
+        },
+        breakpoints: {
+          640: {
+            slidesPerView: 2,
+          },
+          1024: {
+            slidesPerView: 3,
+          }
+        },
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: false,
+        }
+      });
+
+      // Swiper Testimonials Slide Initialization
+      const reviewsSwiper = new Swiper('.reviews-swiper', {
+        slidesPerView: 1,
+        spaceBetween: 24,
+        rtl: true, // Native RTL Support!
+        pagination: {
+          el: '.swiper-reviews-pagination',
+          clickable: true,
+        },
+        navigation: {
+          nextEl: '.swiper-reviews-next',
+          prevEl: '.swiper-reviews-prev',
+        },
+        breakpoints: {
+          768: {
+            slidesPerView: 2,
+          }
+        },
+        autoplay: {
+          delay: 6000,
+          disableOnInteraction: false,
+        }
+      });
+
+    });
+  </script>
+
+</body>
+</html>
