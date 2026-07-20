@@ -37,7 +37,7 @@ jobs:
           rsync -av --progress . public --exclude .git --exclude public
           
           # 3. Rename port4.html to index.html so it becomes the homepage
-          mv public/port4.html public/index.html
+          mv public/home.html public/index.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
