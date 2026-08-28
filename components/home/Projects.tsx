@@ -6,9 +6,9 @@ import { featuredProject, projectCards } from "@/lib/projects";
 import { ArrowLeftIcon, CheckIcon, ExternalIcon } from "@/components/icons";
 
 const featuredHighlights = [
-  "۵ داشبورد اختصاصی برای موسس، مدیر، مالی، معلم و اولیا",
-  "آزمون آنلاین ضدتقلب با ذخیره‌سازی آفلاین",
-  "پرونده ۳۶۰ درجه دانش‌آموز و اتوماسیون پیامکی",
+  "پرداخت آنلاین شهریه و اقساط‌بندی خودکار با درگاه زرین‌پال",
+  "رتبه اعتباری زنده A تا F برای هر دانش‌آموز",
+  "حقوق پویای کارکنان + ماژول آموزشی کامل با آزمون ضدتقلب",
 ];
 
 export default function Projects() {
