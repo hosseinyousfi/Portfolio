@@ -7,8 +7,8 @@ import { ArrowLeftIcon, CheckIcon, ExternalIcon } from "@/components/icons";
 
 const featuredHighlights = [
   "پرداخت آنلاین شهریه و اقساط‌بندی خودکار با درگاه زرین‌پال",
-  "رتبه اعتباری زنده A تا F برای هر دانش‌آموز",
-  "حقوق پویای کارکنان + ماژول آموزشی کامل با آزمون ضدتقلب",
+  "ماژول آموزشی کامل با آزمون آنلاین ضدتقلب و کلاس آنلاین",
+  "مدیریت هوشمند دانش‌آموزان و کارکنان مدارس",
 ];
 
 export default function Projects() {
