@@ -7,7 +7,7 @@ import { ArrowLeftIcon, CheckIcon, ExternalIcon } from "@/components/icons";
 
 const featuredHighlights = [
   "پرداخت آنلاین شهریه و اقساط‌بندی خودکار با درگاه زرین‌پال",
-  "ماژول آموزشی کامل با آزمون آنلاین ضدتقلب و کلاس آنلاین",
+  "ماژول آموزشی کامل با آزمون آنلاین هوشمند و کلاس آنلاین",
   "مدیریت هوشمند دانش‌آموزان و کارکنان مدارس",
 ];
 
@@ -42,7 +42,7 @@ export default function Projects() {
                     ⭐ پروژه شاخص
                   </span>
                   <span className="rounded-full border border-emerald-400/25 bg-emerald-400/10 px-3 py-1.5 text-xs font-semibold text-emerald-300">
-                    دارای کاربران فعال
+                    در حال استفاده در ۴ مدرسه
                   </span>
                 </div>
 
