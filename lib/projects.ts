@@ -294,10 +294,8 @@ export const projects: Project[] = [
     ],
     links: [
       {
-        // TODO: آدرس دموی کامل سامانه را اینجا قرار دهید
         label: "مشاهده دموی کامل سامانه",
-        href: "#",
-        note: "لینک دموی آنلاین به‌زودی فعال می‌شود",
+        href: "https://har.co.ir/demo/",
         primary: true,
       },
     ],
