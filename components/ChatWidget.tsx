@@ -77,21 +77,20 @@ export default function ChatWidget() {
   }, [messages, typing, showQuick]);
 
   useEffect(() => {
-    if (open && !started) {
-      setStarted(true);
-      setTyping(true);
-      const t = setTimeout(() => {
-        setTyping(false);
-        setMessages([
-          {
-            role: "bot",
-            text: "سلام! من دستیار هوشمند Codevo هستم 👋 چطور می‌تونم درباره خدمات یا پروژه‌تون کمکتون کنم؟",
-          },
-        ]);
-        setShowQuick(true);
-      }, 700);
-      return () => clearTimeout(t);
-    }
+    if (!open || started) return;
+    setStarted(true);
+    setTyping(true);
+    // بدون cleanup — تایمر باید حتماً اجرا شود تا پیام خوش‌آمد نمایش داده شود
+    window.setTimeout(() => {
+      setTyping(false);
+      setMessages([
+        {
+          role: "bot",
+          text: "سلام! من دستیار هوشمند Codevo هستم 👋 چطور می‌تونم درباره خدمات یا پروژه‌تون کمکتون کنم؟",
+        },
+      ]);
+      setShowQuick(true);
+    }, 700);
   }, [open, started]);
 
   function send(text: string) {

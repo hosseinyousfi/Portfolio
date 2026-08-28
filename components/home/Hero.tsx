@@ -20,12 +20,12 @@ export default function Hero() {
   });
 
   return (
-    <section id="top" className="relative overflow-hidden pb-16 pt-28 sm:pb-20 sm:pt-36 lg:pb-28 lg:pt-44">
+    <section id="top" className="relative overflow-hidden pb-14 pt-24 sm:pb-20 sm:pt-36 lg:pb-28 lg:pt-44">
       <div className="absolute inset-0 -z-10 grid-backdrop" />
 
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 lg:grid-cols-2 lg:gap-10">
         <div className="text-center lg:text-right">
-          <motion.div {...fadeUp(0)} className="mb-7 flex justify-center lg:justify-start">
+          <motion.div {...fadeUp(0)} className="mb-5 flex justify-center sm:mb-7 lg:justify-start">
             <div className="relative">
               <span className="absolute -inset-1.5 rounded-full bg-gradient-to-tr from-brand-bright via-brand-deep to-brand opacity-60 blur-md" />
               <Image
@@ -34,7 +34,7 @@ export default function Hero() {
                 width={96}
                 height={96}
                 priority
-                className="relative h-24 w-24 rounded-full border-2 border-white/20 object-cover shadow-2xl"
+                className="relative h-20 w-20 rounded-full border-2 border-white/20 object-cover shadow-2xl sm:h-24 sm:w-24"
               />
               <span className="absolute bottom-1 left-1 flex h-4 w-4">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
@@ -53,7 +53,7 @@ export default function Hero() {
 
           <motion.h1
             {...fadeUp(0.1)}
-            className="mt-6 text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-4xl sm:leading-[1.25] lg:text-5xl xl:text-6xl"
+            className="mt-5 text-[2rem] font-extrabold leading-[1.3] tracking-tight text-white sm:mt-6 sm:text-4xl sm:leading-[1.25] lg:text-5xl xl:text-6xl"
           >
             خلق راهکارهای
             <br />
@@ -62,27 +62,52 @@ export default function Hero() {
 
           <motion.p
             {...fadeUp(0.2)}
-            className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-mist/80 sm:mt-6 sm:text-lg lg:mx-0"
+            className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-mist/80 sm:mt-6 sm:text-lg lg:mx-0"
           >
-            من <span className="font-bold text-white">Codevo</span> هستم. ایده
-            شما را به یک محصول دیجیتال واقعی تبدیل می‌کنم؛ از فروشگاه اینترنتی
-            تا سامانه اختصاصی کسب‌وکارتان. شما روی رشد کسب‌وکار تمرکز کنید،
-            ساده‌سازی و حل پیچیدگی‌ها با من.
+            ما در <span className="font-bold text-white">Codevo</span> ایده شما
+            را به یک محصول دیجیتال واقعی تبدیل می‌کنیم؛ ساده، سریع و بدون
+            پیچیدگی.
           </motion.p>
 
           <motion.div
             {...fadeUp(0.3)}
-            className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row lg:justify-start"
+            className="mt-7 flex items-center justify-center gap-3 sm:mt-9 lg:justify-start"
           >
-            <Link href="/#projects" className="btn-brand group w-full px-7 py-3.5 text-base sm:w-auto">
+            <Link
+              href="/#projects"
+              className="btn-brand group flex-1 px-4 py-3.5 text-sm sm:flex-none sm:px-7 sm:text-base"
+            >
               مشاهده نمونه‌کارها
-              <svg className="h-4 w-4 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+              <svg className="hidden h-4 w-4 transition-transform group-hover:-translate-x-1 sm:block" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19 12H5m0 0l6 6m-6-6l6-6" />
               </svg>
             </Link>
-            <Link href="/#contact" className="btn-ghost w-full px-7 py-3.5 text-base sm:w-auto">
+            <Link
+              href="/#contact"
+              className="btn-ghost flex-1 px-4 py-3.5 text-sm sm:flex-none sm:px-7 sm:text-base"
+            >
               شروع همکاری
             </Link>
+          </motion.div>
+
+          {/* quick feature chips — mobile only (desktop has the code card) */}
+          <motion.div
+            {...fadeUp(0.4)}
+            className="mt-8 flex items-center justify-center gap-2.5 lg:hidden"
+          >
+            {[
+              { emoji: "⚡", label: "تحویل سریع" },
+              { emoji: "📱", label: "موبایل‌فرست" },
+              { emoji: "🛡️", label: "امن و پایدار" },
+            ].map((f) => (
+              <span
+                key={f.label}
+                className="glass flex items-center gap-1.5 rounded-full px-3.5 py-2 text-xs font-semibold text-mist/85"
+              >
+                <span aria-hidden>{f.emoji}</span>
+                {f.label}
+              </span>
+            ))}
           </motion.div>
         </div>
 
