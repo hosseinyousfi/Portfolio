@@ -64,11 +64,10 @@ export default function Hero() {
             {...fadeUp(0.2)}
             className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-mist/80 sm:mt-6 sm:text-lg lg:mx-0"
           >
-            من <span className="font-bold text-white">Codevo</span> هستم،
-            توسعه‌دهنده فول‌استک با تخصص در{" "}
-            <span className="ltr text-brand-bright">Python</span> و{" "}
-            <span className="ltr text-brand-bright">Django</span>. ایده‌های شما
-            را به وب‌اپلیکیشن‌ها و فروشگاه‌های اینترنتی حرفه‌ای تبدیل می‌کنم.
+            من <span className="font-bold text-white">Codevo</span> هستم. ایده
+            شما را به یک محصول دیجیتال واقعی تبدیل می‌کنم؛ از فروشگاه اینترنتی
+            تا سامانه اختصاصی کسب‌وکارتان. شما روی رشد کسب‌وکار تمرکز کنید،
+            ساده‌سازی و حل پیچیدگی‌ها با من.
           </motion.p>
 
           <motion.div

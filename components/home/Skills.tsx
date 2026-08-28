@@ -2,18 +2,18 @@ import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 
 const skills = [
-  { name: "Python", hint: "زبان اصلی بک‌اند" },
-  { name: "Django", hint: "فریم‌ورک قدرتمند وب" },
-  { name: "JavaScript", hint: "تعامل و پویایی" },
-  { name: "React / Next.js", hint: "فرانت‌اند مدرن" },
-  { name: "Tailwind CSS", hint: "استایل سریع و تمیز" },
-  { name: "PostgreSQL", hint: "دیتابیس رابطه‌ای" },
-  { name: "Redis", hint: "کش و صف پیام" },
-  { name: "Docker", hint: "کانتینر و استقرار" },
-  { name: "Nginx", hint: "وب‌سرور و پراکسی" },
-  { name: "Git", hint: "کنترل نسخه" },
-  { name: "Linux", hint: "مدیریت سرور" },
-  { name: "HTML5 / CSS3", hint: "استاندارد وب" },
+  { name: "Python", hint: "زبان اصلی بک‌اند", icon: "devicon-python-plain colored" },
+  { name: "Django", hint: "فریم‌ورک قدرتمند وب", icon: "devicon-django-plain", color: "#44B78B" },
+  { name: "JavaScript", hint: "تعامل و پویایی", icon: "devicon-javascript-plain colored" },
+  { name: "React / Next.js", hint: "فرانت‌اند مدرن", icon: "devicon-react-original colored" },
+  { name: "Tailwind CSS", hint: "استایل سریع و تمیز", icon: "devicon-tailwindcss-original colored" },
+  { name: "PostgreSQL", hint: "دیتابیس رابطه‌ای", icon: "devicon-postgresql-plain colored" },
+  { name: "Redis", hint: "کش و صف پیام", icon: "devicon-redis-plain colored" },
+  { name: "Docker", hint: "کانتینر و استقرار", icon: "devicon-docker-plain colored" },
+  { name: "Nginx", hint: "وب‌سرور و پراکسی", icon: "devicon-nginx-original colored" },
+  { name: "Git", hint: "کنترل نسخه", icon: "devicon-git-plain colored" },
+  { name: "Linux", hint: "مدیریت سرور", icon: "devicon-linux-plain", color: "#ffffff" },
+  { name: "HTML5 / CSS3", hint: "استاندارد وب", icon: "devicon-html5-plain colored" },
 ];
 
 export default function Skills() {
@@ -29,8 +29,13 @@ export default function Skills() {
         <div className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {skills.map((s, i) => (
             <Reveal key={s.name} delay={(i % 4) * 0.06} className="h-full">
-              <div className="glass group flex h-full flex-col items-center justify-center gap-1.5 rounded-2xl px-4 py-6 text-center transition-all duration-300 hover:-translate-y-1.5 hover:border-brand/30 hover:shadow-[0_0_20px_2px_rgba(34,211,238,.12)]">
-                <span className="ltr text-base font-extrabold text-white transition-colors group-hover:text-brand-bright">
+              <div className="glass group flex h-full flex-col items-center justify-center gap-2 rounded-2xl px-4 py-6 text-center transition-all duration-300 hover:-translate-y-1.5 hover:border-brand/30 hover:shadow-[0_0_20px_2px_rgba(34,211,238,.12)]">
+                <i
+                  className={`${s.icon} text-4xl transition-transform duration-300 group-hover:scale-110`}
+                  style={s.color ? { color: s.color } : undefined}
+                  aria-hidden
+                />
+                <span className="ltr mt-1 text-base font-extrabold text-white transition-colors group-hover:text-brand-bright">
                   {s.name}
                 </span>
                 <span className="text-xs text-mist/45">{s.hint}</span>
