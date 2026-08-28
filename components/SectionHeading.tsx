@@ -21,7 +21,7 @@ export default function SectionHeading({ eyebrow, title, subtitle }: Props) {
       </Reveal>
       {subtitle && (
         <Reveal delay={0.16}>
-          <p className="mt-4 leading-relaxed text-mist/60">{subtitle}</p>
+          <p className="mt-4 leading-relaxed text-mist/75">{subtitle}</p>
         </Reveal>
       )}
     </div>

@@ -292,13 +292,14 @@ export const projects: Project[] = [
       "Chart.js",
       "ML Pipeline",
     ],
-    galleryTitle: "بخش‌های سامانه",
-    gallery: [
-      { src: "/media/water-map.png", caption: "نقشه تعاملی و پراکندگی ایستگاه‌ها" },
-      { src: "/media/water-map2.png", caption: "گراف هیدرولوژیکی و وضعیت ایستگاه‌ها" },
-      { src: "/media/water-dash.png", caption: "داشبورد تحلیلی و نمودارهای کیفیت" },
-      { src: "/media/water-validation.png", caption: "اعتبارسنجی هوشمند داده‌ها" },
-      { src: "/media/water-entry.png", caption: "ورود و مدیریت داده‌های ایستگاه" },
+    links: [
+      {
+        // TODO: آدرس دموی کامل سامانه را اینجا قرار دهید
+        label: "مشاهده دموی کامل سامانه",
+        href: "#",
+        note: "لینک دموی آنلاین به‌زودی فعال می‌شود",
+        primary: true,
+      },
     ],
   },
 ];

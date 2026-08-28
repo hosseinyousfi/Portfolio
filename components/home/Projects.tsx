@@ -43,7 +43,7 @@ export default function Projects() {
                   <h3 className="mt-4 text-lg font-bold text-white transition-colors group-hover:text-brand-bright">
                     {p.title}
                   </h3>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-mist/60">
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-mist/75">
                     {p.tagline}
                   </p>
                   <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-brand-bright">
@@ -81,11 +81,11 @@ export default function Projects() {
           {/* CTA card */}
           <Reveal delay={0.16} className="h-full">
             <div className="flex h-full flex-col items-center justify-center gap-4 rounded-3xl border border-dashed border-brand/30 bg-brand/5 p-8 text-center">
-              <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-bright to-brand text-2xl text-base">
+              <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-brand to-brand-deep text-2xl text-white">
                 +
               </span>
               <h3 className="text-lg font-bold text-white">پروژه بعدی می‌تواند مال شما باشد</h3>
-              <p className="text-sm leading-relaxed text-mist/60">
+              <p className="text-sm leading-relaxed text-mist/75">
                 ایده‌تان را بگویید تا با هم به یک محصول واقعی تبدیلش کنیم.
               </p>
               <Link href="/#contact" className="btn-brand px-6 py-3 text-sm">

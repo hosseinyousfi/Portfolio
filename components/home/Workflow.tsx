@@ -70,7 +70,7 @@ export default function Workflow() {
                       {step.n}
                     </span>
                     <h3 className="mt-2 text-lg font-bold text-white">{step.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-mist/60">{step.desc}</p>
+                    <p className="mt-2 text-sm leading-relaxed text-mist/75">{step.desc}</p>
                   </div>
                 </div>
                 {/* node */}

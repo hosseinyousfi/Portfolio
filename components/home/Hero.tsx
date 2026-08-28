@@ -25,7 +25,25 @@ export default function Hero() {
 
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 lg:grid-cols-2 lg:gap-10">
         <div className="text-center lg:text-right">
-          <motion.div {...fadeUp(0)} className="inline-flex items-center gap-2 rounded-full border border-brand/25 bg-brand/10 px-3.5 py-1.5 text-xs font-semibold text-brand-bright">
+          <motion.div {...fadeUp(0)} className="mb-7 flex justify-center lg:justify-start">
+            <div className="relative">
+              <span className="absolute -inset-1.5 rounded-full bg-gradient-to-tr from-brand-bright via-brand-deep to-brand opacity-60 blur-md" />
+              <Image
+                src="/images/avatar.webp"
+                alt="Codevo — توسعه‌دهنده فول‌استک"
+                width={96}
+                height={96}
+                priority
+                className="relative h-24 w-24 rounded-full border-2 border-white/20 object-cover shadow-2xl"
+              />
+              <span className="absolute bottom-1 left-1 flex h-4 w-4">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
+                <span className="relative h-4 w-4 rounded-full border-2 border-base bg-emerald-400" />
+              </span>
+            </div>
+          </motion.div>
+
+          <motion.div {...fadeUp(0.05)} className="inline-flex items-center gap-2 rounded-full border border-brand/25 bg-brand/10 px-3.5 py-1.5 text-xs font-semibold text-brand-bright">
             <span className="relative flex h-1.5 w-1.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand opacity-60" />
               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-brand" />

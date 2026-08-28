@@ -62,6 +62,7 @@ export default function ChatWidget() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [typing, setTyping] = useState(false);
   const [showQuick, setShowQuick] = useState(false);
+  const [usedQuick, setUsedQuick] = useState<string[]>([]);
   const [input, setInput] = useState("");
   const [tooltip, setTooltip] = useState(false);
   const listRef = useRef<HTMLDivElement>(null);
@@ -97,12 +98,17 @@ export default function ChatWidget() {
     const trimmed = text.trim();
     if (!trimmed || typing) return;
     setShowQuick(false);
+    if (quickReplies.includes(trimmed)) {
+      setUsedQuick((u) => [...u, trimmed]);
+    }
     setMessages((m) => [...m, { role: "user", text: trimmed }]);
     setInput("");
     setTyping(true);
     setTimeout(() => {
       setTyping(false);
       setMessages((m) => [...m, { role: "bot", text: getBotReply(trimmed) }]);
+      // پیشنهادهای آماده را دوباره نشان بده تا گفتگو «هوشمند» ادامه پیدا کند
+      setShowQuick(true);
     }, 800);
   }
 
@@ -126,7 +132,7 @@ export default function ChatWidget() {
             setOpen((v) => !v);
             setTooltip(false);
           }}
-          className="relative flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-brand-bright to-brand text-base shadow-[0_10px_30px_-6px_rgba(6,182,212,0.7)] transition-transform hover:scale-105"
+          className="relative flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-brand to-brand-deep text-white shadow-[0_10px_30px_-6px_rgba(6,182,212,0.7)] transition-transform hover:scale-105"
           aria-label={open ? "بستن گفتگو" : "گفتگو با دستیار Codevo"}
         >
           {!open && (
@@ -190,7 +196,7 @@ export default function ChatWidget() {
                   <p
                     className={`max-w-[80%] whitespace-pre-line rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${
                       m.role === "user"
-                        ? "bg-gradient-to-br from-brand-bright to-brand text-base"
+                        ? "bg-gradient-to-br from-brand to-brand-deep text-white"
                         : "bg-white/8 text-mist/85"
                     }`}
                   >
@@ -209,17 +215,19 @@ export default function ChatWidget() {
                 </div>
               )}
 
-              {showQuick && (
+              {showQuick && quickReplies.some((q) => !usedQuick.includes(q)) && (
                 <div className="flex flex-wrap gap-2 pt-2">
-                  {quickReplies.map((q) => (
-                    <button
-                      key={q}
-                      onClick={() => send(q)}
-                      className="rounded-full border border-brand/25 bg-brand/10 px-3 py-1.5 text-xs font-medium text-brand-bright transition-colors hover:bg-brand/20"
-                    >
-                      {q}
-                    </button>
-                  ))}
+                  {quickReplies
+                    .filter((q) => !usedQuick.includes(q))
+                    .map((q) => (
+                      <button
+                        key={q}
+                        onClick={() => send(q)}
+                        className="rounded-full border border-brand/25 bg-brand/10 px-3 py-1.5 text-xs font-medium text-brand-bright transition-colors hover:bg-brand/20"
+                      >
+                        {q}
+                      </button>
+                    ))}
                 </div>
               )}
             </div>
@@ -241,7 +249,7 @@ export default function ChatWidget() {
               />
               <button
                 type="submit"
-                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-brand-bright to-brand text-base transition-transform hover:scale-105"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-brand to-brand-deep text-white transition-transform hover:scale-105"
                 aria-label="ارسال"
               >
                 <svg className="h-4 w-4 -scale-x-100" fill="currentColor" viewBox="0 0 20 20">

@@ -59,11 +59,11 @@ export default function Services() {
           {services.map((s, i) => (
             <Reveal key={s.title} delay={i * 0.08} className="h-full">
               <div className="glass group flex h-full flex-col rounded-3xl p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_24px_4px_rgba(34,211,238,.14)]">
-                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-bright to-brand text-base transition-transform duration-300 group-hover:scale-110">
+                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-brand to-brand-deep text-white transition-transform duration-300 group-hover:scale-110">
                   {s.icon}
                 </span>
                 <h3 className="mt-5 text-lg font-bold text-white">{s.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-mist/60">{s.desc}</p>
+                <p className="mt-2 text-sm leading-relaxed text-mist/75">{s.desc}</p>
                 <ul className="mt-5 space-y-2.5 border-t border-white/8 pt-5">
                   {s.items.map((item) => (
                     <li key={item} className="flex items-center gap-2 text-sm text-mist/70">

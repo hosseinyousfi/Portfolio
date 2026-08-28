@@ -91,7 +91,7 @@ export default async function ProjectPage({
                     {section.heading}
                   </h2>
                   {section.body && (
-                    <p className="mt-4 leading-relaxed text-mist/70">{section.body}</p>
+                    <p className="mt-4 leading-relaxed text-mist/80">{section.body}</p>
                   )}
                   {section.bullets && (
                     <ul className="mt-5 space-y-3.5">
@@ -156,7 +156,7 @@ export default async function ProjectPage({
                 <dl className="mt-4 space-y-3.5">
                   {project.info.map((row) => (
                     <div key={row.label} className="flex items-start justify-between gap-4 text-sm">
-                      <dt className="shrink-0 text-mist/50">{row.label}</dt>
+                      <dt className="shrink-0 text-mist/60">{row.label}</dt>
                       <dd className="text-left font-semibold text-white">{row.value}</dd>
                     </div>
                   ))}
@@ -170,20 +170,29 @@ export default async function ProjectPage({
                   <h3 className="text-base font-bold text-white">مشاهده آنلاین</h3>
                   <div className="mt-4 space-y-3">
                     {project.links.map((l) => (
-                      <div key={l.href}>
-                        <a
-                          href={l.href}
-                          target="_blank"
-                          rel="noreferrer"
-                          className={`${
-                            l.primary ? "btn-brand" : "btn-ghost"
-                          } w-full px-5 py-3 text-sm`}
-                        >
-                          {l.label}
-                          <ExternalIcon className="h-4 w-4" />
-                        </a>
+                      <div key={l.label}>
+                        {l.href === "#" ? (
+                          <span className="btn-ghost w-full cursor-default px-5 py-3 text-sm opacity-70">
+                            {l.label}
+                            <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                          </span>
+                        ) : (
+                          <a
+                            href={l.href}
+                            target="_blank"
+                            rel="noreferrer"
+                            className={`${
+                              l.primary ? "btn-brand" : "btn-ghost"
+                            } w-full px-5 py-3 text-sm`}
+                          >
+                            {l.label}
+                            <ExternalIcon className="h-4 w-4" />
+                          </a>
+                        )}
                         {l.note && (
-                          <p className="mt-1.5 text-center text-[11px] text-mist/45">{l.note}</p>
+                          <p className="mt-1.5 text-center text-[11px] text-mist/60">{l.note}</p>
                         )}
                       </div>
                     ))}

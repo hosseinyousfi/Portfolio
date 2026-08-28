@@ -77,11 +77,11 @@ export default function Contact() {
               {promises.map((p, i) => (
                 <Reveal key={p.title} delay={i * 0.08} className="h-full">
                   <div className="glass flex h-full flex-col items-center gap-3 rounded-2xl p-6 text-center">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-brand-bright to-brand text-base">
+                    <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-brand to-brand-deep text-white">
                       {p.icon}
                     </span>
                     <p className="font-semibold text-white">{p.title}</p>
-                    <p className="text-sm text-mist/55">{p.desc}</p>
+                    <p className="text-sm text-mist/75">{p.desc}</p>
                   </div>
                 </Reveal>
               ))}
