@@ -2,8 +2,14 @@ import Link from "next/link";
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
-import { projectCards } from "@/lib/projects";
-import { ArrowLeftIcon, ExternalIcon } from "@/components/icons";
+import { featuredProject, projectCards } from "@/lib/projects";
+import { ArrowLeftIcon, CheckIcon, ExternalIcon } from "@/components/icons";
+
+const featuredHighlights = [
+  "۵ داشبورد اختصاصی برای موسس، مدیر، مالی، معلم و اولیا",
+  "آزمون آنلاین ضدتقلب با ذخیره‌سازی آفلاین",
+  "پرونده ۳۶۰ درجه دانش‌آموز و اتوماسیون پیامکی",
+];
 
 export default function Projects() {
   return (
@@ -15,7 +21,70 @@ export default function Projects() {
           subtitle="نمونه‌ای از پروژه‌های واقعی که از صفر تا استقرار روی سرور انجام داده‌ام."
         />
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Featured project */}
+        <Reveal className="mt-14">
+          <Link href={`/projects/${featuredProject.slug}/`} className="group block">
+            <article className="glass-strong relative overflow-hidden rounded-[2rem] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_0_36px_6px_rgba(34,211,238,.18)] lg:grid lg:grid-cols-2">
+              <div className="relative aspect-[16/9] overflow-hidden lg:aspect-auto lg:min-h-[22rem]">
+                <Image
+                  src={featuredProject.card.image}
+                  alt={featuredProject.card.title}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-base/70 via-transparent to-transparent lg:bg-gradient-to-l lg:from-base-100/80 lg:via-transparent" />
+              </div>
+
+              <div className="flex flex-col p-6 sm:p-9">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-l from-brand to-brand-deep px-3.5 py-1.5 text-xs font-bold text-white shadow-[0_6px_18px_-4px_rgba(6,182,212,0.5)]">
+                    ⭐ پروژه شاخص
+                  </span>
+                  <span className="rounded-full border border-emerald-400/25 bg-emerald-400/10 px-3 py-1.5 text-xs font-semibold text-emerald-300">
+                    دارای کاربران فعال
+                  </span>
+                </div>
+
+                <h3 className="mt-5 text-xl font-extrabold leading-snug text-white transition-colors group-hover:text-brand-bright sm:text-2xl">
+                  {featuredProject.card.title}
+                </h3>
+                <p className="mt-3 leading-relaxed text-mist/70">
+                  {featuredProject.card.tagline}
+                </p>
+
+                <ul className="mt-5 space-y-2.5">
+                  {featuredHighlights.map((h) => (
+                    <li key={h} className="flex items-start gap-2.5 text-sm text-mist/75">
+                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand/15 text-brand-bright">
+                        <CheckIcon className="h-3 w-3" />
+                      </span>
+                      {h}
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-6 flex flex-wrap items-center gap-2">
+                  {featuredProject.card.tags.map((t) => (
+                    <span
+                      key={t}
+                      className="ltr rounded-full border border-brand/20 bg-brand/10 px-2.5 py-1 text-[11px] font-semibold text-brand-bright"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+
+                <span className="mt-7 inline-flex items-center gap-2 text-sm font-bold text-brand-bright">
+                  مطالعه کامل پروژه
+                  <ArrowLeftIcon className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
+                </span>
+              </div>
+            </article>
+          </Link>
+        </Reveal>
+
+        <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {projectCards.map((p, i) => {
             const CardInner = (
               <article className="glass group flex h-full flex-col overflow-hidden rounded-3xl transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_28px_4px_rgba(34,211,238,.15)]">
