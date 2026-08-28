@@ -140,3 +140,7 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+p { 
+  color: rgb(210, 199, 199) !important;
+}
